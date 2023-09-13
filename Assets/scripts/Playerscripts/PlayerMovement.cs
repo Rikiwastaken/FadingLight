@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb2D;
     private Animator myanimator;
 
-    private bool facingRight = true;
+    public bool facingRight = true;
 
     //modifiable variables 
     public float speed = 2.0f;
@@ -61,27 +61,35 @@ public class PlayerMovement : MonoBehaviour
     // Handles input of the physics
     private void Update()
     {
-        //check if key pressed
-        if (valueleft==1 & valueright == 0)
+        if (!GameObject.Find("player1").GetComponent<PlayerJumpV3>().stuckinwall)
         {
-            horizontal = -1;
+            //check if key pressed
+            if (valueleft == 1 & valueright == 0)
+            {
+                horizontal = -1;
+            }
+            if (valueleft == 0 & valueright == 1)
+            {
+                horizontal = 1;
+            }
+            if (valueleft == 0 & valueright == 0)
+            {
+                horizontal = 0;
+            }
+            if (valueleft == 1 & valueright == 1)
+            {
+                horizontal = 0;
+            }
+            //vertical = Input.GetAxis("Vertical");
         }
-        if (valueleft == 0 & valueright == 1)
-        {
-            horizontal = 1;
-        }
-        if (valueleft == 0 & valueright == 0)
-        {
-            horizontal = 0;
-        }
-        //vertical = Input.GetAxis("Vertical");
 
     }
     //Handles running of the physics
     private void FixedUpdate()
     {
         //move player
-        if (GameObject.Find("player").GetComponent<PlayerJumpV2>().allowjump && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingleft && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingright && GameObject.Find("player").GetComponent<PlayerJumpV2>().movecounter<=0)
+       // if (GameObject.Find("player").GetComponent<PlayerJumpV2>().allowjump && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingleft && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingright && GameObject.Find("player").GetComponent<PlayerJumpV2>().movecounter<=0)
+       if (GameObject.Find("player1").GetComponent<PlayerJumpV3>().allowjump && !GetComponent<PlayerJumpV3>().stuckinwall)
         {
             //rb2D.velocity = new Vector2(horizontal * speed, rb2D.velocity.y);
             if (Mathf.Abs(rb2D.velocity.x) <= maxspeed)
@@ -105,13 +113,15 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (!GameObject.Find("player").GetComponent<PlayerJumpV2>().grounded && horizontal!=0)
+            // if (!GameObject.Find("player").GetComponent<PlayerJumpV2>().grounded && horizontal!=0)
+            if (!GameObject.Find("player1").GetComponent<PlayerJumpV3>().grounded && horizontal != 0 && !GetComponent<PlayerJumpV3>().stuckinwall)
             {
                 Flip(horizontal);
             }
         }
         issafe = Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe);
-        if (GameObject.Find("player").GetComponent<PlayerJumpV2>().grounded & Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) & vertical==1)
+        //if (GameObject.Find("player").GetComponent<PlayerJumpV2>().grounded & Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) & vertical==1)
+        if (GameObject.Find("player1").GetComponent<PlayerJumpV3>().grounded && Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) && vertical == 1)
         {
             safezone();
         }
@@ -144,9 +154,11 @@ public class PlayerMovement : MonoBehaviour
                 enemy.GetComponent<EnemyHP>().enabled = true;
                 enemy.GetComponent<EnemyHP>().rez = true;
                 enemy.GetComponent<EnemyAI>().targetted = false;
+                enemy.GetComponent<EnemyHP>().execution = false;
+                enemy.GetComponent<Animator>().SetBool("Stun", false);
             }
         }
-        GameObject.Find("player").GetComponent<PlayerHP>().Eldonhp = GameObject.Find("player").GetComponent<PlayerHP>().Eldonmaxhp;
+        GameObject.Find("player1").GetComponent<PlayerHP>().Eldonhp = GameObject.Find("player1").GetComponent<PlayerHP>().Eldonmaxhp;
     }
     void OnEnable()
     {

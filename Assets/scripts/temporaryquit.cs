@@ -15,12 +15,4 @@ public class temporaryquit : MonoBehaviour
         Application.Quit();
 
     }
-    void OnEnable()
-    {
-        controls.gameplay.Enable();
-    }
-    void OnDisable()
-    {
-        controls.gameplay.Disable();
-    }
 }

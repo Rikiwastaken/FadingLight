@@ -71,9 +71,19 @@ public class PlayerHP : MonoBehaviour
                 inv = false;
             }
         }
-        if (GetComponent<Rigidbody2D>().position.y<-3)
+        if (GetComponent<Rigidbody2D>().position.x>=7 || GetComponent<Rigidbody2D>().position.y <= -3 || GetComponent<Rigidbody2D>().position.y >= 4 || GetComponent<Rigidbody2D>().position.x <= -3)
         {
-            SceneManager.LoadScene("MainMenu");
+            if(Eldonhp>1) 
+            {
+                Eldonhp= Eldonhp - 1;
+                GameObject.Find("player1").transform.position = new Vector2(1,1);
+
+            }
+            else
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+            
         }
     }
 }

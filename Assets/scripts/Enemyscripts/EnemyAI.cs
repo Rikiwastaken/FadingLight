@@ -5,20 +5,37 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    [Header("movement")]
     public float detectdist;
     public float xspeed;
     private Transform target;
     private Rigidbody2D rb2D;
+
+    [Header("HP & energy")]
     public int enemyHP;
     private int tempenemyhp;
     public int hitdelay;
     public float energystunduration;
     public int delaycounter;
+
+    [Header("Attack")]
+    public float attackrange;
+    public float abandonrange;
     public bool cannotmove;
+    public bool cannotmoveatk;
     public bool targetted;
     private bool walkingright = false;
     private bool lookingright = false;
+    private bool initiateattack;
+    private float distplayer;
+    private float attackcounter=1;
+    public float timebeforejump;
+    public float jumpforcex;
+    public float jumpforcey;
+    private float atkcdcounter;
+    public float atkcd;
 
+    [Header("startpos")]
     //starting position for respawn
     public float startx;
     public float starty;
@@ -38,8 +55,25 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+
+        if (targetted && distplayer>= abandonrange || enemyHP <= 0)
+        {
+            targetted = false;
+            GameObject.Find("music").GetComponent<musicmanager>().playcbt = false;
+        }
+
+        if (targetted)
+        {
+            GameObject.Find("music").GetComponent<musicmanager>().playcbt = true;
+        }
+
+        if (atkcdcounter != 0)
+        {
+            atkcdcounter -= 1;
+        }
+
         if (walkingright && !lookingright)
         {
             GetComponent<SpriteRenderer>().flipX=true;
@@ -52,7 +86,7 @@ public class EnemyAI : MonoBehaviour
         }
 
         enemyHP = GetComponent<EnemyHP>().enemyhp;
-        float distance = Vector2.Distance(target.position, transform.position);
+        distplayer = Vector2.Distance(target.position, transform.position);
 
 
         if (tempenemyhp != enemyHP)
@@ -66,10 +100,10 @@ public class EnemyAI : MonoBehaviour
             delaycounter -= 1;
         }
 
-        if (distance<=detectdist || targetted)
+        if (distplayer<=detectdist || targetted)
         {
             targetted = true;
-            if (delaycounter == 0 & !cannotmove)
+            if (delaycounter == 0 & !cannotmove & !cannotmoveatk)
             {
                 if (target.position.x < transform.position.x)
                 {
@@ -90,7 +124,35 @@ public class EnemyAI : MonoBehaviour
             }
             
         }
-        
+
+        if (targetted && distplayer < attackrange && !initiateattack && atkcdcounter==0)
+        {
+            cannotmoveatk = true;
+            attackcounter = timebeforejump;
+            initiateattack = true;
+
+        }
+
+        if (initiateattack && attackcounter!=0)
+        {
+            attackcounter -= 1;
+        }
+
+        if (initiateattack && attackcounter == 0)
+        {
+            if (target.position.x < transform.position.x)
+            {
+                rb2D.AddForce(new Vector2(-jumpforcex, jumpforcey));
+            }
+            if (target.position.x > transform.position.x)
+            {
+                rb2D.AddForce(new Vector2(jumpforcex, jumpforcey));
+            }
+
+            initiateattack = false;
+            cannotmoveatk=false;
+            atkcdcounter = atkcd;
+        }
 
 
     }
@@ -99,5 +161,7 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, detectdist);
     }
+
+    
 }
 

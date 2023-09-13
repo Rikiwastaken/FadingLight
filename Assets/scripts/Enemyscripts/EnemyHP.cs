@@ -144,6 +144,7 @@ public class EnemyHP : MonoBehaviour
             GetComponentInChildren<Canvas>().enabled = false;
             GetComponent<Collider2D>().enabled=false;
             GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
         }
         if (rez)
         {

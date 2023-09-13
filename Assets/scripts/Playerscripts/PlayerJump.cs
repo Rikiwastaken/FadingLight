@@ -72,8 +72,10 @@ public class PlayerJump : MonoBehaviour
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        HandleLayers();
+
         horizontal = GameObject.Find("player").GetComponent<PlayerMovement>().horizontal;
         grounded = Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground);
 
@@ -191,10 +193,6 @@ public class PlayerJump : MonoBehaviour
             Gizmos.DrawSphere(frontcheck.position, radOcircle);
         }
 
-        private void FixedUpdate()
-        {
-            HandleLayers();
-        }
 
         private void HandleLayers()
         {

@@ -13,10 +13,15 @@ public class EldonAttack : MonoBehaviour
 
     private Animator eldonanim;
 
+    [Header("wall variables")]
+    public bool istherewall;
+    [SerializeField] private LayerMask whatiswall;
+
     //size of the attack 
     [Header("hitbox of the attack")]
     public Transform attackpoint;
     public float range;
+    public Collider2D walljumped;
 
 
     //attack variables
@@ -26,7 +31,7 @@ public class EldonAttack : MonoBehaviour
     public int nrgdamage;
     public bool slayermode; //true:slayer false:eater
     public int attackdelay; //number of frames between attacks
-    private int delaycounter;
+    public int delaycounter;
 
 
     [Header("recoil variables")]
@@ -37,7 +42,7 @@ public class EldonAttack : MonoBehaviour
     public float medrecoil;
     public float bigrecoil;
 
-
+    public bool grounded;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +64,7 @@ public class EldonAttack : MonoBehaviour
 
     void OnAttack()
     {
-        if (delaycounter==0)
+        if (delaycounter==0 && !GameObject.Find("player1").GetComponent<PlayerJumpV3>().stuckinwall)
         {
             fctAttack();
             delaycounter = attackdelay;
@@ -68,13 +73,15 @@ public class EldonAttack : MonoBehaviour
 
     void Update()
     {
-    
 
+        grounded = GameObject.Find("player1").GetComponent<PlayerJumpV3>().grounded;
         //attack cooldown
         if (delaycounter>0)
         {
             delaycounter -= 1;
         }
+
+        istherewall = Physics2D.OverlapCircle(attackpoint.position, range,whatiswall);
 
     }
 
@@ -102,6 +109,7 @@ public class EldonAttack : MonoBehaviour
         eldonanim.SetTrigger("attack");
 
         //get enemies in range
+        Collider2D[] hitwalls = Physics2D.OverlapCircleAll(attackpoint.position, range,whatiswall);
         Collider2D[] hitenemies = Physics2D.OverlapCircleAll(attackpoint.position,range);
 
         foreach (Collider2D enemy in hitenemies)
@@ -116,13 +124,13 @@ public class EldonAttack : MonoBehaviour
                 {
                     enemy.GetComponent<EnemyHP>().enemyhp -= hpdamage;
                     enemy.GetComponent<EnemyHP>().enemyNRG -= (nrgdamage * 1/10);
-                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += nrgdamage * 6 /10 ;
+                    GameObject.Find("player1").GetComponent<PlayerHP>().EldonNRG += nrgdamage * 6 /10 ;
                 }
                 else
                 {
                     enemy.GetComponent<EnemyHP>().enemyhp -= hpdamage * 1/10;
                     enemy.GetComponent<EnemyHP>().enemyNRG -= nrgdamage;
-                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += nrgdamage;
+                    GameObject.Find("player1").GetComponent<PlayerHP>().EldonNRG += nrgdamage;
                 }
                 if (enemyrb.position.x < playerx & enemy.GetComponent<EnemyHP>().enemyhp > 0)
                 {
@@ -158,8 +166,18 @@ public class EldonAttack : MonoBehaviour
                 }
 
             }
+            
         }
-           
+        if (istherewall && !grounded)
+        {
+            GameObject.Find("player1").GetComponent<PlayerJumpV3>().stuckinwall = true;
+
+        }
+        foreach (Collider2D wall in hitwalls)
+        {
+            walljumped = wall;
+        }
+
     }
 
     private void OnDrawGizmos()

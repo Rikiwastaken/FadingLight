@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class playgame : MonoBehaviour
 {
     PlayerControls controls;
-public void Playgame ()
+    public void Playgame()
     {
         SceneManager.LoadScene("BreedingGrounds");
     }
@@ -16,14 +16,14 @@ public void Playgame ()
         Debug.Log("Ciao");
         Application.Quit();
     }
-    void OnEnable()
+
+    public void continuegame()
     {
-        controls.gameplay.Enable();
+
     }
-    void OnDisable()
-    {
-        controls.gameplay.Disable();
-    }
+
+
+   
 
 }
 
