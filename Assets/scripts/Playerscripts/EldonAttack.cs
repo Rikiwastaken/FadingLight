@@ -64,7 +64,7 @@ public class EldonAttack : MonoBehaviour
 
     void OnAttack()
     {
-        if (delaycounter==0 && !GameObject.Find("player1").GetComponent<PlayerJumpV3>().stuckinwall)
+        if (delaycounter==0 && !GameObject.Find("player").GetComponent<PlayerJumpV3>().stuckinwall)
         {
             fctAttack();
             delaycounter = attackdelay;
@@ -74,7 +74,7 @@ public class EldonAttack : MonoBehaviour
     void Update()
     {
 
-        grounded = GameObject.Find("player1").GetComponent<PlayerJumpV3>().grounded;
+        grounded = GameObject.Find("player").GetComponent<PlayerJumpV3>().grounded;
         //attack cooldown
         if (delaycounter>0)
         {
@@ -124,13 +124,13 @@ public class EldonAttack : MonoBehaviour
                 {
                     enemy.GetComponent<EnemyHP>().enemyhp -= hpdamage;
                     enemy.GetComponent<EnemyHP>().enemyNRG -= (nrgdamage * 1/10);
-                    GameObject.Find("player1").GetComponent<PlayerHP>().EldonNRG += nrgdamage * 6 /10 ;
+                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += nrgdamage * 6 /10 ;
                 }
                 else
                 {
                     enemy.GetComponent<EnemyHP>().enemyhp -= hpdamage * 1/10;
                     enemy.GetComponent<EnemyHP>().enemyNRG -= nrgdamage;
-                    GameObject.Find("player1").GetComponent<PlayerHP>().EldonNRG += nrgdamage;
+                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += nrgdamage;
                 }
                 if (enemyrb.position.x < playerx & enemy.GetComponent<EnemyHP>().enemyhp > 0)
                 {
@@ -170,7 +170,7 @@ public class EldonAttack : MonoBehaviour
         }
         if (istherewall && !grounded)
         {
-            GameObject.Find("player1").GetComponent<PlayerJumpV3>().stuckinwall = true;
+            GameObject.Find("player").GetComponent<PlayerJumpV3>().stuckinwall = true;
 
         }
         foreach (Collider2D wall in hitwalls)

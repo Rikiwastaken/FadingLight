@@ -16,8 +16,8 @@ public class Playervalues : MonoBehaviour
     // Update is called once per frame
     void Awake()
     {
-        EldonmaxHP = 5;
-        EldonHP = 5;
+        EldonmaxHP = 100;
+        EldonHP = 100;
         EldonmaxNRG = 100;
         EldonNRG = 100;
         DontDestroyOnLoad(this);

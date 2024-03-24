@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,16 +20,6 @@ public class PlayerJumpV3 : MonoBehaviour
     public float jumptime;
     public float jumpcounter;
     public bool allowjump;
-
-    [Header("DoubleJump details")]
-    public bool allowdoublejump;
-    public bool touchedground;
-    public float dbjumpForce;
-    public float dbjumptime;
-    public float dbjumpcounter;
-    public float dbjumpdelay;
-    public float dbjumpdelaycounter;
-
 
     [Header("Ground details")]
     [SerializeField] private Transform groundcheck;
@@ -76,8 +65,6 @@ public class PlayerJumpV3 : MonoBehaviour
         controls.gameplay.down.canceled += ctx => presseddown = false;
         rb = GetComponent<Rigidbody2D>();
         jumpcounter = jumptime;
-        dbjumpdelaycounter = dbjumpdelay;
-        dbjumpcounter = dbjumptime;
         myanim = GetComponent<Animator>();
 
         gravity = rb.gravityScale;
@@ -98,7 +85,7 @@ public class PlayerJumpV3 : MonoBehaviour
             walljumprightrdy = false;
         }
 
-        horizontal = GameObject.Find("player1").GetComponent<PlayerMovement>().horizontal;
+        horizontal = GameObject.Find("player").GetComponent<PlayerMovement>().horizontal;
         grounded = Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground);
         Checkground();
 
@@ -116,52 +103,16 @@ public class PlayerJumpV3 : MonoBehaviour
             myanim.SetTrigger("jump");
             walljumpleftrdy = true;
             walljumprightrdy = true;
-            
-        }
-        if (jumpcounter <= 0)
-        {
-            dbjumpdelaycounter -= Time.deltaTime;
-            if (dbjumpdelaycounter <= 0)
-            {
-                allowdoublejump = true;
-            }
-
         }
         if (!pressedjump && !grounded)
         {
             jumpcounter = 0;
-            dbjumpcounter = 0;
             myanim.SetBool("falling", true);
             myanim.SetTrigger("jump");
         }
         if (rb.velocity.y < 0)
         {
             myanim.SetBool("falling", true);
-        }
-
-
-        //double jump
-
-
-        if (pressedjump && !grounded && allowdoublejump && touchedground)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, dbjumpForce);
-            myanim.SetTrigger("jump");
-            UnityEngine.Debug.Log("doublejump1");
-            touchedground = false;
-        }
-
-        if (!grounded && pressedjump && dbjumpcounter > 0 && allowdoublejump)
-        {
-            UnityEngine.Debug.Log("doublejump2");
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            dbjumpcounter -= Time.deltaTime;
-            myanim.SetTrigger("jump");
-            touchedground = false;
-        }
-        if(dbjumpcounter<=0)
-        {
-            allowdoublejump = false;
         }
 
         //wall jump
@@ -176,7 +127,7 @@ public class PlayerJumpV3 : MonoBehaviour
             rb.gravityScale = 0;
             if (pressedjump)
             {
-                if (GameObject.Find("player1").GetComponent<EldonAttack>().walljumped.name=="wall_left")
+                if (GameObject.Find("player").GetComponent<EldonAttack>().walljumped.name=="wall_left")
                 {
                     rb.velocity = new Vector2(wjforceside, wjforceup);
                     walljumpleftrdy = true;
@@ -195,13 +146,13 @@ public class PlayerJumpV3 : MonoBehaviour
                 horizontal = -lasthorizontal;
                 Scale.x *= -1;
                 transform.localScale = Scale;
-                if (GameObject.Find("player1").GetComponent<PlayerMovement>().facingRight)
+                if (GameObject.Find("player").GetComponent<PlayerMovement>().facingRight)
                 {
-                    GameObject.Find("player1").GetComponent<PlayerMovement>().facingRight = false;
+                    GameObject.Find("player").GetComponent<PlayerMovement>().facingRight = false;
                 }
                 else
                 {
-                    GameObject.Find("player1").GetComponent<PlayerMovement>().facingRight = true;
+                    GameObject.Find("player").GetComponent<PlayerMovement>().facingRight = true;
                 }
             }
 
@@ -237,10 +188,7 @@ public class PlayerJumpV3 : MonoBehaviour
         if (grounded)
         {
             allowjump = true;
-            touchedground = true;
             jumpcounter = jumptime;
-            dbjumpcounter = dbjumptime;
-            dbjumpdelaycounter = dbjumpdelay;
             myanim.ResetTrigger("jump");
             myanim.SetBool("falling", false);
 

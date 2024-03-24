@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     // Handles input of the physics
     private void Update()
     {
-        if (!GameObject.Find("player1").GetComponent<PlayerJumpV3>().stuckinwall)
+        if (!GameObject.Find("player").GetComponent<PlayerJumpV3>().stuckinwall)
         {
             //check if key pressed
             if (valueleft == 1 & valueright == 0)
@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //move player
        // if (GameObject.Find("player").GetComponent<PlayerJumpV2>().allowjump && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingleft && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingright && GameObject.Find("player").GetComponent<PlayerJumpV2>().movecounter<=0)
-       if (GameObject.Find("player1").GetComponent<PlayerJumpV3>().allowjump && !GetComponent<PlayerJumpV3>().stuckinwall)
+       if (GameObject.Find("player").GetComponent<PlayerJumpV3>().allowjump && !GetComponent<PlayerJumpV3>().stuckinwall)
         {
             //rb2D.velocity = new Vector2(horizontal * speed, rb2D.velocity.y);
             if (Mathf.Abs(rb2D.velocity.x) <= maxspeed)
@@ -114,14 +114,14 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             // if (!GameObject.Find("player").GetComponent<PlayerJumpV2>().grounded && horizontal!=0)
-            if (!GameObject.Find("player1").GetComponent<PlayerJumpV3>().grounded && horizontal != 0 && !GetComponent<PlayerJumpV3>().stuckinwall)
+            if (!GameObject.Find("player").GetComponent<PlayerJumpV3>().grounded && horizontal != 0 && !GetComponent<PlayerJumpV3>().stuckinwall)
             {
                 Flip(horizontal);
             }
         }
         issafe = Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe);
         //if (GameObject.Find("player").GetComponent<PlayerJumpV2>().grounded & Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) & vertical==1)
-        if (GameObject.Find("player1").GetComponent<PlayerJumpV3>().grounded && Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) && vertical == 1)
+        if (GameObject.Find("player").GetComponent<PlayerJumpV3>().grounded && Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) && vertical == 1)
         {
             safezone();
         }
@@ -158,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
                 enemy.GetComponent<Animator>().SetBool("Stun", false);
             }
         }
-        GameObject.Find("player1").GetComponent<PlayerHP>().Eldonhp = GameObject.Find("player1").GetComponent<PlayerHP>().Eldonmaxhp;
+        GameObject.Find("player").GetComponent<PlayerHP>().Eldonhp = GameObject.Find("player").GetComponent<PlayerHP>().Eldonmaxhp;
     }
     void OnEnable()
     {
