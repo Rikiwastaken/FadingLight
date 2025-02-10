@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
     public float vertical;
 
 
+    private PlayerJumpV3 playerjump;
+
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -56,12 +59,14 @@ public class PlayerMovement : MonoBehaviour
         //Define the gamobjects found on the player
         rb2D = GetComponent<Rigidbody2D>();
         myanimator = GetComponent<Animator>();
+        playerjump = GetComponent<PlayerJumpV3>();
     }
 
-    // Handles input of the physics
-    private void Update()
+    //Handles running of the physics
+    private void FixedUpdate()
     {
-        if (!GameObject.Find("player").GetComponent<PlayerJumpV3>().stuckinwall)
+
+        if (!playerjump.stuckinwall)
         {
             //check if key pressed
             if (valueleft == 1 & valueright == 0)
@@ -83,28 +88,48 @@ public class PlayerMovement : MonoBehaviour
             //vertical = Input.GetAxis("Vertical");
         }
 
-    }
-    //Handles running of the physics
-    private void FixedUpdate()
-    {
+
         //move player
-       // if (GameObject.Find("player").GetComponent<PlayerJumpV2>().allowjump && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingleft && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingright && GameObject.Find("player").GetComponent<PlayerJumpV2>().movecounter<=0)
-       if (GameObject.Find("player").GetComponent<PlayerJumpV3>().allowjump && !GetComponent<PlayerJumpV3>().stuckinwall)
+        // if (GameObject.Find("player").GetComponent<PlayerJumpV2>().allowjump && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingleft && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingright && GameObject.Find("player").GetComponent<PlayerJumpV2>().movecounter<=0)
+        if (playerjump.allowjump && !playerjump.stuckinwall)
         {
             //rb2D.velocity = new Vector2(horizontal * speed, rb2D.velocity.y);
             if (Mathf.Abs(rb2D.velocity.x) <= maxspeed)
-                {
-                rb2D.AddForce(new Vector2(horizontal * speed,0));
-            }
-            if ((horizontal ==0 && Mathf.Abs(rb2D.velocity.x) > 0.01) || (horizontal>0 && rb2D.velocity.x<0) ||( horizontal<0 && rb2D.velocity.x>0))
             {
-                if (rb2D.velocity.x > 0)
+                float newspeed = rb2D.velocityX+horizontal * speed;
+                if(Mathf.Abs(newspeed) > maxspeed)
                 {
-                    rb2D.AddForce(new Vector2(-slowdownspeed,0));
+                    newspeed = horizontal * maxspeed;
+                }
+                rb2D.velocityX = newspeed;
+            }
+            if(horizontal == 0)
+            {
+                if(Mathf.Abs(rb2D.velocity.x) <= 0.01)
+                {
+                    rb2D.velocityX = 0f;
                 }
                 else
                 {
-                    rb2D.AddForce(new Vector2(slowdownspeed,0));
+                    if (rb2D.velocity.x > 0)
+                    {
+                        rb2D.velocityX -= slowdownspeed;
+                    }
+                    else
+                    {
+                        rb2D.velocityX += slowdownspeed;
+                    }
+                }
+            }
+            if ((horizontal>0 && rb2D.velocity.x<0) ||( horizontal<0 && rb2D.velocity.x>0))
+            {
+                if (rb2D.velocity.x > 0)
+                {
+                    rb2D.velocityX -=slowdownspeed;
+                }
+                else
+                {
+                    rb2D.velocityX += slowdownspeed;
                 }
             }
            
@@ -113,15 +138,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            // if (!GameObject.Find("player").GetComponent<PlayerJumpV2>().grounded && horizontal!=0)
-            if (!GameObject.Find("player").GetComponent<PlayerJumpV3>().grounded && horizontal != 0 && !GetComponent<PlayerJumpV3>().stuckinwall)
+            if (!playerjump.grounded && horizontal != 0 && !GetComponent<PlayerJumpV3>().stuckinwall)
             {
                 Flip(horizontal);
             }
         }
         issafe = Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe);
-        //if (GameObject.Find("player").GetComponent<PlayerJumpV2>().grounded & Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) & vertical==1)
-        if (GameObject.Find("player").GetComponent<PlayerJumpV3>().grounded && Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) && vertical == 1)
+        if (playerjump.grounded && Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) && vertical == 1)
         {
             safezone();
         }
@@ -158,7 +181,7 @@ public class PlayerMovement : MonoBehaviour
                 enemy.GetComponent<Animator>().SetBool("Stun", false);
             }
         }
-        GameObject.Find("player").GetComponent<PlayerHP>().Eldonhp = GameObject.Find("player").GetComponent<PlayerHP>().Eldonmaxhp;
+        GetComponent<PlayerHP>().Eldonhp = GetComponent<PlayerHP>().Eldonmaxhp;
     }
     void OnEnable()
     {

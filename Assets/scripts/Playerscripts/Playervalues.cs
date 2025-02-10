@@ -21,6 +21,7 @@ public class Playervalues : MonoBehaviour
         EldonmaxNRG = 100;
         EldonNRG = 100;
         DontDestroyOnLoad(this);
+        Application.targetFrameRate = 60;
     }
 
     void Update()
