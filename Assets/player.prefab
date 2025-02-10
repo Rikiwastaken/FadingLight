@@ -339,9 +339,8 @@ MonoBehaviour:
     m_Bits: 64
   stuckinwall: 0
   gravity: 0
-  wjforceside: 5
+  wjforceside: 2
   wjforceup: 5
-  lasthorizontal: 0
   walljumpleftrdy: 0
   walljumprightrdy: 0
   grounded: 0

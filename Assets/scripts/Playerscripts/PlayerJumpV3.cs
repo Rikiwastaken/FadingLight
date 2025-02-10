@@ -33,9 +33,6 @@ public class PlayerJumpV3 : MonoBehaviour
     public float gravity;
     public float wjforceside;
     public float wjforceup;
-    public float lasthorizontal;
-    public bool walljumpleftrdy;
-    public bool walljumprightrdy;
 
     public bool grounded;
 
@@ -44,16 +41,12 @@ public class PlayerJumpV3 : MonoBehaviour
     private Animator myanim;
     public float horizontal;
 
-    [Header("Corner")]
-    public float cornlarg;
-    public float cornhaut;
-    public Transform corncheck;
-    public float cornrange;
-    public float cornstrver;
-    public float cornstrhor;
-
     public bool pressedjump = false;
     public bool presseddown = false;
+
+    private bool alreadypressedjump;
+
+    private PlayerMovement playermov;
 
     private void Awake()
     {
@@ -68,31 +61,28 @@ public class PlayerJumpV3 : MonoBehaviour
         myanim = GetComponent<Animator>();
 
         gravity = rb.gravityScale;
+
+        playermov = GetComponent<PlayerMovement>();
     }
 
     private void FixedUpdate()
     {
-
-        if (horizontal != 0f && grounded)
+        if(alreadypressedjump && !pressedjump)
         {
-            lasthorizontal = horizontal;
+            alreadypressedjump = false;
         }
         HandleLayers();
 
-        if (grounded && (walljumpleftrdy ||walljumprightrdy))
-        {
-            walljumpleftrdy = false;
-            walljumprightrdy = false;
-        }
 
-        horizontal = GameObject.Find("player").GetComponent<PlayerMovement>().horizontal;
+        horizontal = playermov.horizontal;
         grounded = Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground);
         Checkground();
 
         //normal jump
 
-        if (pressedjump && grounded)
+        if (pressedjump && grounded && !alreadypressedjump)
         {
+            alreadypressedjump = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             myanim.SetTrigger("jump");
         }
@@ -101,8 +91,6 @@ public class PlayerJumpV3 : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpcounter -= Time.deltaTime;
             myanim.SetTrigger("jump");
-            walljumpleftrdy = true;
-            walljumprightrdy = true;
         }
         if (!pressedjump && !grounded)
         {
@@ -125,53 +113,25 @@ public class PlayerJumpV3 : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 0);
             rb.gravityScale = 0;
-            if (pressedjump)
+            if (pressedjump && !alreadypressedjump)
             {
-                if (GameObject.Find("player").GetComponent<EldonAttack>().walljumped.name=="wall_left")
-                {
-                    rb.velocity = new Vector2(wjforceside, wjforceup);
-                    walljumpleftrdy = true;
-                    walljumprightrdy = false;
-                }
-                else
-                {
-                    rb.velocity = new Vector2(-wjforceside, wjforceup);
-                    walljumpleftrdy = false;
-                    walljumprightrdy = true;
-                }
-                //rb.velocity = new Vector2(wjforceside*lasthorizontal*(-1), wjforceup);
+                alreadypressedjump = true;
+                rb.velocity = new Vector2(-transform.localScale.x/Mathf.Abs(transform.localScale.x) * wjforceside, wjforceup);
                 rb.gravityScale = gravity;
                 stuckinwall = false;
                 Vector3 Scale = transform.localScale;
-                horizontal = -lasthorizontal;
                 Scale.x *= -1;
                 transform.localScale = Scale;
-                if (GameObject.Find("player").GetComponent<PlayerMovement>().facingRight)
+                if (playermov.facingRight)
                 {
-                    GameObject.Find("player").GetComponent<PlayerMovement>().facingRight = false;
+                    playermov.facingRight = false;
                 }
                 else
                 {
-                    GameObject.Find("player").GetComponent<PlayerMovement>().facingRight = true;
+                    playermov.facingRight = true;
                 }
             }
 
-        }
-
-        //cornerjump
-        Collider2D[] corner = Physics2D.OverlapCircleAll(corncheck.position, cornrange);
-        foreach (Collider2D corn in corner)
-        {
-            if (corn.name == "corner_left"&& !grounded && walljumpleftrdy)
-            {
-                rb.velocity=new Vector2(+cornstrhor, cornstrver);
-                walljumpleftrdy = false;
-            }
-            if (corn.name == "corner_right" && !grounded && walljumprightrdy)
-            {
-                rb.velocity=new Vector2(-1*cornstrhor, cornstrver);
-                walljumprightrdy=false;
-            }
         }
 
 
@@ -198,7 +158,6 @@ public class PlayerJumpV3 : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawCube(groundcheck.position, new Vector2(largeurgi, hauteurgi));
-        Gizmos.DrawCube(corncheck.position, new Vector2(cornlarg, cornhaut));
     }
 
     private void HandleLayers()
