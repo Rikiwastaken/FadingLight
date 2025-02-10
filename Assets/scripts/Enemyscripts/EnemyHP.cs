@@ -145,6 +145,7 @@ public class EnemyHP : MonoBehaviour
             GetComponent<Collider2D>().enabled=false;
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<SpriteRenderer>().enabled = false;
+            transform.position = new Vector3(-100, -100);
         }
         if (rez)
         {

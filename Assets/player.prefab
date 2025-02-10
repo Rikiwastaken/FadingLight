@@ -341,16 +341,8 @@ MonoBehaviour:
   gravity: 0
   wjforceside: 2
   wjforceup: 5
-  walljumpleftrdy: 0
-  walljumprightrdy: 0
   grounded: 0
   horizontal: 0
-  cornlarg: 0.1
-  cornhaut: 0.2
-  corncheck: {fileID: 3406871945689157119}
-  cornrange: 0.3
-  cornstrver: 4
-  cornstrhor: 3
   pressedjump: 0
   presseddown: 0
 --- !u!114 &8207891239071273511
@@ -414,7 +406,7 @@ MonoBehaviour:
   hpdamage: 20
   nrgdamage: 20
   slayermode: 0
-  attackdelay: 15
+  attackdelay: 0.5
   delaycounter: 0
   smallrecoil: 150
   medrecoil: 1.5

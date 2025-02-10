@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
     private bool lookingright = false;
     private bool initiateattack;
     private float distplayer;
-    private float attackcounter=1;
+    private int attackcounter;
     public float timebeforejump;
     public float jumpforcex;
     public float jumpforcey;
@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour
     public float startx;
     public float starty;
 
-
+    private Vector2 targetpos;
 
 
     // Start is called before the first frame update
@@ -73,18 +73,46 @@ public class EnemyAI : MonoBehaviour
         {
             atkcdcounter -= 1;
         }
-
-        if (walkingright && !lookingright)
+        else
         {
-            GetComponent<SpriteRenderer>().flipX=true;
-            lookingright = true;
-        }
-        if (!walkingright && lookingright)
-        {
-            GetComponent<SpriteRenderer>().flipX = false;
-            lookingright = false;
-        }
+            if (walkingright && !lookingright)
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
+                lookingright = true;
+            }
+            if (!walkingright && lookingright)
+            {
+                GetComponent<SpriteRenderer>().flipX = false;
+                lookingright = false;
+            }
 
+            if (distplayer <= detectdist || targetted)
+            {
+                targetted = true;
+                if (delaycounter == 0 & !cannotmove & !cannotmoveatk)
+                {
+                    if (target.position.x < transform.position.x)
+                    {
+                        if (rb2D.velocity.x > -xspeed)
+                        {
+                            rb2D.velocity = new Vector2(rb2D.velocity.x - xspeed * 0.08f, 0);
+                        }
+                        walkingright = false;
+                    }
+                    else
+                    {
+                        if (rb2D.velocity.x < xspeed)
+                        {
+                            rb2D.velocity = new Vector2(rb2D.velocity.x + xspeed * 0.08f, 0);
+                        }
+                        walkingright = true;
+                    }
+                }
+
+            }
+
+
+        }
         enemyHP = GetComponent<EnemyHP>().enemyhp;
         distplayer = Vector2.Distance(target.position, transform.position);
 
@@ -100,51 +128,34 @@ public class EnemyAI : MonoBehaviour
             delaycounter -= 1;
         }
 
-        if (distplayer<=detectdist || targetted)
-        {
-            targetted = true;
-            if (delaycounter == 0 & !cannotmove & !cannotmoveatk)
-            {
-                if (target.position.x < transform.position.x)
-                {
-                    if (rb2D.velocity.x> -xspeed)
-                    {
-                        rb2D.velocity = new Vector2(rb2D.velocity.x - xspeed * 0.08f, 0);
-                    }
-                    walkingright = false;
-                }
-                else
-                {
-                    if (rb2D.velocity.x < xspeed)
-                    {
-                        rb2D.velocity = new Vector2(rb2D.velocity.x + xspeed * 0.08f, 0);
-                    }
-                    walkingright = true;
-                }
-            }
-            
-        }
+        
 
         if (targetted && distplayer < attackrange && !initiateattack && atkcdcounter==0)
         {
             cannotmoveatk = true;
-            attackcounter = timebeforejump;
+            attackcounter = (int)(timebeforejump/Time.deltaTime);
             initiateattack = true;
+            targetpos = target.position;
 
         }
 
         if (initiateattack && attackcounter!=0)
         {
             attackcounter -= 1;
+            transform.GetChild(0).gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
         }
 
         if (initiateattack && attackcounter == 0)
         {
-            if (target.position.x < transform.position.x)
+            if (targetpos.x < transform.position.x)
             {
                 rb2D.AddForce(new Vector2(-jumpforcex, jumpforcey));
             }
-            if (target.position.x > transform.position.x)
+            if (targetpos.x > transform.position.x)
             {
                 rb2D.AddForce(new Vector2(jumpforcex, jumpforcey));
             }

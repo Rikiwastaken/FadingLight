@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 public class EldonAttack : MonoBehaviour
@@ -21,7 +22,6 @@ public class EldonAttack : MonoBehaviour
     [Header("hitbox of the attack")]
     public Transform attackpoint;
     public float range;
-    public Collider2D walljumped;
 
 
     //attack variables
@@ -30,7 +30,7 @@ public class EldonAttack : MonoBehaviour
     public int hpdamage;
     public int nrgdamage;
     public bool slayermode; //true:slayer false:eater
-    public int attackdelay; //number of frames between attacks
+    public float attackdelay; //time between attacks
     public int delaycounter;
 
 
@@ -44,14 +44,16 @@ public class EldonAttack : MonoBehaviour
 
     public bool grounded;
 
+    private PlayerJumpV3 playerjump;
+
     // Start is called before the first frame update
     void Start()
     {
         eldonanim = GetComponent<Animator>();
         slayermode = true;
-        GameObject.Find("slayertext").GetComponent<UnityEngine.UI.Text>().enabled = true;
-        GameObject.Find("eatertext").GetComponent<UnityEngine.UI.Text>().enabled = false;
-
+        GameObject.Find("slayertext").GetComponent<Text>().enabled = true;
+        GameObject.Find("eatertext").GetComponent<Text>().enabled = false;
+        playerjump = GetComponent<PlayerJumpV3>();
     }
 
     //Slayer and Eater modes
@@ -64,17 +66,17 @@ public class EldonAttack : MonoBehaviour
 
     void OnAttack()
     {
-        if (delaycounter==0 && !GameObject.Find("player").GetComponent<PlayerJumpV3>().stuckinwall)
+        if (delaycounter==0 && !playerjump.stuckinwall)
         {
             fctAttack();
-            delaycounter = attackdelay;
+            delaycounter = (int)(attackdelay/Time.fixedDeltaTime);
         }
     }
 
     void Update()
     {
 
-        grounded = GameObject.Find("player").GetComponent<PlayerJumpV3>().grounded;
+        grounded = playerjump.grounded;
         //attack cooldown
         if (delaycounter>0)
         {
@@ -91,14 +93,14 @@ public class EldonAttack : MonoBehaviour
         if(slayermode)
         {
             slayermode = false;
-            GameObject.Find("slayertext").GetComponent<UnityEngine.UI.Text>().enabled = false;
-            GameObject.Find("eatertext").GetComponent<UnityEngine.UI.Text>().enabled = true;
+            GameObject.Find("slayertext").GetComponent<Text>().enabled = false;
+            GameObject.Find("eatertext").GetComponent<Text>().enabled = true;
         }
-            else
+        else
         {
             slayermode = true;
-            GameObject.Find("slayertext").GetComponent<UnityEngine.UI.Text>().enabled = true;
-            GameObject.Find("eatertext").GetComponent<UnityEngine.UI.Text>().enabled = false;
+            GameObject.Find("slayertext").GetComponent<Text>().enabled = true;
+            GameObject.Find("eatertext").GetComponent<Text>().enabled = false;
         }
     }
 
@@ -116,23 +118,24 @@ public class EldonAttack : MonoBehaviour
         {
             if (enemy.tag == "enemy")
             {
-                size = enemy.GetComponent<EnemyHP>().size;
+                EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
+                size = enemyHP.size;
                 enemyrb = enemy.GetComponent<Rigidbody2D>();
                 playerx = GetComponent<Rigidbody2D>().position.x;
 
                 if (slayermode)
                 {
-                    enemy.GetComponent<EnemyHP>().enemyhp -= hpdamage;
-                    enemy.GetComponent<EnemyHP>().enemyNRG -= (nrgdamage * 1/10);
+                    enemyHP.enemyhp -= hpdamage;
+                    enemyHP.enemyNRG -= (nrgdamage * 1/10);
                     GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += nrgdamage * 6 /10 ;
                 }
                 else
                 {
-                    enemy.GetComponent<EnemyHP>().enemyhp -= hpdamage * 1/10;
-                    enemy.GetComponent<EnemyHP>().enemyNRG -= nrgdamage;
+                    enemyHP.enemyhp -= hpdamage * 1/10;
+                    enemyHP.enemyNRG -= nrgdamage;
                     GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += nrgdamage;
                 }
-                if (enemyrb.position.x < playerx & enemy.GetComponent<EnemyHP>().enemyhp > 0)
+                if (enemyrb.position.x < playerx & enemyHP.enemyhp > 0)
                 {
                     if (size==1)
                     {
@@ -148,7 +151,7 @@ public class EldonAttack : MonoBehaviour
                         //enemyrb.velocity = new Vector2(enemyrb.velocity.x - bigrecoil, enemyrb.velocity.y);
                     }
                 }
-                if (enemyrb.position.x > playerx & enemy.GetComponent<EnemyHP>().enemyhp > 0)
+                if (enemyrb.position.x > playerx & enemyHP.enemyhp > 0)
                 {
                     if (size == 1)
                     {
@@ -170,12 +173,8 @@ public class EldonAttack : MonoBehaviour
         }
         if (istherewall && !grounded)
         {
-            GameObject.Find("player").GetComponent<PlayerJumpV3>().stuckinwall = true;
+            playerjump.stuckinwall = true;
 
-        }
-        foreach (Collider2D wall in hitwalls)
-        {
-            walljumped = wall;
         }
 
     }
@@ -184,12 +183,4 @@ public class EldonAttack : MonoBehaviour
     {
         Gizmos.DrawWireSphere(attackpoint.position, range);
     }
-//    void OnEnable()
-  //  {
-    //    controls.gameplay.Enable();
-    //}
-    //void OnDisable()
-    //{
-     //   controls.gameplay.Disable();
-    //}
 }

@@ -131,17 +131,8 @@ public class PlayerJumpV3 : MonoBehaviour
                     playermov.facingRight = true;
                 }
             }
-
         }
-
-
-
-
-
-
     }
-
-
 
     void Checkground()
     {

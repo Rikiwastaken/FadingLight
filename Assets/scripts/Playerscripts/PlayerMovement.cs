@@ -85,7 +85,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 horizontal = 0;
             }
-            //vertical = Input.GetAxis("Vertical");
         }
 
 
