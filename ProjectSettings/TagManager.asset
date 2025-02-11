@@ -15,9 +15,9 @@ TagManager:
   - ground
   - savepoint
   - wall
-  - 
-  - 
-  - 
+  - player
+  - ennemy
+  - playerpassthroughenemy
   - 
   - 
   - 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7714607739817182240}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: groundcheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6926696799933660802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: attackpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3898376376426429199}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Front check
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 3724100581142410993}
   - component: {fileID: 7297679925771535583}
   - component: {fileID: 736690049156150842}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -312,6 +312,8 @@ MonoBehaviour:
   slowdownspeed: 0.1
   horizontal: 0
   vertical: 0
+  rolling: 0
+  rollingspeed: 2
 --- !u!114 &2162529214170387368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,7 +403,6 @@ MonoBehaviour:
     m_Bits: 256
   attackpoint: {fileID: 6926696799933660802}
   range: 0.25
-  walljumped: {fileID: 0}
   nrgregen: 0
   hpdamage: 20
   nrgdamage: 20
@@ -451,7 +452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3406871945689157119}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: corncheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

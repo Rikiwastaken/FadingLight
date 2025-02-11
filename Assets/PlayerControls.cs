@@ -89,6 +89,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""25b8167e-7fbd-4241-8eff-18bbafd3296f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -245,6 +254,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""moveright"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69815abd-39e9-4320-9695-7310e401914c"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd31b214-7b18-4b36-85c6-368472f87510"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -260,6 +291,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_gameplay_down = m_gameplay.FindAction("down", throwIfNotFound: true);
         m_gameplay_moveleft = m_gameplay.FindAction("moveleft", throwIfNotFound: true);
         m_gameplay_moveright = m_gameplay.FindAction("moveright", throwIfNotFound: true);
+        m_gameplay_dodge = m_gameplay.FindAction("dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -328,6 +360,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_down;
     private readonly InputAction m_gameplay_moveleft;
     private readonly InputAction m_gameplay_moveright;
+    private readonly InputAction m_gameplay_dodge;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -339,6 +372,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @down => m_Wrapper.m_gameplay_down;
         public InputAction @moveleft => m_Wrapper.m_gameplay_moveleft;
         public InputAction @moveright => m_Wrapper.m_gameplay_moveright;
+        public InputAction @dodge => m_Wrapper.m_gameplay_dodge;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -369,6 +403,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @moveright.started += instance.OnMoveright;
             @moveright.performed += instance.OnMoveright;
             @moveright.canceled += instance.OnMoveright;
+            @dodge.started += instance.OnDodge;
+            @dodge.performed += instance.OnDodge;
+            @dodge.canceled += instance.OnDodge;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -394,6 +431,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @moveright.started -= instance.OnMoveright;
             @moveright.performed -= instance.OnMoveright;
             @moveright.canceled -= instance.OnMoveright;
+            @dodge.started -= instance.OnDodge;
+            @dodge.performed -= instance.OnDodge;
+            @dodge.canceled -= instance.OnDodge;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -420,5 +460,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnDown(InputAction.CallbackContext context);
         void OnMoveleft(InputAction.CallbackContext context);
         void OnMoveright(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }

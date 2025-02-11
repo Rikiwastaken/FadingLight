@@ -73,6 +73,15 @@ public class EldonAttack : MonoBehaviour
         }
     }
 
+    void OnDodge()
+    {
+        if (!eldonanim.GetCurrentAnimatorStateInfo(0).IsName("roll") && !eldonanim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            eldonanim.SetTrigger("dodge");
+        }
+        
+    }
+
     void Update()
     {
 

@@ -11,7 +11,8 @@
                     "id": "485e2196-6a27-4fe3-a9da-744381a3b499",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "jump",
@@ -19,7 +20,8 @@
                     "id": "c6786b4f-9eb3-4cd8-8860-65635bc192b7",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "modechange",
@@ -27,7 +29,8 @@
                     "id": "57ccf2ce-7b56-4f56-91b5-0598ca879a7e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "menu",
@@ -35,7 +38,8 @@
                     "id": "458931c4-6396-4945-97c4-c38b0e893ae3",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "down",
@@ -43,7 +47,8 @@
                     "id": "968db628-9bee-42cf-b020-7cb456054317",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "moveleft",
@@ -51,7 +56,8 @@
                     "id": "cadfdfee-d132-4138-8add-30548612a806",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "moveright",
@@ -59,7 +65,17 @@
                     "id": "869e1407-443f-4185-8df4-437f72db3325",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "dodge",
+                    "type": "Button",
+                    "id": "25b8167e-7fbd-4241-8eff-18bbafd3296f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -214,6 +230,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "moveright",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "69815abd-39e9-4320-9695-7310e401914c",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fd31b214-7b18-4b36-85c6-368472f87510",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     public float horizontal; // 1,-1,0
     public float vertical;
 
+    public bool rolling;
+    public float rollingspeed;
 
     private PlayerJumpV3 playerjump;
 
@@ -130,6 +132,12 @@ public class PlayerMovement : MonoBehaviour
                 {
                     rb2D.velocityX += slowdownspeed;
                 }
+            }
+
+
+            if(rolling)
+            {
+                rb2D.velocityX=(transform.localScale.x/Mathf.Abs(transform.localScale.x))*rollingspeed;
             }
            
             Flip(horizontal);

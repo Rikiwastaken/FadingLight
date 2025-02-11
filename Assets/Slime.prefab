@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7687230029412631787}
   - component: {fileID: 1237506467258737558}
   - component: {fileID: 5923198561826035524}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 5086185784911348803}
   - component: {fileID: 3774370402567916658}
   - component: {fileID: 81927928572536780}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: exclamationmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 7498486688996301377}
   - component: {fileID: 6044456019867006454}
   - component: {fileID: 3743485394842374284}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Canvasenemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 1369644078580577236}
   - component: {fileID: 9173736713204310957}
   - component: {fileID: 4124631649409121217}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: HPbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 3645165955404307903}
   - component: {fileID: 7407807304776217731}
   - component: {fileID: 6266587256966466028}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: BarBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 8556073433365785104}
   - component: {fileID: 3052089137026273567}
   - component: {fileID: 6907951064170325285}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Energybar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -585,7 +585,7 @@ GameObject:
   - component: {fileID: 3579844636067520957}
   - component: {fileID: 1806110475602329056}
   - component: {fileID: 5458493380403203971}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Slime
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -706,7 +706,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -823,7 +823,7 @@ GameObject:
   - component: {fileID: 870409153344571778}
   - component: {fileID: 3514792377077697509}
   - component: {fileID: 6361719237817751906}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +898,7 @@ GameObject:
   - component: {fileID: 2666926242110772353}
   - component: {fileID: 2945014963367668569}
   - component: {fileID: 5626798294952573027}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: BarBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

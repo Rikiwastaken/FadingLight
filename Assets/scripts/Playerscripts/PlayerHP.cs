@@ -46,8 +46,12 @@ public class PlayerHP : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, hitjumpforce);
         }
     }
-    void Update()
+    void FixedUpdate()
     {
+
+        
+
+
         if (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisspike) & inv == false)
         {
             Eldonhp = Eldonhp - 5;
@@ -71,6 +75,26 @@ public class PlayerHP : MonoBehaviour
                 inv = false;
             }
         }
+
+        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && iframe == 0)
+        {
+            iframe += 1;
+            inv = true;
+            
+        }
+        if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll"))
+        {
+            int LayerIgnoreRaycast = LayerMask.NameToLayer("playerpassthroughenemy");
+            gameObject.layer = LayerIgnoreRaycast;
+            GetComponent<PlayerMovement>().rolling = true;
+        }
+        else
+        {
+            int LayerIgnoreRaycast = LayerMask.NameToLayer("player");
+            gameObject.layer = LayerIgnoreRaycast;
+            GetComponent<PlayerMovement>().rolling = false;
+        }
+
         if (GetComponent<Rigidbody2D>().position.y<-3)
         {
             SceneManager.LoadScene("MainMenu");
