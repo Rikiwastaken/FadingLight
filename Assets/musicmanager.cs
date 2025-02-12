@@ -19,7 +19,7 @@ public class musicmanager : MonoBehaviour
     // Start is called before the first frame update
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //optionvolume= Find.GameObject("Optionvalues").GetComponent<optionsvalues>().musicvol;
 

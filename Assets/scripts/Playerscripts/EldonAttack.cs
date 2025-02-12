@@ -9,9 +9,6 @@ public class EldonAttack : MonoBehaviour
 {
     PlayerControls controls;
 
-    public PlayerInput Modechange;
-    public PlayerInput Attack;
-
     private Animator eldonanim;
 
     [Header("wall variables")]
@@ -32,6 +29,7 @@ public class EldonAttack : MonoBehaviour
     public bool slayermode; //true:slayer false:eater
     public float attackdelay; //time between attacks
     public int delaycounter;
+    
 
 
     [Header("recoil variables")]
@@ -46,13 +44,14 @@ public class EldonAttack : MonoBehaviour
 
     private PlayerJumpV3 playerjump;
 
+
     // Start is called before the first frame update
     void Start()
     {
         eldonanim = GetComponent<Animator>();
         slayermode = true;
-        GameObject.Find("slayertext").GetComponent<Text>().enabled = true;
-        GameObject.Find("eatertext").GetComponent<Text>().enabled = false;
+        GameObject.Find("slayertext").GetComponent<Image>().enabled = true;
+        GameObject.Find("eatertext").GetComponent<Image>().enabled = false;
         playerjump = GetComponent<PlayerJumpV3>();
     }
 
@@ -73,16 +72,9 @@ public class EldonAttack : MonoBehaviour
         }
     }
 
-    void OnDodge()
-    {
-        if (!eldonanim.GetCurrentAnimatorStateInfo(0).IsName("roll") && !eldonanim.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
-        {
-            eldonanim.SetTrigger("dodge");
-        }
-        
-    }
+    
 
-    void Update()
+    void FixedUpdate()
     {
 
         grounded = playerjump.grounded;
@@ -91,6 +83,8 @@ public class EldonAttack : MonoBehaviour
         {
             delaycounter -= 1;
         }
+
+        
 
         istherewall = Physics2D.OverlapCircle(attackpoint.position, range,whatiswall);
 
@@ -102,14 +96,14 @@ public class EldonAttack : MonoBehaviour
         if(slayermode)
         {
             slayermode = false;
-            GameObject.Find("slayertext").GetComponent<Text>().enabled = false;
-            GameObject.Find("eatertext").GetComponent<Text>().enabled = true;
+            GameObject.Find("slayertext").GetComponent<Image>().enabled = false;
+            GameObject.Find("eatertext").GetComponent<Image>().enabled = true;
         }
         else
         {
             slayermode = true;
-            GameObject.Find("slayertext").GetComponent<Text>().enabled = true;
-            GameObject.Find("eatertext").GetComponent<Text>().enabled = false;
+            GameObject.Find("slayertext").GetComponent<Image>().enabled = true;
+            GameObject.Find("eatertext").GetComponent<Image>().enabled = false;
         }
     }
 

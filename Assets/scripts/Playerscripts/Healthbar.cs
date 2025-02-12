@@ -6,32 +6,35 @@ using UnityEngine.UI;
 public class Healthbar : MonoBehaviour
 {
 
-    public Slider sliderHP;
-    public Slider sliderNRG;
+    public Image imageHP;
+    public Image imageNRG;
+
+    private float maxhp;
+    private float maxnrj;
 
 
     public void SetMaxhealth(float maxhealth)
     {
-        sliderHP.maxValue = maxhealth;
+        maxhp=maxhealth;
     }
     
 
 
     public void SetHealth(float health)
     {
-        sliderHP.value = health;
+        imageHP.fillAmount = health/maxhp;
     }
 
     public void SetMaxEnergy(float maxenergy)
     {
-        sliderNRG.maxValue = maxenergy;
+        maxnrj = maxenergy;
     }
 
 
 
     public void SetEnergy(float energy)
     {
-        sliderNRG.value = energy;
+        imageNRG.fillAmount = energy/maxnrj;
     }
 
 }

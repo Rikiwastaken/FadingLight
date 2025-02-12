@@ -20,11 +20,12 @@ public class PlayerHP : MonoBehaviour
 
 
     public float radOcircle;
-    public Healthbar healthbar;
+    private Healthbar healthbar;
 
     // Start is called before the first frame update
     void Start()
     {
+        healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
         Eldonhp = Playervalues.EldonHP;
         Eldonmaxhp = Playervalues.EldonmaxHP;
         EldonNRG = 0;
@@ -32,6 +33,7 @@ public class PlayerHP : MonoBehaviour
         healthbar.SetMaxhealth(Eldonmaxhp);
         healthbar.SetMaxEnergy(EldonmaxNRG);
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -76,7 +78,7 @@ public class PlayerHP : MonoBehaviour
             }
         }
 
-        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && iframe == 0)
+        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && iframe == 0 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime<1 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1/14)
         {
             iframe += 1;
             inv = true;
