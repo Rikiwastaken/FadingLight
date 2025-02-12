@@ -10,5 +10,6 @@ public class Global : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene("MainMenu");
+        Screen.SetResolution(1920, 1080,false);
     }
 }

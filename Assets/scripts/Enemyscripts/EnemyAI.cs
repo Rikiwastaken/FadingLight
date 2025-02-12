@@ -24,8 +24,6 @@ public class EnemyAI : MonoBehaviour
     public bool cannotmove;
     public bool cannotmoveatk;
     public bool targetted;
-    private bool walkingright = false;
-    private bool lookingright = false;
     private bool initiateattack;
     private float distplayer;
     private int attackcounter;
@@ -75,15 +73,18 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            if (walkingright && !lookingright)
+
+
+            if (target != null)
             {
-                GetComponent<SpriteRenderer>().flipX = true;
-                lookingright = true;
-            }
-            if (!walkingright && lookingright)
-            {
-                GetComponent<SpriteRenderer>().flipX = false;
-                lookingright = false;
+                if (target.transform.position.x <= transform.position.x)
+                {
+                    transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+                }
+                else
+                {
+                    transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
+                }
             }
 
             if (distplayer <= detectdist || targetted)
@@ -97,7 +98,6 @@ public class EnemyAI : MonoBehaviour
                         {
                             rb2D.velocity = new Vector2(rb2D.velocity.x - xspeed * 0.08f, 0);
                         }
-                        walkingright = false;
                     }
                     else
                     {
@@ -105,7 +105,6 @@ public class EnemyAI : MonoBehaviour
                         {
                             rb2D.velocity = new Vector2(rb2D.velocity.x + xspeed * 0.08f, 0);
                         }
-                        walkingright = true;
                     }
                 }
 
