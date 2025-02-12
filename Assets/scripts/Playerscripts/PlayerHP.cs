@@ -42,11 +42,24 @@ public class PlayerHP : MonoBehaviour
     {
         if (other.gameObject.tag =="enemy" & !inv)
         {
-            Eldonhp -= other.gameObject.GetComponent<EnemyHP>().enemydamage;
-            inv = true;
-            iframe = invicibilityframes;
+            TakeDamage(other.gameObject.GetComponent<EnemyHP>().enemydamage, new Vector2(rb.velocity.x, hitjumpforce),Vector2.zero);
+        }
+    }
+
+    public void TakeDamage(float damage, Vector2 velchg, Vector2 ForceApplied)
+    {
+        Eldonhp -= damage;
+        inv = true;
+        iframe = invicibilityframes;
+        if(velchg!=Vector2.zero)
+        {
             rb.velocity = new Vector2(rb.velocity.x, hitjumpforce);
         }
+        if(ForceApplied!=Vector2.zero)
+        {
+            rb.AddForce(ForceApplied/Time.deltaTime);
+        }
+        
     }
     void FixedUpdate()
     {
@@ -67,7 +80,7 @@ public class PlayerHP : MonoBehaviour
 
         if (Eldonhp <= 0)
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("BreedingGrounds");
         }
         if (inv == true)
         {
@@ -99,7 +112,7 @@ public class PlayerHP : MonoBehaviour
 
         if (GetComponent<Rigidbody2D>().position.y<-3)
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("BreedingGrounds");
         }
     }
 }

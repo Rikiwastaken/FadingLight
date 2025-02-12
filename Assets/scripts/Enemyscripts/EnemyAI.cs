@@ -130,7 +130,7 @@ public class EnemyAI : MonoBehaviour
 
         
 
-        if (targetted && distplayer < attackrange && !initiateattack && atkcdcounter==0)
+        if (targetted && distplayer < attackrange && !initiateattack && atkcdcounter==0 && GetComponent<EnemyHP>().enemyNRG>0)
         {
             cannotmoveatk = true;
             attackcounter = (int)(timebeforejump/Time.deltaTime);
