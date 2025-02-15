@@ -11,10 +11,6 @@ public class EldonAttack : MonoBehaviour
 
     private Animator eldonanim;
 
-    [Header("wall variables")]
-    public bool istherewall;
-    [SerializeField] private LayerMask whatiswall;
-
     //size of the attack 
     [Header("hitbox of the attack")]
     public Transform attackpoint;
@@ -57,7 +53,7 @@ public class EldonAttack : MonoBehaviour
 
     //Slayer and Eater modes
 
-    void OnModechange()
+    void OnRightShoulder()
 
     {
         Modeswitch();
@@ -84,9 +80,6 @@ public class EldonAttack : MonoBehaviour
             delaycounter -= 1;
         }
 
-        
-
-        istherewall = Physics2D.OverlapCircle(attackpoint.position, range,whatiswall);
 
     }
 
@@ -113,8 +106,6 @@ public class EldonAttack : MonoBehaviour
         //attack animation
         eldonanim.SetTrigger("attack");
 
-        //get enemies in range
-        Collider2D[] hitwalls = Physics2D.OverlapCircleAll(attackpoint.position, range,whatiswall);
         Collider2D[] hitenemies = Physics2D.OverlapCircleAll(attackpoint.position,range);
 
         foreach (Collider2D enemy in hitenemies)
@@ -173,11 +164,6 @@ public class EldonAttack : MonoBehaviour
 
             }
             
-        }
-        if (istherewall && !grounded)
-        {
-            playerjump.stuckinwall = true;
-
         }
 
     }

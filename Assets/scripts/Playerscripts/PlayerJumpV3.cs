@@ -29,10 +29,14 @@ public class PlayerJumpV3 : MonoBehaviour
     [SerializeField] private LayerMask whatisground;
 
     [Header("Walljump details")]
-    public bool stuckinwall;
+    public bool touchingwall; //checks if in contact with wall
     public float gravity;
     public float wjforceside;
     public float wjforceup;
+    public bool stuckinwall; // is true if player is sticking to a wall
+    private bool wantstounstick; //check if player wants to unstick from wall
+    [SerializeField] private LayerMask whatiswall;
+    [SerializeField] private Transform frontcheck;
 
     public bool grounded;
 
@@ -76,6 +80,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
         horizontal = playermov.horizontal;
         grounded = Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground);
+        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi, largeurgi),0, whatiswall);
         Checkground();
 
         //normal jump
@@ -104,11 +109,30 @@ public class PlayerJumpV3 : MonoBehaviour
         }
 
         //wall jump
-        if (stuckinwall && presseddown)
+
+        if(!touchingwall)
         {
             stuckinwall = false;
+            wantstounstick = false;
             rb.gravityScale = gravity;
         }
+        else
+        {
+            if(presseddown)
+            {
+                wantstounstick = true;
+            }
+            if(!wantstounstick)
+            {
+                stuckinwall = true;
+            }
+            else
+            {
+                stuckinwall = false;
+                rb.gravityScale = gravity;
+            }
+        }
+
         if (stuckinwall)
         {
             rb.velocity = new Vector2(0, 0);
@@ -142,6 +166,7 @@ public class PlayerJumpV3 : MonoBehaviour
             jumpcounter = jumptime;
             myanim.ResetTrigger("jump");
             myanim.SetBool("falling", false);
+            touchingwall = false;
 
         }
     }
@@ -149,6 +174,8 @@ public class PlayerJumpV3 : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawCube(groundcheck.position, new Vector2(largeurgi, hauteurgi));
+        Gizmos.DrawCube(frontcheck.position, new Vector2(hauteurgi, largeurgi));
+
     }
 
     private void HandleLayers()

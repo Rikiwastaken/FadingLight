@@ -62,37 +62,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2005576112850915861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5626865115691597613
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3898376376426429199}
-  m_Layer: 9
-  m_Name: Front check
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3898376376426429199
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5626865115691597613}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.056, y: 0.007, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2005576112850915861}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5919727951631986471
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,9 +103,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7714607739817182240}
-  - {fileID: 3898376376426429199}
   - {fileID: 6926696799933660802}
-  - {fileID: 3406871945689157119}
+  - {fileID: 884501568741670791}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3096371661168875377
@@ -340,10 +308,14 @@ MonoBehaviour:
   whatisground:
     serializedVersion: 2
     m_Bits: 64
-  stuckinwall: 0
   gravity: 0
   wjforceside: 2
   wjforceup: 5
+  stuckinwall: 0
+  whatiswall:
+    serializedVersion: 2
+    m_Bits: 256
+  frontcheck: {fileID: 884501568741670791}
   grounded: 0
   horizontal: 0
   pressedjump: 0
@@ -376,14 +348,10 @@ MonoBehaviour:
   Eldonmaxhp: 0
   EldonNRG: 0
   EldonmaxNRG: 0
-  whatisspike:
-    serializedVersion: 2
-    m_Bits: 0
   groundcheck: {fileID: 7714607739817182240}
   invicibilityframes: 120
   hitjumpforce: 2
   radOcircle: 0.06
-  healthbar: {fileID: 0}
 --- !u!114 &7297679925771535583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,12 +364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe8d68f9741c4766bd02cde2ed5f933, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Modechange: {fileID: 0}
-  Attack: {fileID: 0}
-  istherewall: 0
-  whatiswall:
-    serializedVersion: 2
-    m_Bits: 256
   attackpoint: {fileID: 6926696799933660802}
   range: 0.25
   nrgregen: 0
@@ -457,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dodgecd: 1
---- !u!1 &8611505731496302673
+--- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -465,24 +427,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3406871945689157119}
-  m_Layer: 9
-  m_Name: corncheck
+  - component: {fileID: 884501568741670791}
+  m_Layer: 0
+  m_Name: Frontcheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3406871945689157119
+--- !u!4 &884501568741670791
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8611505731496302673}
+  m_GameObject: {fileID: 9140735802474745441}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.13, y: 0.1, z: 0}
+  m_LocalPosition: {x: 0.099, y: -0.018, z: 0.0051182485}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

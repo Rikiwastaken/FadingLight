@@ -10,7 +10,6 @@ public class PlayerHP : MonoBehaviour
     public float Eldonmaxhp;
     public float EldonNRG;
     public float EldonmaxNRG;
-    [SerializeField] private LayerMask whatisspike;
     [SerializeField] private Transform groundcheck;
     private bool inv = false;
     private int iframe;
@@ -63,17 +62,6 @@ public class PlayerHP : MonoBehaviour
     }
     void FixedUpdate()
     {
-
-        
-
-
-        if (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisspike) & inv == false)
-        {
-            Eldonhp = Eldonhp - 5;
-            inv = true;
-            iframe = invicibilityframes;
-            rb.velocity=new Vector2(rb.velocity.x, hitjumpforce);
-        }
 
         healthbar.SetHealth(Eldonhp);
         healthbar.SetEnergy(EldonNRG);

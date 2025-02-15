@@ -46,9 +46,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""modechange"",
+                    ""name"": ""RightShoulder"",
                     ""type"": ""Button"",
                     ""id"": ""57ccf2ce-7b56-4f56-91b5-0598ca879a7e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftShoulder"",
+                    ""type"": ""Button"",
+                    ""id"": ""6fb85922-59f8-47ed-881b-e36bdddbc49a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -94,6 +103,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""dodge"",
                     ""type"": ""Button"",
                     ""id"": ""25b8167e-7fbd-4241-8eff-18bbafd3296f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c443ff7-8c1e-4c20-af5c-70816b2a33f5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -152,7 +170,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""modechange"",
+                    ""action"": ""RightShoulder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -163,7 +181,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""modechange"",
+                    ""action"": ""RightShoulder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -276,6 +294,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b69ae0b-0298-4396-a9d8-386357a7632d"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7baad2d9-5819-43b6-aa6f-96c3c999796e"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a331d2b1-0d49-49e9-8da4-035de50a33f1"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftShoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ad1766eb-efce-4f29-9c8f-a503cf190f83"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftShoulder"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -286,12 +348,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_gameplay = asset.FindActionMap("gameplay", throwIfNotFound: true);
         m_gameplay_attack = m_gameplay.FindAction("attack", throwIfNotFound: true);
         m_gameplay_jump = m_gameplay.FindAction("jump", throwIfNotFound: true);
-        m_gameplay_modechange = m_gameplay.FindAction("modechange", throwIfNotFound: true);
+        m_gameplay_RightShoulder = m_gameplay.FindAction("RightShoulder", throwIfNotFound: true);
+        m_gameplay_LeftShoulder = m_gameplay.FindAction("LeftShoulder", throwIfNotFound: true);
         m_gameplay_menu = m_gameplay.FindAction("menu", throwIfNotFound: true);
         m_gameplay_down = m_gameplay.FindAction("down", throwIfNotFound: true);
         m_gameplay_moveleft = m_gameplay.FindAction("moveleft", throwIfNotFound: true);
         m_gameplay_moveright = m_gameplay.FindAction("moveright", throwIfNotFound: true);
         m_gameplay_dodge = m_gameplay.FindAction("dodge", throwIfNotFound: true);
+        m_gameplay_Inventory = m_gameplay.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -355,24 +419,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_gameplay_attack;
     private readonly InputAction m_gameplay_jump;
-    private readonly InputAction m_gameplay_modechange;
+    private readonly InputAction m_gameplay_RightShoulder;
+    private readonly InputAction m_gameplay_LeftShoulder;
     private readonly InputAction m_gameplay_menu;
     private readonly InputAction m_gameplay_down;
     private readonly InputAction m_gameplay_moveleft;
     private readonly InputAction m_gameplay_moveright;
     private readonly InputAction m_gameplay_dodge;
+    private readonly InputAction m_gameplay_Inventory;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @attack => m_Wrapper.m_gameplay_attack;
         public InputAction @jump => m_Wrapper.m_gameplay_jump;
-        public InputAction @modechange => m_Wrapper.m_gameplay_modechange;
+        public InputAction @RightShoulder => m_Wrapper.m_gameplay_RightShoulder;
+        public InputAction @LeftShoulder => m_Wrapper.m_gameplay_LeftShoulder;
         public InputAction @menu => m_Wrapper.m_gameplay_menu;
         public InputAction @down => m_Wrapper.m_gameplay_down;
         public InputAction @moveleft => m_Wrapper.m_gameplay_moveleft;
         public InputAction @moveright => m_Wrapper.m_gameplay_moveright;
         public InputAction @dodge => m_Wrapper.m_gameplay_dodge;
+        public InputAction @Inventory => m_Wrapper.m_gameplay_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -388,9 +456,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @jump.started += instance.OnJump;
             @jump.performed += instance.OnJump;
             @jump.canceled += instance.OnJump;
-            @modechange.started += instance.OnModechange;
-            @modechange.performed += instance.OnModechange;
-            @modechange.canceled += instance.OnModechange;
+            @RightShoulder.started += instance.OnRightShoulder;
+            @RightShoulder.performed += instance.OnRightShoulder;
+            @RightShoulder.canceled += instance.OnRightShoulder;
+            @LeftShoulder.started += instance.OnLeftShoulder;
+            @LeftShoulder.performed += instance.OnLeftShoulder;
+            @LeftShoulder.canceled += instance.OnLeftShoulder;
             @menu.started += instance.OnMenu;
             @menu.performed += instance.OnMenu;
             @menu.canceled += instance.OnMenu;
@@ -406,6 +477,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @dodge.started += instance.OnDodge;
             @dodge.performed += instance.OnDodge;
             @dodge.canceled += instance.OnDodge;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -416,9 +490,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @jump.started -= instance.OnJump;
             @jump.performed -= instance.OnJump;
             @jump.canceled -= instance.OnJump;
-            @modechange.started -= instance.OnModechange;
-            @modechange.performed -= instance.OnModechange;
-            @modechange.canceled -= instance.OnModechange;
+            @RightShoulder.started -= instance.OnRightShoulder;
+            @RightShoulder.performed -= instance.OnRightShoulder;
+            @RightShoulder.canceled -= instance.OnRightShoulder;
+            @LeftShoulder.started -= instance.OnLeftShoulder;
+            @LeftShoulder.performed -= instance.OnLeftShoulder;
+            @LeftShoulder.canceled -= instance.OnLeftShoulder;
             @menu.started -= instance.OnMenu;
             @menu.performed -= instance.OnMenu;
             @menu.canceled -= instance.OnMenu;
@@ -434,6 +511,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @dodge.started -= instance.OnDodge;
             @dodge.performed -= instance.OnDodge;
             @dodge.canceled -= instance.OnDodge;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -455,11 +535,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnAttack(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnModechange(InputAction.CallbackContext context);
+        void OnRightShoulder(InputAction.CallbackContext context);
+        void OnLeftShoulder(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
         void OnMoveleft(InputAction.CallbackContext context);
         void OnMoveright(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }
