@@ -115,6 +115,7 @@ public class PlayerJumpV3 : MonoBehaviour
             stuckinwall = false;
             wantstounstick = false;
             rb.gravityScale = gravity;
+            GetComponent<Animator>().SetBool("stuckinwall", false);
         }
         else
         {
@@ -130,11 +131,13 @@ public class PlayerJumpV3 : MonoBehaviour
             {
                 stuckinwall = false;
                 rb.gravityScale = gravity;
+                GetComponent<Animator>().SetBool("stuckinwall", false);
             }
         }
 
         if (stuckinwall)
         {
+            GetComponent<Animator>().SetBool("stuckinwall",true);
             rb.velocity = new Vector2(0, 0);
             rb.gravityScale = 0;
             if (pressedjump && !alreadypressedjump)
