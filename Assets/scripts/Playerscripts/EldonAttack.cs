@@ -54,7 +54,6 @@ public class EldonAttack : MonoBehaviour
     //Slayer and Eater modes
 
     void OnRightShoulder()
-
     {
         Modeswitch();
     }
