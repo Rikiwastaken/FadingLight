@@ -1,0 +1,157 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class AugmentsScript : MonoBehaviour
+{
+
+    [System.Serializable]
+    public class Augment
+    {
+        public string name;
+        public string description;
+        public int attributeID; //0 maxHP, 1 maxNRG, 2 Damage, 3 Damage, 4 DamageReduction, 5 JumpHeight
+        public float valueincr;
+        public bool mult; //if true, multiplicative, else additive
+        public Image image;
+    }
+
+
+
+    [System.Serializable]
+    public class Stats
+    {
+        public float MaxHP;
+        public float MaxNRJ;
+        public float Damage;
+        public float NRJDamage;
+        public float DamageReduction;
+        public float JumpHeight;
+    }
+
+    public List<Augment> Augmentlist;
+    public List<bool> EquipedAugments;
+    public Stats Basestats;
+    public Stats EquipedStats;
+
+    public bool manuallyapplyaugmentboosts;
+
+    private float HPfraction;
+
+    private void Awake()
+    {
+        ApplyAugmentBoost();
+    }
+    private void Update()
+    {
+        if (manuallyapplyaugmentboosts)
+        {
+            manuallyapplyaugmentboosts = false;
+            ApplyAugmentBoost();
+        }
+    }
+
+    public void ApplyAugmentBoost()
+    {
+        HPfraction = GetComponent<PlayerHP>().Eldonhp/ GetComponent<PlayerHP>().Eldonmaxhp;
+        InitiateEquipedStats();
+
+        for (int i = 0; i < EquipedAugments.Count; i++)
+        {
+            if (EquipedAugments[i] == true && i<Augmentlist.Count)
+            {
+                ApplyAttribute(Augmentlist[i].attributeID, Augmentlist[i].valueincr, Augmentlist[i].mult);
+            }
+        }
+
+        UpdateInGameValues();
+
+    }
+
+    private void ApplyAttribute(int AttributeID, float value, bool mult)
+    {
+        if(mult)
+        {
+            switch (AttributeID)
+            {
+                case 0:
+                    EquipedStats.MaxHP *= value;
+                    break;
+                case 1:
+                    EquipedStats.MaxNRJ *= value;
+                    break;
+                case 2:
+                    EquipedStats.Damage *= value;
+                    break;
+                case 3:
+                    EquipedStats.NRJDamage *= value;
+                    break;
+                case 4:
+                    EquipedStats.DamageReduction *= value;
+                    break;
+                case 5:
+                    EquipedStats.JumpHeight *= value;
+                    break;
+
+            }
+        }
+        else
+        {
+            switch (AttributeID)
+            {
+                case 0:
+                    EquipedStats.MaxHP += value;
+                    break;
+                case 1:
+                    EquipedStats.MaxNRJ += value;
+                    break;
+                case 2:
+                    EquipedStats.Damage += value;
+                    break;
+                case 3:
+                    EquipedStats.NRJDamage += value;
+                    break;
+                case 4:
+                    EquipedStats.DamageReduction += value;
+                    break;
+                case 5:
+                    EquipedStats.JumpHeight += value;
+                    break;
+
+            }
+        }
+    }
+
+    private void InitiateEquipedStats()
+    {
+        Stats newEquipedStats = new Stats();
+        newEquipedStats.MaxHP = Basestats.MaxHP;
+        newEquipedStats.MaxNRJ= Basestats.MaxNRJ;
+        newEquipedStats.Damage= Basestats.Damage;
+        newEquipedStats.NRJDamage = Basestats.NRJDamage;
+        newEquipedStats.DamageReduction= Basestats.DamageReduction;
+        newEquipedStats.JumpHeight= Basestats.JumpHeight;
+        EquipedStats = newEquipedStats;
+    }
+    
+    private void UpdateInGameValues()
+    {
+        GetComponent<EldonAttack>().nrgdamage = (int)EquipedStats.NRJDamage;
+        GetComponent<EldonAttack>().hpdamage = (int)EquipedStats.Damage;
+        GetComponent<PlayerHP>().Eldonmaxhp = (int)EquipedStats.MaxHP;
+        GetComponent<PlayerHP>().EldonmaxNRG = (int)EquipedStats.MaxNRJ;
+        GetComponent<PlayerHP>().damagereduction = (int)EquipedStats.DamageReduction;
+        GetComponent<PlayerJumpV3>().jumpForce = (int)EquipedStats.JumpHeight;
+        if(HPfraction * EquipedStats.MaxHP >= 1f )
+        {
+            GetComponent<PlayerHP>().Eldonhp = (int)(HPfraction* EquipedStats.MaxHP);
+        }
+        else
+        {
+            GetComponent<PlayerHP>().Eldonhp = (int)EquipedStats.MaxHP;
+        }
+        GetComponent<PlayerHP>().UpdateBars();
+    }
+
+}

@@ -16,6 +16,7 @@ public class PlayerHP : MonoBehaviour
     public int invicibilityframes;
     public float hitjumpforce;
     private Rigidbody2D rb;
+    public float damagereduction;
 
 
     public float radOcircle;
@@ -25,12 +26,6 @@ public class PlayerHP : MonoBehaviour
     void Start()
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
-        Eldonhp = Playervalues.EldonHP;
-        Eldonmaxhp = Playervalues.EldonmaxHP;
-        EldonNRG = 0;
-        EldonmaxNRG = Playervalues.EldonmaxNRG;
-        healthbar.SetMaxhealth(Eldonmaxhp);
-        healthbar.SetMaxEnergy(EldonmaxNRG);
         rb = GetComponent<Rigidbody2D>();
         
     }
@@ -47,7 +42,12 @@ public class PlayerHP : MonoBehaviour
 
     public void TakeDamage(float damage, Vector2 velchg, Vector2 ForceApplied)
     {
-        Eldonhp -= damage;
+        int damagetotake = 1;
+        if(damage-damagereduction > 0f)
+        {
+            damagetotake = (int)(damage - damagereduction);
+        }
+        Eldonhp -= damagetotake;
         inv = true;
         iframe = invicibilityframes;
         if(velchg!=Vector2.zero)
@@ -102,5 +102,13 @@ public class PlayerHP : MonoBehaviour
         {
             SceneManager.LoadScene("BreedingGrounds");
         }
+    }
+
+
+    public void UpdateBars()
+    {
+        healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
+        healthbar.SetMaxhealth(Eldonmaxhp);
+        healthbar.SetMaxEnergy(EldonmaxNRG);
     }
 }

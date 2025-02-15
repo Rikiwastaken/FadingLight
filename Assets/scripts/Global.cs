@@ -16,6 +16,7 @@ public class Global : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene("MainMenu");
         Screen.SetResolution(1920, 1080,false);
+        Application.targetFrameRate = 60;
     }
 
     private void Update()
