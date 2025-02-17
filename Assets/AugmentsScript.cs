@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class AugmentsScript : MonoBehaviour
     {
         public string name;
         public string description;
-        public int attributeID; //0 maxHP, 1 maxNRG, 2 Damage, 3 Damage, 4 DamageReduction, 5 JumpHeight
+        public int attributeID; //0 maxHP, 1 maxNRG, 2 Damage, 3 Damage, 4 DamageReduction, 5 JumpHeight, 6 Speed
         public float valueincr;
         public bool mult; //if true, multiplicative, else additive
         public Image image;
@@ -28,18 +29,20 @@ public class AugmentsScript : MonoBehaviour
         public float NRJDamage;
         public float DamageReduction;
         public float JumpHeight;
+        public float Speed;
     }
 
     public List<Augment> Augmentlist;
     public List<bool> EquipedAugments;
     public Stats Basestats;
     public Stats EquipedStats;
+    public Statstext statdisplayobject;
 
     public bool manuallyapplyaugmentboosts;
 
     private float HPfraction;
 
-    private void Awake()
+    private void Start()
     {
         ApplyAugmentBoost();
     }
@@ -93,6 +96,9 @@ public class AugmentsScript : MonoBehaviour
                 case 5:
                     EquipedStats.JumpHeight *= value;
                     break;
+                case 6:
+                    EquipedStats.Speed *= value;
+                    break;
 
             }
         }
@@ -118,6 +124,9 @@ public class AugmentsScript : MonoBehaviour
                 case 5:
                     EquipedStats.JumpHeight += value;
                     break;
+                case 6:
+                    EquipedStats.Speed += value;
+                    break;
 
             }
         }
@@ -132,6 +141,7 @@ public class AugmentsScript : MonoBehaviour
         newEquipedStats.NRJDamage = Basestats.NRJDamage;
         newEquipedStats.DamageReduction= Basestats.DamageReduction;
         newEquipedStats.JumpHeight= Basestats.JumpHeight;
+        newEquipedStats.Speed = Basestats.Speed;
         EquipedStats = newEquipedStats;
     }
     
@@ -143,7 +153,8 @@ public class AugmentsScript : MonoBehaviour
         GetComponent<PlayerHP>().EldonmaxNRG = (int)EquipedStats.MaxNRJ;
         GetComponent<PlayerHP>().damagereduction = (int)EquipedStats.DamageReduction;
         GetComponent<PlayerJumpV3>().jumpForce = (int)EquipedStats.JumpHeight;
-        if(HPfraction * EquipedStats.MaxHP >= 1f )
+        GetComponent<PlayerMovement>().maxspeed = (int)EquipedStats.Speed;
+        if (HPfraction * EquipedStats.MaxHP >= 1f )
         {
             GetComponent<PlayerHP>().Eldonhp = (int)(HPfraction* EquipedStats.MaxHP);
         }
@@ -152,6 +163,17 @@ public class AugmentsScript : MonoBehaviour
             GetComponent<PlayerHP>().Eldonhp = (int)EquipedStats.MaxHP;
         }
         GetComponent<PlayerHP>().UpdateBars();
+        if(statdisplayobject!=null)
+        {
+            statdisplayobject.MaxHP = (int)EquipedStats.MaxHP;
+            statdisplayobject.Damage = (int)EquipedStats.Damage;
+            statdisplayobject.NRJDamage = (int)EquipedStats.NRJDamage;
+            statdisplayobject.MaxHP = (int)EquipedStats.MaxHP;
+            statdisplayobject.MaxNRJ = (int)EquipedStats.MaxNRJ;
+            statdisplayobject.DamageReduction = (int)EquipedStats.DamageReduction;
+            statdisplayobject.JumpHeight = (int)(100f*EquipedStats.JumpHeight / Basestats.JumpHeight);
+            statdisplayobject.Speed = (int)(100f * EquipedStats.Speed / Basestats.Speed);
+        }
     }
 
 }

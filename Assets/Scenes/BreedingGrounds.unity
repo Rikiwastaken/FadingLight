@@ -20084,7 +20084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1937105274317387411, guid: f9e373f14dd52ab42afaee1788d0ec1e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20099,6 +20099,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Basestats.Speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.68
@@ -20147,8 +20151,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
+    - target: {fileID: 6111310874136307973, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: maxspeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6111310874136307973, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: movespeed
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4215601255098030531, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}

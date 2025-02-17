@@ -75,17 +75,8 @@ public class EnemyAI : MonoBehaviour
         {
 
 
-            if (target != null)
-            {
-                if (target.transform.position.x <= transform.position.x)
-                {
-                    transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-                }
-                else
-                {
-                    transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
-                }
-            }
+            Managedirection();
+            
 
             if (distplayer <= detectdist || targetted)
             {
@@ -172,6 +163,23 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, detectdist);
     }
 
+    void Managedirection()
+    {
+        if (target != null)
+        {
+            if (target.transform.position.x <= transform.position.x)
+            {
+                transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+                transform.GetChild(1).localScale = new Vector2(Mathf.Abs(transform.GetChild(1).localScale.x), transform.GetChild(1).localScale.y);
+
+            }
+            else
+            {
+                transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
+                transform.GetChild(1).localScale = new Vector2(-Mathf.Abs(transform.GetChild(1).localScale.x), transform.GetChild(1).localScale.y);
+            }
+        }
+    }
     
 }
 

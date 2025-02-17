@@ -91,11 +91,9 @@ public class PlayerMovement : MonoBehaviour
 
 
         //move player
-        // if (GameObject.Find("player").GetComponent<PlayerJumpV2>().allowjump && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingleft && !GameObject.Find("player").GetComponent<PlayerJumpV2>().wallslidingright && GameObject.Find("player").GetComponent<PlayerJumpV2>().movecounter<=0)
-        if (playerjump.allowjump && !playerjump.stuckinwall)
+        if ( !playerjump.stuckinwall)
         {
-            //rb2D.velocity = new Vector2(horizontal * speed, rb2D.velocity.y);
-            if (Mathf.Abs(rb2D.velocity.x) <= maxspeed)
+            if (Mathf.Abs(rb2D.velocity.x) < maxspeed)
             {
                 float newspeed = rb2D.velocityX+horizontal * speed;
                 if(Mathf.Abs(newspeed) > maxspeed)
