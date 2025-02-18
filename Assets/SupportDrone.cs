@@ -38,7 +38,7 @@ public class SupportDrone : MonoBehaviour
         }
         else
         {
-            if (ActiveDroneID >= -1)
+            if (ActiveDroneID > -1)
             {
                 if (playerhp.EldonNRG >= drones[ActiveDroneID].RequiredEnergy)
                 {
@@ -55,6 +55,7 @@ public class SupportDrone : MonoBehaviour
                             HealerDroneeffect();
                             break;
                     }
+
                 }
             }
         }
@@ -68,6 +69,7 @@ public class SupportDrone : MonoBehaviour
             playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
             playerhp.Eldonhp += drones[ActiveDroneID].Effect * playerhp.Eldonmaxhp;
             dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+            transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
         }
     }
 
@@ -76,14 +78,15 @@ public class SupportDrone : MonoBehaviour
         playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
         playerhp.EldonNRG += drones[ActiveDroneID].Effect * playerhp.EldonmaxNRG;
         dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
-        
+        transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
     }
 
     void HealerDroneeffect()
     {
         playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
-        playerhp.EldonNRG += drones[ActiveDroneID].Effect * playerhp.Eldonmaxhp;
+        playerhp.Eldonhp += drones[ActiveDroneID].Effect * playerhp.Eldonmaxhp;
         dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+        transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
     }
 
 }

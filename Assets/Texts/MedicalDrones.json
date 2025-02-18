@@ -1,0 +1,29 @@
+{
+    "MedicalDrones": [
+      {
+        "Name": "Energy Converter",
+        "ID": "0",
+        "RequiredEnergy": "5",
+        "Effect": "0.02",
+        "Description": "Consumes 5 energy points to restore 2% of maximum HP every second.",
+        "cooldown": "1"
+      },
+      {
+        "Name": "Dynamo Drone",
+        "ID": "1",
+        "RequiredEnergy": "0",
+        "Effect": "0.05",
+        "Description": "Fills up 5% of maximum Energy every 2 seconds.",
+        "cooldown": "2"
+      },
+      {
+        "Name": "Healer Drone",
+        "ID": "2",
+        "RequiredEnergy": "0",
+        "Effect": "0.01",
+        "Description": "Restores 1% of maximum HP every 4 seconds.",
+        "cooldown": "4"
+      }
+    ]
+    
+  }
