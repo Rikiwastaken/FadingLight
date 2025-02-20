@@ -82,6 +82,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""up"",
+                    ""type"": ""Button"",
+                    ""id"": ""952fefc7-4063-4193-b28b-c543e939982e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""moveleft"",
                     ""type"": ""Button"",
                     ""id"": ""cadfdfee-d132-4138-8add-30548612a806"",
@@ -112,6 +121,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""1c443ff7-8c1e-4c20-af5c-70816b2a33f5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Stickdir"",
+                    ""type"": ""Button"",
+                    ""id"": ""86f802f9-1783-4041-bf45-39de4face8a7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -338,6 +356,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""LeftShoulder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""354d02c8-3d5f-4ff1-a4be-5c189719bbe0"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Stickdir"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c069c99-476e-461f-8043-5091028e347e"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdc9c9e0-e690-4c23-b4f4-2585c40abfeb"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -352,10 +403,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_gameplay_LeftShoulder = m_gameplay.FindAction("LeftShoulder", throwIfNotFound: true);
         m_gameplay_menu = m_gameplay.FindAction("menu", throwIfNotFound: true);
         m_gameplay_down = m_gameplay.FindAction("down", throwIfNotFound: true);
+        m_gameplay_up = m_gameplay.FindAction("up", throwIfNotFound: true);
         m_gameplay_moveleft = m_gameplay.FindAction("moveleft", throwIfNotFound: true);
         m_gameplay_moveright = m_gameplay.FindAction("moveright", throwIfNotFound: true);
         m_gameplay_dodge = m_gameplay.FindAction("dodge", throwIfNotFound: true);
         m_gameplay_Inventory = m_gameplay.FindAction("Inventory", throwIfNotFound: true);
+        m_gameplay_Stickdir = m_gameplay.FindAction("Stickdir", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -423,10 +476,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_LeftShoulder;
     private readonly InputAction m_gameplay_menu;
     private readonly InputAction m_gameplay_down;
+    private readonly InputAction m_gameplay_up;
     private readonly InputAction m_gameplay_moveleft;
     private readonly InputAction m_gameplay_moveright;
     private readonly InputAction m_gameplay_dodge;
     private readonly InputAction m_gameplay_Inventory;
+    private readonly InputAction m_gameplay_Stickdir;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -437,10 +492,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LeftShoulder => m_Wrapper.m_gameplay_LeftShoulder;
         public InputAction @menu => m_Wrapper.m_gameplay_menu;
         public InputAction @down => m_Wrapper.m_gameplay_down;
+        public InputAction @up => m_Wrapper.m_gameplay_up;
         public InputAction @moveleft => m_Wrapper.m_gameplay_moveleft;
         public InputAction @moveright => m_Wrapper.m_gameplay_moveright;
         public InputAction @dodge => m_Wrapper.m_gameplay_dodge;
         public InputAction @Inventory => m_Wrapper.m_gameplay_Inventory;
+        public InputAction @Stickdir => m_Wrapper.m_gameplay_Stickdir;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -468,6 +525,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @down.started += instance.OnDown;
             @down.performed += instance.OnDown;
             @down.canceled += instance.OnDown;
+            @up.started += instance.OnUp;
+            @up.performed += instance.OnUp;
+            @up.canceled += instance.OnUp;
             @moveleft.started += instance.OnMoveleft;
             @moveleft.performed += instance.OnMoveleft;
             @moveleft.canceled += instance.OnMoveleft;
@@ -480,6 +540,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @Stickdir.started += instance.OnStickdir;
+            @Stickdir.performed += instance.OnStickdir;
+            @Stickdir.canceled += instance.OnStickdir;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -502,6 +565,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @down.started -= instance.OnDown;
             @down.performed -= instance.OnDown;
             @down.canceled -= instance.OnDown;
+            @up.started -= instance.OnUp;
+            @up.performed -= instance.OnUp;
+            @up.canceled -= instance.OnUp;
             @moveleft.started -= instance.OnMoveleft;
             @moveleft.performed -= instance.OnMoveleft;
             @moveleft.canceled -= instance.OnMoveleft;
@@ -514,6 +580,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @Stickdir.started -= instance.OnStickdir;
+            @Stickdir.performed -= instance.OnStickdir;
+            @Stickdir.canceled -= instance.OnStickdir;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -539,9 +608,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLeftShoulder(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
         void OnMoveleft(InputAction.CallbackContext context);
         void OnMoveright(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
+        void OnStickdir(InputAction.CallbackContext context);
     }
 }
