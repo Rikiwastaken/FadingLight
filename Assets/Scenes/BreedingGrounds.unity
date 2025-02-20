@@ -20084,7 +20084,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1937105274317387411, guid: f9e373f14dd52ab42afaee1788d0ec1e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20102,6 +20102,50 @@ PrefabInstance:
     - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: Basestats.Speed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[1].name
+      value: +20NRG
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[2].mult
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[2].name
+      value: '*2ATK'
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[0].SlotsUsed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[1].SlotsUsed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[1].valueincr
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[2].SlotsUsed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[2].valueincr
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[2].attributeID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 387999305572416826, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: Augmentlist.Array.data[2].description
+      value: multiplie l'attaque par 2
       objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.x

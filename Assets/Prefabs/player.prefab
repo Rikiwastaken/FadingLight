@@ -442,8 +442,23 @@ MonoBehaviour:
     attributeID: 0
     valueincr: 50
     mult: 0
-    image: {fileID: 0}
-  EquipedAugments: 00
+    image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    SlotsUsed: 1
+  - name: +50NRG
+    description: 
+    attributeID: 0
+    valueincr: 50
+    mult: 0
+    image: {fileID: 4691423197714824912, guid: 2f738a72aff8d624eafb303f818cf6e3, type: 3}
+    SlotsUsed: 1
+  - name: '*2atk'
+    description: 
+    attributeID: 0
+    valueincr: 2
+    mult: 1
+    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
+    SlotsUsed: 2
+  EquipedAugments: 010101
   Basestats:
     MaxHP: 120
     MaxNRJ: 100
@@ -452,6 +467,8 @@ MonoBehaviour:
     DamageReduction: 3
     JumpHeight: 3
     Speed: 2
+    MaxSlots: 0
+    EquipedSlots: 0
   EquipedStats:
     MaxHP: 0
     MaxNRJ: 0
@@ -460,8 +477,11 @@ MonoBehaviour:
     DamageReduction: 0
     JumpHeight: 0
     Speed: 0
+    MaxSlots: 0
+    EquipedSlots: 0
   statdisplayobject: {fileID: 0}
   manuallyapplyaugmentboosts: 0
+  numberofequipedaugments: 0
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,8 @@ public class AugmentsScript : MonoBehaviour
         public int attributeID; //0 maxHP, 1 maxNRG, 2 Damage, 3 Damage, 4 DamageReduction, 5 JumpHeight, 6 Speed
         public float valueincr;
         public bool mult; //if true, multiplicative, else additive
-        public Image image;
+        public Sprite image;
+        public int SlotsUsed;
     }
 
 
@@ -30,6 +31,8 @@ public class AugmentsScript : MonoBehaviour
         public float DamageReduction;
         public float JumpHeight;
         public float Speed;
+        public int MaxSlots;
+        public int EquipedSlots;
     }
 
     public List<Augment> Augmentlist;
@@ -41,6 +44,8 @@ public class AugmentsScript : MonoBehaviour
     public bool manuallyapplyaugmentboosts;
 
     private float HPfraction;
+
+    public int numberofequipedaugments;
 
     private void Start()
     {
@@ -57,6 +62,7 @@ public class AugmentsScript : MonoBehaviour
 
     public void ApplyAugmentBoost()
     {
+        numberofequipedaugments = 0;
         HPfraction = GetComponent<PlayerHP>().Eldonhp/ GetComponent<PlayerHP>().Eldonmaxhp;
         InitiateEquipedStats();
 
@@ -64,7 +70,9 @@ public class AugmentsScript : MonoBehaviour
         {
             if (EquipedAugments[i] == true && i<Augmentlist.Count)
             {
+                numberofequipedaugments++;
                 ApplyAttribute(Augmentlist[i].attributeID, Augmentlist[i].valueincr, Augmentlist[i].mult);
+
             }
         }
 
@@ -99,6 +107,9 @@ public class AugmentsScript : MonoBehaviour
                 case 6:
                     EquipedStats.Speed *= value;
                     break;
+                case 7:
+                    EquipedStats.MaxSlots = (int)(EquipedStats.MaxSlots*value);
+                    break;
 
             }
         }
@@ -127,6 +138,9 @@ public class AugmentsScript : MonoBehaviour
                 case 6:
                     EquipedStats.Speed += value;
                     break;
+                case 7:
+                    EquipedStats.MaxSlots = (int)(EquipedStats.MaxSlots + value);
+                    break;
 
             }
         }
@@ -142,6 +156,7 @@ public class AugmentsScript : MonoBehaviour
         newEquipedStats.DamageReduction= Basestats.DamageReduction;
         newEquipedStats.JumpHeight= Basestats.JumpHeight;
         newEquipedStats.Speed = Basestats.Speed;
+        newEquipedStats.MaxSlots= Basestats.MaxSlots;
         EquipedStats = newEquipedStats;
     }
     
@@ -173,6 +188,34 @@ public class AugmentsScript : MonoBehaviour
             statdisplayobject.DamageReduction = (int)EquipedStats.DamageReduction;
             statdisplayobject.JumpHeight = (int)(100f*EquipedStats.JumpHeight / Basestats.JumpHeight);
             statdisplayobject.Speed = (int)(100f * EquipedStats.Speed / Basestats.Speed);
+            statdisplayobject.MaxSlots = EquipedStats.MaxSlots;
+            statdisplayobject.UsedSlots = EquipedStats.EquipedSlots;
+        }
+    }
+
+    public void EquipAugment(int ID)
+    {
+        if(ID<Augmentlist.Count && ID>=0 && numberofequipedaugments<14)
+        {
+            if (Augmentlist[ID].SlotsUsed < EquipedStats.MaxSlots-EquipedStats.EquipedSlots)
+            {
+                EquipedAugments[ID] = true;
+                EquipedStats.EquipedSlots += Augmentlist[ID].SlotsUsed;
+                ApplyAugmentBoost();
+            }
+        }
+    }
+
+    public void UnEquipAugment(int ID)
+    {
+        if (ID < Augmentlist.Count && ID >= 0)
+        {
+            if (EquipedAugments[ID])
+            {
+                EquipedAugments[ID] = false;
+                EquipedStats.EquipedSlots -= Augmentlist[ID].SlotsUsed;
+                ApplyAugmentBoost();
+            }
         }
     }
 

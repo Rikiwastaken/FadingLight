@@ -15,6 +15,8 @@ public class Statstext : MonoBehaviour
     public int DamageReduction;
     public int JumpHeight;
     public int Speed;
+    public int MaxSlots;
+    public int UsedSlots;
 
     private bool playerobjectfound;
 
@@ -50,6 +52,7 @@ public class Statstext : MonoBehaviour
             texttodisplay += "Defense : " + DamageReduction + "\n";
             texttodisplay += "Jump Height : " + JumpHeight + "%\n";
             texttodisplay += "Speed : " + Speed + "%\n";
+            texttodisplay += "Augment Slots : " + UsedSlots + " / " + MaxSlots + "%\n";
             GetComponent<TextMeshProUGUI>().text = texttodisplay;
         }
     }
