@@ -156,4 +156,9 @@ public class EnemyHP : MonoBehaviour
         }
         tempHP = enemyhp;
     }
+
+    public void TakeDamage(int damage)
+    {
+        enemyhp-=damage;
+    }
 }
