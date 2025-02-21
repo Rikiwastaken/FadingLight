@@ -127,9 +127,36 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Stickdir"",
+                    ""name"": ""crossup"",
                     ""type"": ""Button"",
-                    ""id"": ""86f802f9-1783-4041-bf45-39de4face8a7"",
+                    ""id"": ""94e77269-df9c-4ece-bc89-5d6d9dfcd7c7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""crossdown"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc591208-bf52-4ca5-b71c-89921eba752c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""crossleft"",
+                    ""type"": ""Button"",
+                    ""id"": ""369f7fe6-e072-425e-918b-e85304d2830d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""crossright"",
+                    ""type"": ""Button"",
+                    ""id"": ""bc4e94f9-a1b9-46d7-8f80-a045f6e3d3bf"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -359,17 +386,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""354d02c8-3d5f-4ff1-a4be-5c189719bbe0"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Stickdir"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""8c069c99-476e-461f-8043-5091028e347e"",
                     ""path"": ""<Gamepad>/leftStick/up"",
                     ""interactions"": """",
@@ -387,6 +403,94 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91f0fc91-0e7b-4d6e-9f8f-a29975c18c69"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""crossup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bdc09cda-4551-4009-9f69-e75b210beddb"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""crossup"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b918ffe9-04a2-4d8d-8316-4e82ba25edd6"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""crossdown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c0d41b4-e54c-4181-b72b-2d83ae40db74"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""crossdown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6267075-e638-4cc5-85b3-03e5bd1fd1c7"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""crossleft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7772b108-7993-4034-a241-5ffdaf426f9c"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""crossleft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75201b7b-8d35-4d81-a1d0-c291926634d8"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""crossright"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7b30146-fe28-43e0-8ae7-a6a0a25f48f2"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""crossright"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -408,7 +512,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_gameplay_moveright = m_gameplay.FindAction("moveright", throwIfNotFound: true);
         m_gameplay_dodge = m_gameplay.FindAction("dodge", throwIfNotFound: true);
         m_gameplay_Inventory = m_gameplay.FindAction("Inventory", throwIfNotFound: true);
-        m_gameplay_Stickdir = m_gameplay.FindAction("Stickdir", throwIfNotFound: true);
+        m_gameplay_crossup = m_gameplay.FindAction("crossup", throwIfNotFound: true);
+        m_gameplay_crossdown = m_gameplay.FindAction("crossdown", throwIfNotFound: true);
+        m_gameplay_crossleft = m_gameplay.FindAction("crossleft", throwIfNotFound: true);
+        m_gameplay_crossright = m_gameplay.FindAction("crossright", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -481,7 +588,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_moveright;
     private readonly InputAction m_gameplay_dodge;
     private readonly InputAction m_gameplay_Inventory;
-    private readonly InputAction m_gameplay_Stickdir;
+    private readonly InputAction m_gameplay_crossup;
+    private readonly InputAction m_gameplay_crossdown;
+    private readonly InputAction m_gameplay_crossleft;
+    private readonly InputAction m_gameplay_crossright;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -497,7 +607,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @moveright => m_Wrapper.m_gameplay_moveright;
         public InputAction @dodge => m_Wrapper.m_gameplay_dodge;
         public InputAction @Inventory => m_Wrapper.m_gameplay_Inventory;
-        public InputAction @Stickdir => m_Wrapper.m_gameplay_Stickdir;
+        public InputAction @crossup => m_Wrapper.m_gameplay_crossup;
+        public InputAction @crossdown => m_Wrapper.m_gameplay_crossdown;
+        public InputAction @crossleft => m_Wrapper.m_gameplay_crossleft;
+        public InputAction @crossright => m_Wrapper.m_gameplay_crossright;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -540,9 +653,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
-            @Stickdir.started += instance.OnStickdir;
-            @Stickdir.performed += instance.OnStickdir;
-            @Stickdir.canceled += instance.OnStickdir;
+            @crossup.started += instance.OnCrossup;
+            @crossup.performed += instance.OnCrossup;
+            @crossup.canceled += instance.OnCrossup;
+            @crossdown.started += instance.OnCrossdown;
+            @crossdown.performed += instance.OnCrossdown;
+            @crossdown.canceled += instance.OnCrossdown;
+            @crossleft.started += instance.OnCrossleft;
+            @crossleft.performed += instance.OnCrossleft;
+            @crossleft.canceled += instance.OnCrossleft;
+            @crossright.started += instance.OnCrossright;
+            @crossright.performed += instance.OnCrossright;
+            @crossright.canceled += instance.OnCrossright;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -580,9 +702,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
-            @Stickdir.started -= instance.OnStickdir;
-            @Stickdir.performed -= instance.OnStickdir;
-            @Stickdir.canceled -= instance.OnStickdir;
+            @crossup.started -= instance.OnCrossup;
+            @crossup.performed -= instance.OnCrossup;
+            @crossup.canceled -= instance.OnCrossup;
+            @crossdown.started -= instance.OnCrossdown;
+            @crossdown.performed -= instance.OnCrossdown;
+            @crossdown.canceled -= instance.OnCrossdown;
+            @crossleft.started -= instance.OnCrossleft;
+            @crossleft.performed -= instance.OnCrossleft;
+            @crossleft.canceled -= instance.OnCrossleft;
+            @crossright.started -= instance.OnCrossright;
+            @crossright.performed -= instance.OnCrossright;
+            @crossright.canceled -= instance.OnCrossright;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -613,6 +744,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMoveright(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
-        void OnStickdir(InputAction.CallbackContext context);
+        void OnCrossup(InputAction.CallbackContext context);
+        void OnCrossdown(InputAction.CallbackContext context);
+        void OnCrossleft(InputAction.CallbackContext context);
+        void OnCrossright(InputAction.CallbackContext context);
     }
 }

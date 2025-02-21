@@ -71,6 +71,7 @@ public class AugmentsScript : MonoBehaviour
             if (EquipedAugments[i] == true && i<Augmentlist.Count)
             {
                 numberofequipedaugments++;
+                EquipedStats.EquipedSlots += Augmentlist[i].SlotsUsed;
                 ApplyAttribute(Augmentlist[i].attributeID, Augmentlist[i].valueincr, Augmentlist[i].mult);
 
             }
@@ -180,7 +181,6 @@ public class AugmentsScript : MonoBehaviour
         GetComponent<PlayerHP>().UpdateBars();
         if(statdisplayobject!=null)
         {
-            statdisplayobject.MaxHP = (int)EquipedStats.MaxHP;
             statdisplayobject.Damage = (int)EquipedStats.Damage;
             statdisplayobject.NRJDamage = (int)EquipedStats.NRJDamage;
             statdisplayobject.MaxHP = (int)EquipedStats.MaxHP;
@@ -200,7 +200,6 @@ public class AugmentsScript : MonoBehaviour
             if (Augmentlist[ID].SlotsUsed < EquipedStats.MaxSlots-EquipedStats.EquipedSlots)
             {
                 EquipedAugments[ID] = true;
-                EquipedStats.EquipedSlots += Augmentlist[ID].SlotsUsed;
                 ApplyAugmentBoost();
             }
         }
@@ -213,7 +212,6 @@ public class AugmentsScript : MonoBehaviour
             if (EquipedAugments[ID])
             {
                 EquipedAugments[ID] = false;
-                EquipedStats.EquipedSlots -= Augmentlist[ID].SlotsUsed;
                 ApplyAugmentBoost();
             }
         }

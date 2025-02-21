@@ -52,8 +52,14 @@ public class Statstext : MonoBehaviour
             texttodisplay += "Defense : " + DamageReduction + "\n";
             texttodisplay += "Jump Height : " + JumpHeight + "%\n";
             texttodisplay += "Speed : " + Speed + "%\n";
-            texttodisplay += "Augment Slots : " + UsedSlots + " / " + MaxSlots + "%\n";
+            texttodisplay += "Augment Slots : " + UsedSlots + " / " + MaxSlots + "\n";
             GetComponent<TextMeshProUGUI>().text = texttodisplay;
         }
+    }
+
+    private void OnEnable()
+    {
+        GameObject.FindAnyObjectByType<AugmentsScript>().statdisplayobject = this;
+        GameObject.FindAnyObjectByType<AugmentsScript>().ApplyAugmentBoost();
     }
 }

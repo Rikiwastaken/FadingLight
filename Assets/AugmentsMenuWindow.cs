@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -11,6 +13,8 @@ public class AugmentsMenuWindow : MonoBehaviour
     public PlayerControls controls;
     public Transform EquipedAugmentsContainer;
     public Transform DisplayAugmentsContainer;
+    public TextMeshProUGUI effecttext;
+    public TextMeshProUGUI necessaryslots;
     private List<Augment> Augmentlist;
     private List<bool> EquipedAugments;
 
@@ -25,6 +29,10 @@ public class AugmentsMenuWindow : MonoBehaviour
     private int valueup;
     private Vector2 lastinput;
 
+    private int upperlineindex=0;
+
+    private bool onquiped;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,14 +43,15 @@ public class AugmentsMenuWindow : MonoBehaviour
 
         controls = new PlayerControls();
 
-        controls.gameplay.moveleft.performed += ctx => valueleft = 1;
-        controls.gameplay.moveright.performed += ctx => valueright = 1;
-        controls.gameplay.moveleft.canceled += ctx => valueleft = 0;
-        controls.gameplay.moveright.canceled += ctx => valueright = 0;
-        controls.gameplay.down.performed += ctx => valuedown = 1;
-        controls.gameplay.down.canceled += ctx => valuedown = 0;
-        controls.gameplay.up.performed += ctx => valueup = 1;
-        controls.gameplay.up.canceled += ctx => valueup = 0;
+        controls.gameplay.crossleft.performed += ctx => valueleft = 1;
+        controls.gameplay.crossright.performed += ctx => valueright = 1;
+        controls.gameplay.crossleft.canceled += ctx => valueleft = 0;
+        controls.gameplay.crossright.canceled += ctx => valueright = 0;
+        controls.gameplay.crossdown.performed += ctx => valuedown = 1;
+        controls.gameplay.crossdown.canceled += ctx => valuedown = 0;
+        controls.gameplay.crossup.performed += ctx => valueup = 1;
+        controls.gameplay.crossup.canceled += ctx => valueup = 0;
+
 
     }
     // Update is called once per frame
@@ -54,6 +63,11 @@ public class AugmentsMenuWindow : MonoBehaviour
         for(int i=0; i<14; ++i)
         {
             EquipedAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().color=new Color(1f,1f,1f,0f);
+            if(i<=11)
+            {
+                DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
+            }
+            
         }
 
         for (int i = 0; i < EquipedAugments.Count; i++)
@@ -62,8 +76,15 @@ public class AugmentsMenuWindow : MonoBehaviour
             {
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i].image;
+                EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponent<buttonscript>().AugmentID = i;
                 usedslot++;
             }
+        }
+        for (int i = 0; i < Mathf.Min(Augmentlist.Count - upperlineindex * 6, 12); i++)
+        {
+            DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+            DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i + upperlineindex * 6].image;
+            DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().AugmentID = i + upperlineindex * 6;
         }
 
         Vector2 input = Vector2.zero;
@@ -77,7 +98,7 @@ public class AugmentsMenuWindow : MonoBehaviour
             {
                 input.y = 1;
             }
-            if(valueleft!=0)
+            else if(valueleft!=0)
             {
                 input.x = -1;
             }
@@ -91,8 +112,21 @@ public class AugmentsMenuWindow : MonoBehaviour
             Direction(input);
         }
         lastinput = input;
-    }
 
+
+        if (selected != null)
+        {
+            selected.Select();
+            effecttext.text = Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].description;
+            necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].SlotsUsed;
+        }
+        else
+        {
+            effecttext.text = "Choose an Augment to see its effect";
+            necessaryslots.text = "Necessary slots : ";
+        }
+
+    }
     public void Direction(Vector2 dirinput)
     {
         usedslot = 0;
@@ -102,65 +136,218 @@ public class AugmentsMenuWindow : MonoBehaviour
             {
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i].image;
+                EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponent<buttonscript>().AugmentID = i;
                 usedslot++;
             }
         }
-
-        
-        if(dirinput!=Vector2.zero)
+        for(int i = 0;i< Mathf.Min(Augmentlist.Count-upperlineindex*6,12);i++)
         {
-            if(selected==null && usedslot > 0)
+            DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+            DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i+ upperlineindex * 6].image;
+            DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().AugmentID = i + upperlineindex * 6;
+        }
+        for(int i = Augmentlist.Count - upperlineindex * 6;i<12;i++)
+        {
+            DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
+        }
+        if (dirinput != Vector2.zero)
+        {
+            if (selected == null && usedslot > 0)
             {
-                selected = EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponentInChildren<Button>();
+                selected = EquipedAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                onquiped = true;
             }
-            else if(selected!=null)
+            else if (selected == null)
             {
-                int activebuttonidstring = int.Parse(selected.transform.parent.name.Replace("Slot", "0"));
-                if(dirinput.x>0)
+                selected = DisplayAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+            }
+        }
+        int activebuttonidstring = 0;
+        if (selected != null)
+        {
+            activebuttonidstring = int.Parse(selected.transform.parent.name.Replace("Slot", "0"));
+        }
+
+        if (onquiped)
+        {
+            upperlineindex = 0;
+            if (dirinput != Vector2.zero)
+            {
+                if (dirinput.x > 0)
                 {
-                    if(activebuttonidstring<usedslot-1)
+                    if (activebuttonidstring < usedslot - 1 && activebuttonidstring != 6 && activebuttonidstring != 13)
                     {
                         selected = EquipedAugmentsContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
                     }
-                    else if(activebuttonidstring==6 || activebuttonidstring == 13)
+                    else if (activebuttonidstring == usedslot - 1)
+                    {
+                        if (activebuttonidstring <= 6)
+                        {
+                            selected = EquipedAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                        else
+                        {
+                            selected = EquipedAugmentsContainer.GetChild(7).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                    }
+                    else if (activebuttonidstring == 6 || activebuttonidstring == 13)
                     {
                         selected = EquipedAugmentsContainer.GetChild(activebuttonidstring - 6).GetChild(1).GetComponentInChildren<Button>();
                     }
                 }
-                if (dirinput.x < 0)
+                else if (dirinput.x < 0)
                 {
-                    if (activebuttonidstring > 0)
+                    if (activebuttonidstring > 0 && activebuttonidstring != 7)
                     {
                         selected = EquipedAugmentsContainer.GetChild(activebuttonidstring - 1).GetChild(1).GetComponentInChildren<Button>();
                     }
-                    else if (activebuttonidstring == 0 || activebuttonidstring == 7)
+                    else if (activebuttonidstring == 0 && usedslot <= 7)
                     {
-                        selected = EquipedAugmentsContainer.GetChild(activebuttonidstring + 6).GetChild(1).GetComponentInChildren<Button>();
+                        if (usedslot <= 7)
+                        {
+                            selected = EquipedAugmentsContainer.GetChild(activebuttonidstring + usedslot - 1).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                        else
+                        {
+                            selected = EquipedAugmentsContainer.GetChild(activebuttonidstring + 6).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                    }
+                    else if (activebuttonidstring == 7 && usedslot <= 14)
+                    {
+                        selected = EquipedAugmentsContainer.GetChild(activebuttonidstring + usedslot - 8).GetChild(1).GetComponentInChildren<Button>();
                     }
                 }
-                if (dirinput.y !=0)
+                else if (dirinput.y != 0)
                 {
-                    if(activebuttonidstring>6)
+                    if (activebuttonidstring > 6 )
                     {
-                        selected = EquipedAugmentsContainer.GetChild(activebuttonidstring - 7).GetChild(1).GetComponentInChildren<Button>();
+                        if(dirinput.y < 0)
+                        {
+                            selected = DisplayAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                            onquiped = false;
+                        }
+                        else
+                        {
+                            selected = EquipedAugmentsContainer.GetChild(activebuttonidstring - 7).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                        
                     }
-                    if (activebuttonidstring <= 6 && activebuttonidstring+7<=usedslot-1)
+                    else if (activebuttonidstring <= 6 && activebuttonidstring + 7 <= usedslot - 1)
                     {
-                        selected = EquipedAugmentsContainer.GetChild(activebuttonidstring + 7).GetChild(1).GetComponentInChildren<Button>();
+                        if(dirinput.y<0)
+                        {
+                            selected = EquipedAugmentsContainer.GetChild(activebuttonidstring + 7).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                        else
+                        {
+                            selected = DisplayAugmentsContainer.GetChild(activebuttonidstring).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                    }
+                    else if (dirinput.y < 0)
+                    {
+                        selected = DisplayAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                        onquiped = false;
                     }
                 }
-
             }
         }
-        if(selected != null)
+        else
         {
-            selected.Select();
+            if (dirinput != Vector2.zero)
+            {
+                if (dirinput.x > 0)
+                {
+                    switch(activebuttonidstring)
+                    {
+                        case < 5:
+                            selected = DisplayAugmentsContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                            break;
+                        case 5:
+                            selected = DisplayAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                            break;
+                        case 11:
+                            selected = DisplayAugmentsContainer.GetChild(6).GetChild(1).GetComponentInChildren<Button>();
+                            break;
+                        case >5:
+                            if(activebuttonidstring+1<Augmentlist.Count-upperlineindex*6)
+                            {
+                                selected = DisplayAugmentsContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                            }
+                            else
+                            {
+                                selected = DisplayAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                            }
+                            break;
+                    }
+                }
+                else if (dirinput.x < 0)
+                {
+                    if(activebuttonidstring==0)
+                    {
+                        selected = DisplayAugmentsContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
+                    }
+                    else if(activebuttonidstring==6)
+                    {
+                        selected = DisplayAugmentsContainer.GetChild(Mathf.Min(11, Augmentlist.Count - upperlineindex * 6)).GetChild(1).GetComponentInChildren<Button>();
+                    }
+                    else
+                    {
+                        selected = DisplayAugmentsContainer.GetChild(activebuttonidstring-1).GetChild(1).GetComponentInChildren<Button>();
+                    }
+                }
+                else if (dirinput.y > 0)
+                {
+                    if(activebuttonidstring<=5)
+                    {
+                        if(upperlineindex==0)
+                        {
+                            onquiped = true;
+                            selected = EquipedAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                        else
+                        {
+                            upperlineindex--;
+                        }
+                        
+                    }
+                    else
+                    {
+                        selected = DisplayAugmentsContainer.GetChild(activebuttonidstring - 6).GetChild(1).GetComponentInChildren<Button>();
+                    }
+                }
+                else if (dirinput.y < 0)
+                {
+                    if(activebuttonidstring<=5)
+                    {
+                        if(Augmentlist.Count-upperlineindex*6 > 12)
+                        {
+                            selected = DisplayAugmentsContainer.GetChild(activebuttonidstring + 6).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                        else if(Augmentlist.Count-upperlineindex*6> activebuttonidstring +6)
+                        {
+                            selected = DisplayAugmentsContainer.GetChild(activebuttonidstring + 6).GetChild(1).GetComponentInChildren<Button>();
+                        }
+                    }
+                    else if (Augmentlist.Count>12+upperlineindex*6+1)
+                    {
+                        upperlineindex++;
+                        selected = DisplayAugmentsContainer.GetChild(Mathf.Min(activebuttonidstring, Augmentlist.Count - upperlineindex * 6)).GetChild(1).GetComponentInChildren<Button>();
+                    }
+                }
+            }
         }
+        
+        
+        
         
     }
     void OnEnable()
     {
-        controls.gameplay.Enable();
+        if(controls!=null)
+        {
+            controls.gameplay.Enable();
+        }
+        
     }
     void OnDisable()
     {
