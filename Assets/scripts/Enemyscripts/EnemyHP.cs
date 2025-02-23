@@ -59,7 +59,7 @@ public class EnemyHP : MonoBehaviour
 
     }
 
-    void Update()
+    void FixedUpdate()
     {
 
         if (execution)

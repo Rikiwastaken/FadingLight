@@ -12,17 +12,23 @@ public class RocketScript : MonoBehaviour
     void FixedUpdate()
     {
         GetComponent<Rigidbody2D>().velocity = (target.position-transform.position).normalized*speed;
-        transform.forward = (target.position - transform.position).normalized;
+        Vector3 offset = target.position - transform.position;
+
+        Quaternion rotation = Quaternion.LookRotation(
+                               Vector3.forward, // Keep z+ pointing straight into the screen.
+                               offset           // Point y+ toward the target.
+                             );
+        transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.transform.tag=="ennemy")
+        if (collision.GetComponent<EnemyHP>())
         {
-            if(collision.GetComponent<EnemyHP>())
-            {
-                collision.GetComponent<EnemyHP>().TakeDamage(damage);
-            }
+            collision.GetComponent<EnemyHP>().TakeDamage(damage);
+            Destroy(gameObject);
         }
+        
     }
 }

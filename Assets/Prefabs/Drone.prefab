@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1685851245097827361}
   - component: {fileID: -1543034884200180113}
   m_Layer: 0
-  m_Name: MedicalDrone
+  m_Name: Drone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,21 +168,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActiveDroneID: 0
   drones:
-  - ID: 0
+  - name: Energy Converter
+    ID: 0
     RequiredEnergy: 5
     Effect: 0.02
     Description: Consumes 5 energy points to restore 2% of maximum HP every second.
     cooldown: 1
-  - ID: 1
+    Medical: 1
+    Summon: {fileID: 0}
+    Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+  - name: Battery Drone
+    ID: 1
     RequiredEnergy: 0
     Effect: 0.05
     Description: Fills up 5% of maximum Energy every 2 seconds.
     cooldown: 2
-  - ID: 2
+    Medical: 1
+    Summon: {fileID: 0}
+    Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+  - name: Healing Drone
+    ID: 2
     RequiredEnergy: 0
     Effect: 0.01
     Description: Restores 1% of maximum HP every 4 seconds.
     cooldown: 4
+    Medical: 1
+    Summon: {fileID: 0}
+    Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+  - name: Rocket Drone
+    ID: 3
+    RequiredEnergy: 10
+    Effect: 20
+    Description: Launches a Seeker Rocket every 4 seconds.
+    cooldown: 3
+    Medical: 0
+    Summon: {fileID: 3458832224624917955, guid: f6e632099100b534da3498db3da54214, type: 3}
+    Sprite: {fileID: 1902342771589439844, guid: 2f738a72aff8d624eafb303f818cf6e3, type: 3}
+  MedController: {fileID: 9100000, guid: 9838ef1b5d3df0344ba7945b10c47758, type: 2}
+  GunController: {fileID: 9100000, guid: 628dae4b983cdd441ab219a592fb5ea7, type: 2}
 --- !u!1 &1400103518412949323
 GameObject:
   m_ObjectHideFlags: 0
