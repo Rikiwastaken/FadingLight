@@ -27,6 +27,7 @@ public class PlayerJumpV3 : MonoBehaviour
     [SerializeField] private float hauteurgi;
     [SerializeField] private float largeurgi;
     [SerializeField] private LayerMask whatisground;
+    [SerializeField] private LayerMask whatispassthrough;
 
     [Header("Walljump details")]
     public bool touchingwall; //checks if in contact with wall
@@ -52,6 +53,8 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private PlayerMovement playermov;
 
+    public GameObject passthrough;
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -67,6 +70,7 @@ public class PlayerJumpV3 : MonoBehaviour
         gravity = rb.gravityScale;
 
         playermov = GetComponent<PlayerMovement>();
+        passthrough = GameObject.Find("passthroughplatform");
     }
 
     private void FixedUpdate()
@@ -79,8 +83,20 @@ public class PlayerJumpV3 : MonoBehaviour
 
 
         horizontal = playermov.horizontal;
-        grounded = Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground);
+        grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough));
         touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi, largeurgi),0, whatiswall);
+
+        if(Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough))
+        {
+            Debug.Log("touchingpassthough");
+            passthrough.GetComponent<CompositeCollider2D>().isTrigger = false;
+        }
+        else
+        {
+            Debug.Log("nottouchingpassthough");
+            passthrough.GetComponent<CompositeCollider2D>().isTrigger = true;
+        }
+
         Checkground();
 
         //normal jump
@@ -176,9 +192,9 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawCube(groundcheck.position, new Vector2(largeurgi, hauteurgi));
-        Gizmos.DrawCube(frontcheck.position, new Vector2(hauteurgi, largeurgi));
 
+        Gizmos.DrawCube(groundcheck.position - new Vector3(0, 0.1f, 0), new Vector2(largeurgi, hauteurgi));
+        
     }
 
     private void HandleLayers()

@@ -21,31 +21,32 @@ public class DroneMovement : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 returnpos = player.position + offset-transform.position;
-        if (Vector2.Distance(player.position + offset, transform.position) > 0.1f && Vector2.Distance(player.position + offset,transform.position)<2f)
-        {
-            if (GetComponent<Rigidbody2D>().velocity.magnitude < maxspeed )
-            {
-                GetComponent<Rigidbody2D>().velocity += returnpos.normalized * movespeed ;
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = returnpos.normalized * maxspeed;
-            }
-        }
-        else if(Vector2.Distance(player.position + offset, transform.position) >= 1)
-        {
-            if (GetComponent<Rigidbody2D>().velocity.magnitude < maxspeed * Vector2.Distance(player.position + offset, transform.position))
-            {
-                GetComponent<Rigidbody2D>().velocity += returnpos.normalized * movespeed * Vector2.Distance(player.position + offset, transform.position);
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().velocity = returnpos.normalized * maxspeed * Vector2.Distance(player.position + offset, transform.position);
-            }
-        }
-        else
-        {
-            GetComponent<Rigidbody2D>().velocity *= 0.9f;
-        }
+        GetComponent<Rigidbody2D>().velocity = returnpos.normalized * maxspeed * Vector2.Distance(player.position + offset, transform.position);
+        //if (Vector2.Distance(player.position + offset, transform.position) > 0.1f && Vector2.Distance(player.position + offset,transform.position)<2f)
+        //{
+        //    if (GetComponent<Rigidbody2D>().velocity.magnitude < maxspeed )
+        //    {
+        //        GetComponent<Rigidbody2D>().velocity += returnpos.normalized * movespeed ;
+        //    }
+        //    else
+        //    {
+        //        GetComponent<Rigidbody2D>().velocity = returnpos.normalized * maxspeed;
+        //    }
+        //}
+        //else if(Vector2.Distance(player.position + offset, transform.position) >= 1)
+        //{
+        //    if (GetComponent<Rigidbody2D>().velocity.magnitude < maxspeed * Vector2.Distance(player.position + offset, transform.position))
+        //    {
+        //        GetComponent<Rigidbody2D>().velocity += returnpos.normalized * movespeed * Vector2.Distance(player.position + offset, transform.position);
+        //    }
+        //    else
+        //    {
+        //        GetComponent<Rigidbody2D>().velocity = returnpos.normalized * maxspeed * Vector2.Distance(player.position + offset, transform.position);
+        //    }
+        //}
+        //else
+        //{
+        //    GetComponent<Rigidbody2D>().velocity *= 0.9f;
+        //}
     }
 }

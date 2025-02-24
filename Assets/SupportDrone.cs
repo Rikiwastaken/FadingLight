@@ -26,6 +26,7 @@ public class SupportDrone : MonoBehaviour
     public int ActiveDroneID; //-1 : No Drone, 0 : EnergyConverter Drone, 1 : Energy Regen Drone, 2 Healer Drone
 
     private PlayerHP playerhp;
+    private AugmentsScript augmentsscript;
 
     private int dronecd;
 
@@ -38,7 +39,8 @@ public class SupportDrone : MonoBehaviour
     void Start()
     {
         playerhp = GameObject.FindAnyObjectByType<PlayerHP>();
-        if(drones[ActiveDroneID].Medical)
+        augmentsscript = FindAnyObjectByType<AugmentsScript>();
+        if (drones[ActiveDroneID].Medical)
         {
             GetComponent<Animator>().runtimeAnimatorController =MedController;
         }
@@ -153,7 +155,7 @@ public class SupportDrone : MonoBehaviour
             {
                 GameObject newrocket = Instantiate(drones[ActiveDroneID].Summon, transform.position, Quaternion.identity);
                 newrocket.GetComponent<RocketScript>().target = target;
-                newrocket.GetComponent<RocketScript>().damage = (int)drones[ActiveDroneID].Effect;
+                newrocket.GetComponent<RocketScript>().damage = (int)(augmentsscript.EquipedStats.Damage*drones[ActiveDroneID].Effect);
                 playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
                 dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
                 newrocket.transform.localScale = Vector3.one * 0.2f;

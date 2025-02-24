@@ -311,6 +311,9 @@ MonoBehaviour:
   whatisground:
     serializedVersion: 2
     m_Bits: 64
+  whatispassthrough:
+    serializedVersion: 2
+    m_Bits: 4096
   touchingwall: 0
   gravity: 0
   wjforceside: 2
@@ -324,6 +327,7 @@ MonoBehaviour:
   horizontal: 0
   pressedjump: 0
   presseddown: 0
+  passthrough: {fileID: 0}
 --- !u!114 &8207891239071273511
 MonoBehaviour:
   m_ObjectHideFlags: 0

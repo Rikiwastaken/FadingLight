@@ -198,7 +198,7 @@ MonoBehaviour:
   - name: Rocket Drone
     ID: 3
     RequiredEnergy: 10
-    Effect: 20
+    Effect: 1.5
     Description: Launches a Seeker Rocket every 4 seconds.
     cooldown: 3
     Medical: 0
