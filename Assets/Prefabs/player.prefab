@@ -591,6 +591,8 @@ MonoBehaviour:
   statdisplayobject: {fileID: 0}
   manuallyapplyaugmentboosts: 0
   numberofequipedaugments: 0
+  drone1: {fileID: 5291592748213458889}
+  drone2: {fileID: 3697768636770411347}
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,6 +693,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 248add938af55594f8606c6a4fee8022, type: 3}
+--- !u!1 &3697768636770411347 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 776140359127204589, guid: 248add938af55594f8606c6a4fee8022, type: 3}
+  m_PrefabInstance: {fileID: 4149076880531186110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7362735782903513196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6897766817068835282, guid: 248add938af55594f8606c6a4fee8022, type: 3}
@@ -764,5 +771,10 @@ PrefabInstance:
 --- !u!4 &2023011532279493878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6897766817068835282, guid: 248add938af55594f8606c6a4fee8022, type: 3}
+  m_PrefabInstance: {fileID: 4875960350741419300}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5291592748213458889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 776140359127204589, guid: 248add938af55594f8606c6a4fee8022, type: 3}
   m_PrefabInstance: {fileID: 4875960350741419300}
   m_PrefabAsset: {fileID: 0}

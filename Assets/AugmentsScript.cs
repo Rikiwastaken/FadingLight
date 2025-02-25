@@ -47,8 +47,15 @@ public class AugmentsScript : MonoBehaviour
 
     public int numberofequipedaugments;
 
-    private void Start()
+    public GameObject drone1;
+    public GameObject drone2;
+
+    private Healthbar healthbar;
+
+    // Start is called before the first frame update
+    void Start()
     {
+        healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
         ApplyAugmentBoost();
     }
     private void Update()
@@ -58,6 +65,21 @@ public class AugmentsScript : MonoBehaviour
             manuallyapplyaugmentboosts = false;
             ApplyAugmentBoost();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if(drone1 != null)
+        {
+            healthbar.SetMaxDrone1(drone1.GetComponent<SupportDrone>().drones[drone1.GetComponent<SupportDrone>().ActiveDroneID].cooldown/Time.deltaTime);
+            healthbar.SetDrone1(drone1.GetComponent<SupportDrone>().dronecd);
+        }
+        if (drone2 != null)
+        {
+            healthbar.SetMaxDrone2(drone2.GetComponent<SupportDrone>().drones[drone2.GetComponent<SupportDrone>().ActiveDroneID].cooldown / Time.deltaTime);
+            healthbar.SetDrone2(drone2.GetComponent<SupportDrone>().dronecd);
+        }
+
     }
 
     public void ApplyAugmentBoost()

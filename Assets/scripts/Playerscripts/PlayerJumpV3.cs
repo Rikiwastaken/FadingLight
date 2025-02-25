@@ -88,12 +88,10 @@ public class PlayerJumpV3 : MonoBehaviour
 
         if(Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough))
         {
-            Debug.Log("touchingpassthough");
             passthrough.GetComponent<CompositeCollider2D>().isTrigger = false;
         }
         else
         {
-            Debug.Log("nottouchingpassthough");
             passthrough.GetComponent<CompositeCollider2D>().isTrigger = true;
         }
 

@@ -28,7 +28,7 @@ public class SupportDrone : MonoBehaviour
     private PlayerHP playerhp;
     private AugmentsScript augmentsscript;
 
-    private int dronecd;
+    public int dronecd;
 
     public List<HealerDrone> drones;
 
