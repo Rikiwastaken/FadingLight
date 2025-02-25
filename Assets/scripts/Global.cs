@@ -10,11 +10,13 @@ public class Global : MonoBehaviour
     public GameObject currentinventory;
 
     public GameObject lastinv;
+
+    public bool closedmenu;
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
         Screen.SetResolution(1920, 1080,false);
         Application.targetFrameRate = 60;
     }
@@ -23,6 +25,7 @@ public class Global : MonoBehaviour
     {
         if(GameObject.FindAnyObjectByType<InventoryScript>())
         {
+            
             currentinventory = GameObject.FindAnyObjectByType<InventoryScript>().gameObject;
         }
         
@@ -49,6 +52,21 @@ public class Global : MonoBehaviour
                 currentinventory.SetActive(true);
             }
             
+        }
+    }
+
+    void OnDodge()
+    {
+
+        if (currentinventory != null)
+        {
+            if (Time.timeScale == 0f)
+            {
+                closedmenu = true;
+                Time.timeScale = 1f;
+                currentinventory.SetActive(false);
+            }
+
         }
     }
 }

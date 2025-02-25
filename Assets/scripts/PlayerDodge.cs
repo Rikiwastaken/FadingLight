@@ -27,6 +27,14 @@ public class PlayerDodge : MonoBehaviour
 
     void OnDodge()
     {
+        if(FindAnyObjectByType<Global>())
+        {
+            if(FindAnyObjectByType<Global>().closedmenu)
+            {
+                FindAnyObjectByType<Global>().closedmenu = false;
+                return;
+            }
+        }
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("roll") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && dodgecdcnt == 0)
         {
             anim.SetTrigger("dodge");

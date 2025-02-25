@@ -219,7 +219,7 @@ public class AugmentsScript : MonoBehaviour
     {
         if(ID<Augmentlist.Count && ID>=0 && numberofequipedaugments<14)
         {
-            if (Augmentlist[ID].SlotsUsed < EquipedStats.MaxSlots-EquipedStats.EquipedSlots)
+            if (Augmentlist[ID].SlotsUsed <= EquipedStats.MaxSlots-EquipedStats.EquipedSlots)
             {
                 EquipedAugments[ID] = true;
                 ApplyAugmentBoost();

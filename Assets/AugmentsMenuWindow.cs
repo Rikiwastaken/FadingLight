@@ -27,11 +27,14 @@ public class AugmentsMenuWindow : MonoBehaviour
     private int valueright;
     private int valuedown;
     private int valueup;
+    private int valueclick;
     private Vector2 lastinput;
 
     private int upperlineindex=0;
 
     private bool onquiped;
+
+    private bool pressedclick;
 
     // Start is called before the first frame update
     void Start()
@@ -51,12 +54,23 @@ public class AugmentsMenuWindow : MonoBehaviour
         controls.gameplay.crossdown.canceled += ctx => valuedown = 0;
         controls.gameplay.crossup.performed += ctx => valueup = 1;
         controls.gameplay.crossup.canceled += ctx => valueup = 0;
+        controls.gameplay.jump.performed += ctx => valueclick = 1;
+        controls.gameplay.jump.canceled += ctx => valueclick = 0;
 
 
     }
     // Update is called once per frame
     void Update()
     {
+
+        if(valueclick==0)
+        {
+            pressedclick = false;
+        }
+
+        
+
+
         usedslot = 0;
         EquipedAugments = augmentscript.EquipedAugments;
 
@@ -86,6 +100,8 @@ public class AugmentsMenuWindow : MonoBehaviour
             DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i + upperlineindex * 6].image;
             DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().AugmentID = i + upperlineindex * 6;
         }
+
+        Debug.Log(usedslot);
 
         Vector2 input = Vector2.zero;
         if(valueleft!=0 || valueright!=0 || valueup!=0 || valuedown!=0)
@@ -119,6 +135,11 @@ public class AugmentsMenuWindow : MonoBehaviour
             selected.Select();
             effecttext.text = Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].description;
             necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].SlotsUsed;
+            if(!pressedclick && valueclick == 1)
+            {
+                pressedclick = true;
+                selected.onClick.Invoke();
+            }
         }
         else
         {
@@ -301,8 +322,11 @@ public class AugmentsMenuWindow : MonoBehaviour
                     {
                         if(upperlineindex==0)
                         {
-                            onquiped = true;
-                            selected = EquipedAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                            if(usedslot>0)
+                            {
+                                onquiped = true;
+                                selected = EquipedAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                            }
                         }
                         else
                         {
