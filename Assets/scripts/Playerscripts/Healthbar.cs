@@ -53,7 +53,6 @@ public class Healthbar : MonoBehaviour
     public void SetDrone1(float CD)
     {
         imageDrone1.fillAmount=(maxd1-CD)/maxd1;
-        Debug.Log((maxd1 - CD) / maxd1);
     }
 
 

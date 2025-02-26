@@ -22,7 +22,10 @@ public class buttonscript : MonoBehaviour
 
     public void AllAugmentsButton()
     {
-        AugmentsScript.EquipAugment(AugmentID);
+        if(!AugmentsScript.Augmentlist[AugmentID].locked)
+        {
+            AugmentsScript.EquipAugment(AugmentID);
+        }
     }
 
 }

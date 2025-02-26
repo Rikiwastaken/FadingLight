@@ -19,6 +19,7 @@ public class AugmentsMenuWindow : MonoBehaviour
     private List<bool> EquipedAugments;
 
     private AugmentsScript augmentscript;
+    public Sprite Lockedsprite;
 
     public Button selected;
 
@@ -44,7 +45,6 @@ public class AugmentsMenuWindow : MonoBehaviour
 
         Augmentlist = augmentscript.Augmentlist;
 
-        controls = new PlayerControls();
 
         controls.gameplay.crossleft.performed += ctx => valueleft = 1;
         controls.gameplay.crossright.performed += ctx => valueright = 1;
@@ -56,6 +56,8 @@ public class AugmentsMenuWindow : MonoBehaviour
         controls.gameplay.crossup.canceled += ctx => valueup = 0;
         controls.gameplay.jump.performed += ctx => valueclick = 1;
         controls.gameplay.jump.canceled += ctx => valueclick = 0;
+
+        controls.gameplay.Enable();
 
 
     }
@@ -97,12 +99,18 @@ public class AugmentsMenuWindow : MonoBehaviour
         for (int i = 0; i < Mathf.Min(Augmentlist.Count - upperlineindex * 6, 12); i++)
         {
             DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-            DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i + upperlineindex * 6].image;
+            if (Augmentlist[i + upperlineindex * 6].locked)
+            {
+                DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Lockedsprite;
+            }
+            else
+            {
+                DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i + upperlineindex * 6].image;
+            }
+            
             DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().AugmentID = i + upperlineindex * 6;
         }
-
-        Debug.Log(usedslot);
-
+        
         Vector2 input = Vector2.zero;
         if(valueleft!=0 || valueright!=0 || valueup!=0 || valuedown!=0)
         {
@@ -123,6 +131,7 @@ public class AugmentsMenuWindow : MonoBehaviour
                 input.x = 1;
             }
         }
+        
         if(lastinput!=input && input !=Vector2.zero)
         {
             Direction(input);
@@ -133,13 +142,23 @@ public class AugmentsMenuWindow : MonoBehaviour
         if (selected != null)
         {
             selected.Select();
-            effecttext.text = Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].description;
-            necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].SlotsUsed;
-            if(!pressedclick && valueclick == 1)
+            
+            if(Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].locked)
             {
-                pressedclick = true;
-                selected.onClick.Invoke();
+                effecttext.text = "Undiscovered Augment.";
+                necessaryslots.text = "Necessary slots : ?";
             }
+            else
+            {
+                effecttext.text = Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].description;
+                necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].SlotsUsed;
+                if (!pressedclick && valueclick == 1)
+                {
+                    pressedclick = true;
+                    selected.onClick.Invoke();
+                }
+            }
+            
         }
         else
         {
@@ -164,7 +183,14 @@ public class AugmentsMenuWindow : MonoBehaviour
         for(int i = 0;i< Mathf.Min(Augmentlist.Count-upperlineindex*6,12);i++)
         {
             DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
-            DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i+ upperlineindex * 6].image;
+            if (Augmentlist[i + upperlineindex * 6].locked)
+            {
+                DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Lockedsprite;
+            }
+            else
+            {
+                DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i + upperlineindex * 6].image;
+            }
             DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().AugmentID = i + upperlineindex * 6;
         }
         for(int i = Augmentlist.Count - upperlineindex * 6;i<12;i++)
@@ -371,11 +397,14 @@ public class AugmentsMenuWindow : MonoBehaviour
         {
             controls.gameplay.Enable();
         }
-        
+
     }
     void OnDisable()
     {
-        controls.gameplay.Disable();
+        if (controls != null)
+        {
+            controls.gameplay.Disable();
+        }
     }
 
 }

@@ -441,132 +441,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Augmentlist:
-  - name: +50HP
-    description: 
+  - name: Durability Augment
+    description: +20 Max Health.
     attributeID: 0
     valueincr: 50
+    mult: 0
+    image: {fileID: 21300000, guid: c6bd33377e4f8c54c94190a335692768, type: 3}
+    SlotsUsed: 1
+    locked: 0
+  - name: Battery Augment
+    description: +20 Max Energy.
+    attributeID: 1
+    valueincr: 10
+    mult: 0
+    image: {fileID: 21300000, guid: afc16a212838f7e4f9f55c152a923df5, type: 3}
+    SlotsUsed: 1
+    locked: 0
+  - name: Sharpness Augment
+    description: Increase Damage by 10
+    attributeID: 2
+    valueincr: 10
+    mult: 0
+    image: {fileID: 21300000, guid: dafa6ca8039f6de4c909bbcd68c48720, type: 3}
+    SlotsUsed: 2
+    locked: 0
+  - name: Agressivity Augment
+    description: Increase Damage by 110%.
+    attributeID: 2
+    valueincr: 1.1
+    mult: 1
+    image: {fileID: 21300000, guid: dafa6ca8039f6de4c909bbcd68c48720, type: 3}
+    SlotsUsed: 5
+    locked: 0
+  - name: Plate Augment
+    description: Increase Defense by 5
+    attributeID: 4
+    valueincr: 5
+    mult: 0
+    image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
+    SlotsUsed: 2
+    locked: 0
+  - name: Juggernaut Augment
+    description: Increase Defense by 7%
+    attributeID: 0
+    valueincr: 1.07
+    mult: 1
+    image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
+    SlotsUsed: 4
+    locked: 0
+  - name: Randomlocekd
+    description: Reduce Drone Ability cooldown by 10%
+    attributeID: 7
+    valueincr: 0
     mult: 0
     image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
-    SlotsUsed: 1
-  - name: +50NRG
-    description: +50NRG
-    attributeID: 0
-    valueincr: 50
+    SlotsUsed: 3
+    locked: 1
+  - name: Drone Efficiency Augment
+    description: Reduce Drone Ability cooldown by 10%
+    attributeID: 7
+    valueincr: 0
     mult: 0
-    image: {fileID: 4691423197714824912, guid: 2f738a72aff8d624eafb303f818cf6e3, type: 3}
-    SlotsUsed: 1
-  - name: '*2atk'
-    description: '*2atk'
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: balek
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: dqqzd
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: qsd
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: dq
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: ddd
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: cxc
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
-  - name: '*2atk'
-    description: 
-    attributeID: 0
-    valueincr: 2
-    mult: 1
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
-    SlotsUsed: 2
+    image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    SlotsUsed: 3
+    locked: 0
   EquipedAugments: 000000000000000000000000000000000000
   Basestats:
     MaxHP: 120
