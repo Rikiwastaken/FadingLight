@@ -92,7 +92,7 @@ public class AugmentsMenuWindow : MonoBehaviour
             {
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i].image;
-                EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponent<buttonscript>().AugmentID = i;
+                EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponent<buttonscript>().ObjectID = i;
                 usedslot++;
             }
         }
@@ -108,7 +108,7 @@ public class AugmentsMenuWindow : MonoBehaviour
                 DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i + upperlineindex * 6].image;
             }
             
-            DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().AugmentID = i + upperlineindex * 6;
+            DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = i + upperlineindex * 6;
         }
         
         Vector2 input = Vector2.zero;
@@ -143,15 +143,15 @@ public class AugmentsMenuWindow : MonoBehaviour
         {
             selected.Select();
             
-            if(Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].locked)
+            if(Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].locked)
             {
                 effecttext.text = "Undiscovered Augment.";
                 necessaryslots.text = "Necessary slots : ?";
             }
             else
             {
-                effecttext.text = Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].description;
-                necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().AugmentID].SlotsUsed;
+                effecttext.text = Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
+                necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].SlotsUsed;
                 if (!pressedclick && valueclick == 1)
                 {
                     pressedclick = true;
@@ -176,7 +176,7 @@ public class AugmentsMenuWindow : MonoBehaviour
             {
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i].image;
-                EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponent<buttonscript>().AugmentID = i;
+                EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponent<buttonscript>().ObjectID = i;
                 usedslot++;
             }
         }
@@ -191,7 +191,7 @@ public class AugmentsMenuWindow : MonoBehaviour
             {
                 DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i + upperlineindex * 6].image;
             }
-            DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().AugmentID = i + upperlineindex * 6;
+            DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = i + upperlineindex * 6;
         }
         for(int i = Augmentlist.Count - upperlineindex * 6;i<12;i++)
         {

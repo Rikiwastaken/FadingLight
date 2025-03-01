@@ -5,27 +5,42 @@ using UnityEngine;
 
 public class buttonscript : MonoBehaviour
 {
-    public int AugmentID;
+    public int ObjectID;
     private AugmentsScript AugmentsScript;
     private AugmentsMenuWindow AugmentsMenuWindow;
+    private EquipmentScript EquipmentScript;
+    private EquipmentMenuWindow EquipmentMenuWindow;
+    public int equipmentslotID;
 
     private void Start()
     {
         AugmentsScript = FindAnyObjectByType<AugmentsScript>();
         AugmentsMenuWindow = FindAnyObjectByType<AugmentsMenuWindow>();
+        EquipmentScript = FindAnyObjectByType<EquipmentScript>();
+        EquipmentMenuWindow = FindAnyObjectByType<EquipmentMenuWindow>();
     }
     public void EquipedAugmentButton()
     {
-        AugmentsScript.UnEquipAugment(AugmentID);
+        AugmentsScript.UnEquipAugment(ObjectID);
         AugmentsMenuWindow.selected=null;
     }
 
     public void AllAugmentsButton()
     {
-        if(!AugmentsScript.Augmentlist[AugmentID].locked)
+        if(!AugmentsScript.Augmentlist[ObjectID].locked)
         {
-            AugmentsScript.EquipAugment(AugmentID);
+            AugmentsScript.EquipAugment(ObjectID);
         }
+    }
+
+    public void SelectEquipmentSection()
+    {
+        EquipmentMenuWindow.selectedsection = equipmentslotID;
+    }
+
+    public void EquipselectedEquipment()
+    {
+        EquipmentScript.EquipItem(equipmentslotID, ObjectID);
     }
 
 }

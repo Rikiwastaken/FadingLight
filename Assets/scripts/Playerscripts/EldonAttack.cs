@@ -40,6 +40,7 @@ public class EldonAttack : MonoBehaviour
     public bool grounded;
 
     private PlayerJumpV3 playerjump;
+    private EquipmentScript equipmentScript;
 
 
     // Start is called before the first frame update
@@ -50,6 +51,7 @@ public class EldonAttack : MonoBehaviour
         GameObject.Find("slayertext").GetComponent<Image>().enabled = true;
         GameObject.Find("eatertext").GetComponent<Image>().enabled = false;
         playerjump = GetComponent<PlayerJumpV3>();
+        equipmentScript = GetComponent<EquipmentScript>();
     }
 
     //Slayer and Eater modes
@@ -106,6 +108,16 @@ public class EldonAttack : MonoBehaviour
 
         Collider2D[] hitenemies = Physics2D.OverlapCircleAll(attackpoint.position,range);
 
+        int damage = hpdamage;
+        int energydamage =nrgdamage;
+        float absorbrate = 3 / 10;
+        if (equipmentScript.equipedChainIndex!=-1)
+        {
+            damage = (int)(damage * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
+            energydamage = (int)(energydamage * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
+            absorbrate = absorbrate * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].AbsorbMultiplier;
+        }
+
         foreach (Collider2D enemy in hitenemies)
         {
             if (enemy.tag == "enemy")
@@ -117,15 +129,13 @@ public class EldonAttack : MonoBehaviour
 
                 if (slayermode)
                 {
-                    enemyHP.enemyhp -= hpdamage;
-                    enemyHP.enemyNRG -= (nrgdamage * 1/10);
-                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += nrgdamage * 6 /10 ;
+                    enemyHP.TakeDamage(damage, (energydamage * 1 / 10));
+                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate ;
                 }
                 else
                 {
-                    enemyHP.enemyhp -= hpdamage * 1/10;
-                    enemyHP.enemyNRG -= nrgdamage;
-                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += nrgdamage;
+                    enemyHP.TakeDamage(damage*1/10, energydamage);
+                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate*2;
                 }
                 if (enemyrb.position.x < playerx & enemyHP.enemyhp > 0)
                 {

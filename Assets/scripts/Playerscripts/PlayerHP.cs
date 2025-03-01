@@ -21,12 +21,14 @@ public class PlayerHP : MonoBehaviour
 
     public float radOcircle;
     private Healthbar healthbar;
+    private EquipmentScript equipmentScript;
 
     // Start is called before the first frame update
     void Start()
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
         rb = GetComponent<Rigidbody2D>();
+        equipmentScript = GetComponent<EquipmentScript>();
         
     }
 
@@ -43,9 +45,15 @@ public class PlayerHP : MonoBehaviour
     public void TakeDamage(float damage, Vector2 velchg, Vector2 ForceApplied)
     {
         int damagetotake = 1;
-        if(damage-damagereduction > 0f)
+        float totaldamagereduction = damagereduction;
+        if (equipmentScript.equipedPlateIndex!=-1)
         {
-            damagetotake = (int)(damage - damagereduction);
+            totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
+        }
+
+        if (damage- totaldamagereduction > 0f)
+        {
+            damagetotake = (int)(damage - totaldamagereduction);
         }
         Eldonhp -= damagetotake;
         inv = true;

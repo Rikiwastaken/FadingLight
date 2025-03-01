@@ -21,6 +21,7 @@ public class SupportDrone : MonoBehaviour
         public bool Medical;
         public GameObject Summon;
         public Sprite Sprite;
+        public bool locked;
     }
 
     public int ActiveDroneID; //-1 : No Drone, 0 : EnergyConverter Drone, 1 : Energy Regen Drone, 2 Healer Drone

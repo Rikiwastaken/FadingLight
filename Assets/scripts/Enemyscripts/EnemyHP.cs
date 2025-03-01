@@ -161,4 +161,10 @@ public class EnemyHP : MonoBehaviour
     {
         enemyhp-=damage;
     }
+
+    public void TakeDamage(int damage, int energydamage)
+    {
+        enemyhp -= damage;
+        enemyNRG-=energydamage;
+    }
 }
