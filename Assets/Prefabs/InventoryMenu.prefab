@@ -4385,7 +4385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2850161364974909590, guid: 57c5c326a0b7fed47b8372e97e1e949b, type: 3}
       propertyPath: m_Name
-      value: ChainSlot
+      value: Slot0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5013,7 +5013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2850161364974909590, guid: 57c5c326a0b7fed47b8372e97e1e949b, type: 3}
       propertyPath: m_Name
-      value: PlateSlot
+      value: Slot1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6999,7 +6999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2850161364974909590, guid: 57c5c326a0b7fed47b8372e97e1e949b, type: 3}
       propertyPath: m_Name
-      value: DroneSlot2
+      value: Slot3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7521,7 +7521,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2850161364974909590, guid: 57c5c326a0b7fed47b8372e97e1e949b, type: 3}
       propertyPath: m_Name
-      value: DroneSlot1
+      value: Slot2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

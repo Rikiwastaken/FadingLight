@@ -83,6 +83,7 @@ GameObject:
   - component: {fileID: 736690049156150842}
   - component: {fileID: 674670088715472754}
   - component: {fileID: 387999305572416826}
+  - component: {fileID: 761752601891527695}
   m_Layer: 9
   m_Name: player
   m_TagString: Player
@@ -529,6 +530,128 @@ MonoBehaviour:
   statdisplayobject: {fileID: 0}
   manuallyapplyaugmentboosts: 0
   numberofequipedaugments: 0
+--- !u!114 &761752601891527695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919727951631986471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d12c90c9ded25f4188b81d954c3c7f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Chainslist:
+  - name: Broken Chain
+    description: 'Eldon''s chain broke during the '
+    DamageMultiplier: 1
+    AbsorbMultiplier: 1
+    ID: 0
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Standard Chain
+    description: 'Increases damage by 10% but lowers energy generation by 10M '
+    DamageMultiplier: 1.1
+    AbsorbMultiplier: 0.9
+    ID: 1
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Efficient Chain
+    description: Lowers damage by 10% but increses energy generation by 10%.
+    DamageMultiplier: 0.9
+    AbsorbMultiplier: 1.1
+    ID: 2
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: All Purpose chain
+    description: 'Increases damage and Energy generation by 5%. '
+    DamageMultiplier: 1.05
+    AbsorbMultiplier: 1.05
+    ID: 3
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Shredder Chain
+    description: Increases damage by 20%
+    DamageMultiplier: 1.2
+    AbsorbMultiplier: 1
+    ID: 4
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Absorber Chain
+    description: Increases Energy Generation by 20%
+    DamageMultiplier: 1
+    AbsorbMultiplier: 1.2
+    ID: 5
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Locked Item
+    description: Not unlocked yet
+    DamageMultiplier: 100
+    AbsorbMultiplier: 100
+    ID: 6
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 1
+  - name: God Chain
+    description: God Chin
+    DamageMultiplier: 10000
+    AbsorbMultiplier: 100000
+    ID: 7
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  Platelist:
+  - name: Broken Plate
+    description: Eldon broke is prostetic during the fall. It provides little protection
+      now.
+    Defense: 0
+    HPRegen: 0.005
+    ID: 0
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Metal Plate
+    description: Decreases damge taken by 10 and provides a mediocre regeneration
+    Defense: 10
+    HPRegen: 0.005
+    ID: 1
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Bio-Plate
+    description: Does not increase defense but grants a small regeneration
+    Defense: 0
+    HPRegen: 0.01
+    ID: 2
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Bioi-Metal Plate
+    description: Increases defense by 10 and grants a small regeneration
+    Defense: 10
+    HPRegen: 0.01
+    ID: 3
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Shock Amplifier Plate
+    description: Increases damage taken by 10 but grants a good regeneration.
+    Defense: -10
+    HPRegen: 0.02
+    ID: 4
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Reinforced Steel Plate
+    description: Decreases damge taken by 30 and provides a mediocre regeneration
+    Defense: 30
+    HPRegen: 0.005
+    ID: 5
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Juggernaut Plate
+    description: Decreases damge taken by 50.
+    Defense: 50
+    HPRegen: 0
+    ID: 6
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  equipedChainIndex: 0
+  equipedPlateIndex: 0
   drone1: {fileID: 5291592748213458889}
   drone2: {fileID: 3697768636770411347}
 --- !u!1 &9140735802474745441

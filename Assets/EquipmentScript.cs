@@ -27,8 +27,8 @@ public class EquipmentScript : MonoBehaviour
         public string name;
         public string description;
         public float Defense;
-        public int ID;
         public float HPRegen;
+        public int ID;
         public Sprite image;
         public bool locked;
     }
@@ -40,8 +40,6 @@ public class EquipmentScript : MonoBehaviour
     public int equipedPlateIndex;
 
     private float HPfraction;
-
-    public int numberofequipedaugments;
 
     public GameObject drone1;
     public GameObject drone2;

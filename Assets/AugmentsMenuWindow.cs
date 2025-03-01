@@ -203,6 +203,7 @@ public class AugmentsMenuWindow : MonoBehaviour
             {
                 selected = EquipedAugmentsContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
                 onquiped = true;
+                return;
             }
             else if (selected == null)
             {
