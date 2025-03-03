@@ -544,7 +544,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Chainslist:
   - name: Broken Chain
-    description: 'Eldon''s chain broke during the '
+    description: Eldon's chain broke during the fall. This one can't really be repaired
+      anymore.
     DamageMultiplier: 1
     AbsorbMultiplier: 1
     ID: 0
@@ -593,7 +594,7 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 1
   - name: God Chain
-    description: God Chin
+    description: God Chain
     DamageMultiplier: 10000
     AbsorbMultiplier: 100000
     ID: 7

@@ -8,16 +8,20 @@ using UnityEngine.UI;
 using static SupportDrone;
 using static EquipmentScript;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.InputSystem.Switch;
+using UnityEngine.XR;
 
 public class EquipmentMenuWindow : MonoBehaviour
 {
     public PlayerControls controls;
     public Transform EquipedContainer;
     public Transform EquipmentContainer;
+    public Transform ActivepageBackground;
     public TextMeshProUGUI effecttext;
+    public TextMeshProUGUI nametext;
     private List<Plate> Platelist;
     private List<Chain> Chainlist;
-    private List<HealerDrone> Dronelist;
+    public List<HealerDrone> Dronelist;
     private List<int> EquipedItemsID; // 0 chain, 1 Plate, 2 drone1, 3drone2
 
     private EquipmentScript EquipmentScript;
@@ -67,7 +71,25 @@ public class EquipmentMenuWindow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        switch(selectedsection)
+        {
+            case 0:
+                ActivepageBackground.GetChild(0).gameObject.SetActive(true);
+                ActivepageBackground.GetChild(1).gameObject.SetActive(false);
+                ActivepageBackground.GetChild(2).gameObject.SetActive(false);
+                break;
+            case 1:
+                ActivepageBackground.GetChild(0).gameObject.SetActive(false);
+                ActivepageBackground.GetChild(1).gameObject.SetActive(true);
+                ActivepageBackground.GetChild(2).gameObject.SetActive(false);
+                break;
+            case >=2:
+                ActivepageBackground.GetChild(0).gameObject.SetActive(false);
+                ActivepageBackground.GetChild(1).gameObject.SetActive(false);
+                ActivepageBackground.GetChild(2).gameObject.SetActive(true);
+                break;
 
+        }
         if(valueclick==0)
         {
             pressedclick = false;
@@ -87,20 +109,24 @@ public class EquipmentMenuWindow : MonoBehaviour
                     switch (i)
                     {
                         case 0:
-                            EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Chainlist[EquipmentScript.equipedChainIndex].image;
+                            EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = EquipmentScript.Chainslist[EquipmentScript.equipedChainIndex].image;
                             EquipedContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().equipmentslotID = 0;
+                            EquipedContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = EquipmentScript.equipedChainIndex;
                             break;
                         case 1:
-                            EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Platelist[EquipmentScript.equipedPlateIndex].image;
+                            EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = EquipmentScript.Platelist[EquipmentScript.equipedPlateIndex].image;
                             EquipedContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().equipmentslotID = 1;
+                            EquipedContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = EquipmentScript.equipedPlateIndex;
                             break;
                         case 2:
-                            EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Dronelist[EquipmentScript.drone1.GetComponent<SupportDrone>().ActiveDroneID].Sprite;
+                            EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[EquipmentScript.drone1.GetComponent<SupportDrone>().ActiveDroneID].Sprite;
                             EquipedContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().equipmentslotID = 2;
+                            EquipedContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = EquipmentScript.drone1.GetComponent<SupportDrone>().ActiveDroneID;
                             break;
                         case 3:
-                            EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Dronelist[EquipmentScript.drone2.GetComponent<SupportDrone>().ActiveDroneID].Sprite;
+                            EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[EquipmentScript.drone2.GetComponent<SupportDrone>().ActiveDroneID].Sprite;
                             EquipedContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().equipmentslotID = 3;
+                            EquipedContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = EquipmentScript.drone2.GetComponent<SupportDrone>().ActiveDroneID;
                             break;
                     }
                 }
@@ -147,21 +173,9 @@ public class EquipmentMenuWindow : MonoBehaviour
         {
             selected.Select();
 
-            switch(selectedsection)
-            {
-                case 0:
-                    effecttext.text = Chainlist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
-                    break;
-                case 1:
-                    effecttext.text = Platelist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
-                    break;
-                case 2:
-                    effecttext.text = Dronelist[selected.transform.GetComponent<buttonscript>().ObjectID].Description;
-                    break;
-                case 3:
-                    effecttext.text = Dronelist[selected.transform.GetComponent<buttonscript>().ObjectID].Description;
-                    break;
-            }
+            UpdateDisplay();
+
+
             if (!pressedclick && valueclick == 1)
             {
                 pressedclick = true;
@@ -176,14 +190,137 @@ public class EquipmentMenuWindow : MonoBehaviour
 
     }
 
+    void UpdateDisplay()
+    {
+        switch (selectedsection)
+        {
+            case 0:
+                nametext.text = EquipmentScript.Chainslist[selected.transform.GetComponent<buttonscript>().ObjectID].name;
+                int basemultiplier = (int)Math.Round(EquipmentScript.Chainslist[EquipmentScript.equipedChainIndex].DamageMultiplier * 100 - 100);
+                int newmultiplier = (int)Math.Round(EquipmentScript.Chainslist[selected.transform.GetComponent<buttonscript>().ObjectID].DamageMultiplier * 100 - 100);
+                string basetoshow = "";
+                if (basemultiplier < 0)
+                {
+                    basetoshow = basemultiplier + "%";
+                }
+                else
+                {
+                    basetoshow = "+" + basemultiplier + "%";
+                }
+                string newtoshow = "";
+                if (newmultiplier < 0)
+                {
+                    newtoshow = "<b>" + newmultiplier + "%" + "</b>";
+                }
+                else
+                {
+                    newtoshow = "<b>" + "+" + newmultiplier + "%" + "</b>";
+                }
+                if (newmultiplier < basemultiplier)
+                {
+                    newtoshow = "<color=\"red\">" + newtoshow + "</color>";
+                }
+                else if (newmultiplier > basemultiplier)
+                {
+                    newtoshow = "<color=\"green\">" + newtoshow + "</color>";
+                }
 
+                int baseabs = (int)Math.Round(EquipmentScript.Chainslist[EquipmentScript.equipedChainIndex].AbsorbMultiplier * 100 - 100);
+                int newmabs = (int)Math.Round(EquipmentScript.Chainslist[selected.transform.GetComponent<buttonscript>().ObjectID].AbsorbMultiplier * 100 - 100);
+                string baseabstoshow = "";
+                if (baseabs < 0)
+                {
+                    baseabstoshow = baseabs + "%";
+                }
+                else
+                {
+                    baseabstoshow = "+" + baseabs + "%";
+                }
+                string newabstoshow = "";
+                if (newmabs < 0)
+                {
+                    newabstoshow = "<b>" + newmabs + "%" + "</b>";
+                }
+                else
+                {
+                    newabstoshow = "<b>" + "+" + newmabs + "%" + "</b>";
+                }
+                if (newmabs < baseabs)
+                {
+                    newabstoshow = "<color=\"red\">" + newabstoshow + "</color>";
+                }
+                else if (newmabs > baseabs)
+                {
+                    newabstoshow = "<color=\"green\">" + newabstoshow + "</color>";
+                }
+
+                effecttext.text = "Melee Multiplier : " + basetoshow + " -> " + newtoshow + "\n" + "Absorption Multiplier : " + baseabstoshow + " -> " + newabstoshow;
+                effecttext.text += "\n\n" + EquipmentScript.Chainslist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
+                break;
+            case 1:
+
+                nametext.text = EquipmentScript.Platelist[selected.transform.GetComponent<buttonscript>().ObjectID].name;
+                int baseregen = (int)Math.Round(EquipmentScript.Platelist[EquipmentScript.equipedPlateIndex].HPRegen * 100);
+                int newmregen = (int)Math.Round(EquipmentScript.Platelist[selected.transform.GetComponent<buttonscript>().ObjectID].HPRegen * 100);
+                string baseregentoshow = "";
+                if (baseregen < 0)
+                {
+                    baseregentoshow = baseregen + "%/s";
+                }
+                else
+                {
+                    baseregentoshow = "+" + baseregen + "%/s";
+                }
+                string newregentoshow = "";
+                if (newmregen < 0)
+                {
+                    newregentoshow = "<b>" + newmregen + "%/s" + "</b>";
+                }
+                else
+                {
+                    newregentoshow = "<b>+" + newmregen + "%/s" + "</b>";
+                }
+                if (newmregen < baseregen)
+                {
+                    newregentoshow = "<color=\"red\">" + newregentoshow + "</color>";
+                }
+                else if (newmregen > baseregen)
+                {
+                    newregentoshow = "<color=\"green\">" + newregentoshow + "</color>";
+                }
+
+                int basedef = (int)EquipmentScript.Platelist[EquipmentScript.equipedPlateIndex].Defense;
+                int newdef = (int)EquipmentScript.Platelist[selected.transform.GetComponent<buttonscript>().ObjectID].Defense;
+                string deftoshow = "<b>" + newdef + "</b>";
+                if (newdef < basedef)
+                {
+                    deftoshow = "<color=\"red\">" + deftoshow + "</color>";
+                }
+                else if (newdef > basedef)
+                {
+                    deftoshow = "<color=\"green\">" + deftoshow + "</color>";
+                }
+
+                effecttext.text = "Defense : " + basedef + " -> " + deftoshow + "\n" + "Regen per Second : " + baseregentoshow + " -> " + newregentoshow;
+                effecttext.text += "\n\n" + EquipmentScript.Platelist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
+                break;
+            case 2:
+                nametext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].name;
+                effecttext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].Description;
+                break;
+            case 3:
+                nametext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].name;
+                effecttext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].Description;
+                break;
+        }
+    }
 
     void Displaysection(int selectedsection)
     {
         switch(selectedsection)
         {
             case 0:
-                for (int i = 0; i < Mathf.Min(Chainlist.Count - upperlineindex * 5, 9); i++)
+                for (int i = 0; i < Mathf.Min(Chainlist.Count - upperlineindex * 5, 10); i++)
                 {
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Chainlist[i + upperlineindex * 5].image;
@@ -192,7 +329,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                 }
                 break;
             case 1:
-                for (int i = 0; i < Mathf.Min(Platelist.Count - upperlineindex * 5, 9); i++)
+                for (int i = 0; i < Mathf.Min(Platelist.Count - upperlineindex * 5, 10); i++)
                 {
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Platelist[i + upperlineindex * 5].image;
@@ -201,7 +338,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                 }
                 break;
             case 2:
-                for (int i = 0; i < Mathf.Min(Dronelist.Count - upperlineindex * 5, 9); i++)
+                for (int i = 0; i < Mathf.Min(Dronelist.Count - upperlineindex * 5, 10); i++)
                 {
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Dronelist[i + upperlineindex * 5].Sprite;
@@ -210,7 +347,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                 }
                 break;
             case 3:
-                for (int i = 0; i < Mathf.Min(Dronelist.Count - upperlineindex * 5, 9); i++)
+                for (int i = 0; i < Mathf.Min(Dronelist.Count - upperlineindex * 5, 10); i++)
                 {
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Dronelist[i + upperlineindex * 5].Sprite;
@@ -355,86 +492,171 @@ public class EquipmentMenuWindow : MonoBehaviour
             {
                 if (dirinput.x > 0)
                 {
-                    switch (activebuttonidstring)
+                    switch (selectedsection)
                     {
-                        case < 4:
-                            selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
-                            break;
-                        case 4:
-                            selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
-                            break;
-                        case 9:
-                            selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
-                            break;
-                        case > 4:
-                            switch(selectedsection)
+                        case 0:
+                            switch(activebuttonidstring)
                             {
-                                case 0:
+                                case < 4:
+                                    if (Chainlist.Count > activebuttonidstring + 1)
+                                    {
+                                        selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    else
+                                    {
+                                        selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    break;
+                                case 4:
+                                    selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                                    break;
+                                case 9:
+                                    selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
+                                    break;
+                                case > 4:
                                     if (activebuttonidstring + 1 < Chainlist.Count - upperlineindex * 5)
                                     {
                                         selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
                                     }
                                     else
                                     {
+                                        selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    break;
+                            }
+                            break;
+                        case 1:
+                            switch (activebuttonidstring)
+                            {
+                                case < 4:
+                                    if (Platelist.Count > activebuttonidstring + 1)
+                                    {
+                                        selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    else
+                                    {
                                         selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
                                     }
                                     break;
-                                case 1:
+                                case 4:
+                                    selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                                    break;
+                                case 9:
+                                    selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
+                                    break;
+                                case > 4:
                                     if (activebuttonidstring + 1 < Platelist.Count - upperlineindex * 5)
                                     {
                                         selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
                                     }
                                     else
                                     {
-                                        selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
-                                    }
-                                    break;
-                                case 2:
-                                    if (activebuttonidstring + 1 < Dronelist.Count - upperlineindex * 5)
-                                    {
-                                        selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
-                                    }
-                                    else
-                                    {
-                                        selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
-                                    }
-                                    break;
-                                case 3:
-                                    if (activebuttonidstring + 1 < Dronelist.Count - upperlineindex * 5)
-                                    {
-                                        selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
-                                    }
-                                    else
-                                    {
-                                        selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                                        selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
                                     }
                                     break;
                             }
                             break;
-                            
+                        case 2:
+                            switch (activebuttonidstring)
+                            {
+                                case < 4:
+                                    if (Dronelist.Count > activebuttonidstring+1)
+                                    {
+                                        selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    else
+                                    {
+                                        selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    break;
+                                case 4:
+                                    selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                                    break;
+                                case 9:
+                                    selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
+                                    break;
+                                case > 4:
+                                    if (activebuttonidstring + 1 < Dronelist.Count - upperlineindex * 5)
+                                    {
+                                        selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    else
+                                    {
+                                        selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    break;
+                            }
+                            break;
+                        case 3:
+                            switch (activebuttonidstring)
+                            {
+                                case < 4:
+                                    if (Dronelist.Count > activebuttonidstring + 1)
+                                    {
+                                        selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    else
+                                    {
+                                        selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    break;
+                                case 4:
+                                    selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                                    break;
+                                case 9:
+                                    selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
+                                    break;
+                                case > 4:
+                                    if (activebuttonidstring + 1 < Dronelist.Count - upperlineindex * 5)
+                                    {
+                                        selected = EquipmentContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    else
+                                    {
+                                        selected = EquipmentContainer.GetChild(5).GetChild(1).GetComponentInChildren<Button>();
+                                    }
+                                    break;
+                            }
+                            break;
                     }
+                    
                 }
                 else if (dirinput.x < 0)
                 {
                     if (activebuttonidstring == 0)
                     {
-                        selected = EquipmentContainer.GetChild(4).GetChild(1).GetComponentInChildren<Button>();
+                        switch (selectedsection)
+                        {
+                            case 0:
+                                selected = EquipmentContainer.GetChild(Math.Min(4, Chainlist.Count - 1)).GetChild(1).GetComponentInChildren<Button>();
+                                break;
+                            case 1:
+                                selected = EquipmentContainer.GetChild(Mathf.Min(4, Platelist.Count - 1)).GetChild(1).GetComponentInChildren<Button>();
+                                break;
+                            case 2:
+                                selected = EquipmentContainer.GetChild(Mathf.Min(4, Dronelist.Count - 1)).GetChild(1).GetComponentInChildren<Button>();
+                                break;
+                            case 3:
+                                selected = EquipmentContainer.GetChild(Mathf.Min(4, Dronelist.Count - 1)).GetChild(1).GetComponentInChildren<Button>();
+                                break;
+                        }
+                        
                     }
                     else if (activebuttonidstring == 5)
                     {
                         switch (selectedsection)
                         {
                             case 0:
-                                selected = EquipmentContainer.GetChild(Mathf.Min(9, Chainlist.Count - upperlineindex * 5)).GetChild(1).GetComponentInChildren<Button>();
+                                selected = EquipmentContainer.GetChild(Mathf.Min(9, Chainlist.Count - upperlineindex * 5-1)).GetChild(1).GetComponentInChildren<Button>();
                                 break;
                             case 1:
-                                selected = EquipmentContainer.GetChild(Mathf.Min(9, Platelist.Count - upperlineindex * 5)).GetChild(1).GetComponentInChildren<Button>();
+                                selected = EquipmentContainer.GetChild(Mathf.Min(9, Platelist.Count - upperlineindex * 5 - 1)).GetChild(1).GetComponentInChildren<Button>();
                                 break;
                             case 2:
-                                selected = EquipmentContainer.GetChild(Mathf.Min(9, Dronelist.Count - upperlineindex * 5)).GetChild(1).GetComponentInChildren<Button>();
+                                selected = EquipmentContainer.GetChild(Mathf.Min(9, Dronelist.Count - upperlineindex * 5 - 1)).GetChild(1).GetComponentInChildren<Button>();
                                 break;
                             case 3:
-                                selected = EquipmentContainer.GetChild(Mathf.Min(9, Dronelist.Count - upperlineindex * 5)).GetChild(1).GetComponentInChildren<Button>();
+                                selected = EquipmentContainer.GetChild(Mathf.Min(9, Dronelist.Count - upperlineindex * 5 - 1)).GetChild(1).GetComponentInChildren<Button>();
                                 break;
                         }
                         
@@ -451,6 +673,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                         if (upperlineindex == 0)
                         {
                             selected = EquipedContainer.GetChild(selectedsection).GetChild(1).GetComponentInChildren<Button>();
+                            onquiped = true;
                         }
                         else
                         {
@@ -523,6 +746,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                             else
                             {
                                 selected = EquipedContainer.GetChild(selectedsection).GetChild(1).GetComponentInChildren<Button>();
+                                onquiped = true;
                             }
                             
                             break;
@@ -535,6 +759,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                             else
                             {
                                 selected = EquipedContainer.GetChild(selectedsection).GetChild(1).GetComponentInChildren<Button>();
+                                onquiped = true;
                             }
                             break;
                         case 2:
@@ -546,6 +771,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                             else
                             {
                                 selected = EquipedContainer.GetChild(selectedsection).GetChild(1).GetComponentInChildren<Button>();
+                                onquiped = true;
                             }
                             break;
                         case 3:
@@ -557,6 +783,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                             else
                             {
                                 selected = EquipedContainer.GetChild(selectedsection).GetChild(1).GetComponentInChildren<Button>();
+                                onquiped = true;
                             }
                             break;
                     }
@@ -568,6 +795,7 @@ public class EquipmentMenuWindow : MonoBehaviour
 
     void OnEnable()
     {
+        EquipmentScript = FindAnyObjectByType<EquipmentScript>();
         InitializeLists();
         if (controls!=null)
         {

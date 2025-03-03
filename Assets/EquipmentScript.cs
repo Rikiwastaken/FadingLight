@@ -97,10 +97,26 @@ public class EquipmentScript : MonoBehaviour
                 equipedPlateIndex = ItemID;
                 break;
             case 2:
-                drone1.GetComponent<SupportDrone>().ActiveDroneID = ItemID;
+                if(drone2.GetComponent<SupportDrone>().ActiveDroneID == ItemID)
+                {
+                    drone2.GetComponent<SupportDrone>().ActiveDroneID = drone1.GetComponent<SupportDrone>().ActiveDroneID;
+                    drone1.GetComponent<SupportDrone>().ActiveDroneID = ItemID;
+                }
+                else
+                {
+                    drone1.GetComponent<SupportDrone>().ActiveDroneID = ItemID;
+                }
                 break;
             case 3:
-                drone2.GetComponent<SupportDrone>().ActiveDroneID = ItemID;
+                if (drone1.GetComponent<SupportDrone>().ActiveDroneID == ItemID)
+                {
+                    drone1.GetComponent<SupportDrone>().ActiveDroneID = drone2.GetComponent<SupportDrone>().ActiveDroneID;
+                    drone2.GetComponent<SupportDrone>().ActiveDroneID = ItemID;
+                }
+                else
+                {
+                    drone2.GetComponent<SupportDrone>().ActiveDroneID = ItemID;
+                }
                 break;
         }
     }

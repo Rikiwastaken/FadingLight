@@ -23,7 +23,6 @@ public class InventoryScript : MonoBehaviour
 
     void OnRightShoulder()
     {
-        Debug.Log("right");
         pages.GetChild(currentpageid).gameObject.SetActive(false);
         if(currentpageid<maxid)
         {
@@ -38,7 +37,6 @@ public class InventoryScript : MonoBehaviour
 
     void OnLeftShoulder()
     {
-        Debug.Log("left");
         pages.GetChild(currentpageid).gameObject.SetActive(false);
         if (currentpageid > 0)
         {

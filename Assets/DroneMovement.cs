@@ -29,8 +29,12 @@ public class DroneMovement : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = returnpos.normalized * maxspeed * Vector2.Distance(player.position + offset, transform.position)+rd;
         if(framecd==0)
         {
-            framecd = (int)(1/Time.deltaTime);
-            rd = new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+            if(Vector2.Distance(player.position + offset, transform.position)>0.1f)
+            {
+                framecd = (int)(1 / Time.deltaTime);
+                rd = new Vector2(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+            }
+            
         }
         else
         {
