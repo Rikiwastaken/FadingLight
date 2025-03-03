@@ -51,11 +51,11 @@ public class buttonscript : MonoBehaviour
 
     public void SavePointAugment()
     {
-        Debug.Log("Augments");
+        FindAnyObjectByType<Global>().OpenInventory(2);
     }
     public void SavePointEquipment()
     {
-        Debug.Log("Equipments");
+        FindAnyObjectByType<Global>().OpenInventory(1);
     }
     public void SavePointSave()
     {

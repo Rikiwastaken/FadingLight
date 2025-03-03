@@ -64,14 +64,14 @@ public class SavePointMenu : MonoBehaviour
             
         }
         
-        if(lastinput!=input && input !=0)
+        if(lastinput!=input && input !=0 && !FindAnyObjectByType<Global>().ininventory)
         {
             Direction(input);
         }
         lastinput = input;
 
 
-        if (selected != null)
+        if (selected != null && !FindAnyObjectByType<Global>().ininventory)
         {
             selected.Select();
 

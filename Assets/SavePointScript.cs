@@ -89,6 +89,7 @@ public class SavePointScript : MonoBehaviour
             FindAnyObjectByType<PlayerMovement>().safezone();
             FindAnyObjectByType<PlayerMovement>().transform.position = wheretoplaceplayer;
             GameObject newmenu = Instantiate(SaveMenu, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
+            newmenu.transform.SetAsFirstSibling();
             newmenu.GetComponent<RectTransform>().localPosition = Vector2.zero;
             FindAnyObjectByType<Global>().atsavepoint = true;
             savepointcdcounter = (int)(savepointCD / Time.deltaTime);

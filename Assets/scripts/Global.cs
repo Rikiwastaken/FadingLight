@@ -15,6 +15,9 @@ public class Global : MonoBehaviour
     // Start is called before the first frame update
 
     public bool atsavepoint;
+
+    public bool ininventory;
+
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -43,17 +46,16 @@ public class Global : MonoBehaviour
 
         if(currentinventory != null)
         {
-            if(Time.timeScale == 0f)
+            if(ininventory)
             {
                 Time.timeScale = 1f;
-                currentinventory.SetActive(false);
+                CloseInventory();
             }
             else
             {
                 Time.timeScale = 0f;
-                currentinventory.SetActive(true);
-            }
-            
+                OpenInventory();
+            } 
         }
     }
 
@@ -64,11 +66,33 @@ public class Global : MonoBehaviour
         {
             if (Time.timeScale == 0f)
             {
-                closedmenu = true;
                 Time.timeScale = 1f;
-                currentinventory.SetActive(false);
+                
+            }
+            if(ininventory)
+            {
+                CloseInventory();
             }
 
         }
+    }
+
+    public void CloseInventory()
+    {
+        currentinventory.SetActive(false);
+        ininventory=false;
+        closedmenu = true;
+    }
+
+    public void OpenInventory()
+    {
+        currentinventory.SetActive(true);
+        ininventory=true;
+    }
+    public void OpenInventory(int page)
+    {
+        currentinventory.SetActive(true);
+        ininventory=true;
+        currentinventory.GetComponent<InventoryScript>().SetPage(page);
     }
 }

@@ -13,8 +13,13 @@ public class InventoryScript : MonoBehaviour
     void Start()
     {
         maxid = pages.childCount - 1;
-        currentpageid = 0;
-        for(int i = 0; i < maxid; i++)
+        SetPage(0);
+    }
+
+    public void SetPage(int pageid)
+    {
+        currentpageid=pageid;
+        for (int i = 0; i < maxid; i++)
         {
             pages.GetChild(i).gameObject.SetActive(false);
         }

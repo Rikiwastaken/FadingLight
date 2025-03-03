@@ -101,11 +101,14 @@ public class EquipmentMenuWindow : MonoBehaviour
         for(int i=0; i<10; i++)
         {
             EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().color=new Color(1f,1f,1f,0f);
-            if(i<=3)
+            EquipmentContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = false;
+            if (i<=3)
             {
+                EquipedContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = true;
                 if (EquipedItemsID[i]!=-1)
                 {
                     EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
+                    
                     switch (i)
                     {
                         case 0:
@@ -133,6 +136,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                 else
                 {
                     EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
+                    EquipedContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = false;
                 }
                 
             }
@@ -326,6 +330,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Chainlist[i + upperlineindex * 5].image;
                     EquipmentContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = Chainlist[i + upperlineindex * 5].ID;
                     EquipmentContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().equipmentslotID = 0;
+                    EquipmentContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = true;
                 }
                 break;
             case 1:
@@ -335,6 +340,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Platelist[i + upperlineindex * 5].image;
                     EquipmentContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = Platelist[i + upperlineindex * 5].ID;
                     EquipmentContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().equipmentslotID = 1;
+                    EquipmentContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = true;
                 }
                 break;
             case 2:
@@ -344,6 +350,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Dronelist[i + upperlineindex * 5].Sprite;
                     EquipmentContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = Dronelist[i + upperlineindex * 5].ID;
                     EquipmentContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().equipmentslotID = 2;
+                    EquipmentContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = true;
                 }
                 break;
             case 3:
@@ -353,6 +360,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Dronelist[i + upperlineindex * 5].Sprite;
                     EquipmentContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = Dronelist[i + upperlineindex * 5].ID;
                     EquipmentContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().equipmentslotID = 3;
+                    EquipmentContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = true;
                 }
                 break;
         }
