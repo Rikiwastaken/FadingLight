@@ -58,6 +58,10 @@ public class AugmentsScript : MonoBehaviour
     }
     private void Update()
     {
+        if (FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
         if (manuallyapplyaugmentboosts)
         {
             manuallyapplyaugmentboosts = false;

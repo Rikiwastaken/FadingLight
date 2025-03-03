@@ -58,16 +58,26 @@ public class EldonAttack : MonoBehaviour
 
     void OnRightShoulder()
     {
+        if (!!FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
         Modeswitch();
     }
 
     void OnAttack()
     {
-        if (delaycounter==0 && !playerjump.stuckinwall)
+        if (FindAnyObjectByType<Global>().atsavepoint)
         {
-            fctAttack();
-            delaycounter = (int)(attackdelay/Time.fixedDeltaTime);
+            return;
         }
+        if (delaycounter == 0 && !playerjump.stuckinwall)
+            {
+                fctAttack();
+                delaycounter = (int)(attackdelay / Time.fixedDeltaTime);
+            }
+        
+        
     }
 
     void FixedUpdate()

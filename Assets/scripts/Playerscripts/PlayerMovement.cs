@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private float valueleft;
     public float horizontal; // 1,-1,0
     public float vertical;
+    private bool jumppressed;
 
     public bool rolling;
     public float rollingspeed;
@@ -53,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         controls.gameplay.moveright.canceled += ctx => valueright = 0;
         controls.gameplay.down.performed += ctx => vertical = 1;
         controls.gameplay.down.canceled += ctx => vertical = 0;
+        controls.gameplay.jump.performed += ctx => jumppressed = true;
+        controls.gameplay.jump.canceled += ctx => jumppressed = false;
 
     }
 
@@ -67,6 +70,10 @@ public class PlayerMovement : MonoBehaviour
     //Handles running of the physics
     private void FixedUpdate()
     {
+        if(FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
 
         if (!playerjump.stuckinwall)
         {
@@ -91,20 +98,20 @@ public class PlayerMovement : MonoBehaviour
 
 
         //move player
-        if ( !playerjump.stuckinwall)
+        if (!playerjump.stuckinwall)
         {
             if (Mathf.Abs(rb2D.velocity.x) < maxspeed)
             {
-                float newspeed = rb2D.velocityX+horizontal * speed;
-                if(Mathf.Abs(newspeed) > maxspeed)
+                float newspeed = rb2D.velocityX + horizontal * speed;
+                if (Mathf.Abs(newspeed) > maxspeed)
                 {
                     newspeed = horizontal * maxspeed;
                 }
                 rb2D.velocityX = newspeed;
             }
-            if(horizontal == 0)
+            if (horizontal == 0)
             {
-                if(Mathf.Abs(rb2D.velocity.x) <= 0.01)
+                if (Mathf.Abs(rb2D.velocity.x) <= 0.01)
                 {
                     rb2D.velocityX = 0f;
                 }
@@ -120,11 +127,11 @@ public class PlayerMovement : MonoBehaviour
                     }
                 }
             }
-            if ((horizontal>0 && rb2D.velocity.x<0) ||( horizontal<0 && rb2D.velocity.x>0))
+            if ((horizontal > 0 && rb2D.velocity.x < 0) || (horizontal < 0 && rb2D.velocity.x > 0))
             {
                 if (rb2D.velocity.x > 0)
                 {
-                    rb2D.velocityX -=slowdownspeed;
+                    rb2D.velocityX -= slowdownspeed;
                 }
                 else
                 {
@@ -133,11 +140,11 @@ public class PlayerMovement : MonoBehaviour
             }
 
 
-            if(rolling)
+            if (rolling)
             {
-                rb2D.velocityX=(transform.localScale.x/Mathf.Abs(transform.localScale.x))*rollingspeed;
+                rb2D.velocityX = (transform.localScale.x / Mathf.Abs(transform.localScale.x)) * rollingspeed;
             }
-           
+
             Flip(horizontal);
             myanimator.SetFloat("speed", Mathf.Abs(horizontal));
         }
@@ -149,10 +156,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         issafe = Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe);
-        if (playerjump.grounded && Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe) && vertical == 1)
+        if (playerjump.grounded && Physics2D.OverlapCircle(transform.position, 0.1f, whatissafe) && (vertical == 1||jumppressed))
         {
-            safezone();
+            FindAnyObjectByType<SavePointScript>().InteractWithSavePoint();
         }
+
     }
     //flipping function
     private void Flip(float horizontal)
@@ -167,8 +175,12 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
-    void safezone()
+    public void safezone()
     {
+        if(!facingRight)
+        {
+            Flip(1);
+        }
         deadenemy = GameObject.FindGameObjectsWithTag("enemy");
         foreach (GameObject enemy in deadenemy)
         {

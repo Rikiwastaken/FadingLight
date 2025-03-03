@@ -43,4 +43,23 @@ public class buttonscript : MonoBehaviour
         EquipmentScript.EquipItem(equipmentslotID, ObjectID);
     }
 
+    public void SavePointLeave()
+    {
+        FindAnyObjectByType<Global>().atsavepoint = false;
+        Destroy(transform.parent.parent.gameObject);
+    }
+
+    public void SavePointAugment()
+    {
+        Debug.Log("Augments");
+    }
+    public void SavePointEquipment()
+    {
+        Debug.Log("Equipments");
+    }
+    public void SavePointSave()
+    {
+        Debug.Log("Save");
+    }
+
 }

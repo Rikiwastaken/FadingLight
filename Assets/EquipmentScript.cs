@@ -57,6 +57,10 @@ public class EquipmentScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if(FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
         //armorbaseregen;
         if(healcd>0)
         {

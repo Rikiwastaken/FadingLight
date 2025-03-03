@@ -34,6 +34,11 @@ public class PlayerDodge : MonoBehaviour
                 FindAnyObjectByType<Global>().closedmenu = false;
                 return;
             }
+            if (FindAnyObjectByType<Global>().atsavepoint)
+            {
+                return;
+            }
+
         }
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("roll") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && dodgecdcnt == 0)
         {

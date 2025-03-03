@@ -13,6 +13,8 @@ public class Global : MonoBehaviour
 
     public bool closedmenu;
     // Start is called before the first frame update
+
+    public bool atsavepoint;
     void Start()
     {
         DontDestroyOnLoad(gameObject);

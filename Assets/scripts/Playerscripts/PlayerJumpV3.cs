@@ -55,6 +55,8 @@ public class PlayerJumpV3 : MonoBehaviour
 
     public GameObject passthrough;
 
+    private int savepointjumpCD;
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -75,7 +77,16 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(alreadypressedjump && !pressedjump)
+        if (FindAnyObjectByType<Global>().atsavepoint)
+        {
+            savepointjumpCD=(int)(1/Time.deltaTime);
+            return;
+        }
+        if(savepointjumpCD>0)
+        {
+            savepointjumpCD--;
+        }
+        if (alreadypressedjump && !pressedjump)
         {
             alreadypressedjump = false;
         }
@@ -84,9 +95,9 @@ public class PlayerJumpV3 : MonoBehaviour
 
         horizontal = playermov.horizontal;
         grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough));
-        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi, largeurgi),0, whatiswall);
+        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi, largeurgi), 0, whatiswall);
 
-        if(Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough))
+        if (Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough))
         {
             passthrough.GetComponent<CompositeCollider2D>().isTrigger = false;
         }
@@ -99,13 +110,13 @@ public class PlayerJumpV3 : MonoBehaviour
 
         //normal jump
 
-        if (pressedjump && grounded && !alreadypressedjump)
+        if (pressedjump && grounded && !alreadypressedjump && savepointjumpCD<=0)
         {
             alreadypressedjump = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             myanim.SetTrigger("jump");
         }
-        if (!grounded && pressedjump && jumpcounter > 0)
+        if (!grounded && pressedjump && jumpcounter > 0 && savepointjumpCD <= 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpcounter -= Time.deltaTime;
@@ -124,7 +135,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
         //wall jump
 
-        if(!touchingwall)
+        if (!touchingwall)
         {
             stuckinwall = false;
             wantstounstick = false;
@@ -133,11 +144,11 @@ public class PlayerJumpV3 : MonoBehaviour
         }
         else
         {
-            if(presseddown)
+            if (presseddown)
             {
                 wantstounstick = true;
             }
-            if(!wantstounstick)
+            if (!wantstounstick)
             {
                 stuckinwall = true;
             }
@@ -151,13 +162,13 @@ public class PlayerJumpV3 : MonoBehaviour
 
         if (stuckinwall)
         {
-            GetComponent<Animator>().SetBool("stuckinwall",true);
+            GetComponent<Animator>().SetBool("stuckinwall", true);
             rb.velocity = new Vector2(0, 0);
             rb.gravityScale = 0;
             if (pressedjump && !alreadypressedjump)
             {
                 alreadypressedjump = true;
-                rb.velocity = new Vector2(-transform.localScale.x/Mathf.Abs(transform.localScale.x) * wjforceside, wjforceup);
+                rb.velocity = new Vector2(-transform.localScale.x / Mathf.Abs(transform.localScale.x) * wjforceside, wjforceup);
                 rb.gravityScale = gravity;
                 stuckinwall = false;
                 Vector3 Scale = transform.localScale;
@@ -173,6 +184,8 @@ public class PlayerJumpV3 : MonoBehaviour
                 }
             }
         }
+
+
     }
 
     void Checkground()
