@@ -51,6 +51,9 @@ MonoBehaviour:
   closedmenu: 0
   atsavepoint: 0
   ininventory: 0
+  indialogue: 0
+  clickednewgame: 0
+  worldflags: 0000000000000000000000000000000000000000
 --- !u!114 &4595281200388182569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +99,7 @@ MonoBehaviour:
   save:
     slotID: 0
     elapsedseconds: 0
-    zoneID: 0
+    zoneName: 
     coordinates: {x: 0, y: 0}
     unlockedAugments: 
     unlockedChains: 
@@ -104,4 +107,5 @@ MonoBehaviour:
     unlockedDrones: 
     loadout: 
     WorldFlags: 
+  CurrentSlot: 0
   playing: 1

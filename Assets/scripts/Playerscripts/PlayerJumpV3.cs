@@ -77,7 +77,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint)
+        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
         {
             savepointjumpCD=(int)(1/Time.deltaTime);
             return;

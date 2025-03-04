@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     //Handles running of the physics
     private void FixedUpdate()
     {
-        if(FindAnyObjectByType<Global>().atsavepoint)
+        if(FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
         {
             return;
         }

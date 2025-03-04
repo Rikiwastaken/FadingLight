@@ -34,7 +34,7 @@ public class PlayerDodge : MonoBehaviour
                 FindAnyObjectByType<Global>().closedmenu = false;
                 return;
             }
-            if (FindAnyObjectByType<Global>().atsavepoint)
+            if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
             {
                 return;
             }

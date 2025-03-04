@@ -62,7 +62,7 @@ public class EquipmentScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(FindAnyObjectByType<Global>().atsavepoint)
+        if(FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
         {
             return;
         }

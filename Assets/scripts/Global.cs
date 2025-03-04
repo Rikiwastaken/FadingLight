@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Global : MonoBehaviour
 {
-
     public GameObject currentinventory;
 
     public GameObject lastinv;
@@ -17,8 +16,11 @@ public class Global : MonoBehaviour
     public bool atsavepoint;
 
     public bool ininventory;
+    public bool indialogue;
 
     public bool clickednewgame;
+
+    public List<bool> worldflags;
 
     void Start()
     {
@@ -50,14 +52,14 @@ public class Global : MonoBehaviour
     void OnInventory()
     {
 
-        if(currentinventory != null)
+        if(currentinventory != null && !indialogue)
         {
             if(ininventory)
             {
                 Time.timeScale = 1f;
                 CloseInventory();
             }
-            else
+            else if(!atsavepoint)
             {
                 Time.timeScale = 0f;
                 OpenInventory();
@@ -68,7 +70,7 @@ public class Global : MonoBehaviour
     void OnDodge()
     {
 
-        if (currentinventory != null)
+        if (currentinventory != null && !indialogue)
         {
             if (Time.timeScale == 0f)
             {
@@ -80,6 +82,18 @@ public class Global : MonoBehaviour
                 CloseInventory();
             }
 
+        }
+        if(indialogue)
+        {
+            FindAnyObjectByType<DialogueManager>().AccelerateOrClose();
+        }
+    }
+
+    void OnJump()
+    {
+        if (indialogue)
+        {
+            FindAnyObjectByType<DialogueManager>().AccelerateOrClose();
         }
     }
 
@@ -105,5 +119,19 @@ public class Global : MonoBehaviour
     public void LoadSave()
     {
         
+    }
+
+    private void OnEnable()
+    {
+        Global[] globlist = FindObjectsByType<Global>(FindObjectsSortMode.InstanceID);
+        for(int i = 1; i < globlist.Length; i++)
+        {
+            Destroy(globlist[i]);
+        }
+    }
+
+    public void TriggerWorldFlag(int flagID)
+    {
+        worldflags[flagID] = true;
     }
 }

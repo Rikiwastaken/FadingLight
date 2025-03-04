@@ -110,7 +110,12 @@ public class SaveManager : MonoBehaviour
         equipedItemsID.Add(-1);
         save.loadout = equipedItemsID;
 
-        //reste les world flags;
+        save.WorldFlags = new List<bool>();
+        for(int i=0; i<FindAnyObjectByType<Global>().worldflags.Count;i++)
+        {
+            save.WorldFlags.Add(false);
+        }
+        
     }
 
     public void InitializeSaveObject()
@@ -168,7 +173,11 @@ public class SaveManager : MonoBehaviour
         }
         save.loadout = equipedItemsID;
 
-        //reste les world flags;
+        save.WorldFlags = new List<bool>();
+        foreach(bool flag in FindAnyObjectByType<Global>().worldflags)
+        {
+            save.WorldFlags.Add(flag);
+        }
 
     }
 
@@ -236,7 +245,7 @@ public class SaveManager : MonoBehaviour
         }
         augmentsScript.manuallyapplyaugmentboosts = true;
 
-
+        FindAnyObjectByType<Global>().worldflags=save.WorldFlags;
     }
 
     public List<string> GetLastSave(int slotID)

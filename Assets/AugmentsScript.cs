@@ -58,7 +58,7 @@ public class AugmentsScript : MonoBehaviour
     }
     private void Update()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint)
+        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue)
         {
             return;
         }
