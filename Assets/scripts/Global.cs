@@ -18,10 +18,16 @@ public class Global : MonoBehaviour
 
     public bool ininventory;
 
+    public bool clickednewgame;
+
     void Start()
     {
         DontDestroyOnLoad(gameObject);
-        //SceneManager.LoadScene("MainMenu");
+        if(SceneManager.GetActiveScene().name == "Start")
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+
         Screen.SetResolution(1920, 1080,false);
         Application.targetFrameRate = 60;
     }
@@ -94,5 +100,10 @@ public class Global : MonoBehaviour
         currentinventory.SetActive(true);
         ininventory=true;
         currentinventory.GetComponent<InventoryScript>().SetPage(page);
+    }
+
+    public void LoadSave()
+    {
+        
     }
 }

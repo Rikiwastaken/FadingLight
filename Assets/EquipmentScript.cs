@@ -54,6 +54,11 @@ public class EquipmentScript : MonoBehaviour
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
         playerHP = FindAnyObjectByType<PlayerHP>();
+        if(FindAnyObjectByType<Global>().clickednewgame)
+        {
+            FindAnyObjectByType<SaveManager>().CreateEmptySaveFile(FindAnyObjectByType<SaveManager>().CurrentSlot);
+        }
+        FindAnyObjectByType<SaveManager>().ApplySave();
     }
     private void FixedUpdate()
     {
@@ -79,13 +84,31 @@ public class EquipmentScript : MonoBehaviour
 
         if(drone1 != null)
         {
-            healthbar.SetMaxDrone1(drone1.GetComponent<SupportDrone>().drones[drone1.GetComponent<SupportDrone>().ActiveDroneID].cooldown/Time.deltaTime);
-            healthbar.SetDrone1(drone1.GetComponent<SupportDrone>().dronecd);
+            if(drone1.GetComponent<SupportDrone>().ActiveDroneID!=-1)
+            {
+                healthbar.SetMaxDrone1(drone1.GetComponent<SupportDrone>().drones[drone1.GetComponent<SupportDrone>().ActiveDroneID].cooldown / Time.deltaTime);
+                healthbar.SetDrone1(drone1.GetComponent<SupportDrone>().dronecd);
+            }
+            else
+            {
+                healthbar.SetMaxDrone1(1);
+                healthbar.SetDrone1(1);
+            }
+            
         }
         if (drone2 != null)
         {
-            healthbar.SetMaxDrone2(drone2.GetComponent<SupportDrone>().drones[drone2.GetComponent<SupportDrone>().ActiveDroneID].cooldown / Time.deltaTime);
-            healthbar.SetDrone2(drone2.GetComponent<SupportDrone>().dronecd);
+            if (drone2.GetComponent<SupportDrone>().ActiveDroneID != -1)
+            {
+                healthbar.SetMaxDrone2(drone2.GetComponent<SupportDrone>().drones[drone2.GetComponent<SupportDrone>().ActiveDroneID].cooldown / Time.deltaTime);
+                healthbar.SetDrone2(drone2.GetComponent<SupportDrone>().dronecd);
+            }
+            else
+            {
+                healthbar.SetMaxDrone2(1);
+                healthbar.SetDrone2(1);
+            }
+
         }
 
     }

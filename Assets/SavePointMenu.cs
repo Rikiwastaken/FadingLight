@@ -21,6 +21,9 @@ public class SavePointMenu : MonoBehaviour
     public Button selected;
     int activebuttonID;
 
+    public int floppycounter;
+    public Image Floppy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +51,15 @@ public class SavePointMenu : MonoBehaviour
             pressedclick = false;
         }
 
-        
+        if(floppycounter>0)
+        {
+            floppycounter--;
+            Floppy.color = new Color(1f, 1f, 1f, 1f);
+        }
+        else
+        {
+            Floppy.color = new Color(1f, 1f, 1f, 0f);
+        }
         
         int input = 0;
         if( valueup!=0 || valuedown!=0)

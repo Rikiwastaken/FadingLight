@@ -7,9 +7,12 @@ using UnityEngine.InputSystem;
 public class playgame : MonoBehaviour
 {
     PlayerControls controls;
+
+    public Transform LoadMenu;
+
     public void Playgame()
     {
-        SceneManager.LoadScene("BreedingGrounds");
+        FindAnyObjectByType<Global>().clickednewgame=true;
     }
     public void Quitgame()
     {
@@ -19,7 +22,7 @@ public class playgame : MonoBehaviour
 
     public void continuegame()
     {
-
+        FindAnyObjectByType<Global>().clickednewgame = false;
     }
 
 

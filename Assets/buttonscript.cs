@@ -59,7 +59,15 @@ public class buttonscript : MonoBehaviour
     }
     public void SavePointSave()
     {
-        Debug.Log("Save");
+        FindAnyObjectByType<SavePointMenu>().floppycounter = (int)(3/Time.deltaTime);
+        FindAnyObjectByType<SaveManager>().SaveToFile();
+    }
+
+    public void LoadSaveSlot()
+    {
+        int slot = int.Parse(transform.name.Replace("Slot", ""));
+        FindAnyObjectByType<SaveManager>().CurrentSlot = slot;
+        FindAnyObjectByType<SaveManager>().LoadSave();
     }
 
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7399828360059028582}
   - component: {fileID: 6094955288876306632}
   - component: {fileID: 4595281200388182569}
+  - component: {fileID: 3813504583372202981}
   m_Layer: 0
   m_Name: Global
   m_TagString: Untagged
@@ -45,6 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47358a9cda8371f43a9df4e905a5818a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentinventory: {fileID: 0}
+  lastinv: {fileID: 0}
+  closedmenu: 0
+  atsavepoint: 0
+  ininventory: 0
 --- !u!114 &4595281200388182569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,3 +81,27 @@ MonoBehaviour:
   m_DefaultActionMap: gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3813504583372202981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466776373609151813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1c37114821863488c3429a640bd831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  save:
+    slotID: 0
+    elapsedseconds: 0
+    zoneID: 0
+    coordinates: {x: 0, y: 0}
+    unlockedAugments: 
+    unlockedChains: 
+    unlockedPlates: 
+    unlockedDrones: 
+    loadout: 
+    WorldFlags: 
+  playing: 1

@@ -93,18 +93,29 @@ public class SupportDrone : MonoBehaviour
 
     void ChangeSprite()
     {
-        if (drones[ActiveDroneID].Medical && GetComponent<Animator>().runtimeAnimatorController != MedController)
+        if(ActiveDroneID !=-1)
         {
-            GetComponent<Animator>().runtimeAnimatorController = MedController;
+            GetComponent<SpriteRenderer>().enabled = true;
+            GetComponent<Animator>().enabled = true;
+            if (drones[ActiveDroneID].Medical && GetComponent<Animator>().runtimeAnimatorController != MedController)
+            {
+                GetComponent<Animator>().runtimeAnimatorController = MedController;
+            }
+            else if (!drones[ActiveDroneID].Medical && GetComponent<Animator>().runtimeAnimatorController != GunController)
+            {
+                GetComponent<Animator>().runtimeAnimatorController = GunController;
+            }
+            if (GetComponent<SpriteRenderer>().sprite != drones[ActiveDroneID].Sprite)
+            {
+                GetComponent<SpriteRenderer>().sprite = drones[ActiveDroneID].Sprite;
+            }
         }
-        else if (!drones[ActiveDroneID].Medical && GetComponent<Animator>().runtimeAnimatorController != GunController)
+        else
         {
-            GetComponent<Animator>().runtimeAnimatorController = GunController;
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<Animator>().enabled = false;
         }
-        if(GetComponent<SpriteRenderer>().sprite != drones[ActiveDroneID].Sprite)
-        {
-            GetComponent<SpriteRenderer>().sprite = drones[ActiveDroneID].Sprite;
-        }
+        
         
     }
 
