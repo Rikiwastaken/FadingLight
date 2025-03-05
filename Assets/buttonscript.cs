@@ -21,13 +21,16 @@ public class buttonscript : MonoBehaviour
     }
     public void EquipedAugmentButton()
     {
-        AugmentsScript.UnEquipAugment(ObjectID);
-        AugmentsMenuWindow.selected=null;
+        if(FindAnyObjectByType<Global>().atsavepoint)
+        {
+            AugmentsScript.UnEquipAugment(ObjectID);
+            AugmentsMenuWindow.selected = null;
+        }
     }
 
     public void AllAugmentsButton()
     {
-        if(!AugmentsScript.Augmentlist[ObjectID].locked)
+        if(!AugmentsScript.Augmentlist[ObjectID].locked && FindAnyObjectByType<Global>().atsavepoint)
         {
             AugmentsScript.EquipAugment(ObjectID);
         }
@@ -40,7 +43,11 @@ public class buttonscript : MonoBehaviour
 
     public void EquipselectedEquipment()
     {
-        EquipmentScript.EquipItem(equipmentslotID, ObjectID);
+        if(FindAnyObjectByType<Global>().atsavepoint)
+        {
+            EquipmentScript.EquipItem(equipmentslotID, ObjectID);
+        }
+        
     }
 
     public void SavePointLeave()

@@ -321,12 +321,29 @@ public class EquipmentMenuWindow : MonoBehaviour
                 effecttext.text += "\n\n" + EquipmentScript.Platelist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
                 break;
             case 2:
-                nametext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].name;
-                effecttext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].Description;
+                if (!EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].locked)
+                {
+                    nametext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].name;
+                    effecttext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].Description;
+                }
+                else
+                {
+                    nametext.text = "Locked Feature";
+                    effecttext.text = "Locked Feature";
+                }
                 break;
             case 3:
-                nametext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].name;
-                effecttext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].Description;
+                if(!EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].locked)
+                {
+                    nametext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].name;
+                    effecttext.text = EquipmentScript.drone1.GetComponent<SupportDrone>().drones[selected.transform.GetComponent<buttonscript>().ObjectID].Description;
+                }
+                else
+                {
+                    nametext.text = "Locked Feature";
+                    effecttext.text = "Locked Feature";
+                }
+                
                 break;
         }
     }

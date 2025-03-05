@@ -104,7 +104,7 @@ public class AugmentsMenuWindow : MonoBehaviour
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i].image;
                 EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponent<buttonscript>().ObjectID = i;
-                EquipedAugmentsContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = true;
+                EquipedAugmentsContainer.GetChild(usedslot).GetChild(1).GetComponent<Button>().interactable = true;
                 usedslot++;
             }
         }
@@ -118,9 +118,9 @@ public class AugmentsMenuWindow : MonoBehaviour
             else
             {
                 DisplayAugmentsContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Augmentlist[i + upperlineindex * 6].image;
-                DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = true;
             }
-            
+            DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = true;
+
             DisplayAugmentsContainer.GetChild(i).GetChild(1).GetComponent<buttonscript>().ObjectID = i + upperlineindex * 6;
         }
         

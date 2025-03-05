@@ -655,6 +655,7 @@ MonoBehaviour:
   equipedPlateIndex: 0
   drone1: {fileID: 5291592748213458889}
   drone2: {fileID: 3697768636770411347}
+  gotitempopupprefab: {fileID: 6175682124425559733, guid: b87792eefe96a2e40b4460d898f573cf, type: 3}
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0

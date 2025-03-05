@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
+using static AugmentsScript;
+using static EquipmentScript;
 
 public class EquipmentScript : MonoBehaviour
 {
@@ -48,6 +50,9 @@ public class EquipmentScript : MonoBehaviour
     private PlayerHP playerHP;
 
     private int healcd;
+
+
+    public GameObject gotitempopupprefab;
 
     // Start is called before the first frame update
     void Start()
@@ -144,6 +149,67 @@ public class EquipmentScript : MonoBehaviour
                 {
                     drone2.GetComponent<SupportDrone>().ActiveDroneID = ItemID;
                 }
+                break;
+        }
+    }
+
+
+    public void ReceiveItem(int Type, int ID)
+    {
+        switch(Type) //0 chain, 1 Plate, 2 drone, 3 Augment
+        {
+            case 0:
+                if(Chainslist.Count > ID)
+                {
+                    Chainslist[ID].locked = false;
+                    GameObject Itempop = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                    Itempop.GetComponent<GotItemPopup>().InitiatePopup(Chainslist[ID].image, "Chain", Chainslist[ID].name);
+                }
+                else
+                {
+                    Debug.Log("Incorrect ID, "+ID+" too big for Chainslist");
+                }
+                break;
+            case 1:
+                if (Platelist.Count > ID)
+                {
+                    Platelist[ID].locked = false;
+                    GameObject Itempop = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                    Itempop.GetComponent<GotItemPopup>().InitiatePopup(Platelist[ID].image, "Plate", Platelist[ID].name);
+                }
+                else
+                {
+                    Debug.Log("Incorrect ID, "+ID+" too big for Platelist");
+                }
+                break;
+            case 2:
+                if (drone1.GetComponent<SupportDrone>().drones.Count > ID)
+                {
+                    drone1.GetComponent<SupportDrone>().drones[ID].locked = false;
+                    drone2.GetComponent<SupportDrone>().drones[ID].locked = false;
+                    GameObject Itempop = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                    Itempop.GetComponent<GotItemPopup>().InitiatePopup(drone1.GetComponent<SupportDrone>().drones[ID].Sprite, "Drone", drone1.GetComponent<SupportDrone>().drones[ID].name);
+                }
+                else
+                {
+                    Debug.Log("Incorrect ID, "+ID+" too big for drones");
+                }
+                break;
+            case 3:
+                AugmentsScript augmentscript = FindAnyObjectByType<AugmentsScript>();
+                if (augmentscript.Augmentlist.Count > ID)
+                {
+                    augmentscript.Augmentlist[ID].locked = false;
+                    GameObject Itempop = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                    Itempop.GetComponent<GotItemPopup>().InitiatePopup(augmentscript.Augmentlist[ID].image, "Augment", augmentscript.Augmentlist[ID].name);
+
+                }
+                else
+                {
+                    Debug.Log("Incorrect ID, "+ID+" too big for Augmentlist");
+                }
+                break;
+            case 4:
                 break;
         }
     }
