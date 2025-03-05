@@ -37,6 +37,8 @@ public class AugmentsMenuWindow : MonoBehaviour
 
     private bool pressedclick;
 
+    public TextMeshProUGUI NotAtSavePointText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,7 +72,14 @@ public class AugmentsMenuWindow : MonoBehaviour
             pressedclick = false;
         }
 
-        
+        if (FindAnyObjectByType<Global>().atsavepoint)
+        {
+            NotAtSavePointText.text = "";
+        }
+        else
+        {
+            NotAtSavePointText.text = "<color=\"red\">You can only switch Augments in Safe Places.</color>";
+        }
 
 
         usedslot = 0;
@@ -156,7 +165,7 @@ public class AugmentsMenuWindow : MonoBehaviour
             {
                 effecttext.text = Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
                 necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].SlotsUsed;
-                if (!pressedclick && valueclick == 1)
+                if (!pressedclick && valueclick == 1 && FindAnyObjectByType<Global>().atsavepoint)
                 {
                     pressedclick = true;
                     selected.onClick.Invoke();

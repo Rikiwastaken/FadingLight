@@ -946,7 +946,7 @@ Transform:
   m_GameObject: {fileID: 382306434}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.13, y: 1.37, z: -10}
+  m_LocalPosition: {x: 0, y: -1.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2111,6 +2111,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &446306728 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5919727951631986471, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+  m_PrefabInstance: {fileID: 4795295772105988009}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &478415994
 GameObject:
   m_ObjectHideFlags: 0
@@ -14135,7 +14140,7 @@ Transform:
   m_GameObject: {fileID: 1533256421}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.13, y: 1.37, z: -10}
+  m_LocalPosition: {x: 0, y: -1.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -20067,11 +20072,11 @@ PrefabInstance:
       objectReference: {fileID: 466776373609151813, guid: 4812f6c82100174498bd3af8ee43f929, type: 3}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.37
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20242,6 +20247,42 @@ PrefabInstance:
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[0].parts.Array.data[3].text
       value: Elle est de retour ! Aussi Partie 4 !
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[1].movementtotrigger.Actor
+      value: 
+      objectReference: {fileID: 446306728}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[1].movementtotrigger.inwhattime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[2].movementtotrigger.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[1].movementtotrigger.wheretogo.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[1].movementtotrigger.wheretogo.y
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[2].movementtotrigger.Array.data[0].Actor
+      value: 
+      objectReference: {fileID: 446306728}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[2].movementtotrigger.Array.data[0].speed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[2].movementtotrigger.Array.data[0].wheretogo.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].parts.Array.data[2].movementtotrigger.Array.data[0].wheretogo.y
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 9036032384484203687, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: m_LocalPosition.x

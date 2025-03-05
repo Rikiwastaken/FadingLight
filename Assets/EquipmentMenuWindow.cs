@@ -43,6 +43,8 @@ public class EquipmentMenuWindow : MonoBehaviour
 
     public int selectedsection; //0 : nothing, 1 : Chains, 2 : Plates, 3 : Drone1, 4 : Drone2 
 
+    public TextMeshProUGUI NotAtSavePointText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,6 +73,16 @@ public class EquipmentMenuWindow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(FindAnyObjectByType<Global>().atsavepoint)
+        {
+            NotAtSavePointText.text = "";
+        }
+        else
+        {
+            NotAtSavePointText.text = "<color=\"red\">You can only change your equipment in Safe Places.</color>";
+        }
+
         switch(selectedsection)
         {
             case 0:
@@ -180,7 +192,7 @@ public class EquipmentMenuWindow : MonoBehaviour
             UpdateDisplay();
 
 
-            if (!pressedclick && valueclick == 1)
+            if (!pressedclick && valueclick == 1 && FindAnyObjectByType<Global>().atsavepoint)
             {
                 pressedclick = true;
                 selected.onClick.Invoke();

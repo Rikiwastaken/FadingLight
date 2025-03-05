@@ -70,8 +70,22 @@ public class PlayerMovement : MonoBehaviour
     //Handles running of the physics
     private void FixedUpdate()
     {
-        if(FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
+        if (FindAnyObjectByType<Global>().atsavepoint)
         {
+            return;
+        }
+        if (FindAnyObjectByType<Global>().indialogue)
+        {
+            if(Mathf.Abs(rb2D.velocity.x)>0.05)
+            {
+                Flip(rb2D.velocity.x);
+                myanimator.SetFloat("speed", Mathf.Abs(rb2D.velocity.x));
+            }
+            else
+            {
+                myanimator.SetFloat("speed", 0);
+            }
+            
             return;
         }
 

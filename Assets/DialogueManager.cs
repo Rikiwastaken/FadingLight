@@ -12,7 +12,7 @@ public class DialogueManager : MonoBehaviour
         public Sprite Face;
         public string name;
         public string text;
-        public DialogueMovement movementtotrigger;
+        public List<DialogueMovement> movementtotrigger;
     }
 
     [System.Serializable]
@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
     {
         public GameObject Actor;
         public Vector2 wheretogo;
-        public float inwhattime;
+        public float speed;
     }
 
     [System.Serializable]
@@ -67,6 +67,21 @@ public class DialogueManager : MonoBehaviour
                 break;
             }
         }
+        if(currentdialogue != null)
+        {
+            foreach(DialogueMovement Movement in currentdialogue.parts[pageindex].movementtotrigger)
+            {
+                if (Movement.Actor != null)
+                {
+                    Vector2 pos = Movement.Actor.transform.position;
+                    Vector2 dest = Movement.wheretogo;
+                    float speed = Movement.speed;
+                    Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
+                }
+            }
+            
+        }
+        
         
     }
 
@@ -87,12 +102,24 @@ public class DialogueManager : MonoBehaviour
         if (currentdialogue.parts.Count>pageindex+1)
         {
             pageindex += 1;
+            if(pageindex>0)
+            {
+                foreach (DialogueMovement Movement in currentdialogue.parts[pageindex - 1].movementtotrigger)
+                {
+                    if (Movement.Actor != null)
+                    {
+                        Movement.Actor.transform.position = Movement.wheretogo;
+                    }
+                }
+            }
+            
             currentwindow = Instantiate(DialogueWindowPrefab, GameObject.Find("Canvas").transform);
             currentwindow.GetComponent<CutsceneDialogueWindow>().InitiateDialogue(currentdialogue.parts[pageindex]);
         }
         else
         {
             Global.indialogue = false;
+            currentdialogue= null;
         }
         
     }
