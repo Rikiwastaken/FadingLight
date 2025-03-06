@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 432883398bc53814fa279e88a3fd8e63
+guid: ff486ef32669444429d05d23f1652247
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1793232098754794050
-    second: hud2EnergyBar_0
+      213: -7383703493752099550
+    second: hud2gadgetbar_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: hud2EnergyBar_0
+      name: hud2gadgetbar_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 9
-        width: 47
-        height: 10
+        x: 0
+        y: 0
+        width: 69
+        height: 35
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2429b16c717d2e810800000000000000
-      internalID: 1793232098754794050
+      spriteID: 22d68100bc0d78990800000000000000
+      internalID: -7383703493752099550
       vertices: []
       indices: 
       edges: []
@@ -144,7 +144,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      hud2EnergyBar_0: 1793232098754794050
+      hud2gadgetbar_0: -7383703493752099550
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

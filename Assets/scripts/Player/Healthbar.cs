@@ -10,11 +10,36 @@ public class Healthbar : MonoBehaviour
     public Image imageNRG;
     public Image imageDrone1;
     public Image imageDrone2;
+    public Image imageGadget;
 
     private float maxhp;
     private float maxnrj;
     private float maxd1;
     private float maxd2;
+    private float maxGadget;
+
+    void FixedUpdate()
+    {
+        if(imageGadget != null)
+        {
+            float color = imageGadget.fillAmount*(2f / 3f) + 1f/3f;
+            Debug.Log(color);
+            imageGadget.color = new Color(color, color, color);
+        }
+        
+        if(imageDrone1 != null)
+        {
+            float color = imageDrone1.fillAmount * (2f / 3f) + 1f / 3f;
+            imageDrone1.color = new Color(color, color, color);
+        }
+        
+        if( imageDrone2 != null)
+        {
+            float color = imageDrone2.fillAmount * (2f / 3f) + 1f / 3f;
+            imageDrone2.color = new Color(color, color, color);
+        }
+        
+    }
 
     public void SetMaxDrone1(float maxCD)
     {
@@ -43,6 +68,11 @@ public class Healthbar : MonoBehaviour
         maxnrj = maxenergy;
     }
 
+    public void SetMaxGadget(float maxgadgetcd)
+    {
+        maxGadget = maxgadgetcd;
+    }
+
 
 
     public void SetEnergy(float energy)
@@ -59,5 +89,10 @@ public class Healthbar : MonoBehaviour
     public void SetDrone2(float CD)
     {
         imageDrone2.fillAmount = (maxd2 - CD) / maxd2;
+    }
+
+    public void SetGadgetCD(float CD)
+    {
+        imageGadget.fillAmount=(maxGadget - CD)/ maxGadget;
     }
 }

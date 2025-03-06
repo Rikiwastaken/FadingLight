@@ -150,13 +150,17 @@ public class EquipmentScript : MonoBehaviour
                     drone2.GetComponent<SupportDrone>().ActiveDroneID = ItemID;
                 }
                 break;
+            case 4:
+                GadgetScript gadgetScript = GetComponent<GadgetScript>();
+                gadgetScript.ActiveGadgetID = ItemID;
+                break;
         }
     }
 
 
     public void ReceiveItem(int Type, int ID)
     {
-        switch(Type) //0 chain, 1 Plate, 2 drone, 3 Augment
+        switch(Type) //0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget
         {
             case 0:
                 if(Chainslist.Count > ID)
@@ -196,7 +200,7 @@ public class EquipmentScript : MonoBehaviour
                 }
                 break;
             case 3:
-                AugmentsScript augmentscript = FindAnyObjectByType<AugmentsScript>();
+                AugmentsScript augmentscript = GetComponent<AugmentsScript>();
                 if (augmentscript.Augmentlist.Count > ID)
                 {
                     augmentscript.Augmentlist[ID].locked = false;
@@ -210,6 +214,18 @@ public class EquipmentScript : MonoBehaviour
                 }
                 break;
             case 4:
+                GadgetScript gadgetScript = GetComponent<GadgetScript>();
+                if (gadgetScript.GadgetList.Count > ID)
+                {
+                    gadgetScript.GadgetList[ID].locked = false;
+                    GameObject Itempop = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                    Itempop.GetComponent<GotItemPopup>().InitiatePopup(gadgetScript.GadgetList[ID].image, "Gadget", gadgetScript.GadgetList[ID].name);
+
+                }
+                else
+                {
+                    Debug.Log("Incorrect ID, " + ID + " too big for Augmentlist");
+                }
                 break;
         }
     }

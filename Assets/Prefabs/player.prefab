@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 674670088715472754}
   - component: {fileID: 387999305572416826}
   - component: {fileID: 761752601891527695}
+  - component: {fileID: 189450580446498757}
   m_Layer: 9
   m_Name: player
   m_TagString: Player
@@ -656,6 +657,100 @@ MonoBehaviour:
   drone1: {fileID: 5291592748213458889}
   drone2: {fileID: 3697768636770411347}
   gotitempopupprefab: {fileID: 6175682124425559733, guid: b87792eefe96a2e40b4460d898f573cf, type: 3}
+--- !u!114 &189450580446498757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919727951631986471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2215f61bc7a201045b584a71a956f926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GadgetList:
+  - name: Broken Gadget
+    description: What remains of Eldon's grapple gun. Unusable, but it can be repaired.
+    DamageMultiplier: 0
+    AbsorbMultiplier: 0
+    Energycost: 0
+    cooldown: 0
+    PrefabtoSpawn: {fileID: 0}
+    ID: 0
+    image: {fileID: -2671136589151465056, guid: ae75febb297f5b04f938b6f13afdd330, type: 3}
+    locked: 0
+  - name: Test2
+    description: Test2 Description
+    DamageMultiplier: 1.2
+    AbsorbMultiplier: 0.8
+    Energycost: 5
+    cooldown: 10
+    PrefabtoSpawn: {fileID: 0}
+    ID: 1
+    image: {fileID: -1116783849856533523, guid: ae75febb297f5b04f938b6f13afdd330, type: 3}
+    locked: 0
+  - name: Test3
+    description: Test3 Description
+    DamageMultiplier: 0
+    AbsorbMultiplier: 1.2
+    Energycost: 1000
+    cooldown: 0.5
+    PrefabtoSpawn: {fileID: 0}
+    ID: 2
+    image: {fileID: 3619673516247287304, guid: ae75febb297f5b04f938b6f13afdd330, type: 3}
+    locked: 0
+  - name: Test4
+    description: Test4 Description
+    DamageMultiplier: 1.5
+    AbsorbMultiplier: 1
+    Energycost: 3
+    cooldown: 1
+    PrefabtoSpawn: {fileID: 0}
+    ID: 3
+    image: {fileID: -9158349384845336690, guid: 2ecad884286828c4781903e82116b323, type: 3}
+    locked: 0
+  - name: Test5
+    description: Test5 Description
+    DamageMultiplier: 2
+    AbsorbMultiplier: 0.4
+    Energycost: 0
+    cooldown: 2
+    PrefabtoSpawn: {fileID: 0}
+    ID: 4
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
+  - name: Test6
+    description: Test6 Description
+    DamageMultiplier: 0.1
+    AbsorbMultiplier: 3
+    Energycost: 5
+    cooldown: 4
+    PrefabtoSpawn: {fileID: 0}
+    ID: 5
+    image: {fileID: -1291046934158722540, guid: 4972526bd72eb2d4f88a1c9cb1b8e411, type: 3}
+    locked: 1
+  - name: Test7
+    description: Test7 Description
+    DamageMultiplier: 1
+    AbsorbMultiplier: 2
+    Energycost: 300
+    cooldown: 60
+    PrefabtoSpawn: {fileID: 0}
+    ID: 6
+    image: {fileID: 1902342771589439844, guid: 2f738a72aff8d624eafb303f818cf6e3, type: 3}
+    locked: 0
+  - name: Test8
+    description: Test8 Description
+    DamageMultiplier: 0
+    AbsorbMultiplier: 0
+    Energycost: 0
+    cooldown: 0.1
+    PrefabtoSpawn: {fileID: 0}
+    ID: 7
+    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
+    locked: 0
+  ActiveGadgetID: 0
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0

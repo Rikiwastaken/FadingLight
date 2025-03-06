@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using static AugmentsScript;
 using static EquipmentScript;
 using static SupportDrone;
+using static GadgetScript;
 
 public class SaveManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class SaveManager : MonoBehaviour
         public List<bool> unlockedChains; //list of unlocked Chains (true if unlocked, false else)
         public List<bool> unlockedPlates; //list of unlocked Plates (true if unlocked, false else)
         public List<bool> unlockedDrones; //list of unlocked Drones (true if unlocked, false else)
+        public List<bool> unlockedGadgets; //list of unlocked Gadgets (true if unlocked, false else)
         public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones and the rest are augments;
         public List<bool> WorldFlags; //flags for progession
     }
@@ -103,11 +105,20 @@ public class SaveManager : MonoBehaviour
         }
         save.unlockedDrones = unlockeddrones;
 
+        List<Gadget> GadgetList = FindAnyObjectByType<GadgetScript>().GadgetList;
+        List<bool> unlockedgadgets = new List<bool>(GadgetList.Count);
+        foreach (Gadget gadget in GadgetList)
+        {
+            unlockedgadgets.Add(false);
+        }
+        save.unlockedGadgets = unlockedgadgets;
+
         List<int> equipedItemsID = new List<int>();
         equipedItemsID.Add(0);
         equipedItemsID.Add(0);
         equipedItemsID.Add(-1);
         equipedItemsID.Add(-1);
+        equipedItemsID.Add(0);
         save.loadout = equipedItemsID;
 
         save.WorldFlags = new List<bool>();
@@ -121,6 +132,7 @@ public class SaveManager : MonoBehaviour
     public void InitializeSaveObject()
     {
         EquipmentScript equipmentScript = FindAnyObjectByType<EquipmentScript>();
+        GadgetScript gadgetscript = FindAnyObjectByType<GadgetScript>();
         save = new Save();
         save.elapsedseconds = 0;
         save.slotID = CurrentSlot;
@@ -158,11 +170,20 @@ public class SaveManager : MonoBehaviour
         }
         save.unlockedDrones = unlockeddrones;
 
+        List<Gadget> GadgetList = gadgetscript.GadgetList;
+        List<bool> unlockedgadgets = new List<bool>(GadgetList.Count);
+        foreach (Gadget gadget in GadgetList)
+        {
+            unlockedgadgets.Add(!gadget.locked);
+        }
+        save.unlockedGadgets = unlockedgadgets;
+
         List<int> equipedItemsID = new List<int>();
         equipedItemsID.Add(equipmentScript.equipedChainIndex);
         equipedItemsID.Add(equipmentScript.equipedPlateIndex);
         equipedItemsID.Add(equipmentScript.drone1.GetComponent<SupportDrone>().ActiveDroneID);
         equipedItemsID.Add(equipmentScript.drone2.GetComponent<SupportDrone>().ActiveDroneID);
+        equipedItemsID.Add(gadgetscript.ActiveGadgetID);
         List<bool> equipedAugments = FindAnyObjectByType<AugmentsScript>().EquipedAugments;
         for (int i = 0; i < equipedAugments.Count; i++)
         {
@@ -200,6 +221,7 @@ public class SaveManager : MonoBehaviour
     {
         EquipmentScript equipmentScript = FindAnyObjectByType<EquipmentScript>();
         AugmentsScript augmentsScript = FindAnyObjectByType<AugmentsScript>();
+        GadgetScript gadgetScript = FindAnyObjectByType<GadgetScript>();
 
         //    public int slotID; //slot of the save
         //public int elapsedseconds; //number of seconds elapsed since creation of the save
@@ -209,6 +231,7 @@ public class SaveManager : MonoBehaviour
         //public List<bool> unlockedChains; //list of unlocked Chains (true if unlocked, false else)
         //public List<bool> unlockedPlates; //list of unlocked Plates (true if unlocked, false else)
         //public List<bool> unlockedDrones; //list of unlocked Drones (true if unlocked, false else)
+        //list of unlocked Gadgets (true if unlocked, false else)
         //public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones and the rest are augments;
         //public List<bool> WorldFlags; //flags for progession
 
@@ -244,6 +267,12 @@ public class SaveManager : MonoBehaviour
             augmentsScript.EquipedAugments[save.loadout[i]] = true;
         }
         augmentsScript.manuallyapplyaugmentboosts = true;
+
+        for (int i = 0; i < gadgetScript.GadgetList.Count; i++)
+        {
+            gadgetScript.GadgetList[i].locked = !save.unlockedGadgets[i];
+        }
+
 
         FindAnyObjectByType<Global>().worldflags=save.WorldFlags;
     }
