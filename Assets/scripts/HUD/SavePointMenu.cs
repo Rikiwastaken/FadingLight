@@ -24,6 +24,8 @@ public class SavePointMenu : MonoBehaviour
     public int floppycounter;
     public Image Floppy;
 
+    public bool unlockallavailable;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,10 @@ public class SavePointMenu : MonoBehaviour
         controls.gameplay.jump.canceled += ctx => valueclick = 0;
 
         controls.gameplay.Enable();
+        if(!unlockallavailable)
+        {
+            transform.GetChild(transform.childCount-2).gameObject.SetActive(false);
+        }
 
 
     }
@@ -113,22 +119,47 @@ public class SavePointMenu : MonoBehaviour
             }
             else
             {
-                activebuttonID = transform.childCount-1;
-                selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                if(unlockallavailable)
+                {
+                    activebuttonID = transform.childCount - 1;
+                    selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                }
+                else
+                {
+                    activebuttonID = transform.childCount - 2;
+                    selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                }
+                
             }
             return;
         }
         if (dirinput < 0)
         {
-            if (activebuttonID < transform.childCount - 1)
+            if (unlockallavailable)
             {
-                activebuttonID += 1;
-                selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                if (activebuttonID < transform.childCount - 1)
+                {
+                    activebuttonID += 1;
+                    selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                }
+                else
+                {
+                    activebuttonID = 0;
+                    selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                }
             }
             else
             {
-                activebuttonID = 0;
-                selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                if (activebuttonID < transform.childCount - 2)
+                {
+                    activebuttonID += 1;
+                    selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                }
+                else
+                {
+                    activebuttonID = 0;
+                    selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
+                }
             }
         }
 

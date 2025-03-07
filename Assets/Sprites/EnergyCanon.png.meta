@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d98206d30af70464c937b7e92fb12c6a
+guid: d94e0f32361d13842b9a935935e31165
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7898324448837030152
-    second: basewindowempty_0
+      213: 3719060391790284941
+    second: EnergyCanon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,8 +51,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
-  spriteBorder: {x: 6, y: 6, z: 6, w: 7}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 64
+    maxTextureSize: 32
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -113,22 +113,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: basewindowempty_0
+      name: EnergyCanon_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 64
-        height: 64
+        y: 7
+        width: 30
+        height: 19
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 10, y: 10, z: 10, w: 10}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 801d6b53d3c7c9d60800000000000000
-      internalID: 7898324448837030152
+      spriteID: d8092eec8b1cc9330800000000000000
+      internalID: 3719060391790284941
       vertices: []
       indices: 
       edges: []
@@ -136,15 +136,15 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a8a421c70c141ff43a0b870379bb59fd
-    internalID: 1608971058
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      basewindowempty_0: 7898324448837030152
+      EnergyCanon_0: 3719060391790284941
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

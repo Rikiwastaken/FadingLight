@@ -729,8 +729,16 @@ public class EquipmentMenuWindow : MonoBehaviour
                 {
                     if (activebuttonidstring < 4)
                     {
-                        selected = EquipedContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
-                        selectedsection += 1;
+                        if(selectedsection+1==2 && EquipedItemsID[2] == -1)
+                        {
+                            selected = EquipedContainer.GetChild(activebuttonidstring + 3).GetChild(1).GetComponentInChildren<Button>();
+                            selectedsection += 3;
+                        }
+                        else
+                        {
+                            selected = EquipedContainer.GetChild(activebuttonidstring + 1).GetChild(1).GetComponentInChildren<Button>();
+                            selectedsection += 1;
+                        }
                     }
                     else if (activebuttonidstring == 4)
                     {
@@ -742,8 +750,16 @@ public class EquipmentMenuWindow : MonoBehaviour
                 {
                     if (activebuttonidstring > 0)
                     {
-                        selected = EquipedContainer.GetChild(activebuttonidstring - 1).GetChild(1).GetComponentInChildren<Button>();
-                        selectedsection -= 1;
+                        if (selectedsection - 1 == 3 && EquipedItemsID[3] == -1)
+                        {
+                            selected = EquipedContainer.GetChild(activebuttonidstring + 3).GetChild(1).GetComponentInChildren<Button>();
+                            selectedsection -= 3;
+                        }
+                        else
+                        {
+                            selected = EquipedContainer.GetChild(activebuttonidstring - 1).GetChild(1).GetComponentInChildren<Button>();
+                            selectedsection -= 1;
+                        }
                     }
                     else
                     {

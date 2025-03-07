@@ -23,7 +23,6 @@ public class Healthbar : MonoBehaviour
         if(imageGadget != null)
         {
             float color = imageGadget.fillAmount*(2f / 3f) + 1f/3f;
-            Debug.Log(color);
             imageGadget.color = new Color(color, color, color);
         }
         

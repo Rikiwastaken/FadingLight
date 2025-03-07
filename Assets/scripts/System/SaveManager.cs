@@ -22,7 +22,7 @@ public class SaveManager : MonoBehaviour
         public List<bool> unlockedPlates; //list of unlocked Plates (true if unlocked, false else)
         public List<bool> unlockedDrones; //list of unlocked Drones (true if unlocked, false else)
         public List<bool> unlockedGadgets; //list of unlocked Gadgets (true if unlocked, false else)
-        public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones and the rest are augments;
+        public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones, 4 is gadgets and the rest are augments;
         public List<bool> WorldFlags; //flags for progession
     }
 
@@ -111,6 +111,7 @@ public class SaveManager : MonoBehaviour
         {
             unlockedgadgets.Add(false);
         }
+        unlockedgadgets[0] = true;
         save.unlockedGadgets = unlockedgadgets;
 
         List<int> equipedItemsID = new List<int>();
@@ -232,7 +233,7 @@ public class SaveManager : MonoBehaviour
         //public List<bool> unlockedPlates; //list of unlocked Plates (true if unlocked, false else)
         //public List<bool> unlockedDrones; //list of unlocked Drones (true if unlocked, false else)
         //list of unlocked Gadgets (true if unlocked, false else)
-        //public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones and the rest are augments;
+        //public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones, 4 is gadget and the rest are augments;
         //public List<bool> WorldFlags; //flags for progession
 
 
@@ -262,7 +263,8 @@ public class SaveManager : MonoBehaviour
         equipmentScript.equipedPlateIndex = save.loadout[1];
         equipmentScript.drone1.GetComponent<SupportDrone>().ActiveDroneID = save.loadout[2];
         equipmentScript.drone2.GetComponent<SupportDrone>().ActiveDroneID = save.loadout[3];
-        for(int i = 4;i<save.loadout.Count;i++)
+        gadgetScript.ActiveGadgetID = save.loadout[4];
+        for(int i = 5;i<save.loadout.Count;i++)
         {
             augmentsScript.EquipedAugments[save.loadout[i]] = true;
         }

@@ -29,6 +29,9 @@ public class GadgetScript : MonoBehaviour
     private int gadgetCDcounter;
 
     private PlayerHP PlayerHP;
+
+    public float projectileoffset;
+
     private void Start()
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
@@ -53,12 +56,17 @@ public class GadgetScript : MonoBehaviour
         {
             gadgetCDcounter--;
         }
-        else
+
+
+    }
+
+    void OnLeftShoulder()
+    {
+        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || gadgetCDcounter > 0)
         {
-            UseGadget();
+            return;
         }
-
-
+        UseGadget();
     }
 
     private void UseGadget()
@@ -69,6 +77,34 @@ public class GadgetScript : MonoBehaviour
         {
             PlayerHP.EldonNRG -= ActiveGadget.Energycost;
             gadgetCDcounter = (int)(ActiveGadget.cooldown / Time.deltaTime);
+
+            if(ActiveGadget.PrefabtoSpawn!=null)
+            {
+                Spawnprefab(ActiveGadget);
+            }
+
+        }
+    }
+
+    private void Spawnprefab(Gadget gadget)
+    {
+        Vector3 offset = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x), 0f,0f)*projectileoffset;
+        GameObject projectile = Instantiate(gadget.PrefabtoSpawn, transform.position + offset, Quaternion.identity);
+        BulletScript bulletScript = projectile.GetComponent<BulletScript>();
+        RocketScript rocketScript = projectile.GetComponent<RocketScript>();
+        if (bulletScript!=null)
+        {
+            bulletScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
+            bulletScript.EnergyDamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
+            bulletScript.direction = (int)(transform.localScale.x/Mathf.Abs(transform.localScale.x));
+            bulletScript.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        }
+        else if (rocketScript != null)
+        {
+            rocketScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
+            rocketScript.Energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
+            rocketScript.basedirection = (int)(transform.localScale.x / Mathf.Abs(transform.localScale.x));
+            rocketScript.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
         }
     }
 

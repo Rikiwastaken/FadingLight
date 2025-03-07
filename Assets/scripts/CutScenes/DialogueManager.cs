@@ -87,6 +87,7 @@ public class DialogueManager : MonoBehaviour
 
     void launchdialogue(Dialogue dialogue)
     {
+        FindAnyObjectByType<PlayerHP>().GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         Global.indialogue = true;
         pageindex = -1;
         currentdialogue = dialogue;

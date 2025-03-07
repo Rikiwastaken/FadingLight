@@ -680,25 +680,25 @@ MonoBehaviour:
     ID: 0
     image: {fileID: -2671136589151465056, guid: ae75febb297f5b04f938b6f13afdd330, type: 3}
     locked: 0
-  - name: Test2
-    description: Test2 Description
-    DamageMultiplier: 1.2
-    AbsorbMultiplier: 0.8
-    Energycost: 5
-    cooldown: 10
-    PrefabtoSpawn: {fileID: 0}
+  - name: Energy Canon
+    description: Condenses energy into an orb an launch it at moderate speed.
+    DamageMultiplier: 2
+    AbsorbMultiplier: 0
+    Energycost: 10
+    cooldown: 5
+    PrefabtoSpawn: {fileID: 3458832224624917955, guid: 50e9c6038af57bd42882a9f2aac91889, type: 3}
     ID: 1
-    image: {fileID: -1116783849856533523, guid: ae75febb297f5b04f938b6f13afdd330, type: 3}
+    image: {fileID: 21300000, guid: d94e0f32361d13842b9a935935e31165, type: 3}
     locked: 0
-  - name: Test3
-    description: Test3 Description
-    DamageMultiplier: 0
-    AbsorbMultiplier: 1.2
-    Energycost: 1000
-    cooldown: 0.5
-    PrefabtoSpawn: {fileID: 0}
+  - name: RocketLauncher
+    description: Launches a seeking rocket.
+    DamageMultiplier: 2
+    AbsorbMultiplier: 0
+    Energycost: 15
+    cooldown: 7.5
+    PrefabtoSpawn: {fileID: 3458832224624917955, guid: f6e632099100b534da3498db3da54214, type: 3}
     ID: 2
-    image: {fileID: 3619673516247287304, guid: ae75febb297f5b04f938b6f13afdd330, type: 3}
+    image: {fileID: 21300000, guid: d94e0f32361d13842b9a935935e31165, type: 3}
     locked: 0
   - name: Test4
     description: Test4 Description
@@ -751,6 +751,7 @@ MonoBehaviour:
     image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
     locked: 0
   ActiveGadgetID: 0
+  projectileoffset: 0
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,7 +793,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1543034884200180113, guid: 248add938af55594f8606c6a4fee8022, type: 3}
       propertyPath: ActiveDroneID
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 776140359127204589, guid: 248add938af55594f8606c6a4fee8022, type: 3}
       propertyPath: m_Name
@@ -869,6 +870,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2005576112850915861}
     m_Modifications:
+    - target: {fileID: -1543034884200180113, guid: 248add938af55594f8606c6a4fee8022, type: 3}
+      propertyPath: ActiveDroneID
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 776140359127204589, guid: 248add938af55594f8606c6a4fee8022, type: 3}
       propertyPath: m_Name
       value: Drone1

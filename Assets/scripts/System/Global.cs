@@ -24,6 +24,8 @@ public class Global : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         DontDestroyOnLoad(gameObject);
         if(SceneManager.GetActiveScene().name == "Start")
         {

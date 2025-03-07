@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
@@ -33,8 +32,8 @@ public class SupportDrone : MonoBehaviour
 
     public List<HealerDrone> drones;
 
-    public AnimatorController MedController;
-    public AnimatorController GunController;
+    public RuntimeAnimatorController MedController;
+    public RuntimeAnimatorController GunController;
 
     // Start is called before the first frame update
     void Start()

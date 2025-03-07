@@ -77,4 +77,32 @@ public class buttonscript : MonoBehaviour
         FindAnyObjectByType<SaveManager>().LoadSave();
     }
 
+    public void UnlockAll()
+    {
+        foreach(EquipmentScript.Chain chain in EquipmentScript.Chainslist)
+        {
+            chain.locked = false;
+        }
+        foreach (EquipmentScript.Plate plate in EquipmentScript.Platelist)
+        {
+            plate.locked = false;
+        }
+        foreach (SupportDrone.HealerDrone drone in EquipmentScript.drone1.GetComponent<SupportDrone>().drones)
+        {
+            drone.locked = false;
+        }
+        foreach (SupportDrone.HealerDrone drone in EquipmentScript.drone2.GetComponent<SupportDrone>().drones)
+        {
+            drone.locked = false;
+        }
+        foreach(AugmentsScript.Augment augment in AugmentsScript.Augmentlist)
+        {
+            augment.locked = false;
+        }
+        foreach (GadgetScript.Gadget gadget in FindAnyObjectByType<GadgetScript>().GadgetList)
+        {
+            gadget.locked = false;
+        }
+    }
+
 }

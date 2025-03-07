@@ -17,32 +17,31 @@ public class ShowSaveSlots : MonoBehaviour
     {
         for(int i = 0; i < transform.childCount-1; i++)
         {
-            transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Slot" + i;
+            transform.GetChild(i).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = "Slot" + i;
             string name =FindAnyObjectByType<SaveManager>().GetLastSave(i)[1];
-            Debug.Log(name);
             if(name != null)
             {
-                transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text= convertToHours(int.Parse(name.Split('_')[1]+""));
+                transform.GetChild(i).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text= convertToHours(int.Parse(name.Split('_')[1]+""));
                 if (FindAnyObjectByType<Global>().clickednewgame)
                 {
-                    transform.GetChild(i).GetComponent<Button>().interactable = false;
+                    transform.GetChild(i).GetChild(0).GetComponent<Button>().interactable = false;
                 }
                 else
                 {
-                    transform.GetChild(i).GetComponent<Button>().interactable = true;
+                    transform.GetChild(i).GetChild(0).GetComponent<Button>().interactable = true;
                 }
                 
             }
             else
             {
-                transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = "EmptyFile";
+                transform.GetChild(i).GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = "EmptyFile";
                 if (FindAnyObjectByType<Global>().clickednewgame)
                 {
-                    transform.GetChild(i).GetComponent<Button>().interactable = true;
+                    transform.GetChild(i).GetChild(0).GetComponent<Button>().interactable = true;
                 }
                 else
                 {
-                    transform.GetChild(i).GetComponent<Button>().interactable = false;
+                    transform.GetChild(i).GetChild(0).GetComponent<Button>().interactable = false;
                 }
             }
         }

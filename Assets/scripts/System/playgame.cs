@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class playgame : MonoBehaviour
 {
     PlayerControls controls;
-
-    public Transform LoadMenu;
 
     public void Playgame()
     {
@@ -25,8 +25,7 @@ public class playgame : MonoBehaviour
         FindAnyObjectByType<Global>().clickednewgame = false;
     }
 
-
-   
+    
 
 }
 
