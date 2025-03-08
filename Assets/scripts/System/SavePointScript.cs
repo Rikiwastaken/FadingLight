@@ -32,6 +32,7 @@ public class SavePointScript : MonoBehaviour
         if (FindAnyObjectByType<Global>().atsavepoint)
         {
             FindAnyObjectByType<PlayerMovement>().transform.position = wheretoplaceplayer;
+            FindAnyObjectByType<PlayerDodge>().dodgecdcnt = 30;
         }
         else
         {
@@ -90,8 +91,9 @@ public class SavePointScript : MonoBehaviour
             FindAnyObjectByType<PlayerMovement>().transform.position = wheretoplaceplayer;
             GameObject newmenu = Instantiate(SaveMenu, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
             newmenu.transform.SetAsFirstSibling();
-            newmenu.GetComponent<RectTransform>().localPosition = Vector2.zero;
             FindAnyObjectByType<Global>().atsavepoint = true;
+            newmenu.GetComponent<RectTransform>().localPosition = Vector2.zero;
+            
             savepointcdcounter = (int)(savepointCD / Time.deltaTime);
         }
         

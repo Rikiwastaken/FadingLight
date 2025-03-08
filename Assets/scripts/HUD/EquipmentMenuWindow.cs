@@ -225,7 +225,8 @@ public class EquipmentMenuWindow : MonoBehaviour
         }
         else
         {
-            effecttext.text = "Choose an Equipment to see its effect";
+            selected = EquipedContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+            onquiped = true;
         }
 
     }
@@ -706,15 +707,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                 }
                 break;
         }
-        if (dirinput != Vector2.zero)
-        {
-            if (selected == null)
-            {
-                selected = EquipedContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
-                onquiped = true;
-                return;
-            }
-        }
+
         int activebuttonidstring = 0;
         if (selected != null)
         {
@@ -752,7 +745,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                     {
                         if (selectedsection - 1 == 3 && EquipedItemsID[3] == -1)
                         {
-                            selected = EquipedContainer.GetChild(activebuttonidstring + 3).GetChild(1).GetComponentInChildren<Button>();
+                            selected = EquipedContainer.GetChild(activebuttonidstring - 3).GetChild(1).GetComponentInChildren<Button>();
                             selectedsection -= 3;
                         }
                         else

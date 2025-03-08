@@ -89,6 +89,11 @@ public class Global : MonoBehaviour
         {
             FindAnyObjectByType<DialogueManager>().AccelerateOrClose();
         }
+        if(atsavepoint)
+        {
+            atsavepoint = false;
+            Destroy(FindAnyObjectByType<SavePointMenu>().gameObject);
+        }
     }
 
     void OnJump()

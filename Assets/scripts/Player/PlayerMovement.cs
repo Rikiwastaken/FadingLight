@@ -72,7 +72,13 @@ public class PlayerMovement : MonoBehaviour
     {
         if (FindAnyObjectByType<Global>().atsavepoint)
         {
+            myanimator.SetBool("atsavepoint", true);
+            myanimator.SetLayerWeight(1, 0);
             return;
+        }
+        else
+        {
+            myanimator.SetBool("atsavepoint", false);
         }
         if (FindAnyObjectByType<Global>().indialogue)
         {

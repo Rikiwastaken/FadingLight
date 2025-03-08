@@ -8,7 +8,7 @@ public class PlayerDodge : MonoBehaviour
     private Animator anim;
 
     public float dodgecd;
-    private int dodgecdcnt;
+    public int dodgecdcnt;
     // Start is called before the first frame update
     void Start()
     {

@@ -19,7 +19,6 @@ public class PlayerJumpV3 : MonoBehaviour
     public float jumpForce;
     public float jumptime;
     public float jumpcounter;
-    public bool allowjump;
 
     [Header("Ground details")]
     [SerializeField] private Transform groundcheck;
@@ -95,7 +94,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
         horizontal = playermov.horizontal;
         grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough));
-        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi, largeurgi), 0, whatiswall);
+        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/3, largeurgi/2), 0, whatiswall);
 
         if (Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough))
         {
@@ -116,7 +115,7 @@ public class PlayerJumpV3 : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             myanim.SetTrigger("jump");
         }
-        if (!grounded && pressedjump && jumpcounter > 0 && savepointjumpCD <= 0)
+        if (!grounded && alreadypressedjump && jumpcounter > 0 && savepointjumpCD <= 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpcounter -= Time.deltaTime;
@@ -192,8 +191,10 @@ public class PlayerJumpV3 : MonoBehaviour
     {
         if (grounded)
         {
-            allowjump = true;
-            jumpcounter = jumptime;
+            if(!alreadypressedjump)
+            {
+                jumpcounter = jumptime;
+            }
             myanim.ResetTrigger("jump");
             myanim.SetBool("falling", false);
             touchingwall = false;

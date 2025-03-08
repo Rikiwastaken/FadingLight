@@ -305,7 +305,6 @@ MonoBehaviour:
   jumpForce: 3
   jumptime: 0.13
   jumpcounter: 0
-  allowjump: 0
   groundcheck: {fileID: 7714607739817182240}
   radOcircle: 0.06
   hauteurgi: 0.06
@@ -430,6 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dodgecd: 1
+  dodgecdcnt: 0
 --- !u!114 &387999305572416826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,7 +777,7 @@ Transform:
   m_GameObject: {fileID: 9140735802474745441}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.099, y: -0.018, z: 0.0051182485}
+  m_LocalPosition: {x: 0.099, y: 0.226, z: 0.0051182485}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
