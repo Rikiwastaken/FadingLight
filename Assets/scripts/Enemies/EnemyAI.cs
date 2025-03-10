@@ -32,6 +32,7 @@ public class EnemyAI : MonoBehaviour
     public float jumpforcey;
     private float atkcdcounter;
     public float atkcd;
+    public int attackdmg;
 
     [Header("startpos")]
     //starting position for respawn
@@ -50,6 +51,14 @@ public class EnemyAI : MonoBehaviour
         tempenemyhp = enemyHP;
         startx = GetComponent<Rigidbody2D>().position.x;
         starty = GetComponent<Rigidbody2D>().position.y;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(atkcdcounter!=0 && Mathf.Abs(rb2D.velocityX)>0.05 && collision.transform.tag=="Player")
+        {
+            collision.transform.GetComponent<PlayerHP>().TakeDamage(attackdmg, new Vector2(collision.transform.GetComponent<Rigidbody2D>().velocityX, collision.transform.GetComponent<PlayerHP>().hitjumpforce), Vector2.zero);
+        }
     }
 
     // Update is called once per frame

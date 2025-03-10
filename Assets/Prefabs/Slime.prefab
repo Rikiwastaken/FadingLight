@@ -129,6 +129,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageHP: {fileID: 3598366647607394966}
   imageNRG: {fileID: 3462903977509717313}
+  imageDrone1: {fileID: 0}
+  imageDrone2: {fileID: 0}
+  imageGadget: {fileID: 0}
 --- !u!1 &4107497105245484794
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +686,7 @@ MonoBehaviour:
   jumpforcex: 150
   jumpforcey: 120
   atkcd: 100
+  attackdmg: 20
   startx: 0
   starty: 0
 --- !u!114 &1806110475602329056
@@ -697,18 +701,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b83644e7dbf42f798addce02f6dfa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemydamage: 15
-  size: 1
   enemyhp: 0
   enemymaxhp: 100
   rez: 0
   enemyNRG: 0
   enemymaxNRG: 80
-  NRGdelay: 240
-  NRGrechargerate: 10
+  NRGdelay: 5
+  NRGrechargerate: 4
   execution: 0
   cannotmove: 0
   hitstundelay: 20
+  isboss: 0
+  worldflagtospawn: 0
+  LifebarSegments: 0
   healthbar: {fileID: 4526496966787258727}
 --- !u!95 &5458493380403203971
 Animator:

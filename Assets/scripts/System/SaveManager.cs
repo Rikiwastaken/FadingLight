@@ -24,6 +24,7 @@ public class SaveManager : MonoBehaviour
         public List<bool> unlockedGadgets; //list of unlocked Gadgets (true if unlocked, false else)
         public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones, 4 is gadgets and the rest are augments;
         public List<bool> WorldFlags; //flags for progession
+        public int Shards; //Number of Crystal Shards picked up
     }
 
     public Save save;
@@ -66,12 +67,13 @@ public class SaveManager : MonoBehaviour
     public void CreateEmptySaveFile(int slotID)
     {
         EquipmentScript equipmentScript = FindAnyObjectByType<EquipmentScript>();
+        AugmentsScript augmentsScript = FindAnyObjectByType<AugmentsScript>();
         save = new Save();
         save.elapsedseconds = 0;
         save.slotID = CurrentSlot;
         save.zoneName = SceneManager.GetActiveScene().name;
         save.coordinates = FindAnyObjectByType<PlayerMovement>().transform.position;
-        List<Augment> augmentlist = FindAnyObjectByType<AugmentsScript>().Augmentlist;
+        List<Augment> augmentlist = augmentsScript.Augmentlist;
         List<bool> unlockedaugments = new List<bool>();
         foreach (Augment augment in augmentlist)
         {
@@ -127,19 +129,22 @@ public class SaveManager : MonoBehaviour
         {
             save.WorldFlags.Add(false);
         }
-        
+        save.Shards = 0;
+
+
     }
 
     public void InitializeSaveObject()
     {
         EquipmentScript equipmentScript = FindAnyObjectByType<EquipmentScript>();
         GadgetScript gadgetscript = FindAnyObjectByType<GadgetScript>();
+        AugmentsScript augmentsScript = FindAnyObjectByType<AugmentsScript>();
         save = new Save();
         save.elapsedseconds = 0;
         save.slotID = CurrentSlot;
         save.zoneName = SceneManager.GetActiveScene().name;
         save.coordinates = FindAnyObjectByType<PlayerMovement>().transform.position;
-        List<Augment> augmentlist = FindAnyObjectByType<AugmentsScript>().Augmentlist;
+        List<Augment> augmentlist = augmentsScript.Augmentlist;
         List<bool> unlockedaugments = new List<bool>();
         foreach(Augment augment in augmentlist)
         {
@@ -200,6 +205,7 @@ public class SaveManager : MonoBehaviour
         {
             save.WorldFlags.Add(flag);
         }
+        save.Shards = augmentsScript.numberofShardsPickedUp;
 
     }
 
@@ -235,6 +241,7 @@ public class SaveManager : MonoBehaviour
         //list of unlocked Gadgets (true if unlocked, false else)
         //public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones, 4 is gadget and the rest are augments;
         //public List<bool> WorldFlags; //flags for progession
+        //public int Shards; //Number of Crystal Shards picked up
 
 
         equipmentScript.transform.position = save.coordinates;
@@ -275,8 +282,9 @@ public class SaveManager : MonoBehaviour
             gadgetScript.GadgetList[i].locked = !save.unlockedGadgets[i];
         }
 
-
         FindAnyObjectByType<Global>().worldflags=save.WorldFlags;
+
+        augmentsScript.numberofShardsPickedUp = save.Shards;
     }
 
     public List<string> GetLastSave(int slotID)
@@ -341,6 +349,25 @@ public class SaveManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void DeleteSlot(int slotID)
+    {
+        if (System.IO.Directory.Exists(Application.persistentDataPath + "/SaveFiles/"))
+        {
+            string[] listpaths = System.IO.Directory.GetFiles(Application.persistentDataPath + "/SaveFiles/");
+            List<string> listnames = new List<string>();
+            foreach (string path in listpaths)
+            {
+                string newname = path;
+                string abstractpath = Application.persistentDataPath + "/SaveFiles/";
+                newname = newname.Substring((int)(abstractpath.Length), newname.Length - abstractpath.Length);
+                if (int.Parse("" + newname[0]) == save.slotID)
+                {
+                    System.IO.File.Delete(Application.persistentDataPath + "/SaveFiles/" + newname);
+                }    
+            }
+        }
     }
 
     public void SaveToFile()

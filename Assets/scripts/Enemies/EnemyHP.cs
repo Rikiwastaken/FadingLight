@@ -6,10 +6,6 @@ public class EnemyHP : MonoBehaviour
 {
 
 
-    //damage and size (1=small 2=med 3=big)
-    [Header("damage and size (1:small 2:med 3 big")]
-    public int enemydamage;
-    public int size;
 
     //HP variables
     [Header("HP variables")]
@@ -23,7 +19,7 @@ public class EnemyHP : MonoBehaviour
     public int enemyNRG;
     public int enemymaxNRG;
     private int NRGcounter;
-    public int NRGdelay;
+    public float NRGdelay;
     private int NRGrecharge;
     public int NRGrechargerate;
     private bool stopenergyregen;
@@ -34,6 +30,14 @@ public class EnemyHP : MonoBehaviour
     public int hitstundelay;
     private int hitstuncounter;
     private Animator enemyanim;
+
+    [Header("Boss variables")]
+    public bool isboss;
+    public int worldflagtospawn;
+    public int deathworldflag;
+    public int LifebarSegments;
+    private bool activated;
+    private BossLifeBar bossLifeBar;
 
 
 
@@ -49,9 +53,19 @@ public class EnemyHP : MonoBehaviour
         //setting enemy's max heatlth and energy
         enemyhp = enemymaxhp;
         enemyNRG = enemymaxNRG;
-        healthbar.SetMaxhealth(enemymaxhp);
-        healthbar.SetMaxEnergy(enemymaxNRG);
-        cannotmove = GetComponent<EnemyAI>().cannotmove;
+        if(!isboss)
+        {
+            healthbar.SetMaxhealth(enemymaxhp);
+            healthbar.SetMaxEnergy(enemymaxNRG);
+            cannotmove = GetComponent<EnemyAI>().cannotmove;
+        }
+        else
+        {
+            if (FindAnyObjectByType<Global>().worldflags[deathworldflag])
+            {
+                Destroy(gameObject);
+            }
+        }
         enemyanim = GetComponent<Animator>();
         execution = false;
         enemyanim.SetBool("Stun", false);
@@ -69,14 +83,28 @@ public class EnemyHP : MonoBehaviour
             rb2D.velocity=new Vector2(0,0);
         }
 
-        GetComponent<EnemyAI>().cannotmove=cannotmove;
+        if(!isboss)
+        {
+            GetComponent<EnemyAI>().cannotmove = cannotmove;
+        }
+        else //boss activation
+        {
+            if (FindAnyObjectByType<Global>().worldflags[worldflagtospawn] && !activated)
+            {
+                bossLifeBar = FindAnyObjectByType<BossLifeBar>();
+                bossLifeBar.InitiateCombat(this);
+                FindAnyObjectByType<Global>().inbossfight = true;
+                activated = true;
+            }
+        }
+        
 
 
         //Enemy's energy regen when not hit for some time
         if (tempHP == enemyhp & enemyNRG < enemymaxNRG)
         {
             NRGcounter += 1;
-            if (NRGcounter >= NRGdelay & !stopenergyregen)
+            if (NRGcounter >= (int)(NRGdelay/Time.deltaTime) & !stopenergyregen)
             {
                 NRGrecharge += 1;
                 if (NRGrecharge == NRGrechargerate)
@@ -134,18 +162,28 @@ public class EnemyHP : MonoBehaviour
         }
 
         //update of the healthbar
-        healthbar.SetHealth(enemyhp);
-        healthbar.SetEnergy(enemyNRG);
+        if(!isboss)
+        {
+            healthbar.SetHealth(enemyhp);
+            healthbar.SetEnergy(enemyNRG);
+        }
 
         //death of the enemy
 
         if (enemyhp <= 0)
         {
-            GetComponentInChildren<Canvas>().enabled = false;
-            GetComponent<Collider2D>().enabled=false;
-            GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<SpriteRenderer>().enabled = false;
-            transform.position = new Vector3(-100, -100);
+            if(isboss)
+            {
+                FindAnyObjectByType<Global>().worldflags[deathworldflag] = true;
+            }
+            else
+            {
+                GetComponentInChildren<Canvas>().enabled = false;
+                GetComponent<Collider2D>().enabled = false;
+                GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<SpriteRenderer>().enabled = false;
+                transform.position = new Vector3(-100, -100);
+            }
         }
         if (rez)
         {

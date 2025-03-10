@@ -8,7 +8,7 @@ public class PickUpScript : MonoBehaviour
     [System.Serializable]
     public class Pickup
     {
-        public int Type; // 0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget
+        public int Type; // 0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget, 5 Crystal Shard
         public int ID;
         public int WorldFlagID;
     }

@@ -28,9 +28,8 @@ public class DialogueManager : MonoBehaviour
     {
         public int worldflagindex;
         public List<DialoguePart> parts;
+        public int worldflagtotriggerattheend;
     }
-
-    public List<bool> flagstomonitor = new List<bool>();
 
     public List<Dialogue> DialogueList; 
 
@@ -48,25 +47,12 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         Global = FindAnyObjectByType<Global>();
-        foreach (bool flag in Global.worldflags)
-        {
-            flagstomonitor.Add(flag);
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach(Dialogue part in DialogueList)
-        {
-            if (flagstomonitor[part.worldflagindex] != Global.worldflags[part.worldflagindex])
-            {
-
-                launchdialogue(part);
-                flagstomonitor = Global.worldflags;
-                break;
-            }
-        }
+        
         if(currentdialogue != null)
         {
             foreach(DialogueMovement Movement in currentdialogue.parts[pageindex].movementtotrigger)
@@ -75,14 +61,31 @@ public class DialogueManager : MonoBehaviour
                 {
                     Vector2 pos = Movement.Actor.transform.position;
                     Vector2 dest = Movement.wheretogo;
-                    float speed = Movement.speed;
-                    Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
+                    if(Vector2.Distance(pos, dest) >= 0.05)
+                    {
+                        float speed = Movement.speed;
+                        Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
+                    }
+                    else
+                    {
+                        Movement.Actor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    }
                 }
             }
-            
         }
-        
-        
+    }
+
+    public void flagactivated(int flagindex)
+    {
+        foreach (Dialogue part in DialogueList)
+        {
+            if (part.worldflagindex ==flagindex)
+            {
+
+                launchdialogue(part);
+                break;
+            }
+        }
     }
 
     void launchdialogue(Dialogue dialogue)
@@ -120,7 +123,11 @@ public class DialogueManager : MonoBehaviour
         else
         {
             Global.indialogue = false;
-            currentdialogue= null;
+            if(currentdialogue.worldflagtotriggerattheend!=0)
+            {
+                Global.worldflags[currentdialogue.worldflagtotriggerattheend] = true;
+            }
+            currentdialogue = null;
         }
         
     }

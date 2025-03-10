@@ -33,8 +33,6 @@ public class EldonAttack : MonoBehaviour
     private Rigidbody2D enemyrb;
     private float playerx;
     public float smallrecoil;
-    public float medrecoil;
-    public float bigrecoil;
 
     public bool grounded;
 
@@ -132,7 +130,6 @@ public class EldonAttack : MonoBehaviour
             if (enemy.tag == "enemy")
             {
                 EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
-                size = enemyHP.size;
                 enemyrb = enemy.GetComponent<Rigidbody2D>();
                 playerx = GetComponent<Rigidbody2D>().position.x;
 
@@ -146,39 +143,12 @@ public class EldonAttack : MonoBehaviour
                     enemyHP.TakeDamage(damage*1/10, energydamage);
                     GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate*2;
                 }
-                if (enemyrb.position.x < playerx & enemyHP.enemyhp > 0)
+                if (enemyHP.enemyhp > 0)
                 {
-                    if (size==1)
-                    {
-                        //enemyrb.velocity = new Vector2(smallrecoil, enemyrb.velocity.y);
-                        enemyrb.AddForce(new Vector2(-smallrecoil, 0));
-                    }
-                    if (size == 2)
-                    {
-                        //enemyrb.velocity = new Vector2(enemyrb.velocity.x - medrecoil, enemyrb.velocity.y);
-                    }
-                    if (size == 3)
-                    {
-                        //enemyrb.velocity = new Vector2(enemyrb.velocity.x - bigrecoil, enemyrb.velocity.y);
-                    }
+                    int direction = (int)((enemyrb.position.x - playerx) / Mathf.Abs(enemyrb.position.x - playerx));
+                    enemyrb.AddForce(new Vector2(direction*smallrecoil, 0));
+                    
                 }
-                if (enemyrb.position.x > playerx & enemyHP.enemyhp > 0)
-                {
-                    if (size == 1)
-                    {
-                        // enemyrb.velocity = new Vector2(smallrecoil, enemyrb.velocity.y);
-                        enemyrb.AddForce(new Vector2(smallrecoil, 10f));
-                    }
-                    if (size == 2)
-                    {
-                       // enemyrb.velocity = new Vector2(enemyrb.velocity.x + medrecoil, enemyrb.velocity.y);
-                    }
-                    if (size == 3)
-                    {
-                       // enemyrb.velocity = new Vector2(enemyrb.velocity.x + bigrecoil, enemyrb.velocity.y);
-                    }
-                }
-
             }
             
         }

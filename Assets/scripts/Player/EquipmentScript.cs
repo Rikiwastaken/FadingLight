@@ -51,6 +51,7 @@ public class EquipmentScript : MonoBehaviour
 
     private int healcd;
 
+    public Sprite EnergyShard;
 
     public GameObject gotitempopupprefab;
 
@@ -160,7 +161,7 @@ public class EquipmentScript : MonoBehaviour
 
     public void ReceiveItem(int Type, int ID)
     {
-        switch(Type) //0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget
+        switch(Type) //0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget, 5 CrystalShard
         {
             case 0:
                 if(Chainslist.Count > ID)
@@ -226,6 +227,12 @@ public class EquipmentScript : MonoBehaviour
                 {
                     Debug.Log("Incorrect ID, " + ID + " too big for Augmentlist");
                 }
+                break;
+            case 5:
+                augmentscript = GetComponent<AugmentsScript>();
+                augmentscript.numberofShardsPickedUp++;
+                GameObject ItemShard = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                ItemShard.GetComponent<GotItemPopup>().InitiatePopup(EnergyShard, "+5 Max HP, +1 Max Energy", "Crystal Shard");
                 break;
         }
     }

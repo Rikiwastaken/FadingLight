@@ -32,41 +32,33 @@ public class PlayerHP : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-
-    private void OnCollisionStay2D(Collision2D other)
-    {
-        if (other.gameObject.tag =="enemy" & !inv)
-        {
-            TakeDamage(other.gameObject.GetComponent<EnemyHP>().enemydamage, new Vector2(rb.velocity.x, hitjumpforce),Vector2.zero);
-        }
-    }
-
     public void TakeDamage(float damage, Vector2 velchg, Vector2 ForceApplied)
     {
-        int damagetotake = 1;
-        float totaldamagereduction = damagereduction;
-        if (equipmentScript.equipedPlateIndex!=-1)
+        if (!inv)
         {
-            totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
-        }
+            int damagetotake = 1;
+            float totaldamagereduction = damagereduction;
+            if (equipmentScript.equipedPlateIndex != -1)
+            {
+                totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
+            }
 
-        if (damage- totaldamagereduction > 0f)
-        {
-            damagetotake = (int)(damage - totaldamagereduction);
+            if (damage - totaldamagereduction > 0f)
+            {
+                damagetotake = (int)(damage - totaldamagereduction);
+            }
+            Eldonhp -= damagetotake;
+            inv = true;
+            iframe = invicibilityframes;
+            if (velchg != Vector2.zero)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, hitjumpforce);
+            }
+            if (ForceApplied != Vector2.zero)
+            {
+                rb.AddForce(ForceApplied / Time.deltaTime);
+            }
         }
-        Eldonhp -= damagetotake;
-        inv = true;
-        iframe = invicibilityframes;
-        if(velchg!=Vector2.zero)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, hitjumpforce);
-        }
-        if(ForceApplied!=Vector2.zero)
-        {
-            rb.AddForce(ForceApplied/Time.deltaTime);
-        }
-        
     }
     void FixedUpdate()
     {

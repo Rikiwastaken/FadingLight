@@ -24,6 +24,7 @@ public class WorldFlagActivator : MonoBehaviour
         if(collision.GetComponent<PlayerHP>())
         {
             Global.worldflags[worldflagid] = true;
+            FindAnyObjectByType<DialogueManager>().flagactivated(worldflagid);
             Destroy(gameObject);
         }
     }

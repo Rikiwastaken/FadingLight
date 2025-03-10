@@ -35,6 +35,7 @@ public class AugmentsScript : MonoBehaviour
         public int MaxSlots;
         public int EquipedSlots;
     }
+    public int numberofShardsPickedUp;
 
     public List<Augment> Augmentlist;
     public List<bool> EquipedAugments;
@@ -159,8 +160,8 @@ public class AugmentsScript : MonoBehaviour
     private void InitiateEquipedStats()
     {
         Stats newEquipedStats = new Stats();
-        newEquipedStats.MaxHP = Basestats.MaxHP;
-        newEquipedStats.MaxNRJ= Basestats.MaxNRJ;
+        newEquipedStats.MaxHP = Basestats.MaxHP+ numberofShardsPickedUp*5;
+        newEquipedStats.MaxNRJ= Basestats.MaxNRJ+ numberofShardsPickedUp;
         newEquipedStats.Damage= Basestats.Damage;
         newEquipedStats.NRJDamage = Basestats.NRJDamage;
         newEquipedStats.DamageReduction= Basestats.DamageReduction;
