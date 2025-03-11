@@ -114,6 +114,7 @@ public class EnemyHP : MonoBehaviour
                 bossLifeBar.setupseparatorsbool = true;
                 FindAnyObjectByType<Global>().inbossfight = true;
                 FindAnyObjectByType<BossWall>().putupwall = true;
+                FindAnyObjectByType<musicmanager>().EnterBossMusic();
                 activated = true;
             }
         }
@@ -235,6 +236,7 @@ public class EnemyHP : MonoBehaviour
                 FindAnyObjectByType<Global>().inbossfight = false;
                 FindAnyObjectByType<BossLifeBar>().EndCombat();
                 FindAnyObjectByType<BossWall>().putdownwall = true;
+                FindAnyObjectByType<musicmanager>().ExitBossMusic();
                 Destroy(gameObject);
             }
         }

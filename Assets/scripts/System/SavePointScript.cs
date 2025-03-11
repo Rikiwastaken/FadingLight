@@ -28,7 +28,6 @@ public class SavePointScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (FindAnyObjectByType<Global>().atsavepoint)
         {
             FindAnyObjectByType<PlayerMovement>().transform.position = wheretoplaceplayer;

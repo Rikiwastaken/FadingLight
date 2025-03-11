@@ -383,8 +383,6 @@ MonoBehaviour:
   attackdelay: 0.5
   delaycounter: 0
   smallrecoil: 150
-  medrecoil: 1.5
-  bigrecoil: 1
   grounded: 0
 --- !u!114 &736690049156150842
 MonoBehaviour:
@@ -442,6 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655a232d5864a034c9dc9c818ede84d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberofShardsPickedUp: 0
   Augmentlist:
   - name: Durability Augment
     description: +20 Max Health.
@@ -656,6 +655,7 @@ MonoBehaviour:
   equipedPlateIndex: 0
   drone1: {fileID: 5291592748213458889}
   drone2: {fileID: 3697768636770411347}
+  EnergyShard: {fileID: 0}
   gotitempopupprefab: {fileID: 6175682124425559733, guid: b87792eefe96a2e40b4460d898f573cf, type: 3}
 --- !u!114 &189450580446498757
 MonoBehaviour:
