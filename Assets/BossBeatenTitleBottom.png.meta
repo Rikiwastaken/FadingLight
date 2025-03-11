@@ -1,0 +1,552 @@
+fileFormatVersion: 2
+guid: 3024dc509b59a464ebebe2bff979e72d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5035519779956829775
+    second: BossBeatenTitleBottom_0
+  - first:
+      213: 9168334596237930737
+    second: BossBeatenTitleBottom_1
+  - first:
+      213: 5691647716590952815
+    second: BossBeatenTitleBottom_2
+  - first:
+      213: 4864888320320256794
+    second: BossBeatenTitleBottom_3
+  - first:
+      213: 7999751565664240879
+    second: BossBeatenTitleBottom_4
+  - first:
+      213: 2906854546203773957
+    second: BossBeatenTitleBottom_5
+  - first:
+      213: 103518912943220684
+    second: BossBeatenTitleBottom_6
+  - first:
+      213: 3493550336802691964
+    second: BossBeatenTitleBottom_7
+  - first:
+      213: 7276924448604885600
+    second: BossBeatenTitleBottom_8
+  - first:
+      213: -5937810486578306167
+    second: BossBeatenTitleBottom_9
+  - first:
+      213: 5209722289139930093
+    second: BossBeatenTitleBottom_10
+  - first:
+      213: 3119112541572897357
+    second: BossBeatenTitleBottom_11
+  - first:
+      213: 4800608739153933369
+    second: BossBeatenTitleBottom_12
+  - first:
+      213: -2542362360896256929
+    second: BossBeatenTitleBottom_13
+  - first:
+      213: -3238328289260510969
+    second: BossBeatenTitleBottom_14
+  - first:
+      213: -8460537274142499130
+    second: BossBeatenTitleBottom_15
+  - first:
+      213: 5064766123615316876
+    second: BossBeatenTitleBottom_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 2
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 128
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_0
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 17
+        width: 42
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b15830807d3e1ab0800000000000000
+      internalID: -5035519779956829775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_1
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 18
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1f0bfa64db77c3f70800000000000000
+      internalID: 9168334596237930737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_2
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 18
+        width: 85
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f61211e417bccfe40800000000000000
+      internalID: 5691647716590952815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_3
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 18
+        width: 22
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1bb2ace62e838340800000000000000
+      internalID: 4864888320320256794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_4
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 18
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe4caca1aa3d40f60800000000000000
+      internalID: 7999751565664240879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_5
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 18
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50c84300fc8375820800000000000000
+      internalID: 2906854546203773957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_6
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 18
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc7e38127e5cf6100800000000000000
+      internalID: 103518912943220684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_7
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 17
+        width: 70
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7b121e85859b7030800000000000000
+      internalID: 3493550336802691964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_8
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 18
+        width: 40
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06213703b34dcf460800000000000000
+      internalID: 7276924448604885600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_9
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 17
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98329e382d8a89da0800000000000000
+      internalID: -5937810486578306167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_10
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 18
+        width: 22
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de3de96d1d6ac4840800000000000000
+      internalID: 5209722289139930093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_11
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 17
+        width: 36
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4a1beea450594b20800000000000000
+      internalID: 3119112541572897357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_12
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 18
+        width: 37
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 934f7eaa6303f9240800000000000000
+      internalID: 4800608739153933369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_13
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 18
+        width: 47
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f54847c17e6b7bcd0800000000000000
+      internalID: -2542362360896256929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_14
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 18
+        width: 23
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 701678c04952f03d0800000000000000
+      internalID: -3238328289260510969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_15
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 18
+        width: 18
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ced8cdcc22269a80800000000000000
+      internalID: -8460537274142499130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossBeatenTitleBottom_16
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 18
+        width: 25
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8be58484f9a94640800000000000000
+      internalID: 5064766123615316876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      BossBeatenTitleBottom_0: -5035519779956829775
+      BossBeatenTitleBottom_1: 9168334596237930737
+      BossBeatenTitleBottom_10: 5209722289139930093
+      BossBeatenTitleBottom_11: 3119112541572897357
+      BossBeatenTitleBottom_12: 4800608739153933369
+      BossBeatenTitleBottom_13: -2542362360896256929
+      BossBeatenTitleBottom_14: -3238328289260510969
+      BossBeatenTitleBottom_15: -8460537274142499130
+      BossBeatenTitleBottom_16: 5064766123615316876
+      BossBeatenTitleBottom_2: 5691647716590952815
+      BossBeatenTitleBottom_3: 4864888320320256794
+      BossBeatenTitleBottom_4: 7999751565664240879
+      BossBeatenTitleBottom_5: 2906854546203773957
+      BossBeatenTitleBottom_6: 103518912943220684
+      BossBeatenTitleBottom_7: 3493550336802691964
+      BossBeatenTitleBottom_8: 7276924448604885600
+      BossBeatenTitleBottom_9: -5937810486578306167
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -146,4 +146,16 @@ public class DialogueManager : MonoBehaviour
             }
         }
     }
+
+    public void TrytoTrigger(int worldflagindex)
+    {
+        foreach(Dialogue dialogue in DialogueList)
+        {
+            if(dialogue.worldflagindex==worldflagindex)
+            {
+                launchdialogue(dialogue);
+                return;
+            }
+        }
+    }
 }

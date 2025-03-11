@@ -52,8 +52,8 @@ MonoBehaviour:
   enemyhp: 1000
   enemymaxhp: 1000
   rez: 0
-  enemyNRG: 200
-  enemymaxNRG: 200
+  enemyNRG: 10
+  enemymaxNRG: 10
   NRGdelay: 4
   NRGrechargerate: 5
   execution: 0
@@ -61,9 +61,10 @@ MonoBehaviour:
   hitstundelay: 0
   isboss: 1
   worldflagtospawn: 4
-  deathworldflag: 0
-  LifebarSegments: 0
+  deathworldflag: 5
+  LifebarSegments: 3
   activated: 0
+  bossdying: 0
   healthbar: {fileID: 0}
 --- !u!95 &854722408688938285
 Animator:

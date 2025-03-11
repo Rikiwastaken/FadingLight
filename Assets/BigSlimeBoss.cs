@@ -30,7 +30,7 @@ public class BigSlimeBoss : MonoBehaviour
             }
 
 
-            if(attackcooldowncounter <= 0)
+            if(attackcooldowncounter <= 0 && !GetComponent<EnemyHP>().execution && !GetComponent<EnemyHP>().bossdying)
             {
                 if(Vector2.Distance(player.position,transform.position)<=0.75)
                 {
@@ -53,7 +53,6 @@ public class BigSlimeBoss : MonoBehaviour
     void RandomAttackClose()
     {
         int rd = Random.Range(0, 120);
-        Debug.Log(rd);
         if (rd <= 15)
         {
             SpawnLineOfSpikes();
@@ -84,7 +83,6 @@ public class BigSlimeBoss : MonoBehaviour
     void RandomAttackFar()
     {
         int rd = Random.Range(0, 120);
-        Debug.Log(rd);
         if(rd<=20)
         {
             SpawnLineOfSpikes();

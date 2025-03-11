@@ -23,6 +23,8 @@ public class PlayerHP : MonoBehaviour
     private Healthbar healthbar;
     private EquipmentScript equipmentScript;
 
+    private Global global;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,11 @@ public class PlayerHP : MonoBehaviour
     void FixedUpdate()
     {
 
+        if(global==null)
+        {
+            global = FindAnyObjectByType<Global>();
+        }
+
         healthbar.SetHealth(Eldonhp);
         healthbar.SetEnergy(EldonNRG);
 
@@ -78,6 +85,13 @@ public class PlayerHP : MonoBehaviour
                 inv = false;
             }
         }
+
+        if(global.indialogue || global.atsavepoint)
+        {
+            inv = true;
+            iframe = 2;
+        }
+        
 
         if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && iframe == 0 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime<1 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1/14)
         {

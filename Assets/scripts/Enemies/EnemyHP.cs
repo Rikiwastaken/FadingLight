@@ -38,7 +38,9 @@ public class EnemyHP : MonoBehaviour
     public int LifebarSegments;
     public bool activated;
     private BossLifeBar bossLifeBar;
-
+    public bool bossdying;
+    private int bossdeathcounter;
+    private float bossscaley;
 
 
     //Healthbar
@@ -61,6 +63,7 @@ public class EnemyHP : MonoBehaviour
         }
         else
         {
+            bossscaley = transform.localScale.y;
             if (FindAnyObjectByType<Global>().worldflags[deathworldflag])
             {
                 Destroy(gameObject);
@@ -78,9 +81,23 @@ public class EnemyHP : MonoBehaviour
 
         if (execution)
         {
-            cannotmove = true;
-            enemyanim.SetBool("Stun", true);
-            rb2D.velocity=new Vector2(0,0);
+            if(enemyNRG<=0)
+            {
+                enemyanim.SetBool("Stun", true);
+                if (!isboss)
+                {
+                    cannotmove = true;
+
+                    rb2D.velocity = new Vector2(0, 0);
+                }
+            }
+            else
+            {
+                enemyanim.SetBool("Stun", false);
+                execution = false;
+            }
+            
+            
         }
 
         if(!isboss)
@@ -93,7 +110,10 @@ public class EnemyHP : MonoBehaviour
             {
                 bossLifeBar = FindAnyObjectByType<BossLifeBar>();
                 bossLifeBar.InitiateCombat(this);
+                bossLifeBar.numberofseparators = LifebarSegments-1;
+                bossLifeBar.setupseparatorsbool = true;
                 FindAnyObjectByType<Global>().inbossfight = true;
+                FindAnyObjectByType<BossWall>().putupwall = true;
                 activated = true;
             }
         }
@@ -113,6 +133,7 @@ public class EnemyHP : MonoBehaviour
                     NRGrecharge = 0;
                     enemyNRG += 1;
                     execution = false;
+                    
                 }
             }
         }
@@ -150,7 +171,15 @@ public class EnemyHP : MonoBehaviour
             
             if (execution && enemyhp < tempHP)
             {
-                enemyhp=0;
+                if(!isboss)
+                {
+                    enemyhp = 0;
+                }
+                else
+                {
+                    BossExecution();
+                }
+                
             }
 
             if (enemyhp<tempHP)
@@ -170,11 +199,11 @@ public class EnemyHP : MonoBehaviour
 
         //death of the enemy
 
-        if (enemyhp <= 0)
+        if (enemyhp <= 0 && !bossdying)
         {
             if(isboss)
             {
-                FindAnyObjectByType<Global>().worldflags[deathworldflag] = true;
+                BossDeath();
             }
             else
             {
@@ -193,6 +222,48 @@ public class EnemyHP : MonoBehaviour
             rez = false;
         }
         tempHP = enemyhp;
+
+
+        if(bossdying)
+        {
+            transform.localScale = new Vector3(transform.localScale.x, bossscaley*(bossdeathcounter*Time.deltaTime), transform.localScale.z);
+            bossdeathcounter--;
+            if (bossdeathcounter <= 0)
+            {
+                FindAnyObjectByType<Global>().worldflags[deathworldflag] = true;
+                FindAnyObjectByType<DialogueManager>().TrytoTrigger(deathworldflag);
+                FindAnyObjectByType<Global>().inbossfight = false;
+                FindAnyObjectByType<BossLifeBar>().EndCombat();
+                FindAnyObjectByType<BossWall>().putdownwall = true;
+                Destroy(gameObject);
+            }
+        }
+
+
+
+    }
+
+
+    void BossDeath()
+    {
+        FindAnyObjectByType<BossBeatenText>().StartTitle();
+        bossdeathcounter = (int)(1/Time.deltaTime);
+        bossdying = true;
+    }
+    void BossExecution()
+    {
+        for(int i = LifebarSegments-1; i>=0;i--)
+        {
+            if(enemyhp >enemymaxhp*i/LifebarSegments)
+            {
+                enemyhp = enemymaxhp * i / LifebarSegments -1;
+                tempHP = enemyhp;
+                enemyNRG = enemymaxNRG;
+                execution = false;
+                enemyanim.SetBool("Stun", false);
+                return;
+            }
+        }
     }
 
     public void TakeDamage(int damage)
