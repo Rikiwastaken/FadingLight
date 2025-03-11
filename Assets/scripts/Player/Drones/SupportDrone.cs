@@ -154,7 +154,7 @@ public class SupportDrone : MonoBehaviour
         foreach (Collider2D collider in listcollider)
         {
             
-            if(collider.transform.tag=="enemy" && Vector2.Distance(collider.transform.position,transform.position)<lowestdist)
+            if((collider.transform.tag=="enemy" || collider.transform.tag == "Boss") && Vector2.Distance(collider.transform.position,transform.position)<lowestdist)
             {
                 target = collider.transform;
                 lowestdist = Vector2.Distance(collider.transform.position, transform.position);

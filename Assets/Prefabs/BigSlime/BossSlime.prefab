@@ -63,6 +63,7 @@ MonoBehaviour:
   worldflagtospawn: 4
   deathworldflag: 0
   LifebarSegments: 0
+  activated: 0
   healthbar: {fileID: 0}
 --- !u!95 &854722408688938285
 Animator:
@@ -229,3 +230,8 @@ MonoBehaviour:
   VerticalSpike: {fileID: 680520567136983162, guid: 79da5bb7f2d067a4daf7e8a393fba9b1, type: 3}
   yforvertical: -1.6
   verticalspikedamage: 30
+  HorizontalSpikeDamage: 40
+  WheretoSpawnLowHorizontal: {x: -1.6, y: -1.95, z: -0.01}
+  WheretoSpawnHighHorizontal: {x: -1.6, y: -1.283, z: -0.01}
+  WheretoSpawnCloseRangeSpikes: {x: -0.55, y: -1.95, z: -0.01}
+  attackcooldown: 3

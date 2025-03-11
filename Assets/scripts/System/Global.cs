@@ -23,6 +23,9 @@ public class Global : MonoBehaviour
 
     public List<bool> worldflags;
 
+    public float ManualClock;
+    public bool usemanualclock;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -39,6 +42,12 @@ public class Global : MonoBehaviour
 
     private void Update()
     {
+        if(usemanualclock)
+        {
+            Time.timeScale = ManualClock;
+        }
+
+
         if(GameObject.FindAnyObjectByType<InventoryScript>())
         {
             

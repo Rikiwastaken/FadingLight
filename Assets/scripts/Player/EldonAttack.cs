@@ -127,6 +127,7 @@ public class EldonAttack : MonoBehaviour
 
         foreach (Collider2D enemy in hitenemies)
         {
+            
             if (enemy.tag == "enemy")
             {
                 EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
@@ -150,7 +151,24 @@ public class EldonAttack : MonoBehaviour
                     
                 }
             }
-            
+
+            else if (enemy.tag == "Boss")
+            {
+                EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
+
+                if (slayermode)
+                {
+                    enemyHP.TakeDamage(damage, (energydamage * 1 / 10));
+                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate;
+                }
+                else
+                {
+                    enemyHP.TakeDamage(damage * 1 / 10, energydamage);
+                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate * 2;
+                }
+            }
+
+
         }
 
     }

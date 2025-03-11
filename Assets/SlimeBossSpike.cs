@@ -7,6 +7,8 @@ public class SlimeBossSpike : MonoBehaviour
 
     public int damage;
     private Animator Animator;
+    public float timetofade;
+    private int counter=-1;
     
     void Start()
     {
@@ -18,22 +20,38 @@ public class SlimeBossSpike : MonoBehaviour
     {
         AnimatorClipInfo[] animationClip = Animator.GetCurrentAnimatorClipInfo(0);
         int currentFrame = (int)(Animator.GetCurrentAnimatorStateInfo(0).normalizedTime * (animationClip[0].clip.length * animationClip[0].clip.frameRate));
-        if (currentFrame >= 16)
+        if (currentFrame >= 13)
         {
-            GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, GetComponent<SpriteRenderer>().color.a - 0.05f);
-        }
+            Animator.speed = 0;
+            if(counter == -1)
+            {
+                counter = (int)(timetofade/Time.deltaTime)+ (int)((timetofade / Time.deltaTime)*0.5f);
+            }
+            if(counter <= (timetofade / Time.deltaTime))
+            {
+                float newalpha = Mathf.Clamp01((float)counter / (timetofade / Time.deltaTime));
+                GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, newalpha);
+            }
+            
 
-        if (GetComponent<SpriteRenderer>().color.a <= 0f)
-        {
-            Destroy(gameObject);
+            counter--;
+            if(counter == 0)
+            {
+
+                Destroy(gameObject);
+            }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-
-        int currentFrame = (int)(Animator.GetCurrentAnimatorClipInfo(0)[0].weight * (Animator.GetCurrentAnimatorClipInfo(0)[0].clip.length * Animator.GetCurrentAnimatorClipInfo(0)[0].clip.frameRate));
-        if (collision.transform.tag == "Player" && currentFrame >= 12)
+        if(Animator==null)
+        {
+            Animator = GetComponent<Animator>();
+        }
+        AnimatorClipInfo[] animationClip = Animator.GetCurrentAnimatorClipInfo(0);
+        int currentFrame = (int)(Animator.GetCurrentAnimatorStateInfo(0).normalizedTime * (animationClip[0].clip.length * animationClip[0].clip.frameRate));
+        if (collision.transform.tag == "Player" && (counter > (timetofade / Time.deltaTime) || GetComponent<SpriteRenderer>().color.a>0.75f))
         {
             collision.transform.GetComponent<PlayerHP>().TakeDamage(damage, new Vector2(collision.transform.GetComponent<Rigidbody2D>().velocityX, collision.transform.GetComponent<PlayerHP>().hitjumpforce), Vector2.zero);
         }

@@ -448,8 +448,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 384f33183c11dae43940a15a9c1b7d09
-      internalID: -229212142
+      spriteID: 11842764f9dfc6a45b605a463372782a
+      internalID: 1684542992
       vertices: []
       indices: 
       edges: []
@@ -469,8 +469,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d42de7720787d784180b5d1dd96358ce
-      internalID: -616562967
+      spriteID: 39e60823c80abc244b29cafdc16ac043
+      internalID: -30308333
       vertices: []
       indices: 
       edges: []
@@ -492,8 +492,8 @@ TextureImporter:
       BossSlimeSpike_11: 1506016315
       BossSlimeSpike_12: -234994316
       BossSlimeSpike_13: 413463434
-      BossSlimeSpike_14: -229212142
-      BossSlimeSpike_15: -616562967
+      BossSlimeSpike_14: 1684542992
+      BossSlimeSpike_15: -30308333
       BossSlimeSpike_2: 4089148658955635790
       BossSlimeSpike_3: 7732621592554102284
       BossSlimeSpike_4: 4474346924339852070

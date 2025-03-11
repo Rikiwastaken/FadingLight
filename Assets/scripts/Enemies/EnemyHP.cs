@@ -36,7 +36,7 @@ public class EnemyHP : MonoBehaviour
     public int worldflagtospawn;
     public int deathworldflag;
     public int LifebarSegments;
-    private bool activated;
+    public bool activated;
     private BossLifeBar bossLifeBar;
 
 
