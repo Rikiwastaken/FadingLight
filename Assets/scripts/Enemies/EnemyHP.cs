@@ -48,10 +48,20 @@ public class EnemyHP : MonoBehaviour
 
     private Rigidbody2D rb2D;
 
+    private Global global;
 
+    private BossLifeBar BossLifeBar;
+
+    private musicmanager Musicmanager;
+
+    private BossWall BossWall;
 
     void Start()
     {
+        global = FindAnyObjectByType<Global>();
+        BossLifeBar = FindAnyObjectByType<BossLifeBar>();
+        Musicmanager = FindAnyObjectByType<musicmanager>();
+        BossWall = FindAnyObjectByType<BossWall>();
         //setting enemy's max heatlth and energy
         enemyhp = enemymaxhp;
         enemyNRG = enemymaxNRG;
@@ -64,7 +74,7 @@ public class EnemyHP : MonoBehaviour
         else
         {
             bossscaley = transform.localScale.y;
-            if (FindAnyObjectByType<Global>().worldflags[deathworldflag])
+            if (global.worldflags[deathworldflag])
             {
                 Destroy(gameObject);
             }
@@ -106,15 +116,14 @@ public class EnemyHP : MonoBehaviour
         }
         else //boss activation
         {
-            if (FindAnyObjectByType<Global>().worldflags[worldflagtospawn] && !activated)
+            if (global.worldflags[worldflagtospawn] && !activated)
             {
-                bossLifeBar = FindAnyObjectByType<BossLifeBar>();
-                bossLifeBar.InitiateCombat(this);
-                bossLifeBar.numberofseparators = LifebarSegments-1;
-                bossLifeBar.setupseparatorsbool = true;
-                FindAnyObjectByType<Global>().inbossfight = true;
-                FindAnyObjectByType<BossWall>().putupwall = true;
-                FindAnyObjectByType<musicmanager>().EnterBossMusic();
+                BossLifeBar.InitiateCombat(this);
+                BossLifeBar.numberofseparators = LifebarSegments-1;
+                BossLifeBar.setupseparatorsbool = true;
+                global.inbossfight = true;
+                BossWall.putupwall = true;
+                Musicmanager.EnterBossMusic();
                 activated = true;
             }
         }
@@ -231,12 +240,12 @@ public class EnemyHP : MonoBehaviour
             bossdeathcounter--;
             if (bossdeathcounter <= 0)
             {
-                FindAnyObjectByType<Global>().worldflags[deathworldflag] = true;
+                global.worldflags[deathworldflag] = true;
                 FindAnyObjectByType<DialogueManager>().TrytoTrigger(deathworldflag);
-                FindAnyObjectByType<Global>().inbossfight = false;
-                FindAnyObjectByType<BossLifeBar>().EndCombat();
-                FindAnyObjectByType<BossWall>().putdownwall = true;
-                FindAnyObjectByType<musicmanager>().ExitBossMusic();
+                global.inbossfight = false;
+                BossLifeBar.EndCombat();
+                BossWall.putdownwall = true;
+                Musicmanager.ExitBossMusic();
                 Destroy(gameObject);
             }
         }

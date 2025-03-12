@@ -20,9 +20,8 @@ public class SlimeBossSpike : MonoBehaviour
     {
         AnimatorClipInfo[] animationClip = Animator.GetCurrentAnimatorClipInfo(0);
         int currentFrame = (int)(Animator.GetCurrentAnimatorStateInfo(0).normalizedTime * (animationClip[0].clip.length * animationClip[0].clip.frameRate));
-        if (currentFrame >= 13)
+        if (currentFrame >= 14)
         {
-            Animator.speed = 0;
             if(counter == -1)
             {
                 counter = (int)(timetofade/Time.deltaTime)+ (int)((timetofade / Time.deltaTime)*0.5f);
@@ -51,7 +50,7 @@ public class SlimeBossSpike : MonoBehaviour
         }
         AnimatorClipInfo[] animationClip = Animator.GetCurrentAnimatorClipInfo(0);
         int currentFrame = (int)(Animator.GetCurrentAnimatorStateInfo(0).normalizedTime * (animationClip[0].clip.length * animationClip[0].clip.frameRate));
-        if (collision.transform.tag == "Player" && Animator.speed==0 && GetComponent<SpriteRenderer>().color.a>0.75f)
+        if (collision.transform.tag == "Player" && GetComponent<SpriteRenderer>().color.a>0.75f)
         {
             collision.transform.GetComponent<PlayerHP>().TakeDamage(damage, new Vector2(collision.transform.GetComponent<Rigidbody2D>().velocityX, collision.transform.GetComponent<PlayerHP>().hitjumpforce), Vector2.zero);
         }

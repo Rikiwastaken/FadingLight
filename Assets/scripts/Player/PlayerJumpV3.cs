@@ -56,6 +56,8 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private int savepointjumpCD;
 
+    private float velocityx;
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -93,8 +95,14 @@ public class PlayerJumpV3 : MonoBehaviour
 
 
         horizontal = playermov.horizontal;
+
+        if(!grounded && (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough)))// here to get the frame where the player is grounded again
+        {
+            rb.velocity = new Vector2(velocityx,0);
+        }
+
         grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough));
-        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/3, largeurgi/2), 0, whatiswall);
+        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/2, largeurgi/2), 0, whatiswall);
 
         if (Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough))
         {
@@ -184,6 +192,7 @@ public class PlayerJumpV3 : MonoBehaviour
             }
         }
 
+        velocityx = rb.velocityX;
 
     }
 
