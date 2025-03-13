@@ -20,13 +20,13 @@ public class BossWall : MonoBehaviour
     {
         if((putupwall||putdownwall) && wallcounter==-1)
         {
-            wallcounter = (int)( 1/Time.deltaTime);
+            wallcounter = (int)(0.5f / Time.deltaTime);
         }
         if(wallcounter > 0)
         {
             if(putupwall)
             {
-                float newscaley = scaley * ((1 / Time.deltaTime) - wallcounter) * Time.deltaTime;
+                float newscaley = scaley * ((0.5f / Time.deltaTime) - wallcounter) / (0.5f / Time.deltaTime);
                 transform.localScale = new Vector3(transform.localScale.x, newscaley, transform.localScale.z);
                 wallcounter--;
                 if (wallcounter == 0)
@@ -37,7 +37,7 @@ public class BossWall : MonoBehaviour
             }
             else if(putdownwall)
             {
-                float newscaley = scaley * (wallcounter) * Time.deltaTime;
+                float newscaley = scaley * (wallcounter) / (0.5f / Time.deltaTime);
                 transform.localScale = new Vector3(transform.localScale.x, newscaley, transform.localScale.z);
                 wallcounter--;
                 if (wallcounter == 0)

@@ -52,9 +52,13 @@ public class PlayerHP : MonoBehaviour
             Eldonhp -= damagetotake;
             inv = true;
             iframe = invicibilityframes;
-            if (velchg != Vector2.zero)
+            if (velchg.y != 0)
             {
-                rb.velocity = new Vector2(rb.velocity.x, hitjumpforce);
+                rb.velocity = new Vector2(rb.velocity.x, velchg.y);
+            }
+            if (velchg.x != 0)
+            {
+                rb.velocity = new Vector2(velchg.x, rb.velocity.y);
             }
             if (ForceApplied != Vector2.zero)
             {
@@ -75,6 +79,7 @@ public class PlayerHP : MonoBehaviour
 
         if (Eldonhp <= 0)
         {
+            global.inbossfight = false;
             SceneManager.LoadScene("BreedingGrounds");
         }
         if (inv == true)

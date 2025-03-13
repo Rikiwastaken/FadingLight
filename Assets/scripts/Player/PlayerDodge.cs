@@ -40,7 +40,7 @@ public class PlayerDodge : MonoBehaviour
             }
 
         }
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("roll") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && dodgecdcnt == 0)
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("roll") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && dodgecdcnt == 0 && GetComponent<PlayerJumpV3>().grounded)
         {
             anim.SetTrigger("dodge");
             dodgecdcnt = (int)(dodgecd / Time.fixedDeltaTime);

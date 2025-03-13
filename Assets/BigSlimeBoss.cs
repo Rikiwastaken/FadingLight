@@ -19,6 +19,7 @@ public class BigSlimeBoss : MonoBehaviour
     public float attackcooldown;
 
     private Transform player;
+    public float distancextotriggermelee;
 
     private void FixedUpdate()
     {
@@ -32,7 +33,7 @@ public class BigSlimeBoss : MonoBehaviour
 
             if(attackcooldowncounter <= 0 && !GetComponent<EnemyHP>().execution && !GetComponent<EnemyHP>().bossdying)
             {
-                if(Vector2.Distance(player.position,transform.position)<=0.75)
+                if(Mathf.Abs(player.position.x-transform.position.x)<=distancextotriggermelee)
                 {
                     RandomAttackClose();
                 }

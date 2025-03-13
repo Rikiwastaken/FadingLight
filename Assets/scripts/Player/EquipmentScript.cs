@@ -56,15 +56,22 @@ public class EquipmentScript : MonoBehaviour
     public GameObject gotitempopupprefab;
 
     // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
-        healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
-        playerHP = FindAnyObjectByType<PlayerHP>();
-        if(FindAnyObjectByType<Global>().clickednewgame)
+        
+        if (FindAnyObjectByType<Global>().clickednewgame)
         {
             FindAnyObjectByType<SaveManager>().CreateEmptySaveFile(FindAnyObjectByType<SaveManager>().CurrentSlot);
         }
         FindAnyObjectByType<SaveManager>().ApplySave();
+    }
+
+    void Start()
+    {
+
+        healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
+        playerHP = FindAnyObjectByType<PlayerHP>();
     }
     private void FixedUpdate()
     {

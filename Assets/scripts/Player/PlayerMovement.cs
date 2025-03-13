@@ -176,7 +176,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         issafe = Physics2D.OverlapCircle(groundcheck.position, safedetectrange, whatissafe);
-        if (playerjump.grounded && Physics2D.OverlapCircle(transform.position, 0.1f, whatissafe) && (vertical == 1||jumppressed))
+        if (playerjump.grounded && Physics2D.OverlapCircle(transform.position, 0.1f, whatissafe) && vertical == 1)
         {
             SavePointScript[] savepointlist =FindObjectsByType<SavePointScript>(FindObjectsSortMode.InstanceID);
             SavePointScript closest = null;

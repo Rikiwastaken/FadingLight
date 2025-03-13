@@ -40,17 +40,7 @@ public class SupportDrone : MonoBehaviour
     {
         playerhp = GameObject.FindAnyObjectByType<PlayerHP>();
         augmentsscript = FindAnyObjectByType<AugmentsScript>();
-        if (drones[ActiveDroneID].Medical)
-        {
-            GetComponent<Animator>().runtimeAnimatorController =MedController;
-        }
-        else
-        {
-            GetComponent<Animator>().runtimeAnimatorController = GunController;
-        }
-        GetComponent<SpriteRenderer>().sprite= drones[ActiveDroneID].Sprite;
-
-
+        ChangeSprite();
     }
 
     // Update is called once per frame

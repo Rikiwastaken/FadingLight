@@ -81,6 +81,10 @@ public class PlayerJumpV3 : MonoBehaviour
         if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
         {
             savepointjumpCD=(int)(1/Time.deltaTime);
+            stuckinwall = false;
+            wantstounstick = false;
+            rb.gravityScale = gravity;
+            GetComponent<Animator>().SetBool("stuckinwall", false);
             return;
         }
         if(savepointjumpCD>0)
