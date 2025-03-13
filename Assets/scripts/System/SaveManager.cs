@@ -362,7 +362,7 @@ public class SaveManager : MonoBehaviour
                 string newname = path;
                 string abstractpath = Application.persistentDataPath + "/SaveFiles/";
                 newname = newname.Substring((int)(abstractpath.Length), newname.Length - abstractpath.Length);
-                if (int.Parse("" + newname[0]) == save.slotID)
+                if (int.Parse("" + newname[0]) == slotID)
                 {
                     System.IO.File.Delete(Application.persistentDataPath + "/SaveFiles/" + newname);
                 }    

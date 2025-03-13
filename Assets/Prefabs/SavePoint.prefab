@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4813750955272374346}
   - component: {fileID: 3375356738256323393}
   - component: {fileID: 3926278440056376085}
+  - component: {fileID: -2626720585161270710}
   m_Layer: 7
   m_Name: SavePoint
   m_TagString: Untagged
@@ -171,10 +172,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SaveMenu: {fileID: 4659958184961083705, guid: 8c749cefd878a11439b08119d4485aac, type: 3}
-  launchfadetoblack: 0
   fadeduration: 1
   savepointCD: 3
-  fadecounter: 0
+--- !u!50 &-2626720585161270710
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4499550875321652918}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &5542558641761947714
 GameObject:
   m_ObjectHideFlags: 0

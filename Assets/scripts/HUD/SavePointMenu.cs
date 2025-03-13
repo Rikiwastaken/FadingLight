@@ -121,12 +121,12 @@ public class SavePointMenu : MonoBehaviour
             {
                 if(unlockallavailable)
                 {
-                    activebuttonID = transform.childCount - 1;
+                    activebuttonID = transform.childCount - 2;
                     selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
                 }
                 else
                 {
-                    activebuttonID = transform.childCount - 2;
+                    activebuttonID = transform.childCount - 3;
                     selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
                 }
                 
@@ -137,7 +137,7 @@ public class SavePointMenu : MonoBehaviour
         {
             if (unlockallavailable)
             {
-                if (activebuttonID < transform.childCount - 1)
+                if (activebuttonID < transform.childCount - 2)
                 {
                     activebuttonID += 1;
                     selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
@@ -150,7 +150,7 @@ public class SavePointMenu : MonoBehaviour
             }
             else
             {
-                if (activebuttonID < transform.childCount - 2)
+                if (activebuttonID < transform.childCount - 3)
                 {
                     activebuttonID += 1;
                     selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();

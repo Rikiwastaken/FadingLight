@@ -25,6 +25,7 @@ public class Global : MonoBehaviour
 
     public float ManualClock;
     public bool usemanualclock;
+    public SavePointScript activeSavePoint;
 
     void Start()
     {
@@ -106,6 +107,22 @@ public class Global : MonoBehaviour
         }
     }
 
+    void OnNorthButton()
+    {
+        ShowSaveSlots showSaveSlots = FindAnyObjectByType<ShowSaveSlots>();
+        if(showSaveSlots != null)
+        {
+            if(showSaveSlots.GetComponent<basicmenunav>().selected!=null)
+            {
+                string name = showSaveSlots.GetComponent<basicmenunav>().selected.transform.name;
+                int SlotID = int.Parse(name[name.Length-1]+"");
+                GetComponent<SaveManager>().DeleteSlot(SlotID);
+                SceneManager.LoadScene("MainMenu");
+            }
+        }
+            
+    }
+
     void OnJump()
     {
         if (indialogue)
@@ -131,11 +148,6 @@ public class Global : MonoBehaviour
         currentinventory.SetActive(true);
         ininventory=true;
         currentinventory.GetComponent<InventoryScript>().SetPage(page);
-    }
-
-    public void LoadSave()
-    {
-        
     }
 
     private void OnEnable()

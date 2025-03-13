@@ -161,6 +161,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NorthButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""ddd93b15-7987-4d1d-b2ab-ad5cf00aebfb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -493,6 +502,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""crossright"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dbda6930-bb20-4f76-9f46-87fdd4b63e07"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NorthButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9dc2b4a5-55ec-45de-8f48-9e09f4768b03"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NorthButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -516,6 +547,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_gameplay_crossdown = m_gameplay.FindAction("crossdown", throwIfNotFound: true);
         m_gameplay_crossleft = m_gameplay.FindAction("crossleft", throwIfNotFound: true);
         m_gameplay_crossright = m_gameplay.FindAction("crossright", throwIfNotFound: true);
+        m_gameplay_NorthButton = m_gameplay.FindAction("NorthButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -592,6 +624,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_gameplay_crossdown;
     private readonly InputAction m_gameplay_crossleft;
     private readonly InputAction m_gameplay_crossright;
+    private readonly InputAction m_gameplay_NorthButton;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -611,6 +644,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @crossdown => m_Wrapper.m_gameplay_crossdown;
         public InputAction @crossleft => m_Wrapper.m_gameplay_crossleft;
         public InputAction @crossright => m_Wrapper.m_gameplay_crossright;
+        public InputAction @NorthButton => m_Wrapper.m_gameplay_NorthButton;
         public InputActionMap Get() { return m_Wrapper.m_gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -665,6 +699,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @crossright.started += instance.OnCrossright;
             @crossright.performed += instance.OnCrossright;
             @crossright.canceled += instance.OnCrossright;
+            @NorthButton.started += instance.OnNorthButton;
+            @NorthButton.performed += instance.OnNorthButton;
+            @NorthButton.canceled += instance.OnNorthButton;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -714,6 +751,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @crossright.started -= instance.OnCrossright;
             @crossright.performed -= instance.OnCrossright;
             @crossright.canceled -= instance.OnCrossright;
+            @NorthButton.started -= instance.OnNorthButton;
+            @NorthButton.performed -= instance.OnNorthButton;
+            @NorthButton.canceled -= instance.OnNorthButton;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -748,5 +788,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnCrossdown(InputAction.CallbackContext context);
         void OnCrossleft(InputAction.CallbackContext context);
         void OnCrossright(InputAction.CallbackContext context);
+        void OnNorthButton(InputAction.CallbackContext context);
     }
 }

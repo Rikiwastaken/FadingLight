@@ -110,6 +110,11 @@ public class EldonAttack : MonoBehaviour
 
     void fctAttack()
     {
+        if (!grounded)
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 2.5f);
+        }
+        
         //attack animation
         eldonanim.SetTrigger("attack");
 

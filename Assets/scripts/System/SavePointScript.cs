@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,22 +19,25 @@ public class SavePointScript : MonoBehaviour
     private int fadecounter;
     private Vector2 wheretoplaceplayer;
 
+    private Global Global;
+
     // Start is called before the first frame update
     void Start()
     {
         fadetoblack = GameObject.Find("FadeToBlackImage").GetComponent<Image>();
         wheretoplaceplayer=transform.GetChild(0).transform.position;
+        Global = FindAnyObjectByType<Global>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint)
+        if (Global.atsavepoint && Global.activeSavePoint == this)
         {
             FindAnyObjectByType<PlayerMovement>().transform.position = wheretoplaceplayer;
             FindAnyObjectByType<PlayerDodge>().dodgecdcnt = 30;
         }
-        else
+        else if(Global.activeSavePoint == this)
         {
             if(savepointcdcounter>0)
             {
@@ -90,7 +94,7 @@ public class SavePointScript : MonoBehaviour
             FindAnyObjectByType<PlayerMovement>().transform.position = wheretoplaceplayer;
             GameObject newmenu = Instantiate(SaveMenu, Vector3.zero, Quaternion.identity, GameObject.Find("Canvas").transform);
             newmenu.transform.SetAsFirstSibling();
-            FindAnyObjectByType<Global>().atsavepoint = true;
+            Global.atsavepoint = true;
             newmenu.GetComponent<RectTransform>().localPosition = Vector2.zero;
             
             savepointcdcounter = (int)(savepointCD / Time.deltaTime);
@@ -100,6 +104,7 @@ public class SavePointScript : MonoBehaviour
 
     public void InteractWithSavePoint()
     {
+        Global.activeSavePoint = this;
         if (savepointcdcounter<=0)
         {
             launchfadetoblack = true;

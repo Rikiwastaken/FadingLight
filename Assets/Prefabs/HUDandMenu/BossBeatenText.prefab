@@ -53,8 +53,8 @@ MonoBehaviour:
   bottomhalf: {fileID: 3180503614215399240}
   tophalf: {fileID: 728252703217115193}
   offset: 3000
-  titleduration: 5
-  speed: 20
+  titleduration: 3
+  speed: 30
 --- !u!1 &6257257688509724625
 GameObject:
   m_ObjectHideFlags: 0

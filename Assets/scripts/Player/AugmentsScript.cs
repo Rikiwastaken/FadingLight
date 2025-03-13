@@ -200,6 +200,7 @@ public class AugmentsScript : MonoBehaviour
             statdisplayobject.Speed = (int)(100f * EquipedStats.Speed / Basestats.Speed);
             statdisplayobject.MaxSlots = EquipedStats.MaxSlots;
             statdisplayobject.UsedSlots = EquipedStats.EquipedSlots;
+            statdisplayobject.Shards = numberofShardsPickedUp;
         }
     }
 

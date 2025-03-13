@@ -44,6 +44,7 @@ public class BossWall : MonoBehaviour
                 {
                     putdownwall = false;
                     wallcounter = -1;
+                    transform.localScale = new Vector3(transform.localScale.x, 0, transform.localScale.z);
                 }
             }
             else

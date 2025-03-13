@@ -702,10 +702,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyhp: 0
-  enemymaxhp: 100
+  enemymaxhp: 200
   rez: 0
   enemyNRG: 0
-  enemymaxNRG: 80
+  enemymaxNRG: 100
   NRGdelay: 5
   NRGrechargerate: 4
   execution: 0
@@ -713,7 +713,10 @@ MonoBehaviour:
   hitstundelay: 20
   isboss: 0
   worldflagtospawn: 0
+  deathworldflag: 0
   LifebarSegments: 0
+  activated: 0
+  bossdying: 0
   healthbar: {fileID: 4526496966787258727}
 --- !u!95 &5458493380403203971
 Animator:

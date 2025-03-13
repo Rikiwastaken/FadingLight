@@ -258,7 +258,7 @@ public class EnemyHP : MonoBehaviour
     void BossDeath()
     {
         FindAnyObjectByType<BossBeatenText>().StartTitle();
-        bossdeathcounter = (int)(1/Time.deltaTime);
+        bossdeathcounter = (int)(6/Time.deltaTime);
         bossdying = true;
     }
     void BossExecution()

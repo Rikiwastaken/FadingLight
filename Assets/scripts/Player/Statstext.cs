@@ -17,6 +17,7 @@ public class Statstext : MonoBehaviour
     public int Speed;
     public int MaxSlots;
     public int UsedSlots;
+    public int Shards;
 
     private bool playerobjectfound;
 
@@ -53,6 +54,7 @@ public class Statstext : MonoBehaviour
             texttodisplay += "Jump Height : " + JumpHeight + "%\n";
             texttodisplay += "Speed : " + Speed + "%\n";
             texttodisplay += "Augment Slots : " + UsedSlots + " / " + MaxSlots + "\n";
+            texttodisplay += "Crystal Shards : " + Shards +"\n";
             GetComponent<TextMeshProUGUI>().text = texttodisplay;
         }
     }

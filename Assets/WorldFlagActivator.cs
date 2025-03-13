@@ -19,6 +19,14 @@ public class WorldFlagActivator : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Global.worldflags[worldflagid])
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<PlayerHP>())

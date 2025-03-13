@@ -2199,6 +2199,7 @@ MonoBehaviour:
   Speed: 0
   MaxSlots: 0
   UsedSlots: 0
+  Shards: 0
 --- !u!1 &3712308996848982670
 GameObject:
   m_ObjectHideFlags: 0
@@ -4094,7 +4095,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Health : 120 / 120\nEnergy : 0 / 100\nPhysical Damage : 20\nEnergy Damage
-    : 20\nDefense : 3\nJump Height : 3\nAugment Slots : 8/10 \n"
+    : 20\nDefense : 3\nJump Height : 3\nAugment Slots : 8/10 \nShards : 20\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4188,6 +4189,7 @@ MonoBehaviour:
   Speed: 0
   MaxSlots: 0
   UsedSlots: 0
+  Shards: 0
 --- !u!1 &7075528850300478011
 GameObject:
   m_ObjectHideFlags: 0
@@ -4414,7 +4416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4518972753755523485
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4959,7 +4961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1851158454144215009
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5078,6 +5080,7 @@ MonoBehaviour:
   effecttext: {fileID: 1986580854759149553}
   nametext: {fileID: 7132050634444683859}
   Dronelist: []
+  Gadgetlist: []
   selected: {fileID: 0}
   selectedsection: 0
   NotAtSavePointText: {fileID: 4236013251124063690}

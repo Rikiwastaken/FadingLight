@@ -605,49 +605,49 @@ MonoBehaviour:
     description: Eldon broke is prostetic during the fall. It provides little protection
       now.
     Defense: 0
-    HPRegen: 0.005
+    HPRegen: 0.01
     ID: 0
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Metal Plate
     description: Decreases damge taken by 10 and provides a mediocre regeneration
     Defense: 10
-    HPRegen: 0.005
+    HPRegen: 0.01
     ID: 1
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Bio-Plate
     description: Does not increase defense but grants a small regeneration
     Defense: 0
-    HPRegen: 0.01
+    HPRegen: 0.03
     ID: 2
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Bioi-Metal Plate
     description: Increases defense by 10 and grants a small regeneration
     Defense: 10
-    HPRegen: 0.01
+    HPRegen: 0.015
     ID: 3
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Shock Amplifier Plate
     description: Increases damage taken by 10 but grants a good regeneration.
     Defense: -10
-    HPRegen: 0.02
+    HPRegen: 0.04
     ID: 4
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Reinforced Steel Plate
     description: Decreases damge taken by 30 and provides a mediocre regeneration
     Defense: 30
-    HPRegen: 0.005
+    HPRegen: 0.01
     ID: 5
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Juggernaut Plate
     description: Decreases damge taken by 50.
     Defense: 50
-    HPRegen: 0
+    HPRegen: 0.005
     ID: 6
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
