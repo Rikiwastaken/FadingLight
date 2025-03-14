@@ -155,11 +155,13 @@ public class PlayerJumpV3 : MonoBehaviour
         }
         else
         {
+            int direction = (int)(transform.localScale.x / Mathf.Abs(transform.localScale.x));
             if (presseddown)
             {
                 wantstounstick = true;
             }
-            if (!wantstounstick)
+            
+            if (!wantstounstick && ((direction==1 && horizontal>0)||(direction == -1 && horizontal < 0)))
             {
                 stuckinwall = true;
             }

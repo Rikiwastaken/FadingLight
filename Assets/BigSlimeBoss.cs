@@ -111,7 +111,7 @@ public class BigSlimeBoss : MonoBehaviour
     {
         for(int i = 0; i < 3; i++)
         {
-            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f/3f - i, yforvertical, -1), Quaternion.identity);
+            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f/3f - i , yforvertical, -1), Quaternion.identity);
             VerSpike.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
             GameObject VerSpike2 = Instantiate(VerticalSpike, new Vector3(transform.position.x + 2f / 3f + i, yforvertical, -1), Quaternion.identity);
             VerSpike2.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
@@ -122,7 +122,7 @@ public class BigSlimeBoss : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f / 3f - i  -1f/3f, yforvertical, -1), Quaternion.identity);
+            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f / 3f - i  -2f/3f, yforvertical, -1), Quaternion.identity);
             VerSpike.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
             GameObject VerSpike2 = Instantiate(VerticalSpike, new Vector3(transform.position.x + 2f / 3f + i  + 1f / 3f, yforvertical, -1), Quaternion.identity);
             VerSpike2.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
@@ -131,11 +131,11 @@ public class BigSlimeBoss : MonoBehaviour
 
     void SpawnLineOfSpikesMovedAgain()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
-            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f / 3f - i  - 2f / 3f, yforvertical, -1), Quaternion.identity);
+            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f / 3f - i*0.75f, yforvertical, -1), Quaternion.identity);
             VerSpike.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
-            GameObject VerSpike2 = Instantiate(VerticalSpike, new Vector3(transform.position.x + 2f / 3f + i  + 2f / 3f, yforvertical, -1), Quaternion.identity);
+            GameObject VerSpike2 = Instantiate(VerticalSpike, new Vector3(transform.position.x + 2f / 3f + i * 0.75f, yforvertical, -1), Quaternion.identity);
             VerSpike2.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
         }
     }

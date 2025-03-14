@@ -513,7 +513,7 @@ MonoBehaviour:
     Damage: 20
     NRJDamage: 20
     DamageReduction: 3
-    JumpHeight: 3
+    JumpHeight: 3.5
     Speed: 2
     MaxSlots: 3
     EquipedSlots: 0

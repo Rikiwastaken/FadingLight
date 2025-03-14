@@ -35,6 +35,10 @@ public class EquipmentMenuWindow : MonoBehaviour
     private int valueright;
     private int valuedown;
     private int valueup;
+    private int valuestickleft;
+    private int valuestickright;
+    private int valuestickdown;
+    private int valuestickup;
     private int valueclick;
     private Vector2 lastinput;
 
@@ -69,6 +73,15 @@ public class EquipmentMenuWindow : MonoBehaviour
         controls.gameplay.crossup.canceled += ctx => valueup = 0;
         controls.gameplay.jump.performed += ctx => valueclick = 1;
         controls.gameplay.jump.canceled += ctx => valueclick = 0;
+
+        controls.gameplay.moveleft.performed += ctx => valuestickleft = 1;
+        controls.gameplay.moveright.performed += ctx => valuestickright = 1;
+        controls.gameplay.moveleft.canceled += ctx => valuestickleft = 0;
+        controls.gameplay.moveright.canceled += ctx => valuestickright = 0;
+        controls.gameplay.down.performed += ctx => valuestickdown = 1;
+        controls.gameplay.down.canceled += ctx => valuestickdown = 0;
+        controls.gameplay.up.performed += ctx => valuestickup = 1;
+        controls.gameplay.up.canceled += ctx => valuestickup = 0;
 
         controls.gameplay.Enable();
 
@@ -179,6 +192,26 @@ public class EquipmentMenuWindow : MonoBehaviour
 
         Displaysection(selectedsection);
 
+        Vector2 inputstick = Vector2.zero;
+        if (valuestickleft != 0 || valuestickright != 0 || valuestickup != 0 || valuestickdown != 0)
+        {
+            if (valuestickdown != 0)
+            {
+                inputstick.y = -1;
+            }
+            else if (valuestickup != 0)
+            {
+                inputstick.y = 1;
+            }
+            else if (valuestickleft != 0)
+            {
+                inputstick.x = -1;
+            }
+            else if (valuestickright != 0)
+            {
+                inputstick.x = 1;
+            }
+        }
 
         Vector2 input = Vector2.zero;
         if (valueleft != 0 || valueright != 0 || valueup != 0 || valuedown != 0)
@@ -199,6 +232,11 @@ public class EquipmentMenuWindow : MonoBehaviour
             {
                 input.x = 1;
             }
+        }
+
+        if (input == Vector2.zero && inputstick != Vector2.zero)
+        {
+            input = inputstick;
         }
 
         if (lastinput != input && input != Vector2.zero)

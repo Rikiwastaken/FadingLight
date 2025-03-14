@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class DialogueManager : MonoBehaviour
         public int worldflagindex;
         public List<DialoguePart> parts;
         public int worldflagtotriggerattheend;
+        public Vector2 startpos;
     }
 
     public List<Dialogue> DialogueList; 
@@ -43,57 +45,112 @@ public class DialogueManager : MonoBehaviour
     private GameObject currentwindow;
     private Dialogue currentdialogue;
 
+    private bool launchfadetoblack;
+    private Image fadetoblack;
+
+    public float fadeduration;
+
+    private int fadecounter;
+
     // Start is called before the first frame update
     void Start()
     {
         Global = FindAnyObjectByType<Global>();
+        fadetoblack = GameObject.Find("FadeToBlackImage").GetComponent<Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if(currentdialogue != null)
+
+        if (launchfadetoblack)
         {
-            foreach(DialogueMovement Movement in currentdialogue.parts[pageindex].movementtotrigger)
+            if (fadetoblack.color.a < 1)
             {
-                if (Movement.Actor != null)
+                fadecounter += 1;
+                if (fadecounter / (fadeduration / Time.deltaTime) > 1f)
                 {
-                    Vector2 pos = Movement.Actor.transform.position;
-                    Vector2 dest = Movement.wheretogo;
-                    if(Vector2.Distance(pos, dest) >= 0.05)
+                    fadetoblack.color = new Color(1f, 1f, 1f, 1f);
+                    launchfadetoblack = false;
+
+                }
+                else
+                {
+                    fadetoblack.color = new Color(1f, 1f, 1f, fadecounter / (fadeduration / Time.deltaTime));
+                }
+            }
+            if (fadetoblack.color.a == 1)
+            {
+                launchdialogue();
+                fadecounter = -(int)(fadeduration / Time.deltaTime);
+                fadetoblack.color = new Color(1f, 1f, 1f, ((fadeduration / Time.deltaTime) - fadecounter) / (fadeduration / Time.deltaTime));
+            }
+        }
+        else
+        {
+            if (fadetoblack.color.a > 0)
+            {
+                fadecounter += 1;
+                fadetoblack.color = new Color(1f, 1f, 1f, ((fadeduration / Time.deltaTime) - fadecounter) / (fadeduration / Time.deltaTime));
+            }
+            else
+            {
+                fadecounter = 0;
+                fadetoblack.color = new Color(1f, 1f, 1f, 0);
+            }
+
+        }
+
+        if (currentdialogue != null)
+        {
+            if(currentdialogue.parts[pageindex]!=null)
+            {
+                foreach (DialogueMovement Movement in currentdialogue.parts[pageindex].movementtotrigger)
+                {
+                    if (Movement.Actor != null)
                     {
-                        float speed = Movement.speed;
-                        Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
-                    }
-                    else
-                    {
-                        Movement.Actor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        Vector2 pos = Movement.Actor.transform.position;
+                        Vector2 dest = Movement.wheretogo;
+                        if (Vector2.Distance(pos, dest) >= 0.05)
+                        {
+                            float speed = Movement.speed;
+                            Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
+                        }
+                        else
+                        {
+                            Movement.Actor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        }
                     }
                 }
             }
+            
         }
     }
 
     public void flagactivated(int flagindex)
     {
-        foreach (Dialogue part in DialogueList)
+        foreach (Dialogue dialogue in DialogueList)
         {
-            if (part.worldflagindex ==flagindex)
+            if (dialogue.worldflagindex ==flagindex)
             {
 
-                launchdialogue(part);
+                launchfade(dialogue);
                 break;
             }
         }
     }
 
-    void launchdialogue(Dialogue dialogue)
+    void launchfade (Dialogue dialogue)
+    {
+        currentdialogue = dialogue;
+        launchfadetoblack = true;
+    }
+
+    void launchdialogue()
     {
         FindAnyObjectByType<PlayerHP>().GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         Global.indialogue = true;
         pageindex = -1;
-        currentdialogue = dialogue;
         OpenNextPage();
     }
 
@@ -106,6 +163,10 @@ public class DialogueManager : MonoBehaviour
         if (currentdialogue.parts.Count>pageindex+1)
         {
             pageindex += 1;
+            if(pageindex==0 && currentdialogue.startpos!=Vector2.zero)
+            {
+                FindAnyObjectByType<PlayerMovement>().transform.position = currentdialogue.startpos;
+            }
             if(pageindex>0)
             {
                 foreach (DialogueMovement Movement in currentdialogue.parts[pageindex - 1].movementtotrigger)
@@ -153,7 +214,7 @@ public class DialogueManager : MonoBehaviour
         {
             if(dialogue.worldflagindex==worldflagindex)
             {
-                launchdialogue(dialogue);
+                launchfade(dialogue);
                 return;
             }
         }

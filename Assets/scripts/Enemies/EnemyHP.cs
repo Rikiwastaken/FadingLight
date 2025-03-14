@@ -287,6 +287,10 @@ public class EnemyHP : MonoBehaviour
 
     public void TakeDamage(int damage, int energydamage)
     {
+        if(isboss && !global.inbossfight)
+        {
+            return;
+        }
         enemyhp -= damage;
         enemyNRG-=energydamage;
         NRGcounter = 0;

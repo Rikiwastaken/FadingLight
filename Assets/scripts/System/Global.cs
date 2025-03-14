@@ -92,6 +92,10 @@ public class Global : MonoBehaviour
         {
             atsavepoint = false;
             Destroy(FindAnyObjectByType<SavePointMenu>().gameObject);
+            if(ininventory)
+            {
+                CloseInventory();
+            }
         }
     }
 

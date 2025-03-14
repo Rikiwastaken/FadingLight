@@ -24241,11 +24241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.68
+      value: -2.41
       objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.185
+      value: -0.78
       objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24533,7 +24533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1767766277620161340, guid: 5a8b2ec6c8f000c4c82b22878caaa558, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7007284539485652376, guid: 5a8b2ec6c8f000c4c82b22878caaa558, type: 3}
       propertyPath: m_Pivot.x
@@ -24633,12 +24633,40 @@ PrefabInstance:
       value: DialogueManager
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: fadeduration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueWindowPrefab
       value: 
       objectReference: {fileID: 6463510089043810734, guid: e2490a38cc244ed48b71aa1204e733f2, type: 3}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].startpos.x
+      value: 34.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[0].startpos.y
+      value: -1.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[1].startpos.x
+      value: 37.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[1].startpos.y
+      value: -1.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[2].startpos.x
+      value: 38.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
+      propertyPath: DialogueList.Array.data[2].startpos.y
+      value: -1.78
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[0].worldflagindex
