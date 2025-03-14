@@ -32,6 +32,8 @@ public class SaveManager : MonoBehaviour
     private int FrameCounter;
     public bool playing;
 
+    public bool deleteallsaves;
+
     private void FixedUpdate()
     {
         if(playing && save!=null)
@@ -44,9 +46,10 @@ public class SaveManager : MonoBehaviour
             }
         }
 
-        if(save.elapsedseconds ==30 && FrameCounter==0)
+        if(deleteallsaves)
         {
-            SaveToFile();
+            deleteallsaves = false;
+            DeleteAllSlots();
         }
         
     }
@@ -366,6 +369,19 @@ public class SaveManager : MonoBehaviour
                 {
                     System.IO.File.Delete(Application.persistentDataPath + "/SaveFiles/" + newname);
                 }    
+            }
+        }
+    }
+
+    public void DeleteAllSlots()
+    {
+        if (System.IO.Directory.Exists(Application.persistentDataPath + "/SaveFiles/"))
+        {
+            string[] listpaths = System.IO.Directory.GetFiles(Application.persistentDataPath + "/SaveFiles/");
+            List<string> listnames = new List<string>();
+            foreach (string path in listpaths)
+            {
+                System.IO.File.Delete(path);
             }
         }
     }

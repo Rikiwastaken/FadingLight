@@ -169,36 +169,14 @@ public class EnemyHP : MonoBehaviour
         }
 
         //Reinitialization of NRGcounter
-        if (enemyNRG == enemymaxNRG | tempHP != enemyhp)
+        if (enemyNRG == enemymaxNRG)
         {
             NRGcounter = 0;
         }
 
         //temporary execution
 
-        if (enemyNRG<=0)
-        {
-            
-            if (execution && enemyhp < tempHP)
-            {
-                if(!isboss)
-                {
-                    enemyhp = 0;
-                }
-                else
-                {
-                    BossExecution();
-                }
-                
-            }
-
-            if (enemyhp<tempHP)
-            {
-                execution = true;
-            }
-            
-
-        }
+       
 
         //update of the healthbar
         if(!isboss)
@@ -280,11 +258,60 @@ public class EnemyHP : MonoBehaviour
     public void TakeDamage(int damage)
     {
         enemyhp-=damage;
+        NRGcounter = 0;
+        if (enemyNRG <= 0)
+        {
+
+            if (execution && enemyhp < tempHP)
+            {
+                if (!isboss)
+                {
+                    enemyhp = 0;
+                }
+                else
+                {
+                    BossExecution();
+                }
+
+            }
+
+            if (!execution)
+            {
+                execution = true;
+            }
+
+
+        }
+
     }
 
     public void TakeDamage(int damage, int energydamage)
     {
         enemyhp -= damage;
         enemyNRG-=energydamage;
+        NRGcounter = 0;
+        if (enemyNRG <= 0)
+        {
+
+            if (execution && enemyhp < tempHP)
+            {
+                if (!isboss)
+                {
+                    enemyhp = 0;
+                }
+                else
+                {
+                    BossExecution();
+                }
+
+            }
+
+            if (!execution)
+            {
+                execution = true;
+            }
+
+
+        }
     }
 }

@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveDroneID: 0
+  dronecd: 0
   drones:
   - name: Energy Converter
     ID: 0
@@ -177,6 +178,7 @@ MonoBehaviour:
     Medical: 1
     Summon: {fileID: 0}
     Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    locked: 0
   - name: Battery Drone
     ID: 1
     RequiredEnergy: 0
@@ -186,6 +188,7 @@ MonoBehaviour:
     Medical: 1
     Summon: {fileID: 0}
     Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    locked: 0
   - name: Healing Drone
     ID: 2
     RequiredEnergy: 0
@@ -195,15 +198,28 @@ MonoBehaviour:
     Medical: 1
     Summon: {fileID: 0}
     Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    locked: 0
   - name: Rocket Drone
     ID: 3
     RequiredEnergy: 10
     Effect: 1.5
-    Description: Launches a Seeker Rocket every 4 seconds.
+    Description: Launches a Seeker Rocket every 3 seconds.
     cooldown: 3
     Medical: 0
     Summon: {fileID: 3458832224624917955, guid: f6e632099100b534da3498db3da54214, type: 3}
     Sprite: {fileID: 1902342771589439844, guid: 2f738a72aff8d624eafb303f818cf6e3, type: 3}
+    locked: 0
+  - name: Leech Drone
+    ID: 4
+    RequiredEnergy: 0
+    Effect: 0.15
+    Description: Deals 15% of Energy Damage to a nearby Enemy every second and transfers
+      it to Eldon.
+    cooldown: 1
+    Medical: 1
+    Summon: {fileID: 3458832224624917955, guid: b469e734079ce464a91af20ced6ccd9d, type: 3}
+    Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    locked: 0
   MedController: {fileID: 9100000, guid: 9838ef1b5d3df0344ba7945b10c47758, type: 2}
   GunController: {fileID: 9100000, guid: 628dae4b983cdd441ab219a592fb5ea7, type: 2}
 --- !u!1 &1400103518412949323

@@ -83,19 +83,7 @@ public class Global : MonoBehaviour
     void OnDodge()
     {
 
-        if (currentinventory != null && !indialogue)
-        {
-            if (Time.timeScale == 0f)
-            {
-                Time.timeScale = 1f;
-                
-            }
-            if(ininventory)
-            {
-                CloseInventory();
-            }
-
-        }
+        
         if(indialogue)
         {
             FindAnyObjectByType<DialogueManager>().AccelerateOrClose();
@@ -133,6 +121,13 @@ public class Global : MonoBehaviour
 
     public void CloseInventory()
     {
+        if (currentinventory != null && !indialogue)
+        {
+            if (Time.timeScale == 0f)
+            {
+                Time.timeScale = 1f;
+            }
+        }
         currentinventory.SetActive(false);
         ininventory=false;
         closedmenu = true;

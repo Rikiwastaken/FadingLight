@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
     private float valueleft;
     public float horizontal; // 1,-1,0
     public float vertical;
-    private bool jumppressed;
 
     public bool rolling;
     public float rollingspeed;
@@ -54,8 +53,6 @@ public class PlayerMovement : MonoBehaviour
         controls.gameplay.moveright.canceled += ctx => valueright = 0;
         controls.gameplay.down.performed += ctx => vertical = 1;
         controls.gameplay.down.canceled += ctx => vertical = 0;
-        controls.gameplay.jump.performed += ctx => jumppressed = true;
-        controls.gameplay.jump.canceled += ctx => jumppressed = false;
 
     }
 

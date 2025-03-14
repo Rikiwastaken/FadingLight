@@ -172,7 +172,6 @@ public class EquipmentMenuWindow : MonoBehaviour
                 else
                 {
                     EquipedContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 0f);
-                    EquipedContainer.GetChild(i).GetChild(1).GetComponent<Button>().interactable = false;
                 }
                 
             }
@@ -220,6 +219,11 @@ public class EquipmentMenuWindow : MonoBehaviour
             {
                 pressedclick = true;
                 selected.onClick.Invoke();
+                if(onquiped)
+                {
+                    onquiped = false;
+                    selected = EquipmentContainer.GetChild(0).GetChild(1).GetComponentInChildren<Button>();
+                }
             }
 
         }
@@ -655,6 +659,17 @@ public class EquipmentMenuWindow : MonoBehaviour
 
     }
 
+    void OnDodge()
+    {
+        if(onquiped)
+        {
+            FindAnyObjectByType<Global>().CloseInventory();
+        }
+        else
+        {
+            selected = EquipedContainer.GetChild(selectedsection).GetChild(1).GetComponentInChildren<Button>();
+        }
+    }
 
     void Direction(Vector2 dirinput)
     {
@@ -722,7 +737,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                 {
                     if (activebuttonidstring < 4)
                     {
-                        if(selectedsection+1==2 && EquipedItemsID[2] == -1)
+                        if(selectedsection+1==2 && EquipedItemsID[2] == -1 && Dronelist.Count==0)
                         {
                             selected = EquipedContainer.GetChild(activebuttonidstring + 3).GetChild(1).GetComponentInChildren<Button>();
                             selectedsection += 3;
@@ -743,7 +758,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                 {
                     if (activebuttonidstring > 0)
                     {
-                        if (selectedsection - 1 == 3 && EquipedItemsID[3] == -1)
+                        if (selectedsection - 1 == 3 && EquipedItemsID[3] == -1 && Dronelist.Count == 0)
                         {
                             selected = EquipedContainer.GetChild(activebuttonidstring - 3).GetChild(1).GetComponentInChildren<Button>();
                             selectedsection -= 3;

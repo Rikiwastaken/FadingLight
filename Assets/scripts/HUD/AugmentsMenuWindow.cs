@@ -180,6 +180,18 @@ public class AugmentsMenuWindow : MonoBehaviour
         }
 
     }
+
+    void OnDodge()
+    {
+        if (onquiped || !EquipedAugmentsContainer.GetChild(0).GetChild(1).GetComponent<Button>().interactable)
+        {
+            FindAnyObjectByType<Global>().CloseInventory();
+        }
+        else
+        {
+            selected = EquipedAugmentsContainer.GetChild(0).GetChild(1).GetComponent<Button>();
+        }
+    }
     public void Direction(Vector2 dirinput)
     {
         usedslot = 0;

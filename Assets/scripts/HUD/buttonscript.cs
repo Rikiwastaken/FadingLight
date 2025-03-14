@@ -89,6 +89,7 @@ public class buttonscript : MonoBehaviour
         }
         foreach (SupportDrone.HealerDrone drone in EquipmentScript.drone1.GetComponent<SupportDrone>().drones)
         {
+            
             drone.locked = false;
         }
         foreach (SupportDrone.HealerDrone drone in EquipmentScript.drone2.GetComponent<SupportDrone>().drones)

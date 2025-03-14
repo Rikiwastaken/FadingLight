@@ -101,11 +101,13 @@ public class EquipmentScript : MonoBehaviour
             {
                 healthbar.SetMaxDrone1(drone1.GetComponent<SupportDrone>().drones[drone1.GetComponent<SupportDrone>().ActiveDroneID].cooldown / Time.deltaTime);
                 healthbar.SetDrone1(drone1.GetComponent<SupportDrone>().dronecd);
+                healthbar.drone1usable = playerHP.EldonNRG >= drone1.GetComponent<SupportDrone>().drones[drone1.GetComponent<SupportDrone>().ActiveDroneID].RequiredEnergy;
             }
             else
             {
                 healthbar.SetMaxDrone1(1);
                 healthbar.SetDrone1(1);
+                healthbar.drone1usable=false;
             }
             
         }
@@ -115,11 +117,13 @@ public class EquipmentScript : MonoBehaviour
             {
                 healthbar.SetMaxDrone2(drone2.GetComponent<SupportDrone>().drones[drone2.GetComponent<SupportDrone>().ActiveDroneID].cooldown / Time.deltaTime);
                 healthbar.SetDrone2(drone2.GetComponent<SupportDrone>().dronecd);
+                healthbar.drone2usable = playerHP.EldonNRG >= drone2.GetComponent<SupportDrone>().drones[drone2.GetComponent<SupportDrone>().ActiveDroneID].RequiredEnergy;
             }
             else
             {
                 healthbar.SetMaxDrone2(1);
                 healthbar.SetDrone2(1);
+                healthbar.drone2usable = false;
             }
 
         }

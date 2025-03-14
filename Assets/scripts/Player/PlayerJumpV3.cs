@@ -218,8 +218,9 @@ public class PlayerJumpV3 : MonoBehaviour
     private void OnDrawGizmos()
     {
 
-        Gizmos.DrawCube(groundcheck.position - new Vector3(0, 0.1f, 0), new Vector2(largeurgi, hauteurgi));
-        
+        //Gizmos.DrawCube(groundcheck.position - new Vector3(0, 0.1f, 0), new Vector2(largeurgi, hauteurgi));
+        Gizmos.DrawCube(frontcheck.position, new Vector2(hauteurgi / 2, largeurgi / 2));
+
     }
 
     private void HandleLayers()

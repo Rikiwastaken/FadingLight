@@ -57,6 +57,7 @@ public class GadgetScript : MonoBehaviour
             gadgetCDcounter--;
         }
 
+        healthbar.gadgetusable =PlayerHP.EldonNRG >= GadgetList[ActiveGadgetID].Energycost;
 
     }
 

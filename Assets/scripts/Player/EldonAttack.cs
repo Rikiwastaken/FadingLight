@@ -122,7 +122,7 @@ public class EldonAttack : MonoBehaviour
 
         int damage = hpdamage;
         int energydamage =nrgdamage;
-        float absorbrate = 3 / 10;
+        float absorbrate = 3f / 10f;
         if (equipmentScript.equipedChainIndex!=-1)
         {
             damage = (int)(damage * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);

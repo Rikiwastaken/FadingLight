@@ -23,10 +23,11 @@ public class SupportDrone : MonoBehaviour
         public bool locked;
     }
 
-    public int ActiveDroneID; //-1 : No Drone, 0 : EnergyConverter Drone, 1 : Energy Regen Drone, 2 Healer Drone
+    public int ActiveDroneID; //-1 : No Drone, 0 : EnergyConverter Drone, 1 : Energy Regen Drone, 2 Healer Drone, 3 Rocket Drone, 4 Leech Drone
 
     private PlayerHP playerhp;
     private AugmentsScript augmentsscript;
+    private EquipmentScript EquipmentScript;
 
     public int dronecd;
 
@@ -40,6 +41,7 @@ public class SupportDrone : MonoBehaviour
     {
         playerhp = GameObject.FindAnyObjectByType<PlayerHP>();
         augmentsscript = FindAnyObjectByType<AugmentsScript>();
+        EquipmentScript = FindAnyObjectByType<EquipmentScript>();
         ChangeSprite();
     }
 
@@ -71,6 +73,9 @@ public class SupportDrone : MonoBehaviour
                             break;
                         case 3:
                             RocketDroneEffect();
+                            break;
+                        case 4:
+                            LeechDroneEffect();
                             break;
                     }
 
@@ -163,6 +168,48 @@ public class SupportDrone : MonoBehaviour
                 target = null;
             }
         }
+    }
+
+    void LeechDroneEffect()
+    {
+        float detectdist = 3.0f;
+        LeechDroneScript leech = FindAnyObjectByType<LeechDroneScript>();
+        if (leech != null && leech.target!=null)
+        {
+            leech.target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect));
+            playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect;
+            dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+        }
+        else
+        {
+            if(leech != null)
+            {
+                Destroy(leech.gameObject);
+            }
+            Collider2D[] listcollider = Physics2D.OverlapCircleAll(transform.position, detectdist);
+            float lowestdist = detectdist + 1;
+            Transform target = null;
+            foreach (Collider2D collider in listcollider)
+            {
+
+                if ((collider.transform.tag == "enemy" || collider.transform.tag == "Boss") && Vector2.Distance(collider.transform.position, transform.position) < lowestdist)
+                {
+                    target = collider.transform;
+                    lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                }
+            }
+            if (target != null)
+            {
+                GameObject newray = Instantiate(drones[ActiveDroneID].Summon, transform.position, Quaternion.identity);
+                newray.GetComponent<LeechDroneScript>().target = target;
+                newray.GetComponent<LeechDroneScript>().launcher = transform;
+                newray.GetComponent<LeechDroneScript>().detectionrange = detectdist;
+                target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect));
+                playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect;
+                dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+            }
+        }
+        
     }
 
 }
