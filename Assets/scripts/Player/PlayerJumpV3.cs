@@ -78,7 +78,11 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
+        if( FindAnyObjectByType<Global>().zipping && pressedjump)
+        {
+            FindAnyObjectByType<Global>().zipping=false;
+        }
+        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping && pressedjump)
         {
             savepointjumpCD=(int)(1/Time.deltaTime);
             stuckinwall = false;

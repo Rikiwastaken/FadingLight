@@ -91,6 +91,10 @@ public class PlayerMovement : MonoBehaviour
             
             return;
         }
+        if(FindAnyObjectByType<Global>().zipping)
+        {
+            return;
+        }
 
         if (!playerjump.stuckinwall)
         {

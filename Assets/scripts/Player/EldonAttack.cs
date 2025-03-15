@@ -55,7 +55,7 @@ public class EldonAttack : MonoBehaviour
 
     void OnRightShoulder()
     {
-        if (!!FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
+        if (!!FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue|| FindAnyObjectByType<Global>().zipping)
         {
             return;
         }
@@ -64,7 +64,7 @@ public class EldonAttack : MonoBehaviour
 
     void OnAttack()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue)
+        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue|| FindAnyObjectByType<Global>().zipping)
         {
             return;
         }

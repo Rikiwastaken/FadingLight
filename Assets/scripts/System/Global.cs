@@ -18,6 +18,7 @@ public class Global : MonoBehaviour
     public bool ininventory;
     public bool indialogue;
     public bool inbossfight;
+    public bool zipping;
 
     public bool clickednewgame;
 
