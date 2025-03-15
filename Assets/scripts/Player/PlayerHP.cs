@@ -66,6 +66,107 @@ public class PlayerHP : MonoBehaviour
             }
         }
     }
+
+    public void TakeDamage(float damage, Vector2 velchg, Vector2 ForceApplied, float energydamage)
+    {
+        if (!inv)
+        {
+            int damagetotake = 1;
+            int energydamagetotake = 1;
+            float totaldamagereduction = damagereduction;
+            if (equipmentScript.equipedPlateIndex != -1)
+            {
+                totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
+            }
+
+            if (damage - totaldamagereduction > 0f)
+            {
+                damagetotake = (int)(damage - totaldamagereduction);
+            }
+            if(energydamage - totaldamagereduction > 0f)
+            {
+                energydamagetotake = (int)(energydamage - totaldamagereduction);
+            }
+            EldonNRG -= damagetotake;
+            if(EldonNRG < 0)
+            {
+                EldonNRG = 0;
+            }
+            Eldonhp -= damagetotake;
+            inv = true;
+            iframe = invicibilityframes;
+            if (velchg.y != 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, velchg.y);
+            }
+            if (velchg.x != 0)
+            {
+                rb.velocity = new Vector2(velchg.x, rb.velocity.y);
+            }
+            if (ForceApplied != Vector2.zero)
+            {
+                rb.AddForce(ForceApplied, ForceMode2D.Impulse);
+            }
+        }
+    }
+
+    public void TakeDamage(float damage, float energydamage)
+    {
+        if (!inv)
+        {
+            int damagetotake = 1;
+            int energydamagetotake = 1;
+            float totaldamagereduction = damagereduction;
+            if (equipmentScript.equipedPlateIndex != -1)
+            {
+                totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
+            }
+
+            if (damage - totaldamagereduction > 0f)
+            {
+                damagetotake = (int)(damage - totaldamagereduction);
+            }
+            if (energydamage - totaldamagereduction > 0f)
+            {
+                energydamagetotake = (int)(energydamage - totaldamagereduction);
+            }
+            EldonNRG -= damagetotake;
+            if (EldonNRG < 0)
+            {
+                EldonNRG = 0;
+            }
+            Eldonhp -= damagetotake;
+            inv = true;
+            iframe = invicibilityframes;
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (!inv)
+        {
+            int damagetotake = 1;
+            float totaldamagereduction = damagereduction;
+            if (equipmentScript.equipedPlateIndex != -1)
+            {
+                totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
+            }
+
+            if (damage - totaldamagereduction > 0f)
+            {
+                damagetotake = (int)(damage - totaldamagereduction);
+            }
+            EldonNRG -= damagetotake;
+            if (EldonNRG < 0)
+            {
+                EldonNRG = 0;
+            }
+            Eldonhp -= damagetotake;
+            inv = true;
+            iframe = invicibilityframes;
+        }
+    }
+
     void FixedUpdate()
     {
 

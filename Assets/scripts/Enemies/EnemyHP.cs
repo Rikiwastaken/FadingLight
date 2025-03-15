@@ -318,4 +318,43 @@ public class EnemyHP : MonoBehaviour
 
         }
     }
+
+    public void TakeDamage(int damage, int energydamage, Vector2 Force)
+    {
+        if (isboss && !global.inbossfight)
+        {
+            return;
+        }
+        enemyhp -= damage;
+        enemyNRG -= energydamage;
+        NRGcounter = 0;
+        if (enemyNRG <= 0)
+        {
+
+            if (execution && enemyhp < tempHP)
+            {
+                if (!isboss)
+                {
+                    enemyhp = 0;
+                }
+                else
+                {
+                    BossExecution();
+                }
+
+            }
+
+            if (!execution)
+            {
+                execution = true;
+            }
+
+
+        }
+        if(!isboss)
+        {
+            GetComponent<Rigidbody2D>().AddForce(Force, ForceMode2D.Impulse);
+        }
+        
+    }
 }

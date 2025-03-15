@@ -56,7 +56,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         Global = FindAnyObjectByType<Global>();
-        fadetoblack = GameObject.Find("FadeToBlackImage").GetComponent<Image>();
+        fadetoblack = GameObject.Find("FadeToBlackImageForcutscene").GetComponent<Image>();
     }
 
     // Update is called once per frame

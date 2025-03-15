@@ -605,25 +605,25 @@ MonoBehaviour:
     description: Eldon broke is prostetic during the fall. It provides little protection
       now.
     Defense: 0
-    HPRegen: 0.01
+    HPRegen: 0.005
     ID: 0
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Metal Plate
     description: Decreases damge taken by 10 and provides a mediocre regeneration
     Defense: 10
-    HPRegen: 0.01
+    HPRegen: 0.005
     ID: 1
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Bio-Plate
     description: Does not increase defense but grants a small regeneration
     Defense: 0
-    HPRegen: 0.03
+    HPRegen: 0.015
     ID: 2
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
-  - name: Bioi-Metal Plate
+  - name: Bio-Alloy Plate
     description: Increases defense by 10 and grants a small regeneration
     Defense: 10
     HPRegen: 0.015
@@ -633,21 +633,21 @@ MonoBehaviour:
   - name: Shock Amplifier Plate
     description: Increases damage taken by 10 but grants a good regeneration.
     Defense: -10
-    HPRegen: 0.04
+    HPRegen: 0.02
     ID: 4
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Reinforced Steel Plate
     description: Decreases damge taken by 30 and provides a mediocre regeneration
     Defense: 30
-    HPRegen: 0.01
+    HPRegen: 0.005
     ID: 5
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
   - name: Juggernaut Plate
     description: Decreases damge taken by 50.
     Defense: 50
-    HPRegen: 0.005
+    HPRegen: 0.0025
     ID: 6
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
@@ -684,71 +684,41 @@ MonoBehaviour:
     description: Condenses energy into an orb an launch it at moderate speed.
     DamageMultiplier: 2
     AbsorbMultiplier: 0
-    Energycost: 10
+    Energycost: 15
     cooldown: 5
     PrefabtoSpawn: {fileID: 3458832224624917955, guid: 50e9c6038af57bd42882a9f2aac91889, type: 3}
     ID: 1
     image: {fileID: 21300000, guid: d94e0f32361d13842b9a935935e31165, type: 3}
     locked: 0
-  - name: RocketLauncher
+  - name: Rocket Launcher
     description: Launches a seeking rocket.
-    DamageMultiplier: 2
+    DamageMultiplier: 1.5
     AbsorbMultiplier: 0
-    Energycost: 15
-    cooldown: 7.5
+    Energycost: 20
+    cooldown: 6
     PrefabtoSpawn: {fileID: 3458832224624917955, guid: f6e632099100b534da3498db3da54214, type: 3}
     ID: 2
     image: {fileID: 21300000, guid: d94e0f32361d13842b9a935935e31165, type: 3}
     locked: 0
-  - name: Test4
-    description: Test4 Description
-    DamageMultiplier: 1.5
-    AbsorbMultiplier: 1
-    Energycost: 3
-    cooldown: 1
-    PrefabtoSpawn: {fileID: 0}
-    ID: 3
-    image: {fileID: -9158349384845336690, guid: 2ecad884286828c4781903e82116b323, type: 3}
-    locked: 0
-  - name: Test5
-    description: Test5 Description
-    DamageMultiplier: 2
-    AbsorbMultiplier: 0.4
-    Energycost: 0
-    cooldown: 2
-    PrefabtoSpawn: {fileID: 0}
-    ID: 4
-    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
-    locked: 0
-  - name: Test6
-    description: Test6 Description
-    DamageMultiplier: 0.1
-    AbsorbMultiplier: 3
-    Energycost: 5
-    cooldown: 4
-    PrefabtoSpawn: {fileID: 0}
-    ID: 5
-    image: {fileID: -1291046934158722540, guid: 4972526bd72eb2d4f88a1c9cb1b8e411, type: 3}
-    locked: 1
-  - name: Test7
-    description: Test7 Description
-    DamageMultiplier: 1
-    AbsorbMultiplier: 2
-    Energycost: 300
-    cooldown: 60
-    PrefabtoSpawn: {fileID: 0}
-    ID: 6
-    image: {fileID: 1902342771589439844, guid: 2f738a72aff8d624eafb303f818cf6e3, type: 3}
-    locked: 0
-  - name: Test8
-    description: Test8 Description
-    DamageMultiplier: 0
+  - name: Energy Grenade Launcher
+    description: Launches a grenade that depletes the energy of everything in range.
+    DamageMultiplier: 2.5
     AbsorbMultiplier: 0
-    Energycost: 0
-    cooldown: 0.1
-    PrefabtoSpawn: {fileID: 0}
-    ID: 7
-    image: {fileID: -4359158167049451620, guid: adedc9e7385cb29478767af6be3d0741, type: 3}
+    Energycost: 30
+    cooldown: 5
+    PrefabtoSpawn: {fileID: 1504114112772953579, guid: 64507c07bccb74843b860de84b15b57a, type: 3}
+    ID: 3
+    image: {fileID: 21300000, guid: fd649757aa38f2b4692697d2c1fbf94e, type: 3}
+    locked: 0
+  - name: Grenade Launcher
+    description: Launches a grenade that damages everything in range.
+    DamageMultiplier: 2.5
+    AbsorbMultiplier: 0
+    Energycost: 30
+    cooldown: 5
+    PrefabtoSpawn: {fileID: 1504114112772953579, guid: 64507c07bccb74843b860de84b15b57a, type: 3}
+    ID: 4
+    image: {fileID: 1545786567670615267, guid: e204328c74eebed42b696fa489ac6ac4, type: 3}
     locked: 0
   ActiveGadgetID: 0
   projectileoffset: 0
