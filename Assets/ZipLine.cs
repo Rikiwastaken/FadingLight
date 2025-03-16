@@ -17,12 +17,25 @@ public class ZipLine : MonoBehaviour
     public Transform player;
     public float speed;
     public bool reversed;
+    private bool pressingtrigger;
+    private GrappleScript GrappleScript;
+
+    private void Awake()
+    {
+        if (!end && !start)
+        {
+            transform.tag = "Untagged";
+            gameObject.layer = LayerMask.NameToLayer("Default");
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         global = FindAnyObjectByType<Global>();
+        GrappleScript=FindAnyObjectByType<GrappleScript>();
         
+
         if (next != null)
         {
             GameObject connector = new GameObject();
@@ -44,6 +57,8 @@ public class ZipLine : MonoBehaviour
 
     private void FixedUpdate()
     {
+        pressingtrigger = GrappleScript.pressedtrigger;
+
         if(!global.zipping)
         {
             player = null;
@@ -62,21 +77,43 @@ public class ZipLine : MonoBehaviour
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(pressingtrigger && !global.zipping)
+        {
+            if(start)
+            {
+                spreadunreversedtonext(this);
+                global.zipping = true;
+                collision.transform.position = transform.position - (Vector3)Offset;
+                player = collision.transform;
+            }
+            if(end)
+            {
+                spreadreversedtoprevious(this);
+                global.zipping = true;
+                collision.transform.position = transform.position - (Vector3)Offset;
+                player = collision.transform;
+            }
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if(collision.GetComponent<PlayerHP>()!=null)
         {
-            Debug.Log(transform.name);
             if (start)
             {
                 if(!global.zipping)
                 {
-                    spreadunreversedtonext(this);
-                    global.zipping = true;
-                    collision.transform.position = transform.position - (Vector3)Offset;
-                    player = collision.transform;
+                    if(pressingtrigger)
+                    {
+                        spreadunreversedtonext(this);
+                        global.zipping = true;
+                        collision.transform.position = transform.position - (Vector3)Offset;
+                        player = collision.transform;
+                    }
                 }
                 else
                 {
@@ -89,10 +126,14 @@ public class ZipLine : MonoBehaviour
             {
                 if(!global.zipping)
                 {
-                    spreadreversedtoprevious(this);
-                    global.zipping = true;
-                    collision.transform.position = transform.position - (Vector3)Offset;
-                    player = collision.transform;
+                    if(pressingtrigger)
+                    {
+                        spreadreversedtoprevious(this);
+                        global.zipping = true;
+                        collision.transform.position = transform.position - (Vector3)Offset;
+                        player = collision.transform;
+                    }
+                    
                 }
                 else
                 {

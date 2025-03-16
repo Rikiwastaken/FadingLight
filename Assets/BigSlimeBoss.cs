@@ -7,12 +7,15 @@ public class BigSlimeBoss : MonoBehaviour
 
     public GameObject HorizontalSpike;
     public GameObject VerticalSpike;
+    public GameObject Crystal;
     public float yforvertical;
     public int verticalspikedamage;
     public int HorizontalSpikeDamage;
+    public int CrystalDamage;
     public Vector3 WheretoSpawnLowHorizontal;
     public Vector3 WheretoSpawnHighHorizontal;
     public Vector3 WheretoSpawnCloseRangeSpikes;
+    public Vector3 WheretoSpawnCrystal;
     private Global Global;
 
     private int attackcooldowncounter;
@@ -54,25 +57,29 @@ public class BigSlimeBoss : MonoBehaviour
     void RandomAttackClose()
     {
         int rd = Random.Range(0, 120);
-        if (rd <= 15)
+        if (rd <= 5)
         {
             SpawnLineOfSpikes();
         }
-        else if (rd <= 30)
+        else if (rd <= 10)
         {
             SpawnLineOfSpikesMoved();
         }
-        else if (rd <= 45)
+        else if (rd <= 15)
         {
             SpawnLineOfSpikesMovedAgain();
         }
-        else if (rd <= 60)
+        else if (rd <= 20)
         {
             SpawnLowHorizontalSpike();
         }
-        else if (rd <= 75)
+        else if (rd <= 45)
         {
             SpawnHighHorizontalSpike();
+        }
+        else if (rd <= 105)
+        {
+            SpawnCrystal();
         }
         else
         {
@@ -145,6 +152,12 @@ public class BigSlimeBoss : MonoBehaviour
         GameObject HorSpike = Instantiate(HorizontalSpike, transform.position+WheretoSpawnLowHorizontal, Quaternion.identity);
         HorSpike.GetComponent<SlimeBossSpike>().damage = HorizontalSpikeDamage;
         HorSpike.transform.rotation = Quaternion.Euler(0, 0, 90);
+    }
+
+    void SpawnCrystal()
+    {
+        GameObject newCrystal = Instantiate(Crystal, WheretoSpawnCrystal, Quaternion.identity);
+        newCrystal.GetComponent<SlimeBossSpike>().damage = CrystalDamage;
     }
 
     void SpawnHighHorizontalSpike()

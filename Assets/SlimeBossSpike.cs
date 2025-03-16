@@ -45,12 +45,6 @@ public class SlimeBossSpike : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(Animator==null)
-        {
-            Animator = GetComponent<Animator>();
-        }
-        AnimatorClipInfo[] animationClip = Animator.GetCurrentAnimatorClipInfo(0);
-        int currentFrame = (int)(Animator.GetCurrentAnimatorStateInfo(0).normalizedTime * (animationClip[0].clip.length * animationClip[0].clip.frameRate));
         if (collision.transform.tag == "Player" && GetComponent<SpriteRenderer>().color.a>0.9f)
         {
             collision.transform.GetComponent<PlayerHP>().TakeDamage(damage, Vector2.zero, pushforce);

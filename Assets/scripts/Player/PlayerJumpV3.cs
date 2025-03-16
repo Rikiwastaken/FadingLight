@@ -81,8 +81,9 @@ public class PlayerJumpV3 : MonoBehaviour
         if( FindAnyObjectByType<Global>().zipping && pressedjump)
         {
             FindAnyObjectByType<Global>().zipping=false;
+            GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         }
-        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping && pressedjump)
+        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling)
         {
             savepointjumpCD=(int)(1/Time.deltaTime);
             stuckinwall = false;

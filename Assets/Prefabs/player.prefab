@@ -85,6 +85,7 @@ GameObject:
   - component: {fileID: 387999305572416826}
   - component: {fileID: 761752601891527695}
   - component: {fileID: 189450580446498757}
+  - component: {fileID: 4745690015797895177}
   m_Layer: 9
   m_Name: player
   m_TagString: Player
@@ -249,7 +250,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.009999998, y: -0.01903224}
+  m_Offset: {x: -0.009999998, y: -0.025738984}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.36, y: 0.5}
@@ -259,7 +260,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.13, y: 0.57762957}
+  m_Size: {x: 0.13, y: 0.5642161}
   m_EdgeRadius: 0
 --- !u!114 &2405314263836978647
 MonoBehaviour:
@@ -722,6 +723,25 @@ MonoBehaviour:
     locked: 0
   ActiveGadgetID: 0
   projectileoffset: 0
+--- !u!114 &4745690015797895177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919727951631986471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056df3641db773444a0c4fc0c547a700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressedtrigger: 0
+  closestgrapple: {fileID: 0}
+  mindist: 2.5
+  CableSprite: {fileID: 21300000, guid: 7c00b7ca064b8a94d9adddb320300f88, type: 3}
+  speed: 6
+  launch: {x: 0, y: 6}
+  previousgrapple: {fileID: 0}
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0

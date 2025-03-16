@@ -42,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerJumpV3 playerjump;
 
-
     private void Awake()
     {
         controls = new PlayerControls();
@@ -91,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             
             return;
         }
-        if(FindAnyObjectByType<Global>().zipping)
+        if(FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling)
         {
             return;
         }
@@ -165,7 +164,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 rb2D.velocityX = (transform.localScale.x / Mathf.Abs(transform.localScale.x)) * rollingspeed;
             }
-
             Flip(horizontal);
             myanimator.SetFloat("speed", Mathf.Abs(horizontal));
         }
@@ -200,6 +198,7 @@ public class PlayerMovement : MonoBehaviour
     //flipping function
     private void Flip(float horizontal)
     {
+        Debug.Log(transform.localScale);
         if (horizontal < 0 && facingRight || horizontal>0 && !facingRight)
         {
             facingRight = !facingRight;
@@ -207,8 +206,9 @@ public class PlayerMovement : MonoBehaviour
             Vector3 Scale = transform.localScale;
             Scale.x *= -1;
             transform.localScale = Scale;
-
+            
         }
+        Debug.Log(transform.localScale);
     }
     public void safezone()
     {

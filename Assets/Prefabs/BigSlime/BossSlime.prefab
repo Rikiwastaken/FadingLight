@@ -229,11 +229,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HorizontalSpike: {fileID: 2664505378864126884, guid: 60f8c62b9fb47ea43b275295cdac70bd, type: 3}
   VerticalSpike: {fileID: 680520567136983162, guid: 79da5bb7f2d067a4daf7e8a393fba9b1, type: 3}
+  Crystal: {fileID: 0}
   yforvertical: -1.6
   verticalspikedamage: 20
   HorizontalSpikeDamage: 25
+  CrystalDamage: 40
   WheretoSpawnLowHorizontal: {x: -1.6, y: -1.95, z: -0.01}
   WheretoSpawnHighHorizontal: {x: -1.6, y: -1.283, z: -0.01}
   WheretoSpawnCloseRangeSpikes: {x: -0.55, y: -1.95, z: -0.01}
+  WheretoSpawnCrystal: {x: 39.1, y: -0.6, z: 0}
   attackcooldown: 2
   distancextotriggermelee: 1.05
