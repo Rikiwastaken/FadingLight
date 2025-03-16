@@ -6,6 +6,7 @@ TagManager:
   tags:
   - enemy
   - Boss
+  - GrapplePoint
   layers:
   - Default
   - TransparentFX
