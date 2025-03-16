@@ -142,8 +142,10 @@ public class DialogueManager : MonoBehaviour
 
     void launchfade (Dialogue dialogue)
     {
+        Global.indialogue = true;
         currentdialogue = dialogue;
         launchfadetoblack = true;
+        FindAnyObjectByType<PlayerHP>().GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
     void launchdialogue()

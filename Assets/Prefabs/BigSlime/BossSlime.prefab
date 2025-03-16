@@ -49,11 +49,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b83644e7dbf42f798addce02f6dfa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyhp: 500
-  enemymaxhp: 500
+  enemyhp: 600
+  enemymaxhp: 600
   rez: 0
-  enemyNRG: 200
-  enemymaxNRG: 200
+  enemyNRG: 175
+  enemymaxNRG: 175
   NRGdelay: 4
   NRGrechargerate: 5
   execution: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HorizontalSpike: {fileID: 2664505378864126884, guid: 60f8c62b9fb47ea43b275295cdac70bd, type: 3}
   VerticalSpike: {fileID: 680520567136983162, guid: 79da5bb7f2d067a4daf7e8a393fba9b1, type: 3}
-  Crystal: {fileID: 0}
+  Crystal: {fileID: 1790796850074888957, guid: 353cfb95aa29521419501d130cbb39ac, type: 3}
   yforvertical: -1.6
   verticalspikedamage: 20
   HorizontalSpikeDamage: 25
@@ -239,4 +239,4 @@ MonoBehaviour:
   WheretoSpawnCloseRangeSpikes: {x: -0.55, y: -1.95, z: -0.01}
   WheretoSpawnCrystal: {x: 39.1, y: -0.6, z: 0}
   attackcooldown: 2
-  distancextotriggermelee: 1.05
+  distancextotriggermelee: 1.3

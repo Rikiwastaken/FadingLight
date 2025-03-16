@@ -116,6 +116,7 @@ public class EnemyHP : MonoBehaviour
         }
         else //boss activation
         {
+            
             if (global.worldflags[worldflagtospawn] && !activated)
             {
                 BossLifeBar.InitiateCombat(this);

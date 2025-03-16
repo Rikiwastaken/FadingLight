@@ -23,6 +23,7 @@ public class BigSlimeBoss : MonoBehaviour
 
     private Transform player;
     public float distancextotriggermelee;
+    public bool phasetransition;
 
     private void FixedUpdate()
     {
@@ -49,6 +50,11 @@ public class BigSlimeBoss : MonoBehaviour
             {
                 attackcooldowncounter--;
             }
+        }
+        if(GetComponent<EnemyHP>().enemyhp<= GetComponent<EnemyHP>().enemymaxhp/2 && !phasetransition)
+        {
+            phasetransition = true;
+            attackcooldown = attackcooldown * 0.6666f;
         }
     }
 
