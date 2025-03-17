@@ -119,6 +119,10 @@ public class SupportDrone : MonoBehaviour
         {
             playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
             playerhp.Eldonhp += drones[ActiveDroneID].Effect * playerhp.Eldonmaxhp;
+            if(playerhp.Eldonhp> playerhp.Eldonmaxhp)
+            {
+                playerhp.Eldonhp = playerhp.Eldonmaxhp;
+            }
             dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
         }
@@ -128,6 +132,12 @@ public class SupportDrone : MonoBehaviour
     {
         playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
         playerhp.EldonNRG += drones[ActiveDroneID].Effect * playerhp.EldonmaxNRG;
+
+        if (playerhp.EldonNRG > playerhp.EldonmaxNRG)
+        {
+            playerhp.EldonNRG = playerhp.EldonmaxNRG;
+        }
+
         dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
         transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
     }
@@ -136,6 +146,10 @@ public class SupportDrone : MonoBehaviour
     {
         playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
         playerhp.Eldonhp += drones[ActiveDroneID].Effect * playerhp.Eldonmaxhp;
+        if (playerhp.EldonNRG > playerhp.EldonmaxNRG)
+        {
+            playerhp.EldonNRG = playerhp.EldonmaxNRG;
+        }
         dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
         transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
     }
@@ -178,6 +192,10 @@ public class SupportDrone : MonoBehaviour
         {
             leech.target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect));
             playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect;
+            if (playerhp.EldonNRG > playerhp.EldonmaxNRG)
+            {
+                playerhp.EldonNRG = playerhp.EldonmaxNRG;
+            }
             dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
         }
         else
@@ -206,6 +224,10 @@ public class SupportDrone : MonoBehaviour
                 newray.GetComponent<LeechDroneScript>().detectionrange = detectdist;
                 target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect));
                 playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect;
+                if (playerhp.EldonNRG > playerhp.EldonmaxNRG)
+                {
+                    playerhp.EldonNRG = playerhp.EldonmaxNRG;
+                }
                 dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
             }
         }

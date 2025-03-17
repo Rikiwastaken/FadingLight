@@ -50,4 +50,12 @@ public class SlimeBossSpike : MonoBehaviour
             collision.transform.GetComponent<PlayerHP>().TakeDamage(damage, Vector2.zero, pushforce);
         }
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Player" && GetComponent<SpriteRenderer>().color.a > 0.9f)
+        {
+            collision.transform.GetComponent<PlayerHP>().TakeDamage(damage, Vector2.zero, pushforce);
+        }
+    }
 }

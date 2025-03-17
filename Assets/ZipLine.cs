@@ -39,7 +39,7 @@ public class ZipLine : MonoBehaviour
         {
             GameObject connector = new GameObject();
             connector.AddComponent<SpriteRenderer>();
-            connector.GetComponent<SpriteRenderer>().sortingOrder=1;
+            connector.GetComponent<SpriteRenderer>().sortingOrder=0;
             connector.GetComponent<SpriteRenderer>().sprite = ConnectorSprite;
             connector.transform.position = transform.position + (next.transform.position - transform.position) / 2f;
             Vector3 offset = next.transform.position - transform.position;

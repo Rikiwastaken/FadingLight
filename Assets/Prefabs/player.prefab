@@ -596,8 +596,8 @@ MonoBehaviour:
     locked: 1
   - name: God Chain
     description: God Chain
-    DamageMultiplier: 10000
-    AbsorbMultiplier: 100000
+    DamageMultiplier: 1000
+    AbsorbMultiplier: 1000
     ID: 7
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
@@ -737,11 +737,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressedtrigger: 0
   closestgrapple: {fileID: 0}
+  closestenemy: {fileID: 0}
   mindist: 2.5
   CableSprite: {fileID: 21300000, guid: 7c00b7ca064b8a94d9adddb320300f88, type: 3}
+  CableTargetSprite: {fileID: 21300000, guid: 62976d5dbc28c1046b4b48b885368ff1, type: 3}
+  EnemyTargetSprite: {fileID: 21300000, guid: 51eede85ef5ec7a4584dbe3e095952b3, type: 3}
   speed: 6
   launch: {x: 0, y: 6}
   previousgrapple: {fileID: 0}
+  TimeToThrowGrapple: 0.15
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0

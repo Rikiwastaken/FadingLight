@@ -11,10 +11,13 @@ public class GrappleScript : MonoBehaviour
     private GameObject[] GrappleList;
 
     public Transform closestgrapple;
+    public Transform closestenemy;
 
     public float mindist;
 
     public Sprite CableSprite;
+    public Sprite CableTargetSprite;
+    public Sprite EnemyTargetSprite;
     private GameObject cable;
     private Global global;
     public float speed;
@@ -24,6 +27,15 @@ public class GrappleScript : MonoBehaviour
     public Vector2 launch;
 
     public GameObject previousgrapple;
+
+    public float TimeToThrowGrapple;
+    private int TimeToThrowGrapplecounter;
+
+    private GameObject grappletarget;
+    private GameObject enemytarget;
+
+    private bool grapplingenemy;
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -47,19 +59,25 @@ public class GrappleScript : MonoBehaviour
         }
 
 
-        if(global.grappling)
+        if(global.grappling && !grapplingenemy)
         {
             GetComponent<BoxCollider2D>().enabled = false;
         }
 
 
-        if(!global.grappling && grapplecooldown<=0)
+        if(!global.grappling && grapplecooldown<=0 && pressedtrigger)
         {
             GetClosestgrapple();
+            GetClosestenemy();
         }
         else if(grapplecooldown>0)
         {
             grapplecooldown--;
+        }
+        if(!global.grappling && !pressedtrigger)
+        {
+            closestgrapple = null;
+            closestenemy = null;
         }
 
         if(closestgrapple != null)
@@ -69,64 +87,194 @@ public class GrappleScript : MonoBehaviour
                 closestgrapple = null;
             }
         }
-        
-        if((!global.grappling && cable != null) || closestgrapple==null)
+
+        if (closestenemy != null)
+        {
+            if (Vector2.Distance(transform.position, closestenemy.position) > mindist)
+            {
+                closestenemy = null;
+            }
+        }
+
+        if ((!global.grappling && cable != null) || (closestgrapple==null && closestenemy==null))
         {
             GetComponent<BoxCollider2D>().enabled = true;
             global.grappling = false;
             Destroy(cable);
         }
-        else if(global.grappling && cable!=null && closestgrapple!=null)
+        else if(global.grappling && cable!=null)
         {
-            if (Vector2.Distance((Vector2)closestgrapple.transform.position, (Vector2)transform.position) <= 0.3f)
+            Transform target = null;
+            if(closestgrapple != null && !grapplingenemy)
             {
-                Destroy(cable);
-                global.grappling = false;
-                grapplecooldown = (int)(0.2f / Time.deltaTime);
-                GetComponent<BoxCollider2D>().enabled = true;
-                GetComponent<Rigidbody2D>().velocity=Vector2.zero;
-                GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                target=closestgrapple;
+            }
+            else if(closestenemy != null && grapplingenemy)
+            {
+                target = closestenemy;
+            }
+            else
+            {
+                ManageVisuals();
                 return;
             }
-            GetComponent<Rigidbody2D>().velocity = (closestgrapple.transform.position - transform.position).normalized * speed;
-            cable.transform.position = transform.position + (closestgrapple.transform.position - transform.position) / 2f;
-            Vector3 offset = closestgrapple.transform.position - transform.position;
 
-            Quaternion rotation = Quaternion.LookRotation(
-                                   Vector3.forward, // Keep z+ pointing straight into the screen.
-                                   offset           // Point y+ toward the next.
-                                 );
-            cable.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
-            cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)closestgrapple.transform.position), 0.2f, 1f);
+
+            if(TimeToThrowGrapplecounter>0)
+            {
+                TimeToThrowGrapplecounter--;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+                float fraction = (TimeToThrowGrapple / Time.fixedDeltaTime - TimeToThrowGrapplecounter) / (TimeToThrowGrapple / Time.fixedDeltaTime);
+                Vector3 placetoputcable = (target.transform.position - transform.position)*fraction + transform.position;
+                cable.transform.position = transform.position + (placetoputcable - transform.position) / 2f;
+                Vector3 offset = placetoputcable - transform.position;
+
+                Quaternion rotation = Quaternion.LookRotation(
+                                       Vector3.forward, // Keep z+ pointing straight into the screen.
+                                       offset           // Point y+ toward the next.
+                                     );
+                cable.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
+                cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)placetoputcable), 0.2f, 1f);
+
+            }
+            else
+            {
+                if (Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 0.3f || (target.GetComponent<EnemyHP>()!=null && Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 1f))
+                {
+                    Destroy(cable);
+                    global.grappling = false;
+                    grapplecooldown = (int)(0.2f / Time.deltaTime);
+                    GetComponent<BoxCollider2D>().enabled = true;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    if(target!=closestenemy)
+                    {
+                        GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                    }
+                    return;
+                }
+                if (target != closestenemy)
+                {
+                    GetComponent<Rigidbody2D>().velocity = (target.transform.position - transform.position).normalized * speed;
+                }
+                else
+                {
+                    if(closestenemy.GetComponent<EnemyHP>().isbig)
+                    {
+                        GetComponent<Rigidbody2D>().velocity = (target.transform.position - transform.position).normalized * speed;
+                    }
+                    else
+                    {
+                        target.GetComponent<Rigidbody2D>().velocity = (transform.position - target.transform.position).normalized * speed;
+                    }
+                }
+                
+                cable.transform.position = transform.position + (target.transform.position - transform.position) / 2f;
+                Vector3 offset = target.transform.position - transform.position;
+
+                Quaternion rotation = Quaternion.LookRotation(
+                                       Vector3.forward, // Keep z+ pointing straight into the screen.
+                                       offset           // Point y+ toward the next.
+                                     );
+                cable.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
+                cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position), 0.2f, 1f);
+            }
+
+            
             
         }
 
-        
+        ManageVisuals();
 
     }
 
-    private void OnLeftTrigger()
+    private void ManageVisuals()
     {
         if(closestgrapple != null)
         {
+            if(grappletarget == null)
+            {
+                grappletarget = new GameObject();
+                grappletarget.AddComponent<SpriteRenderer>();
+                grappletarget.GetComponent<SpriteRenderer>().sprite = CableTargetSprite;
+                grappletarget.GetComponent<SpriteRenderer>().color = Color.red;
+                grappletarget.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                grappletarget.transform.localScale= Vector3.one*0.1f;
+            }
+            grappletarget.transform.position = closestgrapple.transform.position;
+        }
+        else
+        {
+            if(grappletarget!=null)
+            {
+                Destroy(grappletarget.gameObject);
+            }
+        }
+
+        if (closestenemy != null)
+        {
+            if (enemytarget == null)
+            {
+                enemytarget = new GameObject();
+                enemytarget.AddComponent<SpriteRenderer>();
+                enemytarget.GetComponent<SpriteRenderer>().sprite = EnemyTargetSprite;
+                enemytarget.GetComponent<SpriteRenderer>().sortingOrder = 2;
+                enemytarget.transform.localScale = Vector3.one * 0.1f;
+            }
+            enemytarget.transform.position = closestenemy.transform.position;
+        }
+        else
+        {
+            if (enemytarget != null)
+            {
+                Destroy(enemytarget.gameObject);
+            }
+        }
+    }
+
+    private void OnJump()
+    {
+        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping)
+        {
+            return;
+        }
+        if (closestgrapple != null && pressedtrigger)
+        {
+            grapplingenemy = false;
             previousgrapple = closestgrapple.gameObject;
             global.grappling = true;
-            if(cable !=null)
+            if (cable != null)
             {
                 Destroy(cable);
             }
+            TimeToThrowGrapplecounter = (int)(TimeToThrowGrapple / Time.fixedDeltaTime);
             cable = new GameObject();
             cable.AddComponent<SpriteRenderer>();
             cable.GetComponent<SpriteRenderer>().sprite = CableSprite;
-            cable.transform.position = transform.position + (closestgrapple.transform.position - transform.position) / 2f;
-            Vector3 offset = closestgrapple.transform.position - transform.position;
+            cable.transform.localScale = new Vector3(0f, 0.2f, 1f);
+        }
+    }
 
-            Quaternion rotation = Quaternion.LookRotation(
-                                   Vector3.forward, // Keep z+ pointing straight into the screen.
-                                   offset           // Point y+ toward the next.
-                                 );
-            cable.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
-            cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)closestgrapple.transform.position), 0.2f, 1f);
+    private void OnAttack()
+    {
+        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping)
+        {
+            return;
+        }
+        if (closestenemy != null && pressedtrigger)
+        {
+            grapplingenemy = true;
+            previousgrapple = closestenemy.gameObject;
+            global.grappling = true;
+            if (cable != null)
+            {
+                Destroy(cable);
+            }
+            TimeToThrowGrapplecounter = (int)(TimeToThrowGrapple / Time.fixedDeltaTime);
+            cable = new GameObject();
+            cable.AddComponent<SpriteRenderer>();
+            cable.GetComponent<SpriteRenderer>().sprite = CableSprite;
+            cable.transform.localScale = new Vector3(0f, 0.2f, 1f);
         }
     }
 
@@ -145,7 +293,6 @@ public class GrappleScript : MonoBehaviour
         float distance = mindist;
         foreach (GameObject grapple in GrappleList)
         {
-            grapple.transform.GetChild(0).gameObject.SetActive(false);
             if(Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) < distance && previousgrapple!=grapple)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, grapple.transform.position- transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position)-1 ,13);
@@ -164,8 +311,37 @@ public class GrappleScript : MonoBehaviour
         }
         if(newclosestgrapple != null && newclosestgrapple!= previousgrapple)
         {
-            newclosestgrapple.GetChild(0).gameObject.SetActive(true);
             closestgrapple = newclosestgrapple;
+        }
+    }
+
+
+    private void GetClosestenemy()
+    {
+        Transform newclosestenemy = null;
+        EnemyHP[] enemylist = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
+        float distance = mindist;
+        foreach (EnemyHP enemy in enemylist)
+        {
+            if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && previousgrapple != enemy)
+            {
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
+                if (hit.transform == null)
+                {
+                    newclosestenemy = enemy.transform;
+                    distance = Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position);
+                }
+                else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("wall") && hit.transform.gameObject.layer != LayerMask.NameToLayer("ground"))
+                {
+                    newclosestenemy = enemy.transform;
+                    distance = Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position);
+                }
+
+            }
+        }
+        if (newclosestenemy != null && newclosestenemy != previousgrapple)
+        {
+            closestenemy = newclosestenemy;
         }
     }
 

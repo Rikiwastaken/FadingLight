@@ -63,27 +63,27 @@ public class BigSlimeBoss : MonoBehaviour
     void RandomAttackClose()
     {
         int rd = Random.Range(0, 120);
-        if (rd <= 5)
+        if (rd <= 10)
         {
             SpawnLineOfSpikes();
         }
-        else if (rd <= 10)
+        else if (rd <= 20)
         {
             SpawnLineOfSpikesMoved();
         }
-        else if (rd <= 15)
+        else if (rd <= 30)
         {
             SpawnLineOfSpikesMovedAgain();
         }
-        else if (rd <= 20)
+        else if (rd <= 40)
         {
             SpawnLowHorizontalSpike();
         }
-        else if (rd <= 45)
+        else if (rd <= 50)
         {
             SpawnHighHorizontalSpike();
         }
-        else if (rd <= 105)
+        else if (rd <= 90)
         {
             SpawnCrystal();
         }

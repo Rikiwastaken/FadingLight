@@ -24,6 +24,7 @@ public class EnemyHP : MonoBehaviour
     public int NRGrechargerate;
     private bool stopenergyregen;
     public bool execution;
+    public bool isbig;
 
     //stun variables
     public bool cannotmove;

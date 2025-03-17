@@ -63,7 +63,7 @@ public class GadgetScript : MonoBehaviour
 
     void OnLeftShoulder()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || gadgetCDcounter > 0)
+        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().ininventory || gadgetCDcounter > 0 || FindAnyObjectByType<Global>().grappling || FindAnyObjectByType<Global>().zipping)
         {
             return;
         }

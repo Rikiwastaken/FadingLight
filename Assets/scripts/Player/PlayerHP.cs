@@ -183,6 +183,12 @@ public class PlayerHP : MonoBehaviour
             global.inbossfight = false;
             SceneManager.LoadScene("BreedingGrounds");
         }
+
+
+        if (Eldonhp >Eldonmaxhp)
+        {
+            Eldonhp = Eldonmaxhp;
+        }
         if (inv == true)
         {
             iframe = iframe - 1;
