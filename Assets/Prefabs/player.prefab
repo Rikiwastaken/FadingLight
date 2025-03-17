@@ -77,7 +77,6 @@ GameObject:
   - component: {fileID: 1920544531720648940}
   - component: {fileID: 2405314263836978647}
   - component: {fileID: 2162529214170387368}
-  - component: {fileID: 8207891239071273511}
   - component: {fileID: 3724100581142410993}
   - component: {fileID: 7297679925771535583}
   - component: {fileID: 736690049156150842}
@@ -330,18 +329,6 @@ MonoBehaviour:
   pressedjump: 0
   presseddown: 0
   passthrough: {fileID: 0}
---- !u!114 &8207891239071273511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5919727951631986471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56570b0dd66014e02be8a209cf38f7b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3724100581142410993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +349,7 @@ MonoBehaviour:
   invicibilityframes: 120
   hitjumpforce: 2
   damagereduction: 0
+  GameOverPrefab: {fileID: 1909857644947452815, guid: cf12e9ad978d2d94599d99532774c1a5, type: 3}
   radOcircle: 0.06
 --- !u!114 &7297679925771535583
 MonoBehaviour:

@@ -18,6 +18,8 @@ public class PlayerHP : MonoBehaviour
     private Rigidbody2D rb;
     public float damagereduction;
 
+    public GameObject GameOverPrefab;
+
 
     public float radOcircle;
     private Healthbar healthbar;
@@ -181,7 +183,7 @@ public class PlayerHP : MonoBehaviour
         if (Eldonhp <= 0)
         {
             global.inbossfight = false;
-            SceneManager.LoadScene("BreedingGrounds");
+            Instantiate(GameOverPrefab, GameObject.Find("Canvas").transform);
         }
 
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class buttonscript : MonoBehaviour
 {
@@ -74,6 +75,21 @@ public class buttonscript : MonoBehaviour
     {
         int slot = int.Parse(transform.name.Replace("Slot", ""));
         FindAnyObjectByType<SaveManager>().CurrentSlot = slot;
+        FindAnyObjectByType<SaveManager>().LoadSave();
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void ClosePauseMenu()
+    {
+        Destroy(FindAnyObjectByType<PauseMenu>().gameObject);
+    }
+
+    public void GameOverLoadSaveSlot()
+    {
         FindAnyObjectByType<SaveManager>().LoadSave();
     }
 

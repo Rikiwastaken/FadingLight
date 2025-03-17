@@ -9,6 +9,8 @@ public class basicmenunav : MonoBehaviour
     private int valueup;
     private int valueclick;
     private int lastinput;
+    private int valuestickdown;
+    private int valuestickup;
 
     private bool pressedclick;
     public Button selected;
@@ -30,6 +32,12 @@ public class basicmenunav : MonoBehaviour
         controls.gameplay.jump.performed += ctx => valueclick = 1;
         controls.gameplay.jump.canceled += ctx => valueclick = 0;
 
+
+        controls.gameplay.down.performed += ctx => valuestickdown = 1;
+        controls.gameplay.down.canceled += ctx => valuestickdown = 0;
+        controls.gameplay.up.performed += ctx => valuestickup = 1;
+        controls.gameplay.up.canceled += ctx => valuestickup = 0;
+
         controls.gameplay.Enable();
 
 
@@ -46,8 +54,21 @@ public class basicmenunav : MonoBehaviour
 
 
 
+        int inputstick = 0;
+        if (valuestickup != 0 || valuestickdown != 0)
+        {
+            if (valuestickdown != 0)
+            {
+                inputstick = -1;
+            }
+            else if (valuestickup != 0)
+            {
+                inputstick = 1;
+            }
+        }
+
         int input = 0;
-        if (valueup != 0 || valuedown != 0)
+        if ( valueup != 0 || valuedown != 0)
         {
             if (valuedown != 0)
             {
@@ -57,6 +78,11 @@ public class basicmenunav : MonoBehaviour
             {
                 input = 1;
             }
+        }
+
+        if (input == 0 && inputstick != 0)
+        {
+            input = inputstick;
         }
 
         if (lastinput != input && input != 0)

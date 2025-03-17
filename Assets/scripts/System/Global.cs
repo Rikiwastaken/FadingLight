@@ -29,6 +29,8 @@ public class Global : MonoBehaviour
     public bool usemanualclock;
     public SavePointScript activeSavePoint;
 
+    public GameObject PauseMenu;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -67,7 +69,7 @@ public class Global : MonoBehaviour
     void OnInventory()
     {
 
-        if(currentinventory != null && !indialogue)
+        if(currentinventory != null && !indialogue && FindAnyObjectByType<PlayerHP>().Eldonhp > 0 && FindAnyObjectByType<PauseMenu>() == null)
         {
             if(ininventory)
             {
@@ -79,6 +81,17 @@ public class Global : MonoBehaviour
                 Time.timeScale = 0f;
                 OpenInventory();
             } 
+        }
+    }
+
+    void OnMenu()
+    {
+        if(SceneManager.GetActiveScene().name!="Start" && SceneManager.GetActiveScene().name != "MainMenu" && !ininventory && !atsavepoint && FindAnyObjectByType<PlayerHP>().Eldonhp>0)
+        {
+            if(FindAnyObjectByType<PauseMenu>()==null)
+            {
+                Instantiate(PauseMenu, GameObject.Find("Canvas").transform);
+            }
         }
     }
 

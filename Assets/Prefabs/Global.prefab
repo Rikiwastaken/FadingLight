@@ -53,8 +53,15 @@ MonoBehaviour:
   atsavepoint: 0
   ininventory: 0
   indialogue: 0
+  inbossfight: 0
+  zipping: 0
+  grappling: 0
   clickednewgame: 0
   worldflags: 0000000000000000000000000000000000000000
+  ManualClock: 0
+  usemanualclock: 0
+  activeSavePoint: {fileID: 0}
+  PauseMenu: {fileID: 1909857644947452815, guid: 1c650d1f46e2d5c44835feb32cfe2962, type: 3}
 --- !u!114 &4595281200388182569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,8 +116,10 @@ MonoBehaviour:
     unlockedGadgets: 
     loadout: 
     WorldFlags: 
+    Shards: 0
   CurrentSlot: 0
   playing: 1
+  deleteallsaves: 0
 --- !u!114 &3071227485754094429
 MonoBehaviour:
   m_ObjectHideFlags: 0

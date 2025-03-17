@@ -5,8 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public void Mainmenu()
+    private void OnEnable()
     {
-        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 0.0f;
+    }
+    private void OnDestroy()
+    {
+        Time.timeScale = 1.0f;
     }
 }
