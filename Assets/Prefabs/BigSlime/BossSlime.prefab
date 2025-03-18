@@ -231,6 +231,7 @@ MonoBehaviour:
   HorizontalSpike: {fileID: 2664505378864126884, guid: 60f8c62b9fb47ea43b275295cdac70bd, type: 3}
   VerticalSpike: {fileID: 680520567136983162, guid: 79da5bb7f2d067a4daf7e8a393fba9b1, type: 3}
   Crystal: {fileID: 1790796850074888957, guid: 353cfb95aa29521419501d130cbb39ac, type: 3}
+  AttackPreviewPrefab: {fileID: 3918537565174004228, guid: 3884e2e385ed5ff49a7a134395bc5fd9, type: 3}
   yforvertical: -1.6
   verticalspikedamage: 20
   HorizontalSpikeDamage: 25

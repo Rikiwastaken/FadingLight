@@ -93,6 +93,11 @@ public class buttonscript : MonoBehaviour
         FindAnyObjectByType<SaveManager>().LoadSave();
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void UnlockAll()
     {
         foreach(EquipmentScript.Chain chain in EquipmentScript.Chainslist)

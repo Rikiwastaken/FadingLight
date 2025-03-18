@@ -166,16 +166,12 @@ public class basicmenunav : MonoBehaviour
             {
                 while (activebuttonID < transform.childCount - 1)
                 {
+                    
                     activebuttonID++;
                     if (transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>().interactable)
                     {
                         selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
                         return;
-                    }
-                    else
-                    {
-                        activebuttonID += 1;
-
                     }
                 }
                 if (activebuttonID >= transform.childCount - 1)

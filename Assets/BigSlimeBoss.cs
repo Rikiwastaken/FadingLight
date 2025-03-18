@@ -8,6 +8,7 @@ public class BigSlimeBoss : MonoBehaviour
     public GameObject HorizontalSpike;
     public GameObject VerticalSpike;
     public GameObject Crystal;
+    public GameObject AttackPreviewPrefab;
     public float yforvertical;
     public int verticalspikedamage;
     public int HorizontalSpikeDamage;
@@ -124,10 +125,13 @@ public class BigSlimeBoss : MonoBehaviour
     {
         for(int i = 0; i < 3; i++)
         {
-            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f/3f - i , yforvertical, -1), Quaternion.identity);
-            VerSpike.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
-            GameObject VerSpike2 = Instantiate(VerticalSpike, new Vector3(transform.position.x + 2f / 3f + i, yforvertical, -1), Quaternion.identity);
-            VerSpike2.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
+            Vector3 position = new Vector3(transform.position.x - 2f / 3f - i, yforvertical, -1);
+            GameObject AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+            AttackPreview.GetComponent<AttackZone>().InstantiateObject(VerticalSpike, position, verticalspikedamage, 0.5f, new Vector2(0, -0.5f));
+
+            position = new Vector3(transform.position.x + 2f / 3f + i, yforvertical, -1);
+            AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+            AttackPreview.GetComponent<AttackZone>().InstantiateObject(VerticalSpike, position, verticalspikedamage, 0.5f, new Vector2(0, -0.5f));
         }
     }
 
@@ -135,10 +139,14 @@ public class BigSlimeBoss : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
-            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f / 3f - i  -2f/3f, yforvertical, -1), Quaternion.identity);
-            VerSpike.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
-            GameObject VerSpike2 = Instantiate(VerticalSpike, new Vector3(transform.position.x + 2f / 3f + i  + 1f / 3f, yforvertical, -1), Quaternion.identity);
-            VerSpike2.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
+            Vector3 position = new Vector3(transform.position.x - 2f / 3f - i - 2f / 3f, yforvertical, -1);
+            GameObject AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+            AttackPreview.GetComponent<AttackZone>().InstantiateObject(VerticalSpike, position, verticalspikedamage, 0.5f, new Vector2(0, -0.5f));
+
+            position = new Vector3(transform.position.x + 2f / 3f + i + 1f / 3f, yforvertical, -1);
+            AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+            AttackPreview.GetComponent<AttackZone>().InstantiateObject(VerticalSpike, position, verticalspikedamage, 0.5f, new Vector2(0, -0.5f));
+
         }
     }
 
@@ -146,47 +154,51 @@ public class BigSlimeBoss : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            GameObject VerSpike = Instantiate(VerticalSpike, new Vector3(transform.position.x - 2f / 3f - i*0.75f, yforvertical, -1), Quaternion.identity);
-            VerSpike.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
-            GameObject VerSpike2 = Instantiate(VerticalSpike, new Vector3(transform.position.x + 2f / 3f + i * 0.75f, yforvertical, -1), Quaternion.identity);
-            VerSpike2.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
+            Vector3 position = new Vector3(transform.position.x - 2f / 3f - i * 0.75f, yforvertical, -1);
+            GameObject AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+            AttackPreview.GetComponent<AttackZone>().InstantiateObject(VerticalSpike, position, verticalspikedamage, 0.5f, new Vector2(0, -0.5f));
+
+            position = new Vector3(transform.position.x + 2f / 3f + i * 0.75f, yforvertical, -1);
+            AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+            AttackPreview.GetComponent<AttackZone>().InstantiateObject(VerticalSpike, position, verticalspikedamage, 0.5f, new Vector2(0, -0.5f));
         }
     }
 
     void SpawnLowHorizontalSpike()
     {
-        GameObject HorSpike = Instantiate(HorizontalSpike, transform.position+WheretoSpawnLowHorizontal, Quaternion.identity);
-        HorSpike.GetComponent<SlimeBossSpike>().damage = HorizontalSpikeDamage;
-        HorSpike.transform.rotation = Quaternion.Euler(0, 0, 90);
+        Vector3 position = transform.position + WheretoSpawnLowHorizontal;
+        GameObject AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+        AttackPreview.GetComponent<AttackZone>().InstantiateObject(HorizontalSpike, position, HorizontalSpikeDamage, 0.5f,Vector3.zero,new Vector3(0,0,90), new Vector2(1.5f,0));
     }
 
     void SpawnCrystal()
     {
-        GameObject newCrystal = Instantiate(Crystal, WheretoSpawnCrystal, Quaternion.identity);
-        newCrystal.GetComponent<SlimeBossSpike>().damage = CrystalDamage;
+
+        Vector3 position = WheretoSpawnCrystal;
+        GameObject AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+        AttackPreview.GetComponent<AttackZone>().InstantiateObject(Crystal, position, CrystalDamage, 1f, new Vector2(0, -1.5f));
     }
 
     void SpawnHighHorizontalSpike()
     {
-        GameObject HorSpike = Instantiate(HorizontalSpike, transform.position + WheretoSpawnHighHorizontal, Quaternion.identity);
-        HorSpike.GetComponent<SlimeBossSpike>().damage = HorizontalSpikeDamage;
-        HorSpike.transform.rotation = Quaternion.Euler(0, 0, 90);
+        Vector3 position = transform.position + WheretoSpawnHighHorizontal;
+        GameObject AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+        AttackPreview.GetComponent<AttackZone>().InstantiateObject(HorizontalSpike, position, HorizontalSpikeDamage, 0.5f, Vector3.zero, new Vector3(0, 0, 90), new Vector2(1.5f, 0));
     }
 
     void SpawnCloseRangeSpikes()
     {
         for (int i = 0;i<5;i++)
         {
-            GameObject SpikeLeft = Instantiate(HorizontalSpike, transform.position + WheretoSpawnCloseRangeSpikes + new Vector3(0,0.2f*i,0), Quaternion.identity);
-            SpikeLeft.transform.localScale = new Vector3(0.2f, 0.5f, 1);
-            SpikeLeft.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
-            SpikeLeft.transform.rotation = Quaternion.Euler(0, 0, 90);
+            Vector3 position = transform.position + WheretoSpawnCloseRangeSpikes + new Vector3(0, 0.2f * i, 0);
+            GameObject AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+            AttackPreview.GetComponent<AttackZone>().InstantiateObject(HorizontalSpike, position, verticalspikedamage, 0.5f, new Vector3(0.2f, 0.5f, 1), new Vector3(0, 0, 90), new Vector2(0.25f, 0));
+
 
             Vector3 wheretospawnright = new Vector3(-WheretoSpawnCloseRangeSpikes.x, WheretoSpawnCloseRangeSpikes.y, WheretoSpawnCloseRangeSpikes.z);
-            GameObject SpikeRight = Instantiate(HorizontalSpike, transform.position + wheretospawnright + new Vector3(0, 0.2f * i, 0), Quaternion.identity);
-            SpikeRight.GetComponent<SlimeBossSpike>().damage = verticalspikedamage;
-            SpikeRight.transform.rotation = Quaternion.Euler(0, 0, 90);
-            SpikeRight.transform.localScale = new Vector3(0.2f, -0.5f, 1);
+            position = transform.position + wheretospawnright + new Vector3(0, 0.2f * i, 0);
+            AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
+            AttackPreview.GetComponent<AttackZone>().InstantiateObject(HorizontalSpike, position, verticalspikedamage, 0.5f, new Vector3(0.2f, -0.5f, 1), new Vector3(0, 0, 90), new Vector2(-0.25f, 0));
         }
     }
 
