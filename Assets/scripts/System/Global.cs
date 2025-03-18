@@ -20,6 +20,7 @@ public class Global : MonoBehaviour
     public bool inbossfight;
     public bool zipping;
     public bool grappling;
+    public bool inpause;
 
     public bool clickednewgame;
 
@@ -69,7 +70,7 @@ public class Global : MonoBehaviour
     void OnInventory()
     {
 
-        if(currentinventory != null && !indialogue && FindAnyObjectByType<PlayerHP>().Eldonhp > 0 && FindAnyObjectByType<PauseMenu>() == null)
+        if(currentinventory != null && !indialogue && FindAnyObjectByType<PlayerHP>().Eldonhp > 0 && FindAnyObjectByType<PauseMenu>() == null && !inpause)
         {
             if(ininventory)
             {

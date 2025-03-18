@@ -142,12 +142,20 @@ public class EldonAttack : MonoBehaviour
                 if (slayermode)
                 {
                     enemyHP.TakeDamage(damage, (energydamage * 1 / 10));
-                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate ;
+                    GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate ;
+                    if(GetComponent<PlayerHP>().EldonNRG> GetComponent<PlayerHP>().EldonmaxNRG)
+                    {
+                        GetComponent<PlayerHP>().EldonNRG = GetComponent<PlayerHP>().EldonmaxNRG;
+                    }
                 }
                 else
                 {
                     enemyHP.TakeDamage(damage*1/10, energydamage);
-                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate*2;
+                    GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate*2;
+                    if (GetComponent<PlayerHP>().EldonNRG > GetComponent<PlayerHP>().EldonmaxNRG)
+                    {
+                        GetComponent<PlayerHP>().EldonNRG = GetComponent<PlayerHP>().EldonmaxNRG;
+                    }
                 }
                 if (enemyHP.enemyhp > 0)
                 {
@@ -164,12 +172,20 @@ public class EldonAttack : MonoBehaviour
                 if (slayermode)
                 {
                     enemyHP.TakeDamage(damage, (energydamage * 1 / 10));
-                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate;
+                    GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate;
+                    if (GetComponent<PlayerHP>().EldonNRG > GetComponent<PlayerHP>().EldonmaxNRG)
+                    {
+                        GetComponent<PlayerHP>().EldonNRG = GetComponent<PlayerHP>().EldonmaxNRG;
+                    }
                 }
                 else
                 {
                     enemyHP.TakeDamage(damage * 1 / 10, energydamage);
-                    GameObject.Find("player").GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate * 2;
+                    GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate * 2;
+                    if (GetComponent<PlayerHP>().EldonNRG > GetComponent<PlayerHP>().EldonmaxNRG)
+                    {
+                        GetComponent<PlayerHP>().EldonNRG = GetComponent<PlayerHP>().EldonmaxNRG;
+                    }
                 }
             }
 

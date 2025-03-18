@@ -8,7 +8,7 @@ public class AttackZone : MonoBehaviour
     public Vector3 position;
     public Vector3 rotation;
     public Vector3 scale;
-    public float damage;
+    public int damage;
     public float time;
     private int timecounter;
     public Vector2 offset;
@@ -38,7 +38,7 @@ public class AttackZone : MonoBehaviour
             GameObject newattack =Instantiate(PrefabToSpawn,position,Quaternion.identity);
             if(newattack.GetComponent<spikescript>())
             {
-                newattack.GetComponent<spikescript>().damage = (int)damage;
+                newattack.GetComponent<spikescript>().damage = damage;
             }
             if(rotation!=Vector3.zero)
             {
@@ -56,7 +56,7 @@ public class AttackZone : MonoBehaviour
         }
     }
 
-    public void InstantiateObject(GameObject Prefab,Vector3 pos, float dmg, float timebeforeattack, Vector2 newoffset)
+    public void InstantiateObject(GameObject Prefab,Vector3 pos, int dmg, float timebeforeattack, Vector2 newoffset)
     {
         PrefabToSpawn=Prefab;
         position = pos;
@@ -66,7 +66,7 @@ public class AttackZone : MonoBehaviour
         time = timebeforeattack;
         offset = newoffset;
     }
-    public void InstantiateObject(GameObject Prefab, Vector3 pos, float dmg, float timebeforeattack, Vector3 newscale, Vector3 rot, Vector2 newoffset)
+    public void InstantiateObject(GameObject Prefab, Vector3 pos, int dmg, float timebeforeattack, Vector3 newscale, Vector3 rot, Vector2 newoffset)
     {
         PrefabToSpawn = Prefab;
         position = pos;

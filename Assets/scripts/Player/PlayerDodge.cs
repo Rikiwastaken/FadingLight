@@ -34,7 +34,7 @@ public class PlayerDodge : MonoBehaviour
                 FindAnyObjectByType<Global>().closedmenu = false;
                 return;
             }
-            if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().ininventory || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling)
+            if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().ininventory || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling|| FindAnyObjectByType<Global>().inpause)
             {
                 return;
             }

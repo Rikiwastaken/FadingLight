@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
             
             return;
         }
-        if(FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling)
+        if(FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling|| FindAnyObjectByType<Global>().inpause)
         {
             return;
         }
