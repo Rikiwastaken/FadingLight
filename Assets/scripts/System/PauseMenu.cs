@@ -13,6 +13,10 @@ public class PauseMenu : MonoBehaviour
     private void OnDestroy()
     {
         Time.timeScale = 1.0f;
-        FindAnyObjectByType<Global>().inpause = false;
+        if(FindAnyObjectByType<Global>())
+        {
+            FindAnyObjectByType<Global>().inpause = false;
+        }
+        
     }
 }

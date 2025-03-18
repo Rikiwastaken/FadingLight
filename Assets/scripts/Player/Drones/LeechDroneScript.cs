@@ -7,6 +7,7 @@ public class LeechDroneScript : MonoBehaviour
     public Transform target;
     public float detectionrange;
     public Transform launcher;
+    public bool isleech;
 
     // Update is called once per frame
     void FixedUpdate()

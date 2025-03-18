@@ -48,6 +48,16 @@ public class Global : MonoBehaviour
 
     private void Update()
     {
+
+        if( inpause)
+        {
+            if(!FindAnyObjectByType<PauseMenu>())
+            {
+                inpause = false;
+                Time.timeScale = 1;
+            }
+        }
+
         if(usemanualclock)
         {
             Time.timeScale = ManualClock;

@@ -273,6 +273,31 @@ public class EquipmentMenuWindow : MonoBehaviour
 
     }
 
+    private void OnAttack()
+    {
+        if (onquiped)
+        {
+            switch(selectedsection)
+            {
+                case 0:
+                    EquipmentScript.equipedChainIndex = 0;
+                    break;
+                case 1:
+                    EquipmentScript.equipedPlateIndex = 0;
+                    break;
+                case 2:
+                    EquipmentScript.drone1.GetComponent<SupportDrone>().ActiveDroneID = -1;
+                    break;
+                case 3:
+                    EquipmentScript.drone2.GetComponent<SupportDrone>().ActiveDroneID = -1;
+                    break;
+                case 4:
+                    GadgetScript.ActiveGadgetID = 0;
+                    break;
+            }
+        }
+    }
+
     void UpdateDisplay()
     {
         switch (selectedsection)
@@ -750,7 +775,7 @@ public class EquipmentMenuWindow : MonoBehaviour
                 }
                 break;
             case 4:
-                for (int i = 0; i < Mathf.Min(Dronelist.Count - upperlineindex * 5, 10); i++)
+                for (int i = 0; i < Mathf.Min(Gadgetlist.Count - upperlineindex * 5, 10); i++)
                 {
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
                     EquipmentContainer.GetChild(i).GetChild(0).GetComponent<Image>().sprite = Gadgetlist[i + upperlineindex * 5].image;

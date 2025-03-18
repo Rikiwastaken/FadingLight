@@ -106,7 +106,10 @@ public class GadgetScript : MonoBehaviour
         {
             offset = new Vector3(0f, 0.5f, 0f);
         }
-        Debug.Log(wallinfront);
+        if(gadget.PrefabtoSpawn.GetComponent<ShockwaveScript>())
+        {
+            offset=Vector3.zero;
+        }
         GameObject projectile = Instantiate(gadget.PrefabtoSpawn, transform.position + offset, Quaternion.identity);
         BulletScript bulletScript = projectile.GetComponent<BulletScript>();
         RocketScript rocketScript = projectile.GetComponent<RocketScript>();

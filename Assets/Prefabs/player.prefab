@@ -709,6 +709,16 @@ MonoBehaviour:
     ID: 4
     image: {fileID: 1545786567670615267, guid: e204328c74eebed42b696fa489ac6ac4, type: 3}
     locked: 0
+  - name: Shockwave Generator
+    description: Creates a shockwave that repels small enemies
+    DamageMultiplier: 0
+    AbsorbMultiplier: 0
+    Energycost: 10
+    cooldown: 5
+    PrefabtoSpawn: {fileID: 2364139102164821319, guid: f6141489246545c48ba634232060b04e, type: 3}
+    ID: 5
+    image: {fileID: -8128468405736905527, guid: f5913fa6ddb2205499847ecb874dc15e, type: 3}
+    locked: 0
   ActiveGadgetID: 0
   projectileoffset: 0.2
 --- !u!114 &4745690015797895177

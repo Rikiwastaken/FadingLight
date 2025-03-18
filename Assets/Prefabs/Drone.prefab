@@ -220,8 +220,29 @@ MonoBehaviour:
     Summon: {fileID: 3458832224624917955, guid: b469e734079ce464a91af20ced6ccd9d, type: 3}
     Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
     locked: 0
-  - name: Full Energy Drone
+  - name: Drain Drone
     ID: 5
+    RequiredEnergy: 0
+    Effect: 1
+    Description: Deals 10% of Health Damage to a nearby Enemy every second and transfers
+      it to Eldon.
+    cooldown: 1
+    Medical: 1
+    Summon: {fileID: 0}
+    Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    locked: 0
+  - name: Reanimator Drone
+    ID: 6
+    RequiredEnergy: 100
+    Effect: 0.9
+    Description: If Eldon is below 10% Health, restores 90% Health.
+    cooldown: 20
+    Medical: 1
+    Summon: {fileID: 0}
+    Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    locked: 0
+  - name: Full Energy Drone
+    ID: 7
     RequiredEnergy: 0
     Effect: 1
     Description: Full Energy

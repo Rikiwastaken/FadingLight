@@ -132,6 +132,12 @@ MonoBehaviour:
   imageDrone1: {fileID: 0}
   imageDrone2: {fileID: 0}
   imageGadget: {fileID: 0}
+  imageIndicatorDrone1: {fileID: 0}
+  imageIndicatorDrone2: {fileID: 0}
+  imageIndicatorGadget: {fileID: 0}
+  drone1usable: 0
+  drone2usable: 0
+  gadgetusable: 0
 --- !u!1 &4107497105245484794
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,7 +617,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &4102015513111300274
 BoxCollider2D:
@@ -709,6 +715,7 @@ MonoBehaviour:
   NRGdelay: 5
   NRGrechargerate: 4
   execution: 0
+  isbig: 0
   cannotmove: 0
   hitstundelay: 20
   isboss: 0

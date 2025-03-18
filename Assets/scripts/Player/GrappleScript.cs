@@ -11,8 +11,8 @@ public class GrappleScript : MonoBehaviour
 
     private GameObject[] GrappleList;
 
-    public Transform closestgrapple;
-    public Transform closestenemy;
+    private Transform closestgrapple;
+    private Transform closestenemy;
 
     public float mindist;
 
@@ -27,7 +27,7 @@ public class GrappleScript : MonoBehaviour
 
     public Vector2 launch;
 
-    public GameObject previousgrapple;
+    private GameObject previousgrapple;
 
     public float TimeToThrowGrapple;
     private int TimeToThrowGrapplecounter;
