@@ -111,7 +111,7 @@ public class Global : MonoBehaviour
             {
                 CloseInventory();
             }
-            else
+            else if(activeSavePoint.fadetoblack.color.a<=0.001f)
             {
                 atsavepoint = false;
                 Destroy(FindAnyObjectByType<SavePointMenu>().gameObject);

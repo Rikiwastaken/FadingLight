@@ -7,6 +7,7 @@ public class GrappleScript : MonoBehaviour
 
     PlayerControls controls;
     public bool pressedtrigger;
+    private bool pressedjump;
 
     private GameObject[] GrappleList;
 
@@ -38,12 +39,16 @@ public class GrappleScript : MonoBehaviour
 
     private float lastdist;
 
+    
+
     private void Awake()
     {
         controls = new PlayerControls();
 
         controls.gameplay.LeftTrigger.performed += ctx => pressedtrigger = true;
         controls.gameplay.LeftTrigger.canceled += ctx => pressedtrigger = false;
+        controls.gameplay.jump.performed += ctx => pressedjump = true;
+        controls.gameplay.jump.canceled += ctx => pressedjump = false;
     }
 
     private void Start()
@@ -54,7 +59,6 @@ public class GrappleScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if(GetComponent<PlayerJumpV3>().grounded)
         {
             previousgrapple = null;
@@ -142,18 +146,26 @@ public class GrappleScript : MonoBehaviour
             }
             else
             {
-                if (Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 0.3f || (target.GetComponent<EnemyHP>()!=null && Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 1f))
+                if (Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 0.3f || (target.GetComponent<EnemyHP>()!=null && Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 1f)) 
                 {
-                    Destroy(cable);
-                    global.grappling = false;
-                    grapplecooldown = (int)(0.2f / Time.deltaTime);
-                    GetComponent<BoxCollider2D>().enabled = true;
-                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    if(target!=closestenemy)
+                    if (pressedjump && target != closestenemy)
                     {
-                        GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                        transform.position = target.transform.position -new Vector3(0,0.29f,0);
                     }
-                    return;
+                    else
+                    {
+                        Destroy(cable);
+                        global.grappling = false;
+                        grapplecooldown = (int)(0.2f / Time.deltaTime);
+                        GetComponent<BoxCollider2D>().enabled = true;
+                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        if (target != closestenemy)
+                        {
+                            GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                        }
+                        return;
+                    }
+                    
                 }
                 if (target != closestenemy)
                 {
@@ -182,15 +194,24 @@ public class GrappleScript : MonoBehaviour
                 cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position), 0.2f, 1f);
                 if(Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position) - lastdist) <=0.05f)
                 {
-                    Destroy(cable);
-                    global.grappling = false;
-                    grapplecooldown = (int)(0.2f / Time.deltaTime);
-                    GetComponent<BoxCollider2D>().enabled = true;
-                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                    if (target != closestenemy)
+                    if(pressedjump && target!=closestenemy)
                     {
-                        GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                        
+                        transform.position = target.transform.position - new Vector3(0, 0.29f, 0); ;
                     }
+                    else
+                    {
+                        Destroy(cable);
+                        global.grappling = false;
+                        grapplecooldown = (int)(0.2f / Time.deltaTime);
+                        GetComponent<BoxCollider2D>().enabled = true;
+                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                        if (target != closestenemy)
+                        {
+                            GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                        }
+                    }
+                    
                 }
                 lastdist= Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position);
             }
@@ -249,7 +270,7 @@ public class GrappleScript : MonoBehaviour
 
     private void OnJump()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping)
+        if (global.atsavepoint || global.indialogue || global.zipping || global.grappling)
         {
             return;
         }
@@ -272,7 +293,7 @@ public class GrappleScript : MonoBehaviour
 
     private void OnAttack()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping)
+        if (global.atsavepoint || global.indialogue || global.zipping)
         {
             return;
         }

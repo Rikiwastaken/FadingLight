@@ -9,7 +9,7 @@ public class SavePointScript : MonoBehaviour
 {
     public GameObject SaveMenu;
     private bool launchfadetoblack;
-    private Image fadetoblack;
+    public Image fadetoblack;
 
     public float fadeduration;
 
@@ -45,7 +45,6 @@ public class SavePointScript : MonoBehaviour
             }
 
         }
-
         if (launchfadetoblack)
         {
             if(fadetoblack.color.a<1)

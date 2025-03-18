@@ -233,9 +233,9 @@ MonoBehaviour:
   Crystal: {fileID: 1790796850074888957, guid: 353cfb95aa29521419501d130cbb39ac, type: 3}
   AttackPreviewPrefab: {fileID: 3918537565174004228, guid: 3884e2e385ed5ff49a7a134395bc5fd9, type: 3}
   yforvertical: -1.6
-  verticalspikedamage: 20
-  HorizontalSpikeDamage: 25
-  CrystalDamage: 40
+  verticalspikedamage: 15
+  HorizontalSpikeDamage: 20
+  CrystalDamage: 25
   WheretoSpawnLowHorizontal: {x: -1.6, y: -1.95, z: -0.01}
   WheretoSpawnHighHorizontal: {x: -1.6, y: -1.283, z: -0.01}
   WheretoSpawnCloseRangeSpikes: {x: -0.55, y: -1.95, z: -0.01}
