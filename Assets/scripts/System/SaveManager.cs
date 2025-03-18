@@ -248,6 +248,7 @@ public class SaveManager : MonoBehaviour
 
 
         equipmentScript.transform.position = save.coordinates;
+        Debug.Log(augmentsScript.Augmentlist.Count + "  " + save.unlockedAugments.Count);
         for(int i = 0;i<augmentsScript.Augmentlist.Count;i++)
         {
             augmentsScript.Augmentlist[i].locked = !save.unlockedAugments[i];

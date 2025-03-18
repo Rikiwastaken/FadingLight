@@ -39,7 +39,7 @@ public class GadgetScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(GadgetList[ActiveGadgetID].cooldown!=0)
+        if (GadgetList[ActiveGadgetID].cooldown!=0)
         {
             healthbar.SetMaxGadget(GadgetList[ActiveGadgetID].cooldown / Time.deltaTime);
             healthbar.SetGadgetCD(gadgetCDcounter);
@@ -89,7 +89,24 @@ public class GadgetScript : MonoBehaviour
 
     private void Spawnprefab(Gadget gadget)
     {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector2)transform.position + new Vector2(transform.localScale.x / Mathf.Abs(transform.localScale.x) * (0.2f + GetComponent<BoxCollider2D>().size.x / 1.5f), 0f), 0.3f);
+        bool wallinfront = false;
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject.layer == LayerMask.NameToLayer("wall") || collider.gameObject.layer == LayerMask.NameToLayer("ground"))
+            {
+                wallinfront = true;
+            }
+        }
+        
+        
         Vector3 offset = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x), 0f,0f)*projectileoffset;
+
+        if (wallinfront && gadget.PrefabtoSpawn.GetComponent<GrenadeScript>())
+        {
+            offset = new Vector3(0f, 0.5f, 0f);
+        }
+        Debug.Log(wallinfront);
         GameObject projectile = Instantiate(gadget.PrefabtoSpawn, transform.position + offset, Quaternion.identity);
         BulletScript bulletScript = projectile.GetComponent<BulletScript>();
         RocketScript rocketScript = projectile.GetComponent<RocketScript>();
@@ -118,9 +135,14 @@ public class GadgetScript : MonoBehaviour
             {
                 GrenadeScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
             }
-            GrenadeScript.GetComponent<Rigidbody2D>().velocity = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 3f, 1f, 0f);
+            Vector3 forcetoapply = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 3f, 1f, 0f);
+            if (wallinfront)
+            {
+                forcetoapply = new Vector3(0f, 0f, 0f);
+            }
+            Debug.Log(forcetoapply);
+            GrenadeScript.GetComponent<Rigidbody2D>().AddForce(forcetoapply,ForceMode2D.Impulse);
             GrenadeScript.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         }
     }
-
 }

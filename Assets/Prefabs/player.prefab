@@ -710,7 +710,7 @@ MonoBehaviour:
     image: {fileID: 1545786567670615267, guid: e204328c74eebed42b696fa489ac6ac4, type: 3}
     locked: 0
   ActiveGadgetID: 0
-  projectileoffset: 0
+  projectileoffset: 0.2
 --- !u!114 &4745690015797895177
 MonoBehaviour:
   m_ObjectHideFlags: 0

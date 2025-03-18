@@ -226,9 +226,9 @@ public class PlayerHP : MonoBehaviour
             GetComponent<PlayerMovement>().rolling = false;
         }
 
-        if (GetComponent<Rigidbody2D>().position.y<-3)
+        if (GetComponent<Rigidbody2D>().position.y<-20)
         {
-            SceneManager.LoadScene("BreedingGrounds");
+            Eldonhp -=0.1f;
         }
     }
 

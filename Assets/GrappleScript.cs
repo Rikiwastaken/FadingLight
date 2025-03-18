@@ -36,6 +36,8 @@ public class GrappleScript : MonoBehaviour
 
     private bool grapplingenemy;
 
+    private float lastdist;
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -178,6 +180,19 @@ public class GrappleScript : MonoBehaviour
                                      );
                 cable.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
                 cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position), 0.2f, 1f);
+                if(Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position) - lastdist) <=0.05f)
+                {
+                    Destroy(cable);
+                    global.grappling = false;
+                    grapplecooldown = (int)(0.2f / Time.deltaTime);
+                    GetComponent<BoxCollider2D>().enabled = true;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    if (target != closestenemy)
+                    {
+                        GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                    }
+                }
+                lastdist= Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position);
             }
 
             

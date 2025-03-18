@@ -198,7 +198,6 @@ public class PlayerMovement : MonoBehaviour
     //flipping function
     private void Flip(float horizontal)
     {
-        Debug.Log(transform.localScale);
         if (horizontal < 0 && facingRight || horizontal>0 && !facingRight)
         {
             facingRight = !facingRight;
@@ -208,7 +207,6 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = Scale;
             
         }
-        Debug.Log(transform.localScale);
     }
     public void safezone()
     {
