@@ -248,7 +248,7 @@ public class SaveManager : MonoBehaviour
         //public List<bool> WorldFlags; //flags for progession
         //public int Shards; //Number of Crystal Shards picked up
 
-
+        CurrentSlot = save.slotID;
         equipmentScript.transform.position = save.coordinates;
         for(int i = 0;i<augmentsScript.Augmentlist.Count;i++)
         {

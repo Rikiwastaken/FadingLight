@@ -80,6 +80,7 @@ public class buttonscript : MonoBehaviour
 
     public void MainMenu()
     {
+        FindAnyObjectByType<Global>().inbossfight = false;
         SceneManager.LoadScene("MainMenu");
     }
 

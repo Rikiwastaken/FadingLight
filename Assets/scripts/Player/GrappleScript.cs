@@ -35,7 +35,7 @@ public class GrappleScript : MonoBehaviour
     private GameObject grappletarget;
     private GameObject enemytarget;
 
-    private bool grapplingenemy;
+    public bool grapplingenemy;
 
     private float lastdist;
 
@@ -356,7 +356,7 @@ public class GrappleScript : MonoBehaviour
     {
         Transform newclosestenemy = null;
         EnemyHP[] enemylist = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
-        float distance = mindist;
+        float distance = 1f;
         foreach (EnemyHP enemy in enemylist)
         {
             if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && previousgrapple != enemy)

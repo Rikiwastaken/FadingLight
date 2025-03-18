@@ -35,12 +35,14 @@ public class GadgetScript : MonoBehaviour
     private float CDmultiplier;
 
     private AugmentsScript augmentsScript;
+    private PlayerJumpV3 playerjump;
 
     private void Start()
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
         PlayerHP = GetComponent<PlayerHP>();
         augmentsScript = GetComponent<AugmentsScript>();
+        playerjump = GetComponent<PlayerJumpV3>();
     }
     private void FixedUpdate()
     {
@@ -54,6 +56,7 @@ public class GadgetScript : MonoBehaviour
         {
             healthbar.SetMaxGadget(GadgetList[ActiveGadgetID].cooldown / Time.deltaTime);
             healthbar.SetGadgetCD(gadgetCDcounter);
+            //Debug.Log(gadgetCDcounter + "   " + GadgetList[ActiveGadgetID].cooldown / Time.deltaTime);
         }
         else
         {
@@ -68,13 +71,13 @@ public class GadgetScript : MonoBehaviour
             gadgetCDcounter--;
         }
 
-        healthbar.gadgetusable =PlayerHP.EldonNRG >= GadgetList[ActiveGadgetID].Energycost;
+        healthbar.gadgetusable = PlayerHP.EldonNRG >= GadgetList[ActiveGadgetID].Energycost;
 
     }
 
     void OnLeftShoulder()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().ininventory || gadgetCDcounter > 0 || FindAnyObjectByType<Global>().grappling || FindAnyObjectByType<Global>().zipping|| FindAnyObjectByType<Global>().inpause)
+        if (FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().ininventory || gadgetCDcounter > 0 || FindAnyObjectByType<Global>().grappling || FindAnyObjectByType<Global>().zipping|| FindAnyObjectByType<Global>().inpause || playerjump.stuckinwall)
         {
             return;
         }
@@ -85,12 +88,14 @@ public class GadgetScript : MonoBehaviour
     {
         Gadget ActiveGadget = GadgetList[ActiveGadgetID];
 
-        if(PlayerHP.EldonNRG>= ActiveGadget.Energycost)
+        if(PlayerHP.EldonNRG>= ActiveGadget.Energycost && gadgetCDcounter==0)
         {
             PlayerHP.EldonNRG -= ActiveGadget.Energycost;
-            gadgetCDcounter = (int)(CDmultiplier*ActiveGadget.cooldown / Time.deltaTime);
 
-            if(ActiveGadget.PrefabtoSpawn!=null)
+            gadgetCDcounter = (int)(CDmultiplier*ActiveGadget.cooldown / Time.deltaTime);
+            healthbar.SetMaxGadget(ActiveGadget.cooldown / Time.deltaTime);
+
+            if (ActiveGadget.PrefabtoSpawn!=null)
             {
                 Spawnprefab(ActiveGadget);
             }
@@ -100,7 +105,7 @@ public class GadgetScript : MonoBehaviour
 
     private void Spawnprefab(Gadget gadget)
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector2)transform.position + new Vector2(transform.localScale.x / Mathf.Abs(transform.localScale.x) * (0.2f + GetComponent<BoxCollider2D>().size.x / 1.5f), 0f), 0.3f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector2)transform.position + new Vector2(transform.localScale.x / Mathf.Abs(transform.localScale.x) * (0.1f + GetComponent<BoxCollider2D>().size.x / 1.5f), 0f), 0.15f);
         bool wallinfront = false;
         foreach (Collider2D collider in colliders)
         {
@@ -120,6 +125,16 @@ public class GadgetScript : MonoBehaviour
         if(gadget.PrefabtoSpawn.GetComponent<ShockwaveScript>())
         {
             offset=Vector3.zero;
+        }
+        if(wallinfront && gadget.PrefabtoSpawn.GetComponent<RocketScript>())
+        {
+            gadgetCDcounter = 0;
+            PlayerHP.EldonNRG += gadget.Energycost;
+            if(PlayerHP.EldonNRG>PlayerHP.EldonmaxNRG)
+            {
+                PlayerHP.EldonNRG = PlayerHP.EldonmaxNRG;
+            }
+            return;
         }
         GameObject projectile = Instantiate(gadget.PrefabtoSpawn, transform.position + offset, Quaternion.identity);
         BulletScript bulletScript = projectile.GetComponent<BulletScript>();
@@ -141,11 +156,11 @@ public class GadgetScript : MonoBehaviour
         }
         else if (GrenadeScript != null)
         {
-            if(gadget.ID ==3)
+            if(gadget.ID ==4)
             {
                 GrenadeScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
             }
-            else if(gadget.ID ==4)
+            else if(gadget.ID ==3)
             {
                 GrenadeScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
             }
@@ -159,4 +174,9 @@ public class GadgetScript : MonoBehaviour
             GrenadeScript.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         }
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere((Vector2)transform.position + new Vector2(transform.localScale.x / Mathf.Abs(transform.localScale.x) * (0.1f + GetComponent<BoxCollider2D>().size.x / 1.5f), 0f), 0.15f);
+    }
+
 }
