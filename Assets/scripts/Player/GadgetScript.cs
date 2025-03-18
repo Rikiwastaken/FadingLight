@@ -32,13 +32,24 @@ public class GadgetScript : MonoBehaviour
 
     public float projectileoffset;
 
+    private float CDmultiplier;
+
+    private AugmentsScript augmentsScript;
+
     private void Start()
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
         PlayerHP = GetComponent<PlayerHP>();
+        augmentsScript = GetComponent<AugmentsScript>();
     }
     private void FixedUpdate()
     {
+        CDmultiplier = 1.0f;
+        if (augmentsScript.EquipedAugments[8])
+        {
+            CDmultiplier = 0.8f;
+        }
+
         if (GadgetList[ActiveGadgetID].cooldown!=0)
         {
             healthbar.SetMaxGadget(GadgetList[ActiveGadgetID].cooldown / Time.deltaTime);
@@ -77,7 +88,7 @@ public class GadgetScript : MonoBehaviour
         if(PlayerHP.EldonNRG>= ActiveGadget.Energycost)
         {
             PlayerHP.EldonNRG -= ActiveGadget.Energycost;
-            gadgetCDcounter = (int)(ActiveGadget.cooldown / Time.deltaTime);
+            gadgetCDcounter = (int)(CDmultiplier*ActiveGadget.cooldown / Time.deltaTime);
 
             if(ActiveGadget.PrefabtoSpawn!=null)
             {

@@ -51,6 +51,8 @@ public class AugmentsScript : MonoBehaviour
 
     private Healthbar healthbar;
 
+    public int numberofSlotexpansionspickedup;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,7 @@ public class AugmentsScript : MonoBehaviour
         numberofequipedaugments = 0;
         HPfraction = GetComponent<PlayerHP>().Eldonhp/ GetComponent<PlayerHP>().Eldonmaxhp;
         InitiateEquipedStats();
+
 
         for (int i = 0; i < EquipedAugments.Count; i++)
         {
@@ -167,7 +170,7 @@ public class AugmentsScript : MonoBehaviour
         newEquipedStats.DamageReduction= Basestats.DamageReduction;
         newEquipedStats.JumpHeight= Basestats.JumpHeight;
         newEquipedStats.Speed = Basestats.Speed;
-        newEquipedStats.MaxSlots= Basestats.MaxSlots;
+        newEquipedStats.MaxSlots = Basestats.MaxSlots + numberofSlotexpansionspickedup;
         EquipedStats = newEquipedStats;
     }
     

@@ -479,20 +479,28 @@ MonoBehaviour:
     image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
     SlotsUsed: 4
     locked: 0
-  - name: Randomlocekd
-    description: Reduce Drone Ability cooldown by 10%
+  - name: Rien du tout hein
+    description: Bro this does nothing
+    attributeID: 7
+    valueincr: 0
+    mult: 0
+    image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    SlotsUsed: 9
+    locked: 0
+  - name: Drone Efficiency Augment
+    description: Reduce Drone Ability cooldown by 20%
     attributeID: 7
     valueincr: 0
     mult: 0
     image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
     SlotsUsed: 3
-    locked: 1
-  - name: Drone Efficiency Augment
-    description: Reduce Drone Ability cooldown by 10%
+    locked: 0
+  - name: Gadget Efficiency Augment
+    description: Reduce Gadget cooldown by 20%
     attributeID: 7
     valueincr: 0
     mult: 0
-    image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    image: {fileID: 21300000, guid: fd649757aa38f2b4692697d2c1fbf94e, type: 3}
     SlotsUsed: 3
     locked: 0
   EquipedAugments: 000000000000000000000000000000000000
@@ -519,6 +527,7 @@ MonoBehaviour:
   statdisplayobject: {fileID: 0}
   manuallyapplyaugmentboosts: 0
   numberofequipedaugments: 0
+  numberofSlotexpansionspickedup: 0
 --- !u!114 &761752601891527695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,15 +743,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pressedtrigger: 0
-  closestgrapple: {fileID: 0}
-  closestenemy: {fileID: 0}
   mindist: 2.5
   CableSprite: {fileID: 21300000, guid: 7c00b7ca064b8a94d9adddb320300f88, type: 3}
   CableTargetSprite: {fileID: 21300000, guid: 62976d5dbc28c1046b4b48b885368ff1, type: 3}
   EnemyTargetSprite: {fileID: 21300000, guid: 51eede85ef5ec7a4584dbe3e095952b3, type: 3}
   speed: 6
   launch: {x: 0, y: 6}
-  previousgrapple: {fileID: 0}
   TimeToThrowGrapple: 0.15
 --- !u!1 &9140735802474745441
 GameObject:

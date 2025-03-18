@@ -36,6 +36,8 @@ public class SupportDrone : MonoBehaviour
     public RuntimeAnimatorController MedController;
     public RuntimeAnimatorController GunController;
 
+    private float CDmultiplier;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,14 @@ public class SupportDrone : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        CDmultiplier = 1f;
+        //check if CD red augment is equiped
+        if (augmentsscript.EquipedAugments[7])
+        {
+            CDmultiplier = 0.8f;
+        }
+
         ChangeSprite();
         if(dronecd>0)
         {
@@ -132,7 +142,7 @@ public class SupportDrone : MonoBehaviour
             {
                 playerhp.Eldonhp = playerhp.Eldonmaxhp;
             }
-            dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+            dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
         }
     }
@@ -147,7 +157,7 @@ public class SupportDrone : MonoBehaviour
             playerhp.EldonNRG = playerhp.EldonmaxNRG;
         }
 
-        dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+        dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
         transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
     }
 
@@ -159,7 +169,7 @@ public class SupportDrone : MonoBehaviour
         {
             playerhp.EldonNRG = playerhp.EldonmaxNRG;
         }
-        dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+        dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
         transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
     }
 
@@ -173,7 +183,7 @@ public class SupportDrone : MonoBehaviour
             {
                 playerhp.EldonNRG = playerhp.EldonmaxNRG;
             }
-            dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+            dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("playanim");
         }
         
@@ -202,7 +212,7 @@ public class SupportDrone : MonoBehaviour
                 newrocket.GetComponent<RocketScript>().target = target;
                 newrocket.GetComponent<RocketScript>().damage = (int)(augmentsscript.EquipedStats.Damage*drones[ActiveDroneID].Effect);
                 playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
-                dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+                dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
                 newrocket.transform.localScale = Vector3.one * 0.2f;
                 target = null;
             }
@@ -229,7 +239,7 @@ public class SupportDrone : MonoBehaviour
             {
                 playerhp.EldonNRG = playerhp.EldonmaxNRG;
             }
-            dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+            dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
         }
         else
         {
@@ -262,7 +272,7 @@ public class SupportDrone : MonoBehaviour
                 {
                     playerhp.EldonNRG = playerhp.EldonmaxNRG;
                 }
-                dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+                dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
             }
         }
         
@@ -288,7 +298,7 @@ public class SupportDrone : MonoBehaviour
             {
                 playerhp.Eldonhp = playerhp.Eldonmaxhp;
             }
-            dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+            dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
         }
         else
         {
@@ -321,7 +331,7 @@ public class SupportDrone : MonoBehaviour
                 {
                     playerhp.Eldonhp = playerhp.Eldonmaxhp;
                 }
-                dronecd = (int)(drones[ActiveDroneID].cooldown / Time.deltaTime);
+                dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
             }
         }
 

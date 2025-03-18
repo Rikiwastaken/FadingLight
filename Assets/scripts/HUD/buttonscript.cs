@@ -125,6 +125,7 @@ public class buttonscript : MonoBehaviour
         {
             gadget.locked = false;
         }
+        AugmentsScript.numberofSlotexpansionspickedup = 100;
     }
 
 }

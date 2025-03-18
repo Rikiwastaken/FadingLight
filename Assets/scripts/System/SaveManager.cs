@@ -25,6 +25,7 @@ public class SaveManager : MonoBehaviour
         public List<int> loadout; //list of the IDs of equiped Items, 0 is chain, 1 is plate, 2 and 3 are drones, 4 is gadgets and the rest are augments;
         public List<bool> WorldFlags; //flags for progession
         public int Shards; //Number of Crystal Shards picked up
+        public int AugmentSlots;
     }
 
     public Save save;
@@ -133,6 +134,7 @@ public class SaveManager : MonoBehaviour
             save.WorldFlags.Add(false);
         }
         save.Shards = 0;
+        save.AugmentSlots = 0;
 
 
     }
@@ -209,7 +211,7 @@ public class SaveManager : MonoBehaviour
             save.WorldFlags.Add(flag);
         }
         save.Shards = augmentsScript.numberofShardsPickedUp;
-
+        save.AugmentSlots = augmentsScript.numberofSlotexpansionspickedup;
     }
 
     public void LoadSave()
@@ -288,6 +290,7 @@ public class SaveManager : MonoBehaviour
         FindAnyObjectByType<Global>().worldflags=save.WorldFlags;
 
         augmentsScript.numberofShardsPickedUp = save.Shards;
+        augmentsScript.numberofSlotexpansionspickedup = save.AugmentSlots;
     }
 
     public List<string> GetLastSave(int slotID)
