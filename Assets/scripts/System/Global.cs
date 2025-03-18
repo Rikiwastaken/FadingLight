@@ -106,11 +106,15 @@ public class Global : MonoBehaviour
         }
         if(atsavepoint)
         {
-            atsavepoint = false;
-            Destroy(FindAnyObjectByType<SavePointMenu>().gameObject);
+            
             if(ininventory)
             {
                 CloseInventory();
+            }
+            else
+            {
+                atsavepoint = false;
+                Destroy(FindAnyObjectByType<SavePointMenu>().gameObject);
             }
         }
     }

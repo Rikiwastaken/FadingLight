@@ -36,11 +36,11 @@ public class AttackZone : MonoBehaviour
         if(timecounter==0)
         {
             GameObject newattack =Instantiate(PrefabToSpawn,position,Quaternion.identity);
-            if(newattack.GetComponent<spikescript>())
+            if (newattack.GetComponent<SlimeBossSpike>())
             {
-                newattack.GetComponent<spikescript>().damage = damage;
+                newattack.GetComponent<SlimeBossSpike>().damage = damage;
             }
-            if(rotation!=Vector3.zero)
+            if (rotation!=Vector3.zero)
             {
                 newattack.transform.rotation = Quaternion.Euler(rotation);
             }
@@ -58,6 +58,7 @@ public class AttackZone : MonoBehaviour
 
     public void InstantiateObject(GameObject Prefab,Vector3 pos, int dmg, float timebeforeattack, Vector2 newoffset)
     {
+        
         PrefabToSpawn=Prefab;
         position = pos;
         damage = dmg;

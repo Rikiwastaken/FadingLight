@@ -77,6 +77,9 @@ public class SupportDrone : MonoBehaviour
                         case 4:
                             LeechDroneEffect();
                             break;
+                        case 5:
+                            EnergyRegenDroneeffect();
+                            break;
                     }
 
                 }

@@ -16,6 +16,7 @@ public class RocketScript : MonoBehaviour
     {
         if(target != null)
         {
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             GetComponent<Rigidbody2D>().velocity = (target.position - transform.position).normalized * speed;
             Vector3 offset = target.position - transform.position;
 

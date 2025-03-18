@@ -78,7 +78,7 @@ public class ZipLine : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(pressingtrigger && !global.zipping)
+        if(pressingtrigger && !global.zipping && collision.transform.GetComponent<PlayerHP>()!=null)
         {
             if(start)
             {

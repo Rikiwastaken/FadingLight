@@ -173,7 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SaveMenu: {fileID: 4659958184961083705, guid: 8c749cefd878a11439b08119d4485aac, type: 3}
   fadeduration: 1
-  savepointCD: 3
+  savepointCD: 1
 --- !u!50 &-2626720585161270710
 Rigidbody2D:
   serializedVersion: 4

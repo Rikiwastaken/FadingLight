@@ -220,6 +220,16 @@ MonoBehaviour:
     Summon: {fileID: 3458832224624917955, guid: b469e734079ce464a91af20ced6ccd9d, type: 3}
     Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
     locked: 0
+  - name: Full Energy Drone
+    ID: 5
+    RequiredEnergy: 0
+    Effect: 1
+    Description: Full Energy
+    cooldown: 1
+    Medical: 1
+    Summon: {fileID: 0}
+    Sprite: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    locked: 0
   MedController: {fileID: 9100000, guid: 9838ef1b5d3df0344ba7945b10c47758, type: 2}
   GunController: {fileID: 9100000, guid: 628dae4b983cdd441ab219a592fb5ea7, type: 2}
 --- !u!1 &1400103518412949323

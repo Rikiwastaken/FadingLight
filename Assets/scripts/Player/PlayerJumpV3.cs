@@ -112,6 +112,11 @@ public class PlayerJumpV3 : MonoBehaviour
 
         grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough));
         touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/2, largeurgi/2), 0, whatiswall);
+        if(touchingwall)
+        {
+            Debug.Log(touchingwall);
+        }
+        
 
         if (Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough))
         {
