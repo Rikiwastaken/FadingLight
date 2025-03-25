@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3631119774338555410}
   - component: {fileID: 6380461341893963397}
   - component: {fileID: 1938428165189016421}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,9 @@ MonoBehaviour:
   timebeforeexplosion: 3
   damage: 0
   energydamage: 0
+  explosioncounter: 0
   explosionduration: 1
+  explosiondurationcounter: -1
   ForcetoApply: {x: 5, y: 5}
 --- !u!58 &1938428165189016421
 CircleCollider2D:

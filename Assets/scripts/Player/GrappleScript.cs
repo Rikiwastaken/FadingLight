@@ -356,10 +356,10 @@ public class GrappleScript : MonoBehaviour
     {
         Transform newclosestenemy = null;
         EnemyHP[] enemylist = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
-        float distance = 1f;
+        float distance = 2f;
         foreach (EnemyHP enemy in enemylist)
         {
-            if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && previousgrapple != enemy)
+            if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) > 0.5f && previousgrapple != enemy)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
                 if (hit.transform == null)

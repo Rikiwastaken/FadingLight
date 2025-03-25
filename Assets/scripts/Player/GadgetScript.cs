@@ -140,6 +140,7 @@ public class GadgetScript : MonoBehaviour
         BulletScript bulletScript = projectile.GetComponent<BulletScript>();
         RocketScript rocketScript = projectile.GetComponent<RocketScript>();
         GrenadeScript GrenadeScript = projectile.GetComponent<GrenadeScript>();
+        TurretScript turretScript = projectile.GetComponent<TurretScript>();
         if (bulletScript!=null)
         {
             bulletScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
@@ -169,9 +170,20 @@ public class GadgetScript : MonoBehaviour
             {
                 forcetoapply = new Vector3(0f, 0f, 0f);
             }
-            Debug.Log(forcetoapply);
             GrenadeScript.GetComponent<Rigidbody2D>().AddForce(forcetoapply,ForceMode2D.Impulse);
             GrenadeScript.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        }
+        else if (turretScript != null)
+        {
+            Vector3 forcetoapply = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 2f, 1f, 0f);
+            if (wallinfront)
+            {
+                forcetoapply = new Vector3(0f, 0f, 0f);
+            }
+            turretScript.transform.localScale = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 0.35f, 0.35f, 0.35f);
+            turretScript.damage= (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
+            turretScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
+            turretScript.GetComponent<Rigidbody2D>().AddForce(forcetoapply, ForceMode2D.Impulse);
         }
     }
     private void OnDrawGizmos()

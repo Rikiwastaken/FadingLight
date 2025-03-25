@@ -63,6 +63,7 @@ public class EquipmentScript : MonoBehaviour
         if (FindAnyObjectByType<Global>().clickednewgame)
         {
             FindAnyObjectByType<SaveManager>().CreateEmptySaveFile(FindAnyObjectByType<SaveManager>().CurrentSlot);
+            FindAnyObjectByType<Global>().clickednewgame=false;
         }
         FindAnyObjectByType<SaveManager>().ApplySave();
     }

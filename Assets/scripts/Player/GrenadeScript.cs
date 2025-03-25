@@ -7,11 +7,12 @@ public class GrenadeScript : MonoBehaviour
     public float timebeforeexplosion;
     public int damage;
     public int energydamage;
-    private int explosioncounter;
+    public int explosioncounter;
     private List<Transform> damagedobject = new List<Transform>();
     public float explosionduration;
-    private int explosiondurationcounter=-1;
+    public int explosiondurationcounter=-1;
     public Vector2 ForcetoApply;
+    private bool initialized;
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -50,13 +51,15 @@ public class GrenadeScript : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        explosioncounter = (int)(timebeforeexplosion / Time.deltaTime);
-    }
-
     private void FixedUpdate()
     {
+
+        if(!initialized)
+        {
+            explosioncounter = (int)(timebeforeexplosion / Time.deltaTime);
+            initialized = true;
+        }
+
         if(explosiondurationcounter==0 && explosioncounter==0)
         {
             Destroy(gameObject);
