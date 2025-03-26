@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 3458832224624917955, guid: 50e9c6038af57bd42882a9f2aac91889, type: 3}
-  duration: 999999
+  duration: 10
   damage: 0
   energydamage: 0
   rateoffire: 1

@@ -20,12 +20,17 @@ public class PlayerJumpV3 : MonoBehaviour
     public float jumptime;
     public float jumpcounter;
 
+    [Header("Second Jump details")]
+    private bool jump2;
+
     [Header("Ground details")]
     [SerializeField] private Transform groundcheck;
     [SerializeField] private float radOcircle;
     [SerializeField] private float hauteurgi;
     [SerializeField] private float largeurgi;
     [SerializeField] private LayerMask whatisground;
+    [SerializeField] private LayerMask whatisennemy;
+    [SerializeField] private LayerMask whatisboss;
     [SerializeField] private LayerMask whatispassthrough;
 
     [Header("Walljump details")]
@@ -39,6 +44,7 @@ public class PlayerJumpV3 : MonoBehaviour
     [SerializeField] private Transform frontcheck;
 
     public bool grounded;
+    public bool onennemi;
 
     [Header("Components")]
     private Rigidbody2D rb;
@@ -111,6 +117,7 @@ public class PlayerJumpV3 : MonoBehaviour
         }
 
         grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough));
+        onennemi = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisennemy) || Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisboss));
         touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/2, largeurgi/2), 0, whatiswall);
         if(touchingwall)
         {
@@ -154,6 +161,16 @@ public class PlayerJumpV3 : MonoBehaviour
             myanim.SetBool("falling", true);
         }
 
+        //doublejump
+
+        if (pressedjump && !grounded && !alreadypressedjump && !jump2 &&!stuckinwall)
+        {
+            alreadypressedjump = true;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce*1.5f);
+            myanim.SetTrigger("jump");
+            jump2 = true;
+        }
+
         //wall jump
 
         if (!touchingwall)
@@ -183,8 +200,10 @@ public class PlayerJumpV3 : MonoBehaviour
             }
         }
 
+
         if (stuckinwall)
         {
+            jump2 = false;
             GetComponent<Animator>().SetBool("stuckinwall", true);
             rb.velocity = new Vector2(0, 0);
             rb.gravityScale = 0;
@@ -223,7 +242,11 @@ public class PlayerJumpV3 : MonoBehaviour
             myanim.ResetTrigger("jump");
             myanim.SetBool("falling", false);
             touchingwall = false;
-
+            jump2 = false;
+        }
+        if(onennemi)
+        {
+            jump2 = false;
         }
     }
 
