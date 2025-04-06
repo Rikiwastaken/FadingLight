@@ -58,8 +58,6 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private PlayerMovement playermov;
 
-    public GameObject passthrough;
-
     private int savepointjumpCD;
 
     private float velocityx;
@@ -79,7 +77,6 @@ public class PlayerJumpV3 : MonoBehaviour
         gravity = rb.gravityScale;
 
         playermov = GetComponent<PlayerMovement>();
-        passthrough = GameObject.Find("passthroughplatform");
     }
 
     private void FixedUpdate()
@@ -119,21 +116,6 @@ public class PlayerJumpV3 : MonoBehaviour
         grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough));
         onennemi = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisennemy) || Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisboss));
         touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/2, largeurgi/2), 0, whatiswall);
-        if(touchingwall)
-        {
-            Debug.Log(touchingwall);
-        }
-        
-
-        if (Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough))
-        {
-            passthrough.GetComponent<CompositeCollider2D>().isTrigger = false;
-        }
-        else
-        {
-            passthrough.GetComponent<CompositeCollider2D>().isTrigger = true;
-        }
-
         Checkground();
 
         //normal jump

@@ -45,7 +45,7 @@ public class SlimeBossSpike : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Player" && GetComponent<SpriteRenderer>().color.a>0.9f)
+        if (collision.transform.tag == "Player")
         {
             collision.transform.GetComponent<PlayerHP>().TakeDamage(damage, Vector2.zero, pushforce);
         }
@@ -53,7 +53,7 @@ public class SlimeBossSpike : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.transform.tag == "Player" && GetComponent<SpriteRenderer>().color.a > 0.9f)
+        if (collision.transform.tag == "Player")
         {
             collision.transform.GetComponent<PlayerHP>().TakeDamage(damage, Vector2.zero, pushforce);
         }

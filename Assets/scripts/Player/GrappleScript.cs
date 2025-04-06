@@ -235,7 +235,7 @@ public class GrappleScript : MonoBehaviour
                 grappletarget.GetComponent<SpriteRenderer>().sprite = CableTargetSprite;
                 grappletarget.GetComponent<SpriteRenderer>().color = Color.red;
                 grappletarget.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                grappletarget.transform.localScale= Vector3.one*0.1f;
+                grappletarget.transform.localScale= Vector3.one*0.5f;
             }
             grappletarget.transform.position = closestgrapple.transform.position;
         }
@@ -255,7 +255,7 @@ public class GrappleScript : MonoBehaviour
                 enemytarget.AddComponent<SpriteRenderer>();
                 enemytarget.GetComponent<SpriteRenderer>().sprite = EnemyTargetSprite;
                 enemytarget.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                enemytarget.transform.localScale = Vector3.one * 0.1f;
+                enemytarget.transform.localScale = Vector3.one * 0.5f;
             }
             enemytarget.transform.position = closestenemy.transform.position;
         }
@@ -287,7 +287,7 @@ public class GrappleScript : MonoBehaviour
             cable = new GameObject();
             cable.AddComponent<SpriteRenderer>();
             cable.GetComponent<SpriteRenderer>().sprite = CableSprite;
-            cable.transform.localScale = new Vector3(0f, 0.2f, 1f);
+            cable.transform.localScale = new Vector3(0f, 1f, 1f);
         }
     }
 
@@ -356,7 +356,7 @@ public class GrappleScript : MonoBehaviour
     {
         Transform newclosestenemy = null;
         EnemyHP[] enemylist = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
-        float distance = 2f;
+        float distance = 2f*5f;
         foreach (EnemyHP enemy in enemylist)
         {
             if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) > 0.5f && previousgrapple != enemy)

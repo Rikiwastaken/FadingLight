@@ -101,29 +101,36 @@ public class DialogueManager : MonoBehaviour
 
         }
 
-        if (currentdialogue != null)
+        if (currentdialogue != null && Global.indialogue)
         {
-            if(currentdialogue.parts[pageindex]!=null)
+            if(currentdialogue.parts!= null && pageindex < currentdialogue.parts.Count)
             {
-                foreach (DialogueMovement Movement in currentdialogue.parts[pageindex].movementtotrigger)
+                if (currentdialogue.parts[pageindex] != null)
                 {
-                    if (Movement.Actor != null)
+                    foreach (DialogueMovement Movement in currentdialogue.parts[pageindex].movementtotrigger)
                     {
-                        Vector2 pos = Movement.Actor.transform.position;
-                        Vector2 dest = Movement.wheretogo;
-                        if (Vector2.Distance(pos, dest) >= 0.05)
+                        if (Movement.Actor != null)
                         {
-                            float speed = Movement.speed;
-                            Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
-                        }
-                        else
-                        {
-                            Movement.Actor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                            Vector2 pos = Movement.Actor.transform.position;
+                            Vector2 dest = Movement.wheretogo;
+                            if (Vector2.Distance(pos, dest) >= 0.05)
+                            {
+                                float speed = Movement.speed;
+                                Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
+                            }
+                            else
+                            {
+                                Movement.Actor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                            }
                         }
                     }
                 }
-            }
-            
+            }           
+        }
+
+        if(!Global.indialogue)
+        {
+            currentdialogue=null;
         }
     }
 
@@ -185,28 +192,34 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            Global.indialogue = false;
+            pageindex = 0;
+            
             if(currentdialogue.worldflagtotriggerattheend!=0)
             {
                 Global.worldflags[currentdialogue.worldflagtotriggerattheend] = true;
             }
             currentdialogue = null;
+            Global.indialogue = false;
         }
         
     }
 
     public void AccelerateOrClose()
     {
-        if(Global.indialogue)
+        if(Global.indialogue && currentdialogue!=null && currentwindow!=null)
         {
-            if (currentwindow.GetComponent<CutsceneDialogueWindow>().numberofcharacterstoshow < currentdialogue.parts[pageindex].text.Length)
+            if(currentdialogue.parts!=null && pageindex < currentdialogue.parts.Count)
             {
-                currentwindow.GetComponent<CutsceneDialogueWindow>().numberofcharacterstoshow = currentdialogue.parts[pageindex].text.Length;
+                if (currentwindow.GetComponent<CutsceneDialogueWindow>().numberofcharacterstoshow < currentdialogue.parts[pageindex].text.Length)
+                {
+                    currentwindow.GetComponent<CutsceneDialogueWindow>().numberofcharacterstoshow = currentdialogue.parts[pageindex].text.Length;
+                }
+                else
+                {
+                    OpenNextPage();
+                }
             }
-            else
-            {
-                OpenNextPage();
-            }
+            
         }
     }
 

@@ -26,7 +26,7 @@ public class GadgetScript : MonoBehaviour
 
     private Healthbar healthbar;
 
-    private int gadgetCDcounter;
+    public int gadgetCDcounter;
 
     private PlayerHP PlayerHP;
 
@@ -56,7 +56,6 @@ public class GadgetScript : MonoBehaviour
         {
             healthbar.SetMaxGadget(GadgetList[ActiveGadgetID].cooldown / Time.deltaTime);
             healthbar.SetGadgetCD(gadgetCDcounter);
-            //Debug.Log(gadgetCDcounter + "   " + GadgetList[ActiveGadgetID].cooldown / Time.deltaTime);
         }
         else
         {
@@ -146,14 +145,14 @@ public class GadgetScript : MonoBehaviour
             bulletScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
             bulletScript.EnergyDamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
             bulletScript.direction = (int)(transform.localScale.x/Mathf.Abs(transform.localScale.x));
-            bulletScript.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            bulletScript.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
         else if (rocketScript != null)
         {
             rocketScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
             rocketScript.Energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
             rocketScript.basedirection = (int)(transform.localScale.x / Mathf.Abs(transform.localScale.x));
-            rocketScript.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            rocketScript.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else if (GrenadeScript != null)
         {
@@ -165,22 +164,22 @@ public class GadgetScript : MonoBehaviour
             {
                 GrenadeScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
             }
-            Vector3 forcetoapply = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 3f, 1f, 0f);
+            Vector3 forcetoapply = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 5f, 1f, 0f)*10f;
             if (wallinfront)
             {
                 forcetoapply = new Vector3(0f, 0f, 0f);
             }
             GrenadeScript.GetComponent<Rigidbody2D>().AddForce(forcetoapply,ForceMode2D.Impulse);
-            GrenadeScript.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            GrenadeScript.transform.localScale =new Vector3(0.5f, 0.5f, 0.5f);
         }
         else if (turretScript != null)
         {
-            Vector3 forcetoapply = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 2f, 1f, 0f);
+            Vector3 forcetoapply = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 2f, 2f, 0f)*10f;
             if (wallinfront)
             {
                 forcetoapply = new Vector3(0f, 0f, 0f);
             }
-            turretScript.transform.localScale = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 0.35f, 0.35f, 0.35f);
+            turretScript.transform.localScale = new Vector3(transform.localScale.x / Mathf.Abs(transform.localScale.x) * 1.75f, 1.75f, 1.75f);
             turretScript.damage= (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
             turretScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
             turretScript.GetComponent<Rigidbody2D>().AddForce(forcetoapply, ForceMode2D.Impulse);

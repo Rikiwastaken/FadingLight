@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SaveMenu: {fileID: 4659958184961083705, guid: 8c749cefd878a11439b08119d4485aac, type: 3}
+  fadetoblack: {fileID: 0}
   fadeduration: 1
   savepointCD: 1
 --- !u!50 &-2626720585161270710
@@ -226,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 5542558641761947714}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.175, z: 0}
+  m_LocalPosition: {x: 0.3, y: -0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

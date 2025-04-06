@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerDodge : MonoBehaviour
@@ -108,7 +107,6 @@ public class PlayerDodge : MonoBehaviour
                         }
                         
                     }
-                    Debug.Log(max);
 
                 }
             }

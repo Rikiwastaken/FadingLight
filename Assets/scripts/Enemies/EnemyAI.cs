@@ -152,11 +152,11 @@ public class EnemyAI : MonoBehaviour
         {
             if (targetpos.x < transform.position.x)
             {
-                rb2D.AddForce(new Vector2(-jumpforcex, jumpforcey));
+                rb2D.AddForce(new Vector2(-jumpforcex, jumpforcey),ForceMode2D.Impulse);
             }
             if (targetpos.x > transform.position.x)
             {
-                rb2D.AddForce(new Vector2(jumpforcex, jumpforcey));
+                rb2D.AddForce(new Vector2(jumpforcex, jumpforcey), ForceMode2D.Impulse);
             }
 
             initiateattack = false;

@@ -213,7 +213,7 @@ public class SupportDrone : MonoBehaviour
                 newrocket.GetComponent<RocketScript>().damage = (int)(augmentsscript.EquipedStats.Damage*drones[ActiveDroneID].Effect);
                 playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
                 dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
-                newrocket.transform.localScale = Vector3.one * 0.2f;
+                newrocket.transform.localScale = Vector3.one;
                 target = null;
             }
         }

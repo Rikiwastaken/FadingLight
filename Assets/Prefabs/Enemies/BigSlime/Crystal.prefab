@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   timetofade: 0.5
-  pushforce: {x: 10, y: 6}
+  pushforce: {x: 20, y: 12}
 --- !u!58 &7268438930865392108
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -531,7 +531,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.916, y: -1.304, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5086185784911348803}
@@ -604,10 +604,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: af865bd59ace4dc449c1f6e57cfca7ac, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -677,19 +677,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd30e455943a24865b1679e70986ab97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectdist: 1.2
-  xspeed: 1.4
+  detectdist: 6
+  xspeed: 7
   enemyHP: 0
   hitdelay: 20
   energystunduration: 0
   delaycounter: 0
-  attackrange: 1
-  abandonrange: 3
+  attackrange: 5
+  abandonrange: 15
   cannotmove: 0
   cannotmoveatk: 0
   targetted: 0
   timebeforejump: 1
-  jumpforcex: 150
+  jumpforcex: 75
   jumpforcey: 120
   atkcd: 100
   attackdmg: 20

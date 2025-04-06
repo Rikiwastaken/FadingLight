@@ -217,7 +217,6 @@ public class SaveManager : MonoBehaviour
     public void LoadSave()
     {
         string savetoload = GetLastSave(CurrentSlot)[0];
-        Debug.Log(savetoload);
         if (savetoload != null)
         {
             save = JsonUtility.FromJson<Save>(savetoload);

@@ -160,7 +160,7 @@ public class EldonAttack : MonoBehaviour
                 if (enemyHP.enemyhp > 0)
                 {
                     int direction = (int)((enemyrb.position.x - playerx) / Mathf.Abs(enemyrb.position.x - playerx));
-                    enemyrb.AddForce(new Vector2(direction*smallrecoil, 0));
+                    enemyrb.AddForce(new Vector2(direction*smallrecoil, 0),ForceMode2D.Impulse);
                     
                 }
             }

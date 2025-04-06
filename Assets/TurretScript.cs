@@ -37,7 +37,7 @@ public class TurretScript : MonoBehaviour
         if(rateoffirecounter==0)
         {
             GameObject newproj =Instantiate(projectile, transform.GetChild(0).position, Quaternion.identity);
-            newproj.transform.localScale = Vector3.one*0.1f; 
+            newproj.transform.localScale = Vector3.one*0.5f; 
             newproj.GetComponent<BulletScript>().damage = damage;
             newproj.GetComponent<BulletScript>().EnergyDamage = energydamage;
             newproj.GetComponent<BulletScript>().direction = (int)(transform.localScale.x/Mathf.Abs(transform.localScale.x));
