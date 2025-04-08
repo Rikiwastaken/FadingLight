@@ -91,8 +91,8 @@ public class GadgetScript : MonoBehaviour
         {
             PlayerHP.EldonNRG -= ActiveGadget.Energycost;
 
-            gadgetCDcounter = (int)(CDmultiplier*ActiveGadget.cooldown / Time.deltaTime);
-            healthbar.SetMaxGadget(ActiveGadget.cooldown / Time.deltaTime);
+            gadgetCDcounter = (int)(CDmultiplier*ActiveGadget.cooldown*60);
+            healthbar.SetMaxGadget(ActiveGadget.cooldown*60);
 
             if (ActiveGadget.PrefabtoSpawn!=null)
             {
@@ -119,7 +119,7 @@ public class GadgetScript : MonoBehaviour
 
         if (wallinfront && gadget.PrefabtoSpawn.GetComponent<GrenadeScript>())
         {
-            offset = new Vector3(0f, 0.5f, 0f);
+            offset = new Vector3(0f, 2.5f, 0f);
         }
         if(gadget.PrefabtoSpawn.GetComponent<ShockwaveScript>())
         {

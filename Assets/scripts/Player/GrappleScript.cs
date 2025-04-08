@@ -270,7 +270,7 @@ public class GrappleScript : MonoBehaviour
 
     private void OnJump()
     {
-        if (global.atsavepoint || global.indialogue || global.zipping || global.grappling)
+        if (global.atsavepoint || global.indialogue || global.zipping || global.grappling || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll"))
         {
             return;
         }
@@ -293,7 +293,7 @@ public class GrappleScript : MonoBehaviour
 
     private void OnAttack()
     {
-        if (global.atsavepoint || global.indialogue || global.zipping)
+        if (global.atsavepoint || global.indialogue || global.zipping || !GetComponent<PlayerJumpV3>().grounded || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll"))
         {
             return;
         }
@@ -332,12 +332,13 @@ public class GrappleScript : MonoBehaviour
             if(Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) < distance && previousgrapple!=grapple)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, grapple.transform.position- transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position)-1 ,13);
+                
                 if(hit.transform==null)
                 {
                     newclosestgrapple = grapple.transform;
                     distance = Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position);
                 }
-                else if(hit.transform.gameObject.layer!=LayerMask.NameToLayer("wall") && hit.transform.gameObject.layer != LayerMask.NameToLayer("ground"))
+                else if(hit.transform.gameObject.layer!=LayerMask.NameToLayer("wall") && hit.transform.gameObject.layer != LayerMask.NameToLayer("ground") && hit.transform.name!="Roof")
                 {
                     newclosestgrapple = grapple.transform;
                     distance = Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position);
@@ -359,7 +360,7 @@ public class GrappleScript : MonoBehaviour
         float distance = 2f*5f;
         foreach (EnemyHP enemy in enemylist)
         {
-            if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) > 0.5f && previousgrapple != enemy)
+            if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) > 2.5f && previousgrapple != enemy)
             {
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
                 if (hit.transform == null)
@@ -367,7 +368,7 @@ public class GrappleScript : MonoBehaviour
                     newclosestenemy = enemy.transform;
                     distance = Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position);
                 }
-                else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("wall") && hit.transform.gameObject.layer != LayerMask.NameToLayer("ground"))
+                else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("wall") && hit.transform.gameObject.layer != LayerMask.NameToLayer("ground") && hit.transform.name != "Roof")
                 {
                     newclosestenemy = enemy.transform;
                     distance = Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position);

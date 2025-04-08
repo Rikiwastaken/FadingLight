@@ -34,7 +34,7 @@ public class TurretScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(rateoffirecounter==0)
+        if(rateoffirecounter==0 && touchedground)
         {
             GameObject newproj =Instantiate(projectile, transform.GetChild(0).position, Quaternion.identity);
             newproj.transform.localScale = Vector3.one*0.5f; 
@@ -43,7 +43,7 @@ public class TurretScript : MonoBehaviour
             newproj.GetComponent<BulletScript>().direction = (int)(transform.localScale.x/Mathf.Abs(transform.localScale.x));
             rateoffirecounter=(int)(rateoffire/Time.deltaTime);
         }
-        else
+        else if (touchedground)
         {
             rateoffirecounter--;
         }

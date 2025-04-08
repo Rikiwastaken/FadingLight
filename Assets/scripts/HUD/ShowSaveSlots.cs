@@ -49,12 +49,17 @@ public class ShowSaveSlots : MonoBehaviour
 
     string convertToHours(int seconds)
     {
+        string res = "";
         int minutes = seconds / 60;
         int hours = minutes / 60;
-
+        res += hours+"h";
         int remainingminutes = minutes % 60;
-
-        return hours + "h" + remainingminutes;
+        if(remainingminutes <=9)
+        {
+            res+="0";
+        }
+        res += remainingminutes;
+        return res;
     }
 
 

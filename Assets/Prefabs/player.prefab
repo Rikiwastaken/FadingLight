@@ -748,7 +748,7 @@ MonoBehaviour:
     locked: 0
   ActiveGadgetID: 0
   gadgetCDcounter: 0
-  projectileoffset: 0.2
+  projectileoffset: 1
 --- !u!114 &4745690015797895177
 MonoBehaviour:
   m_ObjectHideFlags: 0

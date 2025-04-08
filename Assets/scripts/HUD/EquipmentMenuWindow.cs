@@ -275,7 +275,7 @@ public class EquipmentMenuWindow : MonoBehaviour
 
     private void OnAttack()
     {
-        if (onquiped)
+        if (onquiped && FindAnyObjectByType<Global>().atsavepoint)
         {
             switch(selectedsection)
             {
