@@ -135,7 +135,8 @@ public class GadgetScript : MonoBehaviour
             }
             return;
         }
-        GameObject projectile = Instantiate(gadget.PrefabtoSpawn, transform.position + offset, Quaternion.identity);
+        //GameObject projectile = Instantiate(gadget.PrefabtoSpawn, transform.position + offset, Quaternion.identity);
+        GameObject projectile = Instantiate(gadget.PrefabtoSpawn, GetComponent<Rigidbody2D>().position, Quaternion.identity);
         BulletScript bulletScript = projectile.GetComponent<BulletScript>();
         RocketScript rocketScript = projectile.GetComponent<RocketScript>();
         GrenadeScript GrenadeScript = projectile.GetComponent<GrenadeScript>();

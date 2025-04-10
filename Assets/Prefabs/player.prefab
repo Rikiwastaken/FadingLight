@@ -250,7 +250,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.009999998, y: -0.0125}
+  m_Offset: {x: 0, y: -0.0125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.36, y: 0.5}
@@ -306,6 +306,7 @@ MonoBehaviour:
   jumpForce: 3
   jumptime: 0.13
   jumpcounter: 0
+  jump2: 0
   groundcheck: {fileID: 7714607739817182240}
   radOcircle: 0.3
   hauteurgi: 0.3
@@ -427,6 +428,7 @@ MonoBehaviour:
   airdodgelengthcnt: 0
   airdodgelength: 0.25
   airdodgespeed: 25
+  resetairdash: 0
 --- !u!114 &387999305572416826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,7 +772,7 @@ MonoBehaviour:
   CableTargetSprite: {fileID: 21300000, guid: 62976d5dbc28c1046b4b48b885368ff1, type: 3}
   EnemyTargetSprite: {fileID: 21300000, guid: 51eede85ef5ec7a4584dbe3e095952b3, type: 3}
   speed: 30
-  launch: {x: 0, y: 6}
+  launch: {x: 0, y: 75}
   TimeToThrowGrapple: 0.15
   grapplingenemy: 0
 --- !u!114 &8273249805438150069

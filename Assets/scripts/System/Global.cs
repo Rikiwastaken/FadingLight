@@ -48,7 +48,26 @@ public class Global : MonoBehaviour
 
     private void Update()
     {
-
+        if(SceneManager.GetActiveScene().name == "Start" || SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            inbossfight = false;
+            ininventory = false;
+            inpause = false;
+            atsavepoint = false;
+            indialogue = false;
+            zipping = false;
+            grappling = false;
+            Time.timeScale = 1;
+            foreach (bool flag in worldflags)
+            {
+                flag = false;
+            }
+            currentinventory = null;
+            lastinv = null;
+            activeSavePoint = null;
+            clickednewgame = false;
+            PauseMenu = null;
+        }
         if( inpause)
         {
             if(!FindAnyObjectByType<PauseMenu>())
@@ -97,7 +116,7 @@ public class Global : MonoBehaviour
 
     void OnMenu()
     {
-        if(SceneManager.GetActiveScene().name!="Start" && SceneManager.GetActiveScene().name != "MainMenu" && !ininventory && !atsavepoint && FindAnyObjectByType<PlayerHP>().Eldonhp>0)
+        if(SceneManager.GetActiveScene().name!="Start" && !indialogue && SceneManager.GetActiveScene().name != "MainMenu" && !ininventory && !atsavepoint && FindAnyObjectByType<PlayerHP>().Eldonhp>0)
         {
             if(FindAnyObjectByType<PauseMenu>()==null)
             {

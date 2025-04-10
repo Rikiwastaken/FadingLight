@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -21,7 +18,7 @@ public class PlayerJumpV3 : MonoBehaviour
     public float jumpcounter;
 
     [Header("Second Jump details")]
-    private bool jump2;
+    public bool jump2;
 
     [Header("Ground details")]
     [SerializeField] private Transform groundcheck;
@@ -86,20 +83,17 @@ public class PlayerJumpV3 : MonoBehaviour
             FindAnyObjectByType<Global>().zipping=false;
             GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         }
-        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping || (FindAnyObjectByType<Global>().grappling && !GetComponent<GrappleScript>().grapplingenemy)|| FindAnyObjectByType<Global>().inpause || GetComponent<PlayerDodge>().airdodgelengthcnt > 0)
+        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping || (FindAnyObjectByType<Global>().grappling && !GetComponent<GrappleScript>().grapplingenemy)|| FindAnyObjectByType<Global>().inpause)
         {
             savepointjumpCD=(int)(1/Time.deltaTime);
             stuckinwall = false;
             wantstounstick = false;
-            if(GetComponent<PlayerDodge>().airdodgelengthcnt == 0)
-            {
-
-                rb.gravityScale = gravity;
-            }
             
             GetComponent<Animator>().SetBool("stuckinwall", false);
             return;
         }
+
+
         if(savepointjumpCD>0)
         {
             savepointjumpCD--;
@@ -125,13 +119,13 @@ public class PlayerJumpV3 : MonoBehaviour
 
         //normal jump
 
-        if (pressedjump && grounded && !alreadypressedjump && savepointjumpCD<=0)
+        if (pressedjump && grounded && !alreadypressedjump && savepointjumpCD<=0 && GetComponent<PlayerDodge>().airdodgelengthcnt == 0)
         {
             alreadypressedjump = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             myanim.SetTrigger("jump");
         }
-        if (!grounded && alreadypressedjump && jumpcounter > 0 && savepointjumpCD <= 0)
+        if (!grounded && alreadypressedjump && jumpcounter > 0 && savepointjumpCD <= 0 && GetComponent<PlayerDodge>().airdodgelengthcnt == 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             jumpcounter -= Time.deltaTime;
@@ -150,7 +144,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
         //doublejump
 
-        if (pressedjump && !grounded && !alreadypressedjump && !jump2 &&!stuckinwall)
+        if (pressedjump && !grounded && !alreadypressedjump && !jump2 &&!stuckinwall && GetComponent<PlayerDodge>().airdodgelengthcnt == 0)
         {
             
             alreadypressedjump = true;
@@ -163,7 +157,6 @@ public class PlayerJumpV3 : MonoBehaviour
         }
 
         //wall jump
-
         if (!touchingwall)
         {
             stuckinwall = false;
@@ -190,7 +183,6 @@ public class PlayerJumpV3 : MonoBehaviour
                 GetComponent<Animator>().SetBool("stuckinwall", false);
             }
         }
-
 
         if (stuckinwall)
         {

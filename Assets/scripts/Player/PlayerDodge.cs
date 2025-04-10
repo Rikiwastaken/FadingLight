@@ -45,12 +45,18 @@ public class PlayerDodge : MonoBehaviour
 
         if (airdodgelengthcnt > 0)
         {
+            if(Mathf.Abs(GetComponent<Rigidbody2D>().velocityX)<=0.5f)
+            {
+                airdodgelengthcnt = 0;
+                GetComponent<Rigidbody2D>().gravityScale = gravity;
+                return;
+            }
             airdodgelengthcnt -= 1;
             
             GetComponent<Rigidbody2D>().gravityScale = 0;
             if(airdodgelengthcnt==0)
             {
-                GetComponent<Rigidbody2D>().gravityScale=gravity;
+                GetComponent<Rigidbody2D>().gravityScale = gravity;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(airdodgedirection*airdodgespeed / 2, 0);
             }
             else
@@ -98,7 +104,7 @@ public class PlayerDodge : MonoBehaviour
             replaceennemy = true;
         }
 
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("roll") && replaceennemy)
+        if ((!anim.GetCurrentAnimatorStateInfo(0).IsName("roll")|| airdodgelengthcnt==0) && replaceennemy)
         {
             replaceennemy = false;
             Replaceenemies();
@@ -106,11 +112,11 @@ public class PlayerDodge : MonoBehaviour
 
         if(!grounded && !usedairdodge && airdodgelengthcnt==0)
         {
-            anim.SetTrigger("dodge");
             usedairdodge = true;
             airdodgelengthcnt = (int)(airdodgelength/Time.fixedDeltaTime);
             airdodgedirection = (int)(transform.localScale.x/Mathf.Abs(transform.localScale.x));
             GetComponent<Rigidbody2D>().gravityScale = 0;
+            replaceennemy = true;
         }
 
     }
