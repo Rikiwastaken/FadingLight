@@ -15,8 +15,7 @@ public class soundoptions : MonoBehaviour
         public int height;
     }
 
-    public float soundvolume;
-    public float musicvolume;
+    optionvalues optionval;
 
     public Image SoundImage;
     public Image MusicImage;
@@ -31,7 +30,6 @@ public class soundoptions : MonoBehaviour
     private bool pressedclick;
     public Transform selected;
     int activebuttonID;
-    private Resolution resolution;
     public List<Resolution> Allresolutions;
     public TextMeshProUGUI resolutiontext;
     public TextMeshProUGUI FullscreenText;
@@ -57,13 +55,9 @@ public class soundoptions : MonoBehaviour
         controls.gameplay.jump.canceled += ctx => valueclick = 0;
 
         controls.gameplay.Enable();
-
-        resolution=new Resolution();
-        resolution.width = Screen.currentResolution.width;
-        resolution.height = Screen.currentResolution.height;
-        resolutiontext.text = resolution.width + "x" + resolution.height;
-        soundvolume = FindAnyObjectByType<optionvalues>().soundvol;
-        musicvolume = FindAnyObjectByType<optionvalues>().musicvol;
+        optionval = FindAnyObjectByType<optionvalues>();
+        resolutiontext.text = optionval.options.resolution.width + "x" + optionval.options.resolution.height;
+        
         if (Screen.fullScreen)
         {
             FullscreenText.text = "Fullscreen : On";
@@ -74,18 +68,18 @@ public class soundoptions : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
-        SoundImage.fillAmount = soundvolume;
-        MusicImage.fillAmount = musicvolume;
+        SoundImage.fillAmount = optionval.options.soundvol;
+        MusicImage.fillAmount = optionval.options.musicvol;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        SoundImage.fillAmount = soundvolume;
-        MusicImage.fillAmount = musicvolume;
+        SoundImage.fillAmount = optionval.options.soundvol;
+        MusicImage.fillAmount = optionval.options.musicvol;
 
         if (valueclick == 0)
         {
@@ -148,61 +142,67 @@ public class soundoptions : MonoBehaviour
             case "SoundSelected":
                 if(inputx != 0)
                 {
-                    soundvolume += 0.05f * inputx;
-                    if(soundvolume<0)
+                    optionval.options.soundvol += 0.05f * inputx;
+                    if(optionval.options.soundvol<0)
                     {
-                        soundvolume = 0;
+                        optionval.options.soundvol = 0;
                     }
-                    else if(soundvolume>1)
+                    else if(optionval.options.soundvol>1)
                     {
-                        soundvolume=1;
+                        optionval.options.soundvol=1;
                     }
                 }
-                
+                optionval.SaveOptions();
                 break;
             case "MusicSelected":
                 if (inputx != 0)
                 {
-                    musicvolume += 0.05f * inputx;
-                    if (musicvolume < 0)
+                    optionval.options.musicvol += 0.05f * inputx;
+                    if (optionval.options.musicvol < 0)
                     {
-                        musicvolume = 0;
+                        optionval.options.musicvol = 0;
                     }
-                    else if (musicvolume > 1)
+                    else if (optionval.options.musicvol > 1)
                     {
-                        musicvolume = 1;
+                        optionval.options.musicvol = 1;
                     }
                 }
+                optionval.SaveOptions();
                 break;
             case "ResolutionSelected":
                 if (inputx < 0)
                 {
-                    resolution=GetClosestLower(resolution);
+                    optionval.options.resolution =GetClosestLower(optionval.options.resolution);
                 }
                 else if(inputx > 0)
                 {
-                    resolution = GetClosestHigher(resolution);
+                    optionval.options.resolution = GetClosestHigher(optionval.options.resolution);
                 }
-                Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
-                resolutiontext.text = resolution.width + "x" + resolution.height;
+                Screen.SetResolution(optionval.options.resolution.width, optionval.options.resolution.height, Screen.fullScreenMode);
+                resolutiontext.text = optionval.options.resolution.width + "x" + optionval.options.resolution.height;
+                optionval.SaveOptions();
                 break;
             case "FullScreenSelected":
                 if (Screen.fullScreen==true)
                 {
                     Screen.fullScreen = false;
+                    optionval.options.fullscreen = false;
                     FullscreenText.text = "Fullscreen : Off";
                 }
                 else
                 {
                     Screen.fullScreen = true;
+                    optionval.options.fullscreen = true;
                     FullscreenText.text = "Fullscreen : On";
                 }
+                optionval.SaveOptions();
                 break;
             case "BackSelected":
                 if (valueclick != 0)
                 {
                     SceneManager.LoadScene("MainMenu");
                 }
+                optionval.SaveOptions();
                 break;
 
 

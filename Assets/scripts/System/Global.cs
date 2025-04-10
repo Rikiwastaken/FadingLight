@@ -58,9 +58,9 @@ public class Global : MonoBehaviour
             zipping = false;
             grappling = false;
             Time.timeScale = 1;
-            foreach (bool flag in worldflags)
+            for(int i = 0;i<worldflags.Count;i++)
             {
-                flag = false;
+                worldflags[i] = false;
             }
             currentinventory = null;
             lastinv = null;
