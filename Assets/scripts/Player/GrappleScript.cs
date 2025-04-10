@@ -197,7 +197,7 @@ public class GrappleScript : MonoBehaviour
                     if(pressedjump && target!=closestenemy)
                     {
                         
-                        transform.position = target.transform.position - new Vector3(0, 0.29f, 0); ;
+                        GetComponent<Rigidbody2D>().MovePosition(target.transform.position - new Vector3(0, 0.29f, 0));
                     }
                     else
                     {

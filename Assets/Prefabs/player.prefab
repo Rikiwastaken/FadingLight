@@ -424,6 +424,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dodgecd: 1
   dodgecdcnt: 0
+  airdodgelengthcnt: 0
+  airdodgelength: 0.25
+  airdodgespeed: 25
 --- !u!114 &387999305572416826
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -86,12 +86,17 @@ public class PlayerJumpV3 : MonoBehaviour
             FindAnyObjectByType<Global>().zipping=false;
             GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         }
-        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping || (FindAnyObjectByType<Global>().grappling && !GetComponent<GrappleScript>().grapplingenemy)|| FindAnyObjectByType<Global>().inpause)
+        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping || (FindAnyObjectByType<Global>().grappling && !GetComponent<GrappleScript>().grapplingenemy)|| FindAnyObjectByType<Global>().inpause || GetComponent<PlayerDodge>().airdodgelengthcnt > 0)
         {
             savepointjumpCD=(int)(1/Time.deltaTime);
             stuckinwall = false;
             wantstounstick = false;
-            rb.gravityScale = gravity;
+            if(GetComponent<PlayerDodge>().airdodgelengthcnt == 0)
+            {
+
+                rb.gravityScale = gravity;
+            }
+            
             GetComponent<Animator>().SetBool("stuckinwall", false);
             return;
         }
@@ -147,10 +152,14 @@ public class PlayerJumpV3 : MonoBehaviour
 
         if (pressedjump && !grounded && !alreadypressedjump && !jump2 &&!stuckinwall)
         {
+            
             alreadypressedjump = true;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce*1.5f);
             myanim.SetTrigger("jump");
             jump2 = true;
+
+            // Reset AirDash
+            GetComponent<PlayerDodge>().resetairdash = true;
         }
 
         //wall jump

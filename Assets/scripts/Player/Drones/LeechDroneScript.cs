@@ -22,7 +22,7 @@ public class LeechDroneScript : MonoBehaviour
                                    offset           // Point y+ toward the target.
                                  );
             transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
-            transform.localScale = new Vector3(Vector2.Distance((Vector2)launcher.transform.position, (Vector2)target.transform.position), 0.3f, 1f);
+            transform.localScale = new Vector3(Vector2.Distance((Vector2)launcher.transform.position, (Vector2)target.transform.position), 1.5f, 1f);
             if(Vector2.Distance((Vector2)launcher.transform.position, (Vector2)target.transform.position)>detectionrange)
             {
                 target=null;
