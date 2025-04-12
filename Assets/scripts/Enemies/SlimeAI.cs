@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class SlimeAI : MonoBehaviour
 {
     [Header("movement")]
     public float detectdist;
@@ -21,9 +21,7 @@ public class EnemyAI : MonoBehaviour
     [Header("Attack")]
     public float attackrange;
     public float abandonrange;
-    public bool cannotmove;
     public bool cannotmoveatk;
-    public bool targetted;
     private bool initiateattack;
     private float distplayer;
     private int attackcounter;
@@ -33,11 +31,6 @@ public class EnemyAI : MonoBehaviour
     private float atkcdcounter;
     public float atkcd;
     public int attackdmg;
-
-    [Header("startpos")]
-    //starting position for respawn
-    public float startx;
-    public float starty;
 
     private Vector2 targetpos;
 
@@ -49,8 +42,6 @@ public class EnemyAI : MonoBehaviour
         rb2D = transform.GetComponent<Rigidbody2D>();
         enemyHP = this.GetComponent<EnemyHP>().enemyhp;
         tempenemyhp = enemyHP;
-        startx = GetComponent<Rigidbody2D>().position.x;
-        starty = GetComponent<Rigidbody2D>().position.y;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,13 +56,13 @@ public class EnemyAI : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (targetted && distplayer>= abandonrange || enemyHP <= 0)
+        if (GetComponent<EnemyHP>().targetted && distplayer>= abandonrange || enemyHP <= 0)
         {
-            targetted = false;
+            GetComponent<EnemyHP>().targetted = false;
             GameObject.Find("music").GetComponent<musicmanager>().playcbt = false;
         }
 
-        if (targetted)
+        if (GetComponent<EnemyHP>().targetted)
         {
             GameObject.Find("music").GetComponent<musicmanager>().playcbt = true;
         }
@@ -87,10 +78,10 @@ public class EnemyAI : MonoBehaviour
             Managedirection();
             
 
-            if (distplayer <= detectdist || targetted)
+            if (distplayer <= detectdist || GetComponent<EnemyHP>().targetted)
             {
-                targetted = true;
-                if (delaycounter == 0 & !cannotmove & !cannotmoveatk)
+                GetComponent<EnemyHP>().targetted = true;
+                if (delaycounter == 0 && !GetComponent<EnemyHP>().cannotmove && !cannotmoveatk)
                 {
                     if (target.position.x < transform.position.x)
                     {
@@ -129,7 +120,7 @@ public class EnemyAI : MonoBehaviour
 
         
 
-        if (targetted && distplayer < attackrange && !initiateattack && atkcdcounter==0 && GetComponent<EnemyHP>().enemyNRG>0)
+        if (GetComponent<EnemyHP>().targetted && distplayer < attackrange && !initiateattack && atkcdcounter==0 && GetComponent<EnemyHP>().enemyNRG>0)
         {
             cannotmoveatk = true;
             attackcounter = (int)(timebeforejump/Time.deltaTime);

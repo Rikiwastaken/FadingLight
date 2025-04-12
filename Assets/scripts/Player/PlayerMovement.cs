@@ -226,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
                 enemy.GetComponent<SpriteRenderer>().enabled = true;
                 enemy.GetComponent<EnemyHP>().enabled = true;
                 enemy.GetComponent<EnemyHP>().rez = true;
-                enemy.GetComponent<EnemyAI>().targetted = false;
+                enemy.GetComponent<EnemyHP>().targetted = false;
                 enemy.GetComponent<EnemyHP>().execution = false;
                 enemy.GetComponent<Animator>().SetBool("Stun", false);
             }

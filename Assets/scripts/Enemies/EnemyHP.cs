@@ -57,8 +57,11 @@ public class EnemyHP : MonoBehaviour
 
     private BossWall BossWall;
 
+    private Vector2 start;
+    public bool targetted;
     void Start()
     {
+        start = transform.position;
         global = FindAnyObjectByType<Global>();
         BossLifeBar = FindAnyObjectByType<BossLifeBar>();
         Musicmanager = FindAnyObjectByType<musicmanager>();
@@ -70,7 +73,6 @@ public class EnemyHP : MonoBehaviour
         {
             healthbar.SetMaxhealth(enemymaxhp);
             healthbar.SetMaxEnergy(enemymaxNRG);
-            cannotmove = GetComponent<EnemyAI>().cannotmove;
         }
         else
         {
@@ -111,11 +113,7 @@ public class EnemyHP : MonoBehaviour
             
         }
 
-        if(!isboss)
-        {
-            GetComponent<EnemyAI>().cannotmove = cannotmove;
-        }
-        else //boss activation
+        if(isboss) //boss activation
         {
             
             if (global.worldflags[worldflagtospawn] && !activated)
@@ -207,7 +205,7 @@ public class EnemyHP : MonoBehaviour
         if (rez)
         {
 
-            transform.position = new Vector2(GetComponent<EnemyAI>().startx, GetComponent<EnemyAI>().starty);
+            transform.position = start;
             GetComponent<Rigidbody2D>().velocity=new Vector2(0,0);
             rez = false;
         }
