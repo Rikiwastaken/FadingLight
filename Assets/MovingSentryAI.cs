@@ -23,6 +23,7 @@ public class MovingSentryAI : MonoBehaviour
     public int numberofsalvoes;
     public GameObject projectileprefab;
     private int activesalvo;
+    public Transform wheretospawnbullets;
 
     public float damage;
 
@@ -61,7 +62,7 @@ public class MovingSentryAI : MonoBehaviour
             timebeforeattackcounter++;
             if (timebeforeattackcounter == (int)(timebeforeattack / Time.fixedDeltaTime) + activesalvo * (int)(timebeforenextsalvoe / Time.fixedDeltaTime))
             {
-                GameObject bullet =Instantiate(projectileprefab, transform.position,Quaternion.identity);
+                GameObject bullet =Instantiate(projectileprefab, wheretospawnbullets.transform.position,Quaternion.identity);
                 BulletScript bulletScript  = bullet.GetComponent<BulletScript>();
                 bulletScript.damage = (int)damage;
                 bulletScript.speed = bulletScript.speed / 2f;
@@ -84,7 +85,7 @@ public class MovingSentryAI : MonoBehaviour
     }
     private void ManageMovement()
     {
-        if(targetting)
+        if(targetting && Vector2.Distance(target.transform.position,transform.position)>1f)
         {
 
             float direction = (target.transform.position.x - transform.position.x)/Mathf.Abs(target.transform.position.x - transform.position.x);

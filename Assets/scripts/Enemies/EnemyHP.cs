@@ -291,9 +291,6 @@ public class EnemyHP : MonoBehaviour
         {
             return;
         }
-        enemyhp -= damage;
-        enemyNRG-=energydamage;
-        NRGcounter = 0;
         if (enemyNRG <= 0)
         {
 
@@ -317,6 +314,10 @@ public class EnemyHP : MonoBehaviour
 
 
         }
+        enemyhp -= damage;
+        enemyNRG-=energydamage;
+        NRGcounter = 0;
+        
     }
 
     public void TakeDamage(int damage, int energydamage, Vector2 Force)
@@ -325,9 +326,6 @@ public class EnemyHP : MonoBehaviour
         {
             return;
         }
-        enemyhp -= damage;
-        enemyNRG -= energydamage;
-        NRGcounter = 0;
         if (enemyNRG <= 0)
         {
 
@@ -351,10 +349,14 @@ public class EnemyHP : MonoBehaviour
 
 
         }
-        if(!isboss)
+        if (!isboss)
         {
             GetComponent<Rigidbody2D>().AddForce(Force, ForceMode2D.Impulse);
         }
+        enemyhp -= damage;
+        enemyNRG -= energydamage;
+        NRGcounter = 0;
+        
         
     }
 }
