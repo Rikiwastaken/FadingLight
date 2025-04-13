@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using static GadgetScript;
@@ -11,6 +12,7 @@ public class MovingSentryAI : MonoBehaviour
     public GameObject SentryCanon;
     public GameObject target;
     public List<Vector2> targetpos = new List<Vector2>();
+    public GameObject Exclamationmark;
     public float mindist;
     private bool targetting;
     private float canonanimspeed;
@@ -24,20 +26,50 @@ public class MovingSentryAI : MonoBehaviour
     public GameObject projectileprefab;
     private int activesalvo;
     public Transform wheretospawnbullets;
+    private bool hacked;
+    private GameObject player;
+
+    private int lasthp;
+    public float timeunabletomove;
+    private int timeunabletomovecounter;
+
 
     public float damage;
+
+    private EnemyHP[] allenemies;
 
     // Start is called before the first frame update
     void Start()
     {
-        target = FindAnyObjectByType<PlayerHP>().gameObject;
         canonanimspeed = SentryCanon.GetComponentInChildren<Animator>().speed;
         mainanimspeed = GetComponent<Animator>().speed;
+        allenemies = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
+        player = FindAnyObjectByType<PlayerHP>().gameObject;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        hacked = GetComponent<EnemyHP>().hacked;
+        if (hacked)
+        {
+            float distance  = 100000;
+            allenemies = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
+            foreach (EnemyHP enemy in allenemies)
+            {
+                if(enemy != GetComponent<EnemyHP>() && !enemy.hacked && Vector2.Distance(enemy.transform.position,transform.position)<distance && !enemy.isboss)
+                {
+                    target = enemy.gameObject;
+                    distance = Vector2.Distance(enemy.transform.position, transform.position);
+                }
+            }
+        }
+        else
+        {
+            target = player;
+        }
+
+
         if(Vector2.Distance(target.transform.position,transform.position) <= mindist)
         {
             targetting = true;
@@ -47,18 +79,50 @@ public class MovingSentryAI : MonoBehaviour
             targetting = false;
         }
 
-        ManageTargetting();
+        if (GetComponent<EnemyHP>().enemyNRG > 0)
+        {
+            ManageTargetting();
 
-        ManageMovement();
+            ManageMovement();
 
-        ManageAttack();
+            ManageAttack();
+
+            managehitstun();
+        }
+
         
+        
+    }
+
+    private void managehitstun()
+    {
+
+        if(timeunabletomove>0)
+        {
+            timeunabletomove--;
+        }
+
+        if(lasthp> GetComponent<EnemyHP>().enemyhp && timeunabletomove==0)
+        {
+            timeunabletomovecounter= (int)(timeunabletomove/Time.deltaTime);
+        }
+
+
+        lasthp = GetComponent<EnemyHP>().enemyhp;
     }
 
     private void ManageAttack()
     {
         if(targetting)
         {
+            if (timeunabletomovecounter <= 0)
+            {
+                return;
+            }
+            if(timebeforeattackcounter >= (int)(timebeforeattack / Time.fixedDeltaTime)*2/3)
+            {
+                Exclamationmark.SetActive(true);
+            }
             timebeforeattackcounter++;
             if (timebeforeattackcounter == (int)(timebeforeattack / Time.fixedDeltaTime) + activesalvo * (int)(timebeforenextsalvoe / Time.fixedDeltaTime))
             {
@@ -66,7 +130,10 @@ public class MovingSentryAI : MonoBehaviour
                 BulletScript bulletScript  = bullet.GetComponent<BulletScript>();
                 bulletScript.damage = (int)damage;
                 bulletScript.speed = bulletScript.speed / 2f;
-                bulletScript.damagePlayer = true;
+                if(!hacked)
+                {
+                    bulletScript.damagePlayer = true;
+                }
                 bulletScript.directionvector = target.transform.position - SentryCanon.transform.position ;
                 bulletScript.transform.localScale = Vector3.one * 0.5f;
                 activesalvo += 1;
@@ -74,6 +141,7 @@ public class MovingSentryAI : MonoBehaviour
                 {
                     activesalvo = 0;
                     timebeforeattackcounter = 0;
+                    Exclamationmark.SetActive(false);
                 }
             }
         }
@@ -81,24 +149,31 @@ public class MovingSentryAI : MonoBehaviour
         {
             timebeforeattackcounter = 0;
             activesalvo = 0;
+            Exclamationmark.SetActive(false);
         }
     }
     private void ManageMovement()
     {
-        if(targetting && Vector2.Distance(target.transform.position,transform.position)>1f)
+        if(targetting && Vector2.Distance(target.transform.position,transform.position)>2.5f && timeunabletomovecounter<=0)
         {
 
             float direction = (target.transform.position.x - transform.position.x)/Mathf.Abs(target.transform.position.x - transform.position.x);
 
             GetComponent<Rigidbody2D>().velocity = new Vector2(direction * movespeed, GetComponent<Rigidbody2D>().velocity.y);
         }
+        else if(hacked && Vector2.Distance(player.transform.position, transform.position)> 5f && timeunabletomovecounter <= 0)
+        {
+            float direction = (player.transform.position.x - transform.position.x) / Mathf.Abs(player.transform.position.x - transform.position.x);
 
-        if (GetComponent<Rigidbody2D>().velocityX > 0.1f)
+            GetComponent<Rigidbody2D>().velocity = new Vector2(direction * movespeed/2f, GetComponent<Rigidbody2D>().velocity.y);
+        }
+
+        if (GetComponent<Rigidbody2D>().velocityX > 0.5f)
         {
             GetComponent<Animator>().speed = mainanimspeed;
             GetComponent<SpriteRenderer>().flipX = false;
         }
-        else if(GetComponent<Rigidbody2D>().velocityX < -0.1f)
+        else if(GetComponent<Rigidbody2D>().velocityX < -0.5f)
         {
             GetComponent<Animator>().speed = mainanimspeed;
             GetComponent<SpriteRenderer>().flipX = true;

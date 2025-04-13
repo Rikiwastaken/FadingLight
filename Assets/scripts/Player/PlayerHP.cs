@@ -12,7 +12,7 @@ public class PlayerHP : MonoBehaviour
     public float EldonmaxNRG;
     [SerializeField] private Transform groundcheck;
     private bool inv = false;
-    private int iframe;
+    public int iframe;
     public int invicibilityframes;
     public float hitjumpforce;
     private Rigidbody2D rb;

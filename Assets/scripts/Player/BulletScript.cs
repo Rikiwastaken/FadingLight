@@ -54,8 +54,15 @@ public class BulletScript : MonoBehaviour
         }
         if (collision.GetComponent<PlayerHP>() && damagePlayer)
         {
-            collision.GetComponent<PlayerHP>().TakeDamage(damage);
-            Destroy(gameObject);
+            if(collision.GetComponent<PlayerHP>().iframe==0)
+            {
+                collision.GetComponent<PlayerHP>().TakeDamage(damage);
+                Destroy(gameObject);
+            } 
+            else if (!collision.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll"))
+            {
+                Destroy(gameObject);
+            }
         }
         if (collision.gameObject.layer == LayerMask.NameToLayer("ground") || collision.gameObject.layer == LayerMask.NameToLayer("wall"))
         {

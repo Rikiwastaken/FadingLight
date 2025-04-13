@@ -250,7 +250,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.0125}
+  m_Offset: {x: 0, y: -0.025929898}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.36, y: 0.5}
@@ -260,7 +260,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.13, y: 0.615}
+  m_Size: {x: 0.13, y: 0.5881402}
   m_EdgeRadius: 0
 --- !u!114 &2405314263836978647
 MonoBehaviour:
@@ -316,7 +316,7 @@ MonoBehaviour:
     m_Bits: 64
   whatisennemy:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   whatisboss:
     serializedVersion: 2
     m_Bits: 0
@@ -354,6 +354,7 @@ MonoBehaviour:
   EldonNRG: 0
   EldonmaxNRG: 0
   groundcheck: {fileID: 7714607739817182240}
+  iframe: 0
   invicibilityframes: 120
   hitjumpforce: 2
   damagereduction: 0
@@ -771,6 +772,7 @@ MonoBehaviour:
   CableSprite: {fileID: 21300000, guid: 7c00b7ca064b8a94d9adddb320300f88, type: 3}
   CableTargetSprite: {fileID: 21300000, guid: 62976d5dbc28c1046b4b48b885368ff1, type: 3}
   EnemyTargetSprite: {fileID: 21300000, guid: 51eede85ef5ec7a4584dbe3e095952b3, type: 3}
+  EnemyHackTargetSprite: {fileID: 21300000, guid: 983a0d5ebd2c0bf4c910e1a7462cf239, type: 3}
   speed: 30
   launch: {x: 0, y: 75}
   TimeToThrowGrapple: 0.15
@@ -787,7 +789,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da6e0d718d13854590e0f138a0a3ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bobby: {fileID: 6311752338245390967, guid: fa2529ed0922de347a0670aa8dd98f7c, type: 3}
+  EnemyList:
+  - {fileID: 6311752338245390967, guid: fa2529ed0922de347a0670aa8dd98f7c, type: 3}
+  - {fileID: 6311752338245390967, guid: 7b2a880211a8ec842924d5588cd948e5, type: 3}
+  SpriteList:
+  - {fileID: 21300000, guid: 00f522e1c1b0742229e17f9377e037b2, type: 3}
+  - {fileID: -8426275517856544378, guid: b19599820b7147f4cb812d97129b9937, type: 3}
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0

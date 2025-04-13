@@ -16,12 +16,12 @@ public class EnemyHP : MonoBehaviour
 
     //Energy variables
     [Header("Energy variables")]
-    public int enemyNRG;
-    public int enemymaxNRG;
-    private int NRGcounter;
-    public float NRGdelay;
-    private int NRGrecharge;
-    public int NRGrechargerate;
+    public int enemyNRG; // current energy
+    public int enemymaxNRG; // max nrg
+    private int NRGcounter; 
+    public float NRGdelay; //Time Before energy starts recharging
+    private int NRGrecharge; // Frames between rehcarge (counter)
+    public int NRGrechargerate; // Frames between rehcarge
     private bool stopenergyregen;
     public bool execution;
     public bool isbig;
@@ -42,6 +42,11 @@ public class EnemyHP : MonoBehaviour
     public bool bossdying;
     private int bossdeathcounter;
     private float bossscaley;
+
+    //HP variables
+    [Header("Machine variables")]
+    public bool ismachine;
+    public bool hacked;
 
 
     //Healthbar
@@ -91,6 +96,18 @@ public class EnemyHP : MonoBehaviour
 
     void FixedUpdate()
     {
+        if(ismachine)
+        {
+            if (hacked)
+            {
+                enemyanim.SetBool("Hacked", true);
+            }
+            else
+            {
+                enemyanim.SetBool("Hacked", false);
+            }
+        }
+        
 
         if (execution)
         {
@@ -206,6 +223,7 @@ public class EnemyHP : MonoBehaviour
         {
 
             transform.position = start;
+            hacked = false;
             GetComponent<Rigidbody2D>().velocity=new Vector2(0,0);
             rez = false;
         }
@@ -264,13 +282,17 @@ public class EnemyHP : MonoBehaviour
 
             if (execution && enemyhp < tempHP)
             {
-                if (!isboss)
+                if (ismachine)
                 {
-                    enemyhp = 0;
+                    
+                }
+                else if(isboss)
+                {
+                    BossExecution();
                 }
                 else
                 {
-                    BossExecution();
+                    enemyhp = 0;
                 }
 
             }
@@ -296,13 +318,17 @@ public class EnemyHP : MonoBehaviour
 
             if (execution && enemyhp < tempHP)
             {
-                if (!isboss)
+                if (ismachine)
                 {
-                    enemyhp = 0;
+
+                }
+                else if (isboss)
+                {
+                    BossExecution();
                 }
                 else
                 {
-                    BossExecution();
+                    enemyhp = 0;
                 }
 
             }
@@ -315,7 +341,11 @@ public class EnemyHP : MonoBehaviour
 
         }
         enemyhp -= damage;
-        enemyNRG-=energydamage;
+        enemyNRG -= energydamage;
+        if(enemyNRG < 0)
+        {
+            enemyNRG = 0;
+        }
         NRGcounter = 0;
         
     }
@@ -331,13 +361,17 @@ public class EnemyHP : MonoBehaviour
 
             if (execution && enemyhp < tempHP)
             {
-                if (!isboss)
+                if (ismachine)
                 {
-                    enemyhp = 0;
+
+                }
+                else if (isboss)
+                {
+                    BossExecution();
                 }
                 else
                 {
-                    BossExecution();
+                    enemyhp = 0;
                 }
 
             }
@@ -355,6 +389,10 @@ public class EnemyHP : MonoBehaviour
         }
         enemyhp -= damage;
         enemyNRG -= energydamage;
+        if (enemyNRG < 0)
+        {
+            enemyNRG = 0;
+        }
         NRGcounter = 0;
         
         

@@ -19,6 +19,8 @@ public class GrappleScript : MonoBehaviour
     public Sprite CableSprite;
     public Sprite CableTargetSprite;
     public Sprite EnemyTargetSprite;
+    public Sprite EnemyHackTargetSprite;
+    private bool hacking;
     private GameObject cable;
     private Global global;
     public float speed;
@@ -107,6 +109,7 @@ public class GrappleScript : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = true;
             global.grappling = false;
             Destroy(cable);
+            hacking = false;
         }
         else if(global.grappling && cable!=null)
         {
@@ -172,6 +175,19 @@ public class GrappleScript : MonoBehaviour
                 if (target != closestenemy)
                 {
                     GetComponent<Rigidbody2D>().velocity = (target.transform.position - transform.position).normalized * speed;
+                }
+                else if (hacking)
+                {
+                    target.GetComponent<EnemyHP>().hacked = true;
+                    target.GetComponent<EnemyHP>().enemyNRG = target.GetComponent<EnemyHP>().enemymaxNRG;
+                    hacking = false;
+                    Destroy(cable);
+                    global.grappling = false;
+                    grapplecooldown = (int)(0.2f / Time.deltaTime);
+                    GetComponent<BoxCollider2D>().enabled = true;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    closestenemy = null;
+                    return;
                 }
                 else
                 {
@@ -262,7 +278,15 @@ public class GrappleScript : MonoBehaviour
             {
                 enemytarget = new GameObject();
                 enemytarget.AddComponent<SpriteRenderer>();
-                enemytarget.GetComponent<SpriteRenderer>().sprite = EnemyTargetSprite;
+                if(closestenemy.GetComponent<EnemyHP>().ismachine && closestenemy.GetComponent<EnemyHP>().enemyNRG<=0)
+                {
+                    enemytarget.GetComponent<SpriteRenderer>().sprite = EnemyHackTargetSprite;
+                }
+                else
+                {
+                    enemytarget.GetComponent<SpriteRenderer>().sprite = EnemyTargetSprite;
+                }
+                
                 enemytarget.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 enemytarget.transform.localScale = Vector3.one * 0.5f;
             }
@@ -311,6 +335,30 @@ public class GrappleScript : MonoBehaviour
             grapplingenemy = true;
             previousgrapple = closestenemy.gameObject;
             global.grappling = true;
+            if (cable != null)
+            {
+                Destroy(cable);
+            }
+            TimeToThrowGrapplecounter = (int)(TimeToThrowGrapple / Time.fixedDeltaTime);
+            cable = new GameObject();
+            cable.AddComponent<SpriteRenderer>();
+            cable.GetComponent<SpriteRenderer>().sprite = CableSprite;
+            cable.transform.localScale = new Vector3(0f, 0.2f, 1f);
+        }
+    }
+
+    private void OnNorthButton()
+    {
+        if (global.atsavepoint || global.indialogue || global.zipping || !GetComponent<PlayerJumpV3>().grounded || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll"))
+        {
+            return;
+        }
+        if (closestenemy != null && pressedtrigger && closestenemy.GetComponent<EnemyHP>().ismachine && closestenemy.GetComponent<EnemyHP>().enemyNRG <= 0)
+        {
+            grapplingenemy = true;
+            previousgrapple = closestenemy.gameObject;
+            global.grappling = true;
+            hacking = true;
             if (cable != null)
             {
                 Destroy(cable);

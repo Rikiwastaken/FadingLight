@@ -2,26 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class BetaTestScript : MonoBehaviour
 {
 
     private bool Npressed;
+    private bool Bpressed;
 
-    public GameObject Bobby;
+    private int activeindex;
+
+    public GameObject[] EnemyList;
+    public Sprite[] SpriteList;
+
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(GameObject.Find("TestImageToSpawn"))
+        {
+            GameObject.Find("TestImageToSpawn").GetComponent<Image>().sprite = SpriteList[activeindex];
+        }
+
         if (Input.GetKeyDown(KeyCode.N) && !Npressed)
         {
             Npressed = true;
-            Instantiate(Bobby, transform.position + new Vector3(1f,0f,0f)*transform.localScale.x,Quaternion.identity);
+            Instantiate(EnemyList[activeindex], transform.position + new Vector3(1f,0f,0f)*transform.localScale.x,Quaternion.identity);
         }
 
         if(!Input.GetKeyDown(KeyCode.N))
         {
             Npressed=false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B) && !Bpressed)
+        {
+            Bpressed = true;
+            if(activeindex<EnemyList.Length-1)
+            {
+                activeindex++;
+            }
+            else
+            {
+                activeindex = 0;
+            }
+        }
+
+        if (!Input.GetKeyDown(KeyCode.B))
+        {
+            Bpressed = false;
         }
     }
 }

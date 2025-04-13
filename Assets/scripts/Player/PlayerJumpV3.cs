@@ -229,6 +229,13 @@ public class PlayerJumpV3 : MonoBehaviour
         }
         if(onennemi)
         {
+            if (!alreadypressedjump)
+            {
+                jumpcounter = jumptime;
+            }
+            myanim.ResetTrigger("jump");
+            myanim.SetBool("falling", false);
+            touchingwall = false;
             jump2 = false;
         }
     }

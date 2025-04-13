@@ -110,7 +110,7 @@ public class EldonAttack : MonoBehaviour
 
     void fctAttack()
     {
-        if (!grounded)
+        if (!grounded && !playerjump.onennemi)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 12.5f);
         }
