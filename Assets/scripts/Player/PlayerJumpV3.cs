@@ -76,6 +76,14 @@ public class PlayerJumpV3 : MonoBehaviour
         playermov = GetComponent<PlayerMovement>();
     }
 
+    private void Update()
+    {
+        if(FindAnyObjectByType<Global>().inpause || FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().ininventory || FindAnyObjectByType<Global>().indialogue)
+        {
+            savepointjumpCD = 10;
+        }
+    }
+
     private void FixedUpdate()
     {
         if( FindAnyObjectByType<Global>().zipping && pressedjump)

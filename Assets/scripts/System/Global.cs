@@ -65,7 +65,6 @@ public class Global : MonoBehaviour
             currentinventory = null;
             lastinv = null;
             activeSavePoint = null;
-            clickednewgame = false;
         }
         if( inpause)
         {

@@ -31,7 +31,7 @@ public class MovingSentryAI : MonoBehaviour
 
     private int lasthp;
     public float timeunabletomove;
-    private int timeunabletomovecounter;
+    public int timeunabletomovecounter;
 
 
     public float damage;
@@ -97,12 +97,12 @@ public class MovingSentryAI : MonoBehaviour
     private void managehitstun()
     {
 
-        if(timeunabletomove>0)
+        if(timeunabletomovecounter > 0)
         {
-            timeunabletomove--;
+            timeunabletomovecounter--;
         }
 
-        if(lasthp> GetComponent<EnemyHP>().enemyhp && timeunabletomove==0)
+        if(lasthp> GetComponent<EnemyHP>().enemyhp && timeunabletomovecounter == 0)
         {
             timeunabletomovecounter= (int)(timeunabletomove/Time.deltaTime);
         }
@@ -115,7 +115,7 @@ public class MovingSentryAI : MonoBehaviour
     {
         if(targetting)
         {
-            if (timeunabletomovecounter <= 0)
+            if (timeunabletomovecounter > 0)
             {
                 return;
             }
@@ -154,14 +154,19 @@ public class MovingSentryAI : MonoBehaviour
     }
     private void ManageMovement()
     {
-        if(targetting && Vector2.Distance(target.transform.position,transform.position)>2.5f && timeunabletomovecounter<=0)
+        if (timeunabletomovecounter > 0)
+        {
+            GetComponent<Animator>().speed = 0f;
+            return;
+        }
+        if (targetting && Vector2.Distance(target.transform.position,transform.position)>2.5f)
         {
 
             float direction = (target.transform.position.x - transform.position.x)/Mathf.Abs(target.transform.position.x - transform.position.x);
 
             GetComponent<Rigidbody2D>().velocity = new Vector2(direction * movespeed, GetComponent<Rigidbody2D>().velocity.y);
         }
-        else if(hacked && Vector2.Distance(player.transform.position, transform.position)> 5f && timeunabletomovecounter <= 0)
+        else if(hacked && Vector2.Distance(player.transform.position, transform.position)> 5f)
         {
             float direction = (player.transform.position.x - transform.position.x) / Mathf.Abs(player.transform.position.x - transform.position.x);
 

@@ -309,7 +309,8 @@ public class EnemyHP : MonoBehaviour
 
     public void TakeDamage(int damage, int energydamage)
     {
-        if(isboss && !global.inbossfight)
+        enemyhp -= damage;
+        if (isboss && !global.inbossfight)
         {
             return;
         }
@@ -340,7 +341,7 @@ public class EnemyHP : MonoBehaviour
 
 
         }
-        enemyhp -= damage;
+        
         enemyNRG -= energydamage;
         if(enemyNRG < 0)
         {
@@ -352,6 +353,7 @@ public class EnemyHP : MonoBehaviour
 
     public void TakeDamage(int damage, int energydamage, Vector2 Force)
     {
+        enemyhp -= damage;
         if (isboss && !global.inbossfight)
         {
             return;
@@ -387,7 +389,7 @@ public class EnemyHP : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(Force, ForceMode2D.Impulse);
         }
-        enemyhp -= damage;
+        
         enemyNRG -= energydamage;
         if (enemyNRG < 0)
         {
