@@ -113,7 +113,7 @@ public class DialogueManager : MonoBehaviour
                         {
                             Vector2 pos = Movement.Actor.transform.position;
                             Vector2 dest = Movement.wheretogo;
-                            if (Vector2.Distance(pos, dest) >= 0.05)
+                            if (Vector2.Distance(pos, dest) >= 0.5f)
                             {
                                 float speed = Movement.speed;
                                 Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;

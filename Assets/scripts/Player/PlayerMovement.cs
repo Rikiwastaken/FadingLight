@@ -42,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerJumpV3 playerjump;
 
+    private GameObject parentforflip;
+
     private void Awake()
     {
         controls = new PlayerControls();
@@ -66,6 +68,12 @@ public class PlayerMovement : MonoBehaviour
     //Handles running of the physics
     private void FixedUpdate()
     {
+        if(parentforflip!=null)
+        {
+            transform.parent = null;
+            Destroy(parentforflip);
+        }
+
         if (FindAnyObjectByType<Global>().atsavepoint)
         {
             myanimator.SetBool("atsavepoint", true);
@@ -198,8 +206,17 @@ public class PlayerMovement : MonoBehaviour
     //flipping function
     private void Flip(float horizontal)
     {
+        
         if (horizontal < 0 && facingRight || horizontal>0 && !facingRight)
         {
+            parentforflip = new GameObject();
+            parentforflip.transform.localScale = transform.localScale;
+            parentforflip.transform.position = transform.position;
+            parentforflip.AddComponent<Rigidbody2D>();
+            parentforflip.AddComponent<BoxCollider2D>();
+            parentforflip.GetComponent<BoxCollider2D>().size = GetComponent<BoxCollider2D>().size;
+            parentforflip.GetComponent<BoxCollider2D>().offset = GetComponent<BoxCollider2D>().offset;
+            transform.SetParent(parentforflip.transform);
             facingRight = !facingRight;
 
             Vector3 Scale = transform.localScale;
