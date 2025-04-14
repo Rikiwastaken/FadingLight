@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static AugmentsScript;
 using static EquipmentScript;
@@ -59,8 +60,12 @@ public class EquipmentScript : MonoBehaviour
 
     void Awake()
     {
-        
-        if (FindAnyObjectByType<Global>().clickednewgame)
+        if (FindAnyObjectByType<Global>() == null)
+        {
+            SceneManager.LoadScene("Start");
+            return;
+        }
+        else if (FindAnyObjectByType<Global>().clickednewgame)
         {
             FindAnyObjectByType<SaveManager>().CreateEmptySaveFile(FindAnyObjectByType<SaveManager>().CurrentSlot);
             FindAnyObjectByType<Global>().clickednewgame=false;

@@ -176,6 +176,7 @@ public class PlayerHP : MonoBehaviour
         {
             global = FindAnyObjectByType<Global>();
         }
+        
 
         healthbar.SetHealth(Eldonhp);
         healthbar.SetEnergy(EldonNRG);
