@@ -115,6 +115,7 @@ public class PlayerDodge : MonoBehaviour
             usedairdodge = true;
             airdodgelengthcnt = (int)(airdodgelength/Time.fixedDeltaTime);
             airdodgedirection = (int)(transform.localScale.x/Mathf.Abs(transform.localScale.x));
+            GetComponent<Rigidbody2D>().velocity = new Vector2(airdodgedirection * airdodgespeed / 2, 0);
             GetComponent<Rigidbody2D>().gravityScale = 0;
             replaceennemy = true;
         }

@@ -115,7 +115,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
         horizontal = playermov.horizontal;
 
-        if(!grounded && (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough)))// here to get the frame where the player is grounded again
+        if(!grounded && (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground)))// here to get the frame where the player is grounded again
         {
             rb.velocity = new Vector2(velocityx,0);
         }

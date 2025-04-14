@@ -388,24 +388,28 @@ public class GrappleScript : MonoBehaviour
         {
             if(Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) < distance && previousgrapple!=grapple)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, grapple.transform.position- transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position)-1 ,13);
-                
-                if(hit.transform==null || hit.transform.gameObject==grapple)
+                RaycastHit2D hitmiddle = Physics2D.Raycast(transform.position, grapple.transform.position- transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position)-1 ,13);
+                RaycastHit2D hittop = Physics2D.Raycast(transform.position + new Vector3(0f,GetComponent<BoxCollider2D>().size.y * transform.localScale.y/1.9f,0f), grapple.transform.position - transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) - 1, 13);
+                RaycastHit2D hitbottom = Physics2D.Raycast(transform.position - new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), grapple.transform.position - transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) - 1, 13);
+
+
+                if ((hitmiddle.transform==null || hitmiddle.transform.gameObject==grapple) && (hittop.transform == null || hittop.transform.gameObject == grapple) && (hitbottom.transform == null || hitbottom.transform.gameObject == grapple))
                 {
+                    
+                    
                     newclosestgrapple = grapple.transform;
                     distance = Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position);
                 }
-                //else if(hit.transform.gameObject.layer!=LayerMask.NameToLayer("wall") && hit.transform.gameObject.layer != LayerMask.NameToLayer("ground") && hit.transform.name!="Roof")
-                //{
-                //    newclosestgrapple = grapple.transform;
-                //    distance = Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position);
-                //}
                 
             }
         }
         if(newclosestgrapple != null && newclosestgrapple!= previousgrapple)
         {
             closestgrapple = newclosestgrapple;
+        }
+        else
+        {
+            closestgrapple = null;
         }
     }
 
@@ -419,17 +423,16 @@ public class GrappleScript : MonoBehaviour
         {
             if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) > 2.5f && previousgrapple != enemy)
             {
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
-                if (hit.transform == null || hit.transform.gameObject == enemy.gameObject)
+
+                RaycastHit2D hitmiddle = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
+                RaycastHit2D hittop = Physics2D.Raycast(transform.position + new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
+                RaycastHit2D hitbottom = Physics2D.Raycast(transform.position - new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
+                
+                if ((hitmiddle.transform == null || hitmiddle.transform.gameObject == enemy.gameObject) && (hittop.transform == null || hittop.transform.gameObject == enemy.gameObject) && (hitbottom.transform == null || hitbottom.transform.gameObject == enemy.gameObject))
                 {
                     newclosestenemy = enemy.transform;
                     distance = Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position);
                 }
-                //else if (hit.transform.gameObject.layer != LayerMask.NameToLayer("wall") && hit.transform.gameObject.layer != LayerMask.NameToLayer("ground") && hit.transform.name != "Roof")
-                //{
-                //    newclosestenemy = enemy.transform;
-                //    distance = Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position);
-                //}
 
             }
         }
