@@ -46,25 +46,29 @@ public class Global : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
+    public void ResetVariables()
+    {
+        inbossfight = false;
+        ininventory = false;
+        inpause = false;
+        atsavepoint = false;
+        indialogue = false;
+        zipping = false;
+        grappling = false;
+        Time.timeScale = 1;
+        for (int i = 0; i < worldflags.Count; i++)
+        {
+            worldflags[i] = false;
+        }
+        currentinventory = null;
+        lastinv = null;
+        activeSavePoint = null;
+    }
     private void Update()
     {
         if(SceneManager.GetActiveScene().name == "Start" || SceneManager.GetActiveScene().name == "MainMenu")
         {
-            inbossfight = false;
-            ininventory = false;
-            inpause = false;
-            atsavepoint = false;
-            indialogue = false;
-            zipping = false;
-            grappling = false;
-            Time.timeScale = 1;
-            for(int i = 0;i<worldflags.Count;i++)
-            {
-                worldflags[i] = false;
-            }
-            currentinventory = null;
-            lastinv = null;
-            activeSavePoint = null;
+            ResetVariables();
         }
         if( inpause)
         {

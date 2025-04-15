@@ -81,20 +81,20 @@ public class SlimeAI : MonoBehaviour
             if (distplayer <= detectdist || GetComponent<EnemyHP>().targetted)
             {
                 GetComponent<EnemyHP>().targetted = true;
-                if (delaycounter == 0 && !GetComponent<EnemyHP>().cannotmove && !cannotmoveatk)
+                if (delaycounter == 0 && !GetComponent<EnemyHP>().cannotmove && !cannotmoveatk && Mathf.Abs(target.position.x - transform.position.x)>0.25f)
                 {
                     if (target.position.x < transform.position.x)
                     {
                         if (rb2D.velocity.x > -xspeed)
                         {
-                            rb2D.velocity = new Vector2(rb2D.velocity.x - xspeed * 0.08f, 0);
+                            rb2D.velocity = new Vector2(rb2D.velocity.x - xspeed * 0.08f, rb2D.velocity.y);
                         }
                     }
                     else
                     {
                         if (rb2D.velocity.x < xspeed)
                         {
-                            rb2D.velocity = new Vector2(rb2D.velocity.x + xspeed * 0.08f, 0);
+                            rb2D.velocity = new Vector2(rb2D.velocity.x + xspeed * 0.08f, rb2D.velocity.y);
                         }
                     }
                 }

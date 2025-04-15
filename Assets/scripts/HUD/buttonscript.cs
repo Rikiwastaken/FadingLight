@@ -91,6 +91,7 @@ public class buttonscript : MonoBehaviour
 
     public void GameOverLoadSaveSlot()
     {
+        FindAnyObjectByType<Global>().ResetVariables();
         FindAnyObjectByType<SaveManager>().LoadSave();
     }
 

@@ -210,7 +210,7 @@ public class GrappleScript : MonoBehaviour
                                      );
                 cable.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
                 cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position), 0.2f, 1f);
-                if(Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position) - lastdist) <=0.05f)
+                if(Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position) - lastdist) <=0.5f)
                 {
                     if(pressedjump && target!=closestenemy)
                     {
@@ -227,6 +227,10 @@ public class GrappleScript : MonoBehaviour
                         if (target != closestenemy)
                         {
                             GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                        }
+                        else
+                        {
+                            target.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
                         }
                     }
                     
@@ -384,13 +388,14 @@ public class GrappleScript : MonoBehaviour
     {
         Transform newclosestgrapple= null;
         float distance = mindist;
+        LayerMask newlayermask = (1 << 6) | (1 << 8) | (1 << 13);
         foreach (GameObject grapple in GrappleList)
         {
             if(Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) < distance && previousgrapple!=grapple)
             {
-                RaycastHit2D hitmiddle = Physics2D.Raycast(transform.position, grapple.transform.position- transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position)-1 ,13);
-                RaycastHit2D hittop = Physics2D.Raycast(transform.position + new Vector3(0f,GetComponent<BoxCollider2D>().size.y * transform.localScale.y/1.9f,0f), grapple.transform.position - transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) - 1, 13);
-                RaycastHit2D hitbottom = Physics2D.Raycast(transform.position - new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), grapple.transform.position - transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) - 1, 13);
+                RaycastHit2D hitmiddle = Physics2D.Raycast(transform.position, grapple.transform.position- transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position)-1 , newlayermask);
+                RaycastHit2D hittop = Physics2D.Raycast(transform.position + new Vector3(0f,GetComponent<BoxCollider2D>().size.y * transform.localScale.y/1.9f,0f), grapple.transform.position - transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) - 1, newlayermask);
+                RaycastHit2D hitbottom = Physics2D.Raycast(transform.position - new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), grapple.transform.position - transform.position, Vector2.Distance((Vector2)grapple.transform.position, (Vector2)transform.position) - 1, newlayermask);
 
 
                 if ((hitmiddle.transform==null || hitmiddle.transform.gameObject==grapple) && (hittop.transform == null || hittop.transform.gameObject == grapple) && (hitbottom.transform == null || hitbottom.transform.gameObject == grapple))
@@ -417,6 +422,7 @@ public class GrappleScript : MonoBehaviour
     private void GetClosestenemy()
     {
         Transform newclosestenemy = null;
+        LayerMask newlayermask = (1 << 6) | (1 << 8) | (1 << 12) | (1 << 13);
         EnemyHP[] enemylist = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
         float distance = 2f*5f;
         foreach (EnemyHP enemy in enemylist)
@@ -424,9 +430,9 @@ public class GrappleScript : MonoBehaviour
             if (Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) < distance && Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) > 2.5f && previousgrapple != enemy)
             {
 
-                RaycastHit2D hitmiddle = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
-                RaycastHit2D hittop = Physics2D.Raycast(transform.position + new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
-                RaycastHit2D hitbottom = Physics2D.Raycast(transform.position - new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, 13);
+                RaycastHit2D hitmiddle = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, newlayermask);
+                RaycastHit2D hittop = Physics2D.Raycast(transform.position + new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, newlayermask);
+                RaycastHit2D hitbottom = Physics2D.Raycast(transform.position - new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, newlayermask);
                 
                 if ((hitmiddle.transform == null || hitmiddle.transform.gameObject == enemy.gameObject) && (hittop.transform == null || hittop.transform.gameObject == enemy.gameObject) && (hitbottom.transform == null || hitbottom.transform.gameObject == enemy.gameObject))
                 {

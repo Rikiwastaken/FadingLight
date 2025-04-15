@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 189450580446498757}
   - component: {fileID: 4745690015797895177}
   - component: {fileID: 8273249805438150069}
+  - component: {fileID: 7399717354443737266}
   m_Layer: 9
   m_Name: player
   m_TagString: Player
@@ -795,6 +796,43 @@ MonoBehaviour:
   SpriteList:
   - {fileID: 21300000, guid: 00f522e1c1b0742229e17f9377e037b2, type: 3}
   - {fileID: -8426275517856544378, guid: b19599820b7147f4cb812d97129b9937, type: 3}
+--- !u!70 &7399717354443737266
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919727951631986471}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 32503
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.0259299}
+  m_Size: {x: 0.2, y: 0.5881402}
+  m_Direction: 0
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0

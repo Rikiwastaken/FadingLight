@@ -34,7 +34,7 @@ public class passthoughplatform : MonoBehaviour
     {
         if (playerRB.GetComponent<PlayerMovement>().vertical == 1)
         {
-            getdowncounter = (int)(0.5f / Time.fixedDeltaTime);
+            getdowncounter = (int)(0.1f / Time.fixedDeltaTime);
         }
         else if (getdowncounter>0)
         {
