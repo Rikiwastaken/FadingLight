@@ -16,12 +16,13 @@ public class GrappleScript : MonoBehaviour
 
     public float mindist;
 
-    public Sprite CableSprite;
+    public GameObject ChainPrefab;
+    private List<GameObject> LastChain = new List<GameObject>();
     public Sprite CableTargetSprite;
+    public float linkLength = 0.5f;
     public Sprite EnemyTargetSprite;
     public Sprite EnemyHackTargetSprite;
     private bool hacking;
-    private GameObject cable;
     private Global global;
     public float speed;
 
@@ -104,14 +105,17 @@ public class GrappleScript : MonoBehaviour
             }
         }
 
-        if ((!global.grappling && cable != null) || (closestgrapple==null && closestenemy==null))
+        if ((!global.grappling && LastChain.Count>0) || (closestgrapple==null && closestenemy==null))
         {
             GetComponent<BoxCollider2D>().enabled = true;
             global.grappling = false;
-            Destroy(cable);
+            foreach(GameObject chain in LastChain)
+            {
+                Destroy(chain);
+            }
             hacking = false;
         }
-        else if(global.grappling && cable!=null)
+        else if(global.grappling)
         {
             Transform target = null;
             if(closestgrapple != null && !grapplingenemy)
@@ -136,15 +140,7 @@ public class GrappleScript : MonoBehaviour
 
                 float fraction = (TimeToThrowGrapple / Time.fixedDeltaTime - TimeToThrowGrapplecounter) / (TimeToThrowGrapple / Time.fixedDeltaTime);
                 Vector3 placetoputcable = (target.transform.position - transform.position)*fraction + transform.position;
-                cable.transform.position = transform.position + (placetoputcable - transform.position) / 2f;
-                Vector3 offset = placetoputcable - transform.position;
-
-                Quaternion rotation = Quaternion.LookRotation(
-                                       Vector3.forward, // Keep z+ pointing straight into the screen.
-                                       offset           // Point y+ toward the next.
-                                     );
-                cable.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
-                cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)placetoputcable), 0.2f, 1f);
+                GenerateChain((Vector2)transform.position, (Vector2)placetoputcable);
 
             }
             else
@@ -157,7 +153,10 @@ public class GrappleScript : MonoBehaviour
                     }
                     else
                     {
-                        Destroy(cable);
+                        foreach (GameObject chain in LastChain)
+                        {
+                            Destroy(chain);
+                        }
                         global.grappling = false;
                         grapplecooldown = (int)(0.2f / Time.deltaTime);
                         GetComponent<BoxCollider2D>().enabled = true;
@@ -181,7 +180,10 @@ public class GrappleScript : MonoBehaviour
                     target.GetComponent<EnemyHP>().hacked = true;
                     target.GetComponent<EnemyHP>().enemyNRG = target.GetComponent<EnemyHP>().enemymaxNRG;
                     hacking = false;
-                    Destroy(cable);
+                    foreach (GameObject chain in LastChain)
+                    {
+                        Destroy(chain);
+                    }
                     global.grappling = false;
                     grapplecooldown = (int)(0.2f / Time.deltaTime);
                     GetComponent<BoxCollider2D>().enabled = true;
@@ -200,17 +202,8 @@ public class GrappleScript : MonoBehaviour
                         target.GetComponent<Rigidbody2D>().velocity = (transform.position - target.transform.position).normalized * speed;
                     }
                 }
-                
-                cable.transform.position = transform.position + (target.transform.position - transform.position) / 2f;
-                Vector3 offset = target.transform.position - transform.position;
-
-                Quaternion rotation = Quaternion.LookRotation(
-                                       Vector3.forward, // Keep z+ pointing straight into the screen.
-                                       offset           // Point y+ toward the next.
-                                     );
-                cable.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
-                cable.transform.localScale = new Vector3(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position), 0.2f, 1f);
-                if(Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position) - lastdist) <=0.5f)
+                GenerateChain((Vector2)transform.position, (Vector2)target.transform.position);
+                if (Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position) - lastdist) <=0.5f)
                 {
                     if(pressedjump && target!=closestenemy)
                     {
@@ -219,7 +212,10 @@ public class GrappleScript : MonoBehaviour
                     }
                     else
                     {
-                        Destroy(cable);
+                        foreach (GameObject chain in LastChain)
+                        {
+                            Destroy(chain);
+                        }
                         global.grappling = false;
                         grapplecooldown = (int)(0.2f / Time.deltaTime);
                         GetComponent<BoxCollider2D>().enabled = true;
@@ -316,15 +312,7 @@ public class GrappleScript : MonoBehaviour
             grapplingenemy = false;
             previousgrapple = closestgrapple.gameObject;
             global.grappling = true;
-            if (cable != null)
-            {
-                Destroy(cable);
-            }
             TimeToThrowGrapplecounter = (int)(TimeToThrowGrapple / Time.fixedDeltaTime);
-            cable = new GameObject();
-            cable.AddComponent<SpriteRenderer>();
-            cable.GetComponent<SpriteRenderer>().sprite = CableSprite;
-            cable.transform.localScale = new Vector3(0f, 1f, 1f);
         }
     }
 
@@ -339,15 +327,7 @@ public class GrappleScript : MonoBehaviour
             grapplingenemy = true;
             previousgrapple = closestenemy.gameObject;
             global.grappling = true;
-            if (cable != null)
-            {
-                Destroy(cable);
-            }
             TimeToThrowGrapplecounter = (int)(TimeToThrowGrapple / Time.fixedDeltaTime);
-            cable = new GameObject();
-            cable.AddComponent<SpriteRenderer>();
-            cable.GetComponent<SpriteRenderer>().sprite = CableSprite;
-            cable.transform.localScale = new Vector3(0f, 0.2f, 1f);
         }
     }
 
@@ -363,18 +343,36 @@ public class GrappleScript : MonoBehaviour
             previousgrapple = closestenemy.gameObject;
             global.grappling = true;
             hacking = true;
-            if (cable != null)
-            {
-                Destroy(cable);
-            }
             TimeToThrowGrapplecounter = (int)(TimeToThrowGrapple / Time.fixedDeltaTime);
-            cable = new GameObject();
-            cable.AddComponent<SpriteRenderer>();
-            cable.GetComponent<SpriteRenderer>().sprite = CableSprite;
-            cable.transform.localScale = new Vector3(0f, 0.2f, 1f);
         }
     }
 
+    void GenerateChain(Vector2 Start, Vector2 End)
+    {
+        foreach(GameObject chain in LastChain)
+        {
+            Destroy (chain);
+        }
+        Vector2 direction = End - Start;
+        float distance = direction.magnitude;
+        int numberOfLinks = Mathf.FloorToInt(distance / linkLength);
+        Vector2 step = direction.normalized * linkLength;
+
+
+        Vector3 offset = End - Start;
+
+        Quaternion rotation = Quaternion.LookRotation(
+                               Vector3.forward, // Keep z+ pointing straight into the screen.
+                               offset           // Point y+ toward the next.
+                             );
+
+        for (int i = 0; i <= numberOfLinks; i++)
+        {
+            Vector2 position = Start + (step * i);
+            GameObject newchain =Instantiate(ChainPrefab, position, rotation, transform);
+            LastChain.Add(newchain);
+        }
+    }
     void OnEnable()
     {
         controls.gameplay.Enable();

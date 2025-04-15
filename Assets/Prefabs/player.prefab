@@ -233,7 +233,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4096
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -382,6 +382,7 @@ MonoBehaviour:
   attackdelay: 0.5
   delaycounter: 0
   smallrecoil: 100
+  flyingrecoil: 0.002
   grounded: 0
 --- !u!114 &736690049156150842
 MonoBehaviour:
@@ -770,8 +771,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pressedtrigger: 0
   mindist: 12.5
-  CableSprite: {fileID: 21300000, guid: 7c00b7ca064b8a94d9adddb320300f88, type: 3}
+  ChainPrefab: {fileID: 3752820467604303583, guid: 44015a0ee29660f46994bf43cf2ec05f, type: 3}
   CableTargetSprite: {fileID: 21300000, guid: 62976d5dbc28c1046b4b48b885368ff1, type: 3}
+  linkLength: 0.375
   EnemyTargetSprite: {fileID: 21300000, guid: 51eede85ef5ec7a4584dbe3e095952b3, type: 3}
   EnemyHackTargetSprite: {fileID: 21300000, guid: 983a0d5ebd2c0bf4c910e1a7462cf239, type: 3}
   speed: 30
@@ -793,9 +795,11 @@ MonoBehaviour:
   EnemyList:
   - {fileID: 6311752338245390967, guid: fa2529ed0922de347a0670aa8dd98f7c, type: 3}
   - {fileID: 6311752338245390967, guid: 7b2a880211a8ec842924d5588cd948e5, type: 3}
+  - {fileID: 6311752338245390967, guid: 3df0a037abefabf42b6da02e769f02a4, type: 3}
   SpriteList:
   - {fileID: 21300000, guid: 00f522e1c1b0742229e17f9377e037b2, type: 3}
   - {fileID: -8426275517856544378, guid: b19599820b7147f4cb812d97129b9937, type: 3}
+  - {fileID: 7456911284069886418, guid: 503ff03f1282a0840a214626d7b7506a, type: 3}
 --- !u!70 &7399717354443737266
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

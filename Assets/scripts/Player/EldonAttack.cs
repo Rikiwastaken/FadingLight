@@ -33,6 +33,7 @@ public class EldonAttack : MonoBehaviour
     private Rigidbody2D enemyrb;
     private float playerx;
     public float smallrecoil;
+    public float flyingrecoil;
 
     public bool grounded;
 
@@ -160,7 +161,15 @@ public class EldonAttack : MonoBehaviour
                 if (enemyHP.enemyhp > 0)
                 {
                     int direction = (int)((enemyrb.position.x - playerx) / Mathf.Abs(enemyrb.position.x - playerx));
-                    enemyrb.AddForce(new Vector2(direction*smallrecoil, 0),ForceMode2D.Impulse);
+                    if(enemyHP.isflying)
+                    {
+                        enemyrb.AddForce(new Vector2(direction * flyingrecoil, 0), ForceMode2D.Impulse);
+                    }
+                    else
+                    {
+                        enemyrb.AddForce(new Vector2(direction * smallrecoil, 0), ForceMode2D.Impulse);
+                    }
+                   
                     
                 }
             }

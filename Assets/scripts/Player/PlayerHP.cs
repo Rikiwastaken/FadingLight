@@ -214,7 +214,7 @@ public class PlayerHP : MonoBehaviour
             inv = true;
             
         }
-        if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && GetComponent<PlayerJumpV3>().grounded)
+        if((GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && GetComponent<PlayerJumpV3>().grounded) || GetComponent<PlayerDodge>().airdodgelengthcnt>0 )
         {
             int LayerIgnoreRaycast = LayerMask.NameToLayer("playerpassthroughenemy");
             gameObject.layer = LayerIgnoreRaycast;

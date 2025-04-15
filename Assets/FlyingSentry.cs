@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingSentryAI : MonoBehaviour
+public class FlyingSentry : MonoBehaviour
 {
 
     public GameObject LaserSight;
@@ -25,10 +25,6 @@ public class MovingSentryAI : MonoBehaviour
     private bool hacked;
     private GameObject player;
 
-    private int lasthp;
-    public float timeunabletomove;
-    public int timeunabletomovecounter;
-
 
     public float damage;
 
@@ -41,15 +37,6 @@ public class MovingSentryAI : MonoBehaviour
         mainanimspeed = GetComponent<Animator>().speed;
         allenemies = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
         player = FindAnyObjectByType<PlayerHP>().gameObject;
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if(collision.transform.GetComponent<PlayerHP>() != null && (transform.position.y-GetComponent<BoxCollider2D>().size.y*transform.localScale.y/2f>=collision.transform.position.y+ collision.transform.GetComponent<BoxCollider2D>().size.y * collision.transform.transform.localScale.y / 2f))
-        {
-            int direction = (int)((collision.transform.position.x - transform.position.x)/Mathf.Abs(collision.transform.position.x-transform.position.x));
-            collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction*5,3), ForceMode2D.Impulse);
-        }
     }
 
     // Update is called once per frame
@@ -92,38 +79,15 @@ public class MovingSentryAI : MonoBehaviour
 
             ManageAttack();
 
-            managehitstun();
         }
 
         
         
     }
-
-    private void managehitstun()
-    {
-
-        if(timeunabletomovecounter > 0)
-        {
-            timeunabletomovecounter--;
-        }
-
-        if(lasthp> GetComponent<EnemyHP>().enemyhp && timeunabletomovecounter == 0)
-        {
-            timeunabletomovecounter= (int)(timeunabletomove/Time.deltaTime);
-        }
-
-
-        lasthp = GetComponent<EnemyHP>().enemyhp;
-    }
-
     private void ManageAttack()
     {
         if(targetting)
         {
-            if (timeunabletomovecounter > 0)
-            {
-                return;
-            }
             if(timebeforeattackcounter >= (int)(timebeforeattack / Time.fixedDeltaTime)*2/3)
             {
                 Exclamationmark.SetActive(true);
@@ -159,39 +123,20 @@ public class MovingSentryAI : MonoBehaviour
     }
     private void ManageMovement()
     {
-        if (timeunabletomovecounter > 0)
+        if (targetting && Vector2.Distance(target.transform.position,transform.position)>7f)
         {
-            GetComponent<Animator>().speed = 0f;
-            return;
+            GetComponent<Rigidbody2D>().velocity = (target.transform.position- transform.position).normalized*movespeed;
         }
-        if (targetting && Mathf.Abs(target.transform.position.x-transform.position.x)>2.5f)
+        else if(hacked && Vector2.Distance(player.transform.position, transform.position) > 10f)
         {
 
-            float direction = (target.transform.position.x - transform.position.x)/Mathf.Abs(target.transform.position.x - transform.position.x);
-
-            GetComponent<Rigidbody2D>().velocity = new Vector2(direction * movespeed, GetComponent<Rigidbody2D>().velocity.y);
-        }
-        else if(hacked && Mathf.Abs(target.transform.position.x - transform.position.x) > 5f)
-        {
-            float direction = (player.transform.position.x - transform.position.x) / Mathf.Abs(player.transform.position.x - transform.position.x);
-
-            GetComponent<Rigidbody2D>().velocity = new Vector2(direction * movespeed/2f, GetComponent<Rigidbody2D>().velocity.y);
-        }
-
-        if (GetComponent<Rigidbody2D>().velocityX > 0.5f)
-        {
-            GetComponent<Animator>().speed = mainanimspeed;
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
-        else if(GetComponent<Rigidbody2D>().velocityX < -0.5f)
-        {
-            GetComponent<Animator>().speed = mainanimspeed;
-            GetComponent<SpriteRenderer>().flipX = true;
+            GetComponent<Rigidbody2D>().velocity = (player.transform.position - transform.position).normalized * movespeed/2f;
         }
         else
         {
-            GetComponent<Animator>().speed = 0f;
+            GetComponent<Rigidbody2D>().velocity *= 0.9f;
         }
+
     }
 
     private void ManageTargetting()
@@ -207,7 +152,7 @@ public class MovingSentryAI : MonoBehaviour
                                  );
             SentryCanon.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
             LaserSight.transform.position = Vector3.Lerp(wheretoaim, SentryCanon.transform.position, 0.5f); ;
-            LaserSight.transform.localScale = new Vector2(Vector3.Distance(wheretoaim, SentryCanon.transform.position) / 3f, 0.015f);
+            LaserSight.transform.localScale = new Vector2(Vector3.Distance(wheretoaim, SentryCanon.transform.position) / 3f, 0.03f);
             SentryCanon.GetComponentInChildren<Animator>().speed = canonanimspeed;
         }
         else

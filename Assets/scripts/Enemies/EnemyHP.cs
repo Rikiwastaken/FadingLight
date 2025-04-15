@@ -44,8 +44,9 @@ public class EnemyHP : MonoBehaviour
     private float bossscaley;
 
     //HP variables
-    [Header("Machine variables")]
+    [Header("EnemyType variables")]
     public bool ismachine;
+    public bool isflying;
     public bool hacked;
 
 
