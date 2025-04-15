@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static System.Net.WebRequestMethods;
 
 public class GrappleScript : MonoBehaviour
 {
@@ -429,10 +430,11 @@ public class GrappleScript : MonoBehaviour
             {
 
                 RaycastHit2D hitmiddle = Physics2D.Raycast(transform.position, enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, newlayermask);
-                RaycastHit2D hittop = Physics2D.Raycast(transform.position + new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, newlayermask);
-                RaycastHit2D hitbottom = Physics2D.Raycast(transform.position - new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, newlayermask);
-                
-                if ((hitmiddle.transform == null || hitmiddle.transform.gameObject == enemy.gameObject) && (hittop.transform == null || hittop.transform.gameObject == enemy.gameObject) && (hitbottom.transform == null || hitbottom.transform.gameObject == enemy.gameObject))
+                //RaycastHit2D hittop = Physics2D.Raycast(transform.position + new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, newlayermask);
+                //RaycastHit2D hitbottom = Physics2D.Raycast(transform.position - new Vector3(0f, GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 1.9f, 0f), enemy.transform.position - transform.position, Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position) - 1, newlayermask);
+
+                //if ((hitmiddle.transform == null || hitmiddle.transform.gameObject == enemy.gameObject) && (hittop.transform == null || hittop.transform.gameObject == enemy.gameObject) && (hitbottom.transform == null || hitbottom.transform.gameObject == enemy.gameObject))
+                if (hitmiddle.transform == null || hitmiddle.transform.gameObject == enemy.gameObject)
                 {
                     newclosestenemy = enemy.transform;
                     distance = Vector2.Distance((Vector2)enemy.transform.position, (Vector2)transform.position);

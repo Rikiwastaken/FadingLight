@@ -87,7 +87,16 @@ public class EldonAttack : MonoBehaviour
         {
             delaycounter -= 1;
         }
-
+        int direction = 0;
+        if (GetComponent<SpriteRenderer>().flipX)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
+        attackpoint.transform.localPosition = new Vector2(direction * Mathf.Abs(attackpoint.transform.localPosition.x), attackpoint.transform.localPosition.y);
 
     }
 

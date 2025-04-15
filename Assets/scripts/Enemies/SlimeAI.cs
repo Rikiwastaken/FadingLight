@@ -46,7 +46,11 @@ public class SlimeAI : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(atkcdcounter!=0 && Mathf.Abs(rb2D.velocityX)>0.05 && collision.transform.tag=="Player")
+        if (FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
+        if (atkcdcounter!=0 && Mathf.Abs(rb2D.velocityX)>0.05 && collision.transform.tag=="Player")
         {
             collision.transform.GetComponent<PlayerHP>().TakeDamage(attackdmg, new Vector2(collision.transform.GetComponent<Rigidbody2D>().velocityX, collision.transform.GetComponent<PlayerHP>().hitjumpforce), Vector2.zero);
         }
@@ -55,6 +59,10 @@ public class SlimeAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
 
         if (GetComponent<EnemyHP>().targetted && distplayer>= abandonrange || enemyHP <= 0)
         {

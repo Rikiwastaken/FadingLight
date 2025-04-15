@@ -58,35 +58,6 @@ public class PlayerJumpV3 : MonoBehaviour
     private int savepointjumpCD;
 
     private float velocityx;
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if(FindAnyObjectByType<Global>().inpause || FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().ininventory || FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().zipping || (FindAnyObjectByType<Global>().grappling && !GetComponent<GrappleScript>().grapplingenemy)|| stuckinwall)
-        {
-            return;
-        }
-        if (collision.collider==GetComponent<CapsuleCollider2D>() || collision.otherCollider == GetComponent<CapsuleCollider2D>())
-        {
-            ContactPoint2D[] contacts = collision.contacts;
-            ContactPoint2D contact = new ContactPoint2D();
-            foreach(ContactPoint2D contactPoint in contacts)
-            {
-                if (contactPoint.collider == GetComponent<CapsuleCollider2D>() || contactPoint.otherCollider == GetComponent<CapsuleCollider2D>())
-                {
-                    contact = contactPoint;
-                }
-            }
-            if(contact.point.x< GetComponent<Rigidbody2D>().position.x)
-            {
-                GetComponent<Rigidbody2D>().position += new Vector2(0.2f, 0f);
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().position -= new Vector2(0.2f, 0f);
-            }
-            
-        }
-    }
     private void Awake()
     {
         controls = new PlayerControls();
@@ -114,7 +85,19 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if( FindAnyObjectByType<Global>().zipping && pressedjump)
+
+        int direction = 0;
+        if (GetComponent<SpriteRenderer>().flipX)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = 1;
+        }
+        frontcheck.transform.localPosition = new Vector2(direction * Mathf.Abs(frontcheck.transform.localPosition.x), frontcheck.transform.localPosition.y);
+
+        if ( FindAnyObjectByType<Global>().zipping && pressedjump)
         {
             FindAnyObjectByType<Global>().zipping=false;
             GetComponent<Rigidbody2D>().velocity=Vector2.zero;
@@ -202,7 +185,6 @@ public class PlayerJumpV3 : MonoBehaviour
         }
         else
         {
-            int direction = (int)(transform.localScale.x / Mathf.Abs(transform.localScale.x));
             if (presseddown)
             {
                 wantstounstick = true;
@@ -229,12 +211,10 @@ public class PlayerJumpV3 : MonoBehaviour
             if (pressedjump && !alreadypressedjump)
             {
                 alreadypressedjump = true;
-                rb.velocity = new Vector2(-transform.localScale.x / Mathf.Abs(transform.localScale.x) * wjforceside, wjforceup);
+                rb.velocity = new Vector2(-direction * wjforceside, wjforceup);
                 rb.gravityScale = gravity;
                 stuckinwall = false;
-                Vector3 Scale = transform.localScale;
-                Scale.x *= -1;
-                transform.localScale = Scale;
+                GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
                 if (playermov.facingRight)
                 {
                     playermov.facingRight = false;

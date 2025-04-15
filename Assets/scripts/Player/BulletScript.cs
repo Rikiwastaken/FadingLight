@@ -64,7 +64,7 @@ public class BulletScript : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("ground") || collision.gameObject.layer == LayerMask.NameToLayer("wall"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("ground") || collision.gameObject.layer == LayerMask.NameToLayer("wall") || collision.gameObject.name=="Roof")
         {
             Destroy(gameObject);
         }

@@ -170,7 +170,16 @@ public class PlayerMovement : MonoBehaviour
 
             if (rolling)
             {
-                rb2D.velocityX = (transform.localScale.x / Mathf.Abs(transform.localScale.x)) * rollingspeed;
+                int direction = 0;
+                if (GetComponent<SpriteRenderer>().flipX)
+                {
+                    direction = -1;
+                }
+                else
+                {
+                    direction = 1;
+                }
+                rb2D.velocityX = direction * rollingspeed;
             }
             Flip(horizontal);
             myanimator.SetFloat("speed", Mathf.Abs(horizontal));
@@ -209,20 +218,11 @@ public class PlayerMovement : MonoBehaviour
         
         if (horizontal < 0 && facingRight || horizontal>0 && !facingRight)
         {
-            parentforflip = new GameObject();
-            parentforflip.transform.localScale = transform.localScale;
-            parentforflip.transform.position = transform.position;
-            parentforflip.AddComponent<Rigidbody2D>();
-            parentforflip.AddComponent<BoxCollider2D>();
-            parentforflip.GetComponent<BoxCollider2D>().size = GetComponent<BoxCollider2D>().size;
-            parentforflip.GetComponent<BoxCollider2D>().offset = GetComponent<BoxCollider2D>().offset;
-            transform.SetParent(parentforflip.transform);
             facingRight = !facingRight;
 
-            Vector3 Scale = transform.localScale;
-            Scale.x *= -1;
-            transform.localScale = Scale;
-            
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
+
+
         }
     }
     public void safezone()

@@ -24,28 +24,20 @@ public class BossWall : MonoBehaviour
         }
         if(wallcounter > 0)
         {
-            if(putupwall)
+            if (putupwall)
             {
-                float newscaley = scaley * ((0.5f / Time.deltaTime) - wallcounter) / (0.5f / Time.deltaTime);
+                float newscaley = scaley;
                 transform.localScale = new Vector3(transform.localScale.x, newscaley, transform.localScale.z);
-                wallcounter--;
+                wallcounter = 0;
                 if (wallcounter == 0)
                 {
                     putupwall = false;
                     wallcounter = -1;
                 }
             }
-            else if(putdownwall)
+            else if (putdownwall)
             {
-                float newscaley = scaley * (wallcounter) / (0.5f / Time.deltaTime);
-                transform.localScale = new Vector3(transform.localScale.x, newscaley, transform.localScale.z);
-                wallcounter--;
-                if (wallcounter == 0)
-                {
-                    putdownwall = false;
-                    wallcounter = -1;
-                    transform.localScale = new Vector3(transform.localScale.x, 0, transform.localScale.z);
-                }
+                putdownwall = false;
             }
             else
             {

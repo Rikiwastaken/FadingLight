@@ -45,7 +45,11 @@ public class MovingSentryAI : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.transform.GetComponent<PlayerHP>() != null && (transform.position.y-GetComponent<BoxCollider2D>().size.y*transform.localScale.y/2f>=collision.transform.position.y+ collision.transform.GetComponent<BoxCollider2D>().size.y * collision.transform.transform.localScale.y / 2f))
+        if (FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
+        if (collision.transform.GetComponent<PlayerHP>() != null && (transform.position.y-GetComponent<BoxCollider2D>().size.y*transform.localScale.y/2f>=collision.transform.position.y+ collision.transform.GetComponent<BoxCollider2D>().size.y * collision.transform.transform.localScale.y / 2f))
         {
             int direction = (int)((collision.transform.position.x - transform.position.x)/Mathf.Abs(collision.transform.position.x-transform.position.x));
             collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction*5,3), ForceMode2D.Impulse);
@@ -55,6 +59,10 @@ public class MovingSentryAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
         hacked = GetComponent<EnemyHP>().hacked;
         if (hacked)
         {

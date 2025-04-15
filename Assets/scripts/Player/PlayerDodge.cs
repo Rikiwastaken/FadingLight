@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerDodge : MonoBehaviour
 {
@@ -114,7 +115,16 @@ public class PlayerDodge : MonoBehaviour
         {
             usedairdodge = true;
             airdodgelengthcnt = (int)(airdodgelength/Time.fixedDeltaTime);
-            airdodgedirection = (int)(transform.localScale.x/Mathf.Abs(transform.localScale.x));
+            if(GetComponent<SpriteRenderer>().flipX)
+            {
+                airdodgedirection = -1;
+            }
+            else
+            {
+                airdodgedirection = 1;
+
+            }
+            
             GetComponent<Rigidbody2D>().velocity = new Vector2(airdodgedirection * airdodgespeed / 2, 0);
             GetComponent<Rigidbody2D>().gravityScale = 0;
             replaceennemy = true;
@@ -127,19 +137,17 @@ public class PlayerDodge : MonoBehaviour
     {
         bool wallleft = false;
         bool wallright = false;
-        RaycastHit2D[] allcollisions = Physics2D.BoxCastAll((Vector2)transform.position + GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size, 0f, Vector2.zero);
-        foreach(RaycastHit2D collision in allcollisions)
+        ContactPoint2D[] collisionswall = new ContactPoint2D[99];
+        Physics2D.GetContacts(GetComponent<BoxCollider2D>(), GameObject.Find("wall").GetComponent<TilemapCollider2D>(), new ContactFilter2D(), collisionswall);
+        foreach(ContactPoint2D collision in collisionswall)
         {
-            if((collision.transform.gameObject.layer==LayerMask.NameToLayer("ground") || collision.transform.gameObject.layer == LayerMask.NameToLayer("wall")) && collision.point.y>transform.position.y- GetComponent<BoxCollider2D>().size.y)
+            if (collision.point.x < transform.position.x)
             {
-                if(collision.point.x<transform.position.x)
-                {
-                    wallleft = true;
-                }
-                if (collision.point.x > transform.position.x)
-                {
-                    wallright = true;
-                }
+                wallleft = true;
+            }
+            if (collision.point.x > transform.position.x)
+            {
+                wallright = true;
             }
         }
         Collider2D[] allcolliders = Physics2D.OverlapBoxAll((Vector2)transform.position + GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size, 0f);
@@ -176,6 +184,11 @@ public class PlayerDodge : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube((Vector2)transform.position + GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size * transform.localScale.x * 1.5f);
     }
 
 }

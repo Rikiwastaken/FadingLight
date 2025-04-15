@@ -42,6 +42,10 @@ public class FlyingSentry : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(FindAnyObjectByType<Global>().atsavepoint)
+        {
+            return;
+        }
         hacked = GetComponent<EnemyHP>().hacked;
         if (hacked)
         {
