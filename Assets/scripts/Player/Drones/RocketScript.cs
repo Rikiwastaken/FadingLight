@@ -38,10 +38,13 @@ public class RocketScript : MonoBehaviour
             {
                 if ((collider.transform.tag == "enemy" || collider.transform.tag == "Boss") && Vector2.Distance(collider.transform.position, transform.position) < lowestdist)
                 {
-                    
-                    target = collider.transform;
+                    if (!collider.GetComponent<EnemyHP>().hacked)
+                    {
+                        target = collider.transform;
 
-                    lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                        lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                    }
+                    
                 }
             }
         }

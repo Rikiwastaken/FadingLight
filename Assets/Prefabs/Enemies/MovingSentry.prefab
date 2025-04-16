@@ -624,6 +624,7 @@ GameObject:
   - component: {fileID: 1806110475602329056}
   - component: {fileID: 5458493380403203971}
   - component: {fileID: 5333038541683594301}
+  - component: {fileID: -2078461667686514786}
   m_Layer: 10
   m_Name: MovingSentry
   m_TagString: enemy
@@ -860,6 +861,22 @@ MonoBehaviour:
   timeunabletomove: 0.33
   timeunabletomovecounter: 0
   damage: 25
+--- !u!114 &-2078461667686514786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311752338245390967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae115bfd39fcaa4793627729fb2d1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 65856
+  notinthemur: []
 --- !u!1 &6732582265878893510
 GameObject:
   m_ObjectHideFlags: 0

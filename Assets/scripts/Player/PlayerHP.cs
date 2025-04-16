@@ -217,14 +217,14 @@ public class PlayerHP : MonoBehaviour
         }
         if((GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && GetComponent<PlayerJumpV3>().grounded) || GetComponent<PlayerDodge>().airdodgelengthcnt>0 )
         {
-            //int LayerIgnoreRaycast = LayerMask.NameToLayer("playerpassthroughenemy");
-            //gameObject.layer = LayerIgnoreRaycast;
+            int LayerIgnoreRaycast = LayerMask.NameToLayer("playerpassthroughenemy");
+            gameObject.layer = LayerIgnoreRaycast;
             GetComponent<PlayerMovement>().rolling = true;
         }
         else
         {
-            //int LayerIgnoreRaycast = LayerMask.NameToLayer("player");
-            //gameObject.layer = LayerIgnoreRaycast;
+            int LayerIgnoreRaycast = LayerMask.NameToLayer("player");
+            gameObject.layer = LayerIgnoreRaycast;
             GetComponent<PlayerMovement>().rolling = false;
         }
 

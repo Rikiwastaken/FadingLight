@@ -159,7 +159,7 @@ public class PlayerDodge : MonoBehaviour
                 wallright = true;
             }
         }
-        Collider2D[] allcolliders = Physics2D.OverlapBoxAll((Vector2)transform.position + GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size, 0f);
+        Collider2D[] allcolliders = Physics2D.OverlapBoxAll(GetComponent<BoxCollider2D>().bounds.center, GetComponent<BoxCollider2D>().bounds.size* 1.1f, 0f);
         foreach (Collider2D collider in allcolliders)
         {
             if (collider.GetComponent<EnemyHP>())
@@ -167,25 +167,25 @@ public class PlayerDodge : MonoBehaviour
                 if (!collider.GetComponent<EnemyHP>().isboss)
                 {
                     int direction = 0;
-                    if (collider.transform.position.x < transform.position.x && !wallleft)
+                    if (wallleft)
                     {
                         direction = -1;
                     }
-                    if(collider.transform.position.x > transform.position.x && !wallright)
+                    if(wallright)
                     {
                         direction = 1;
                     }
                     int max = 0;
-                    while (Physics2D.OverlapBoxAll((Vector2)transform.position + GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size, 0f).Contains(collider) && max <= 9999)
+                    if (Physics2D.OverlapBoxAll(GetComponent<BoxCollider2D>().bounds.center, GetComponent<BoxCollider2D>().bounds.size * 1.1f, 0f).Contains(collider) && max <= 9999)
                     {
                         max++;
                         if(direction == 0)
                         {
-                            collider.transform.position += new Vector3(0.01f * direction, 0.01f, 0f);
+                            collider.transform.position += new Vector3(GetComponent<BoxCollider2D>().bounds.size.y * 1.1f * direction, 0.01f, 0f);
                         }
                         else
                         {
-                            collider.transform.position += new Vector3(0.01f * direction, 0f, 0f);
+                            collider.transform.position += new Vector3(GetComponent<BoxCollider2D>().bounds.size.x * 1.1f * direction, 0f, 0f);
                         }
                         
                     }

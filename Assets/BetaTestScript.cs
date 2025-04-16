@@ -26,8 +26,13 @@ public class BetaTestScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N) && !Npressed)
         {
+            int direction = 1;
+            if(GetComponent<SpriteRenderer>().flipX)
+            {
+                direction = -1;
+            }
             Npressed = true;
-            Instantiate(EnemyList[activeindex], transform.position + new Vector3(1f,0f,0f)*transform.localScale.x,Quaternion.identity);
+            Instantiate(EnemyList[activeindex], transform.position + new Vector3(5f,0f,0f)*direction,Quaternion.identity);
         }
 
         if(!Input.GetKeyDown(KeyCode.N))

@@ -24,8 +24,8 @@ TagManager:
   - passthroughplatform
   - GrapplePoint
   - grenade
-  - 
-  - 
+  - onlycollidewithwalls
+  - roof
   - 
   - 
   - 

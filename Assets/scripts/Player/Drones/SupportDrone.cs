@@ -200,8 +200,11 @@ public class SupportDrone : MonoBehaviour
             
             if((collider.transform.tag=="enemy" || collider.transform.tag == "Boss") && Vector2.Distance(collider.transform.position,transform.position)<lowestdist)
             {
-                target = collider.transform;
-                lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                if (!collider.GetComponent<EnemyHP>().hacked)
+                {
+                    target = collider.transform;
+                    lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                }
             }
         }
         if(target != null)
@@ -233,6 +236,11 @@ public class SupportDrone : MonoBehaviour
         }
         if (leech != null && leech.target!=null)
         {
+            if(leech.target.GetComponent<EnemyHP>().hacked)
+            {
+                Destroy(leech.gameObject);
+                return;
+            }
             leech.target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect));
             playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect;
             if (playerhp.EldonNRG > playerhp.EldonmaxNRG)
@@ -255,8 +263,12 @@ public class SupportDrone : MonoBehaviour
 
                 if ((collider.transform.tag == "enemy" || collider.transform.tag == "Boss") && Vector2.Distance(collider.transform.position, transform.position) < lowestdist)
                 {
-                    target = collider.transform;
-                    lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                    if(!collider.GetComponent<EnemyHP>().hacked)
+                    {
+                        target = collider.transform;
+                        lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                    }
+                    
                 }
             }
             if (target != null)
@@ -292,6 +304,11 @@ public class SupportDrone : MonoBehaviour
         }
         if (leech != null && leech.target != null)
         {
+            if (leech.target.GetComponent<EnemyHP>().hacked)
+            {
+                Destroy(leech.gameObject);
+                return;
+            }
             leech.target.GetComponent<EnemyHP>().TakeDamage((int)(augmentsscript.EquipedStats.Damage * drones[ActiveDroneID].Effect),0);
             playerhp.Eldonhp += augmentsscript.EquipedStats.Damage * drones[ActiveDroneID].Effect;
             if (playerhp.Eldonhp > playerhp.Eldonmaxhp)
@@ -314,8 +331,11 @@ public class SupportDrone : MonoBehaviour
 
                 if ((collider.transform.tag == "enemy" || collider.transform.tag == "Boss") && Vector2.Distance(collider.transform.position, transform.position) < lowestdist)
                 {
-                    target = collider.transform;
-                    lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                    if (!collider.GetComponent<EnemyHP>().hacked)
+                    {
+                        target = collider.transform;
+                        lowestdist = Vector2.Distance(collider.transform.position, transform.position);
+                    }
                 }
             }
             if (target != null)

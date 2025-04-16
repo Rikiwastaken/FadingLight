@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 189450580446498757}
   - component: {fileID: 4745690015797895177}
   - component: {fileID: 8273249805438150069}
+  - component: {fileID: 913560301609640885}
   m_Layer: 9
   m_Name: player
   m_TagString: Player
@@ -308,7 +309,7 @@ MonoBehaviour:
   jumpcounter: 0
   jump2: 0
   groundcheck: {fileID: 7714607739817182240}
-  radOcircle: 0.3
+  radOcircle: 0.1
   hauteurgi: 0.3
   largeurgi: 1
   whatisground:
@@ -854,6 +855,24 @@ MonoBehaviour:
   - {fileID: -8426275517856544378, guid: b19599820b7147f4cb812d97129b9937, type: 3}
   - {fileID: 7456911284069886418, guid: 503ff03f1282a0840a214626d7b7506a, type: 3}
   - {fileID: 2781095275680018358, guid: 069251c5d7e680a458be294089f43fbe, type: 3}
+--- !u!114 &913560301609640885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919727951631986471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae115bfd39fcaa4793627729fb2d1a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 65856
+  checkFrequency: 0.2
+  nudgeDistance: 1
+  maxAttempts: 50
 --- !u!1 &9140735802474745441
 GameObject:
   m_ObjectHideFlags: 0
