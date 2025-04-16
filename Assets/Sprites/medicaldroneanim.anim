@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: medicaldrone
+  m_Name: medicaldroneanim
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -32,10 +32,6 @@ AnimationClip:
       value: {fileID: 559095637, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
     - time: 0.41666666
       value: {fileID: 685826850, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
-    - time: 0.5
-      value: {fileID: 1745487215, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
-    - time: 0.5833333
-      value: {fileID: -1735141626, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -64,14 +60,12 @@ AnimationClip:
     - {fileID: -7621206211108252304, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
     - {fileID: 559095637, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
     - {fileID: 685826850, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
-    - {fileID: 1745487215, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
-    - {fileID: -1735141626, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6666666
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

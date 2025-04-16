@@ -268,27 +268,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: GunDrone_7
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 0
-        width: 34
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1d3f5d73ce7b0284f8086d8e2a8346c7
-      internalID: 1346368040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -307,7 +286,6 @@ TextureImporter:
       GunDrone_4: -1182820368
       GunDrone_5: -1418604480
       GunDrone_6: -537177570
-      GunDrone_7: 1346368040
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

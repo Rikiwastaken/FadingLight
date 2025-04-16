@@ -67,6 +67,8 @@ public class EnemyHP : MonoBehaviour
     public bool targetted;
 
     private GadgetScript gadgetScript;
+    private int hackinghpdraincounter;
+
     void Start()
     {
         start = transform.position;
@@ -111,6 +113,15 @@ public class EnemyHP : MonoBehaviour
             if (hacked)
             {
                 enemyanim.SetBool("Hacked", true);
+                if(hackinghpdraincounter==0)
+                {
+                    enemyhp -=(int) (enemymaxhp * 0.03f);
+                    hackinghpdraincounter = (int)(1/Time.fixedDeltaTime);
+                }
+                else
+                {
+                    hackinghpdraincounter--;
+                }
             }
             else
             {

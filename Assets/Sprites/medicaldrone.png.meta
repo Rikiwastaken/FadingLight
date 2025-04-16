@@ -126,7 +126,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 64
         width: 34
         height: 32
       alignment: 0
@@ -147,7 +147,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 96
+        y: 64
         width: 34
         height: 32
       alignment: 0
@@ -168,7 +168,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
+        y: 32
         width: 34
         height: 32
       alignment: 0
@@ -189,7 +189,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 64
+        y: 32
         width: 34
         height: 32
       alignment: 0
@@ -210,7 +210,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 0
         width: 34
         height: 32
       alignment: 0
@@ -231,7 +231,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 32
+        y: 0
         width: 34
         height: 32
       alignment: 0
@@ -243,48 +243,6 @@ TextureImporter:
       bones: []
       spriteID: a2bac2952ad1a74469b2a70ec355facf
       internalID: 685826850
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: medicaldrone_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 34
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f15e49f8260ecb94ea487aab89e6c144
-      internalID: 1745487215
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: medicaldrone_7
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 0
-        width: 34
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc8f883e5e017c24fa8e145e119ded27
-      internalID: -1735141626
       vertices: []
       indices: 
       edges: []
@@ -306,8 +264,6 @@ TextureImporter:
       medicaldrone_3: -7621206211108252304
       medicaldrone_4: 559095637
       medicaldrone_5: 685826850
-      medicaldrone_6: 1745487215
-      medicaldrone_7: -1735141626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
