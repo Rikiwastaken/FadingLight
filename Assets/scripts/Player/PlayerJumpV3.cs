@@ -131,7 +131,7 @@ public class PlayerJumpV3 : MonoBehaviour
             rb.velocity = new Vector2(velocityx,0);
         }
 
-        grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi, hauteurgi), 0, whatispassthrough));
+        grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi/2f, hauteurgi), 0, whatispassthrough));
         onennemi = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisennemy) || Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisboss));
         touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/2, largeurgi/2), 0, whatiswall);
         Checkground();

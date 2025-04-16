@@ -20,6 +20,8 @@ public class musicmanager : MonoBehaviour
     private void Start()
     {
         Global =FindAnyObjectByType<Global>();
+        musiccbtvol *= Global.GetComponent<optionvalues>().options.musicvol;
+        musicexpvol *= Global.GetComponent<optionvalues>().options.musicvol;
     }
     void FixedUpdate()
     {

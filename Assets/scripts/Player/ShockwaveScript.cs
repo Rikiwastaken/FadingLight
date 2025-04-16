@@ -34,8 +34,9 @@ public class ShockwaveScript : MonoBehaviour
         {
             if(!enemy.isbig && !enemy.isboss)
             {
-                Vector2 forcetoapply = (enemy.transform.position-transform.position).normalized*forcestr;
-                enemy.transform.GetComponent<Rigidbody2D>().AddForce(forcetoapply,ForceMode2D.Impulse);
+                Vector2 forcetoapply = (enemy.transform.position - transform.position).normalized * forcestr;
+                enemy.TakeDamage(0,0,forcetoapply);
+
             }
         }
     }

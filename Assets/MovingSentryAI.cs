@@ -142,6 +142,7 @@ public class MovingSentryAI : MonoBehaviour
                 GameObject bullet =Instantiate(projectileprefab, wheretospawnbullets.transform.position,Quaternion.identity);
                 BulletScript bulletScript  = bullet.GetComponent<BulletScript>();
                 bulletScript.damage = (int)damage;
+                bulletScript.sender = gameObject;
                 bulletScript.speed = bulletScript.speed / 2f;
                 if(!hacked)
                 {

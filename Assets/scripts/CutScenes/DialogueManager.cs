@@ -159,6 +159,7 @@ public class DialogueManager : MonoBehaviour
     {
         FindAnyObjectByType<PlayerHP>().GetComponent<Rigidbody2D>().velocity=Vector2.zero;
         Global.indialogue = true;
+        FindAnyObjectByType<PlayerJumpV3>().grounded = true;
         pageindex = -1;
         OpenNextPage();
     }

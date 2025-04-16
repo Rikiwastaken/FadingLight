@@ -33,6 +33,7 @@ public class soundoptions : MonoBehaviour
     public List<Resolution> Allresolutions;
     public TextMeshProUGUI resolutiontext;
     public TextMeshProUGUI FullscreenText;
+    public TextMeshProUGUI HeadphonesText;
 
     PlayerControls controls;
 
@@ -65,6 +66,14 @@ public class soundoptions : MonoBehaviour
         else
         {
             FullscreenText.text = "Fullscreen : Off";
+        }
+        if (optionval.options.headphones)
+        {
+            HeadphonesText.text = "Headphones : On";
+        }
+        else
+        {
+            HeadphonesText.text = "Headphones : Off";
         }
     }
 
@@ -197,6 +206,19 @@ public class soundoptions : MonoBehaviour
                 }
                 optionval.SaveOptions();
                 break;
+            case "HeadphonesSelected":
+                if (optionval.options.headphones)
+                {
+                    optionval.options.headphones = false;
+                    HeadphonesText.text = "Headphones : Off";
+                }
+                else
+                {
+                    optionval.options.headphones = true;
+                    HeadphonesText.text = "Headphones : On";
+                }
+                optionval.SaveOptions();
+                break;
             case "BackSelected":
                 if (valueclick != 0)
                 {
@@ -230,6 +252,12 @@ public class soundoptions : MonoBehaviour
             return res;
         }
         return result;
+    }
+
+    private void OnDodge()
+    {
+        optionval.SaveOptions();
+        SceneManager.LoadScene("MainMenu");
     }
 
 

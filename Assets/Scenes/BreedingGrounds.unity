@@ -4676,7 +4676,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 296f64f9c40d08043b722c49aeedfb77, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -49820,6 +49820,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2162529214170387368, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: radOcircle
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5919727951631986471, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_Name
       value: player
@@ -50623,7 +50627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[1].parts.Array.data[0].movementtotrigger.Array.data[0].wheretogo.x
-      value: 188
+      value: 192
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[1].parts.Array.data[0].movementtotrigger.Array.data[0].wheretogo.y

@@ -103,6 +103,10 @@ public class EnemyHP : MonoBehaviour
     void FixedUpdate()
     {
 
+        if(global.inbossfight && !isboss)
+        {
+            transform.position = start;
+        }
         if(gadgetScript.invisibilityFrames>0 && !isboss)
         {
             targetted = false;

@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ShowSaveSlots : MonoBehaviour
 {
-
+    private void OnDodge()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     private void OnEnable()
     {
         getallsaves();

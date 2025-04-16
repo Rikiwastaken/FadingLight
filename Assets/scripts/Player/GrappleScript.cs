@@ -194,7 +194,7 @@ public class GrappleScript : MonoBehaviour
                 }
                 else
                 {
-                    if(closestenemy.GetComponent<EnemyHP>().isbig)
+                    if(closestenemy.GetComponent<EnemyHP>().isbig && !GetComponent<AugmentsScript>().EquipedAugments[11])
                     {
                         GetComponent<Rigidbody2D>().velocity = (target.transform.position - transform.position).normalized * speed;
                     }

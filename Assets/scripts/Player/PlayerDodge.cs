@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static GadgetScript;
 
 public class PlayerDodge : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayerDodge : MonoBehaviour
 
     private bool replaceennemy;
     private float gravity;
-
+    public GameObject Grenade;
     [Header("Ground Dodge")]
     public float dodgecd;
     public int dodgecdcnt;
@@ -100,7 +101,15 @@ public class PlayerDodge : MonoBehaviour
         }
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("roll") && !anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && dodgecdcnt == 0 && GetComponent<PlayerJumpV3>().grounded)
         {
-            anim.SetTrigger("dodge");
+            if (GetComponent<AugmentsScript>().EquipedAugments[10])
+            {
+                GameObject grenade = Instantiate(Grenade, transform.position, Quaternion.identity);
+                GrenadeScript GrenadeScript = grenade.GetComponent<GrenadeScript>();
+                GrenadeScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage / 3f);
+                GrenadeScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage / 3f);
+                GrenadeScript.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+            }
+                anim.SetTrigger("dodge");
             dodgecdcnt = (int)(dodgecd / Time.fixedDeltaTime);
             replaceennemy = true;
         }
@@ -155,7 +164,7 @@ public class PlayerDodge : MonoBehaviour
         {
             if (collider.GetComponent<EnemyHP>())
             {
-                if (!collider.GetComponent<EnemyHP>().isboss && !!collider.GetComponent<EnemyHP>().isbig)
+                if (!collider.GetComponent<EnemyHP>().isboss)
                 {
                     int direction = 0;
                     if (collider.transform.position.x < transform.position.x && !wallleft)

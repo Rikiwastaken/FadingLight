@@ -14,6 +14,7 @@ public class optionvalues : MonoBehaviour
         public float soundvol; //volume of music
         public soundoptions.Resolution resolution;
         public bool fullscreen;
+        public bool headphones;
     }
 
     public OptionSave options;
@@ -29,23 +30,40 @@ public class optionvalues : MonoBehaviour
 
     private void LoadOrCreateOptionsSave()
     {
-        if(System.IO.File.Exists(Application.persistentDataPath + "/Options.txt"))
+        string path = Application.persistentDataPath + "/Options.txt";
+
+        if (System.IO.File.Exists(path))
         {
-            string optionsfile = System.IO.File.ReadAllText(Application.persistentDataPath + "/Options.txt");
-            options = JsonUtility.FromJson<OptionSave>(optionsfile);
+            try
+            {
+                string optionsfile = System.IO.File.ReadAllText(path);
+                options = JsonUtility.FromJson<OptionSave>(optionsfile);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning("Erreur lors du chargement des options, création de nouvelles options par défaut. Détail : " + e.Message);
+                CreateDefaultOptions(path);
+            }
         }
         else
         {
-            options = new OptionSave();
-            options.musicvol = 0.5f;
-            options.soundvol = 0.5f;
-            options.resolution = new soundoptions.Resolution();
-            options.resolution.width = Screen.currentResolution.width;
-            options.resolution.height = Screen.currentResolution.height;
-            options.fullscreen = Screen.fullScreen;
-            string optionJSON = JsonUtility.ToJson(options);
-            System.IO.File.WriteAllText(Application.persistentDataPath + "/Options.txt", optionJSON);
+            CreateDefaultOptions(path);
         }
+    }
+
+    private void CreateDefaultOptions(string path)
+    {
+        options = new OptionSave();
+        options.musicvol = 0.5f;
+        options.soundvol = 0.5f;
+        options.resolution = new soundoptions.Resolution();
+        options.resolution.width = Screen.currentResolution.width;
+        options.resolution.height = Screen.currentResolution.height;
+        options.fullscreen = Screen.fullScreen;
+        options.headphones = false;
+
+        string optionJSON = JsonUtility.ToJson(options);
+        System.IO.File.WriteAllText(path, optionJSON);
     }
     public void SaveOptions()
     {

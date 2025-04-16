@@ -52,6 +52,7 @@ public class GadgetScript : MonoBehaviour
         if((FindAnyObjectByType<Global>().grappling|| FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().indialogue) && invisibilityFrames>0)
         {
             invisibilityFrames = 1;
+            gadgetCDcounter = 0;
         }
         if(invisibilityFrames>0)
         {

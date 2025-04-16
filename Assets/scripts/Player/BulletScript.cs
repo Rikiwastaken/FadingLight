@@ -10,6 +10,7 @@ public class BulletScript : MonoBehaviour
     public int EnergyDamage;
     public bool damagePlayer;
     public Vector2 directionvector;
+    public GameObject sender;
     private void Start()
     {
         if (directionvector != Vector2.zero)
@@ -47,6 +48,10 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if(sender==collision.gameObject)
+        {
+            return;
+        }
         if (collision.GetComponent<EnemyHP>() && !damagePlayer)
         {
             collision.GetComponent<EnemyHP>().TakeDamage(damage, EnergyDamage);

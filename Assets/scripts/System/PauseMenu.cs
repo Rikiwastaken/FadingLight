@@ -23,4 +23,9 @@ public class PauseMenu : MonoBehaviour
         }
         
     }
+    private void OnDodge()
+    {
+        Destroy(gameObject);
+    }
 }
+
