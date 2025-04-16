@@ -86,7 +86,7 @@ public class SlimeAI : MonoBehaviour
             Managedirection();
             
 
-            if (distplayer <= detectdist || GetComponent<EnemyHP>().targetted)
+            if ((distplayer <= detectdist || GetComponent<EnemyHP>().targetted) && FindAnyObjectByType<GadgetScript>().invisibilityFrames==0)
             {
                 GetComponent<EnemyHP>().targetted = true;
                 if (delaycounter == 0 && !GetComponent<EnemyHP>().cannotmove && !cannotmoveatk && Mathf.Abs(target.position.x - transform.position.x)>0.25f)
@@ -173,18 +173,18 @@ public class SlimeAI : MonoBehaviour
 
     void Managedirection()
     {
-        if (target != null)
+        if (target != null && FindAnyObjectByType<GadgetScript>().invisibilityFrames == 0)
         {
             if (target.transform.position.x <= transform.position.x)
             {
-                transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-                transform.GetChild(1).localScale = new Vector2(Mathf.Abs(transform.GetChild(1).localScale.x), transform.GetChild(1).localScale.y);
+                GetComponent<SpriteRenderer>().flipX = false;
+                
 
             }
             else
             {
-                transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
-                transform.GetChild(1).localScale = new Vector2(-Mathf.Abs(transform.GetChild(1).localScale.x), transform.GetChild(1).localScale.y);
+                GetComponent<SpriteRenderer>().flipX = true;
+                
             }
         }
     }

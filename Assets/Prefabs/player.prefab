@@ -471,7 +471,7 @@ MonoBehaviour:
     locked: 0
   - name: Agressivity Augment
     description: Increase Damage by 110%.
-    attributeID: 2
+    attributeID: 3
     valueincr: 1.1
     mult: 1
     image: {fileID: 21300000, guid: dafa6ca8039f6de4c909bbcd68c48720, type: 3}
@@ -487,7 +487,7 @@ MonoBehaviour:
     locked: 0
   - name: Juggernaut Augment
     description: Increase Defense by 7%
-    attributeID: 0
+    attributeID: 5
     valueincr: 1.07
     mult: 1
     image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
@@ -495,7 +495,7 @@ MonoBehaviour:
     locked: 0
   - name: Rien du tout hein
     description: Bro this does nothing
-    attributeID: 7
+    attributeID: 6
     valueincr: 0
     mult: 0
     image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
@@ -511,11 +511,19 @@ MonoBehaviour:
     locked: 0
   - name: Gadget Efficiency Augment
     description: Reduce Gadget cooldown by 20%
-    attributeID: 7
+    attributeID: 8
     valueincr: 0
     mult: 0
     image: {fileID: 21300000, guid: fd649757aa38f2b4692697d2c1fbf94e, type: 3}
     SlotsUsed: 3
+    locked: 0
+  - name: Rocket Jump Augment
+    description: Allows Eldon to jump when in range of grenade explosions.
+    attributeID: 9
+    valueincr: 0
+    mult: 0
+    image: {fileID: 21300000, guid: a4165faefc4273c4cab101acfa166949, type: 3}
+    SlotsUsed: 1
     locked: 0
   EquipedAugments: 000000000000000000000000000000000000
   Basestats:
@@ -663,6 +671,13 @@ MonoBehaviour:
     ID: 6
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
+  - name: God Plate
+    description: For testing purposes only
+    Defense: 1000
+    HPRegen: 1
+    ID: 7
+    image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
+    locked: 0
   equipedChainIndex: 0
   equipedPlateIndex: 0
   drone1: {fileID: 5291592748213458889}
@@ -753,9 +768,30 @@ MonoBehaviour:
     ID: 6
     image: {fileID: -1217602550, guid: a29854d869097df41baecc2173543afe, type: 3}
     locked: 0
+  - name: Invisibility Cloak
+    description: Makes Eldon invisible for 5 seconds.
+    DamageMultiplier: 0
+    AbsorbMultiplier: 0
+    Energycost: 20
+    cooldown: 30
+    PrefabtoSpawn: {fileID: 0}
+    ID: 7
+    image: {fileID: 21300000, guid: df38ea83b65ac0b49ba750b53770adb4, type: 3}
+    locked: 0
+  - name: Futuristic Mace
+    description: Create a rotating mace that damages and push enemies
+    DamageMultiplier: 1.5
+    AbsorbMultiplier: 0
+    Energycost: 10
+    cooldown: 15
+    PrefabtoSpawn: {fileID: 3419316200322922217, guid: 149517af158883942958509e073a4c7c, type: 3}
+    ID: 8
+    image: {fileID: 21300000, guid: 751b5b1b59e36d34e9d878eb89e71b62, type: 3}
+    locked: 0
   ActiveGadgetID: 0
   gadgetCDcounter: 0
   projectileoffset: 1
+  invisibilityFrames: 0
 --- !u!114 &4745690015797895177
 MonoBehaviour:
   m_ObjectHideFlags: 0

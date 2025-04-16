@@ -65,6 +65,8 @@ public class EnemyHP : MonoBehaviour
 
     private Vector2 start;
     public bool targetted;
+
+    private GadgetScript gadgetScript;
     void Start()
     {
         start = transform.position;
@@ -72,6 +74,7 @@ public class EnemyHP : MonoBehaviour
         BossLifeBar = FindAnyObjectByType<BossLifeBar>();
         Musicmanager = FindAnyObjectByType<musicmanager>();
         BossWall = FindAnyObjectByType<BossWall>();
+        gadgetScript = FindAnyObjectByType<GadgetScript>();
         //setting enemy's max heatlth and energy
         enemyhp = enemymaxhp;
         enemyNRG = enemymaxNRG;
@@ -97,6 +100,12 @@ public class EnemyHP : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if(gadgetScript.invisibilityFrames>0 && !isboss)
+        {
+            targetted = false;
+        }
+
         if(ismachine)
         {
             if (hacked)
@@ -388,7 +397,15 @@ public class EnemyHP : MonoBehaviour
         }
         if (!isboss)
         {
-            GetComponent<Rigidbody2D>().AddForce(Force, ForceMode2D.Impulse);
+            if(isflying)
+            {
+                GetComponent<Rigidbody2D>().AddForce(Force/50000f, ForceMode2D.Impulse);
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().AddForce(Force, ForceMode2D.Impulse);
+            }
+            
         }
         
         enemyNRG -= energydamage;

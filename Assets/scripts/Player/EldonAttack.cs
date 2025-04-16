@@ -120,6 +120,12 @@ public class EldonAttack : MonoBehaviour
 
     void fctAttack()
     {
+        if(FindAnyObjectByType<GadgetScript>().invisibilityFrames >0)
+        {
+            FindAnyObjectByType<GadgetScript>().invisibilityFrames = 1;
+        }
+        
+
         if (!grounded && !playerjump.onennemi)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, 12.5f);

@@ -185,10 +185,4 @@ public class PlayerDodge : MonoBehaviour
             }
         }
     }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube((Vector2)transform.position + GetComponent<BoxCollider2D>().offset, GetComponent<BoxCollider2D>().size * transform.localScale.x * 1.5f);
-    }
-
 }

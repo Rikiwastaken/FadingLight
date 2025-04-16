@@ -33,21 +33,14 @@ public class GrenadeScript : MonoBehaviour
                 Vector2 realforce = new Vector2(ForcetoApply.x* direction, ForcetoApply.y);
                 collision.GetComponent<EnemyHP>().TakeDamage(damage,energydamage, realforce);
             }
-            //if(collision.GetComponent<PlayerHP>() != null && !damagedobject.Contains(collision.transform))
-            //{
-            //    damagedobject.Add(collision.transform);
-            //    int direction = 0;
-            //    if (transform.position.x > collision.transform.position.x)
-            //    {
-            //        direction = -1;
-            //    }
-            //    else
-            //    {
-            //        direction = 1;
-            //    }
-            //    Vector2 realforce = new Vector2(ForcetoApply.x * direction, ForcetoApply.y);
-            //    collision.GetComponent<PlayerHP>().TakeDamage(damage,Vector2.zero, realforce, energydamage);
-            //}
+            if(collision.GetComponent<PlayerHP>() != null && !damagedobject.Contains(collision.transform))
+            {
+                damagedobject.Add(collision.transform);
+                if (collision.GetComponent<AugmentsScript>().EquipedAugments[9])
+                {
+                    collision.GetComponent<Rigidbody2D>().AddForce(new Vector2(0,75),ForceMode2D.Impulse);
+                }
+            }
         }
     }
 

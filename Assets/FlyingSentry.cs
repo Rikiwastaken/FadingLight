@@ -66,7 +66,7 @@ public class FlyingSentry : MonoBehaviour
         }
 
 
-        if(Vector2.Distance(target.transform.position,transform.position) <= mindist)
+        if(Vector2.Distance(target.transform.position,transform.position) <= mindist && FindAnyObjectByType<GadgetScript>().invisibilityFrames == 0)
         {
             targetting = true;
         }
@@ -156,7 +156,7 @@ public class FlyingSentry : MonoBehaviour
                                  );
             SentryCanon.transform.rotation = rotation * Quaternion.Euler(0, 0, 90);
             LaserSight.transform.position = Vector3.Lerp(wheretoaim, SentryCanon.transform.position, 0.5f); ;
-            LaserSight.transform.localScale = new Vector2(Vector3.Distance(wheretoaim, SentryCanon.transform.position) / 3f, 0.03f);
+            LaserSight.transform.localScale = new Vector2(Vector3.Distance(wheretoaim, SentryCanon.transform.position), 0.03f);
             SentryCanon.GetComponentInChildren<Animator>().speed = canonanimspeed;
         }
         else

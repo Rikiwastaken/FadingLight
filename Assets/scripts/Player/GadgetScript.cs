@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,6 +38,8 @@ public class GadgetScript : MonoBehaviour
     private AugmentsScript augmentsScript;
     private PlayerJumpV3 playerjump;
 
+    public int invisibilityFrames;
+
     private void Start()
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
@@ -46,6 +49,24 @@ public class GadgetScript : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if((FindAnyObjectByType<Global>().grappling|| FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().indialogue) && invisibilityFrames>0)
+        {
+            invisibilityFrames = 1;
+        }
+        if(invisibilityFrames>0)
+        {
+            invisibilityFrames--;
+            if(invisibilityFrames == 0)
+            {
+                GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r, GetComponent<SpriteRenderer>().color.g, GetComponent<SpriteRenderer>().color.b, 1f);
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r, GetComponent<SpriteRenderer>().color.g, GetComponent<SpriteRenderer>().color.b, 0.75f);
+            }
+            
+        }
+
         CDmultiplier = 1.0f;
         if (augmentsScript.EquipedAugments[8])
         {
@@ -54,7 +75,7 @@ public class GadgetScript : MonoBehaviour
 
         if (GadgetList[ActiveGadgetID].cooldown!=0)
         {
-            healthbar.SetMaxGadget(GadgetList[ActiveGadgetID].cooldown / Time.deltaTime);
+            healthbar.SetMaxGadget(GadgetList[ActiveGadgetID].cooldown * 60);
             healthbar.SetGadgetCD(gadgetCDcounter);
         }
         else
@@ -99,6 +120,11 @@ public class GadgetScript : MonoBehaviour
                 Spawnprefab(ActiveGadget);
             }
 
+            if(ActiveGadgetID==7)
+            {
+                invisibilityFrames=(int)(5/Time.fixedDeltaTime);
+            }
+
         }
     }
 
@@ -136,6 +162,13 @@ public class GadgetScript : MonoBehaviour
         {
             offset=Vector3.zero;
         }
+        if(gadget.PrefabtoSpawn.transform.childCount>0)
+        {
+            if(gadget.PrefabtoSpawn.transform.GetChild(0).GetComponent<MaceGadget>())
+            {
+                offset = Vector3.zero;
+            }
+        }
         if(wallinfront && gadget.PrefabtoSpawn.GetComponent<RocketScript>())
         {
             gadgetCDcounter = 0;
@@ -152,6 +185,14 @@ public class GadgetScript : MonoBehaviour
         RocketScript rocketScript = projectile.GetComponent<RocketScript>();
         GrenadeScript GrenadeScript = projectile.GetComponent<GrenadeScript>();
         TurretScript turretScript = projectile.GetComponent<TurretScript>();
+        MaceGadget macegadget = null;
+        if (projectile.transform.childCount > 0)
+        {
+            if (projectile.transform.GetChild(0).GetComponent<MaceGadget>())
+            {
+                macegadget = projectile.transform.GetChild(0).GetComponent<MaceGadget>();
+            }
+        }
         if (bulletScript!=null)
         {
             bulletScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
@@ -195,6 +236,14 @@ public class GadgetScript : MonoBehaviour
             turretScript.damage= (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
             turretScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
             turretScript.GetComponent<Rigidbody2D>().AddForce(forcetoapply, ForceMode2D.Impulse);
+        }
+        else if(macegadget != null)
+        {
+            
+            macegadget.transform.parent.SetParent(transform);
+            macegadget.transform.parent.localPosition = GetComponent<Collider2D>().offset;
+            macegadget.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
+
         }
     }
 

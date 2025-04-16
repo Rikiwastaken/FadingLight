@@ -83,7 +83,7 @@ public class MovingSentryAI : MonoBehaviour
         }
 
 
-        if(Vector2.Distance(target.transform.position,transform.position) <= mindist)
+        if(Vector2.Distance(target.transform.position,transform.position) <= mindist && FindAnyObjectByType<GadgetScript>().invisibilityFrames == 0)
         {
             targetting = true;
         }
