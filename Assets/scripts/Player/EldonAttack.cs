@@ -156,7 +156,7 @@ public class EldonAttack : MonoBehaviour
         Collider2D[] hitenemies = Physics2D.OverlapCircleAll(attackpoint.position,range);
 
         int damage = hpdamage;
-        int energydamage =nrgdamage;
+        float energydamage =nrgdamage;
         float absorbrate = 3f / 10f;
         float damagewithchainsaw = hpdamage;
         float energydamagewithchainsaw = nrgdamage;
@@ -175,7 +175,7 @@ public class EldonAttack : MonoBehaviour
         if (equipmentScript.equipedChainIndex!=-1)
         {
             damage = (int)(damagewithchainsaw * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
-            energydamage = (int)(energydamagewithchainsaw * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
+            energydamage = (energydamagewithchainsaw * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
             absorbrate = absorbrate * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].AbsorbMultiplier;
             if(GetComponent<AugmentsScript>().EquipedAugments[6])
             {
@@ -194,7 +194,7 @@ public class EldonAttack : MonoBehaviour
 
                 if (slayermode)
                 {
-                    enemyHP.TakeDamage(damage, (energydamage * 1 / 10));
+                    enemyHP.TakeDamage(damage, (int)(energydamage * 0.1f));
                     GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate ;
                     if(GetComponent<PlayerHP>().EldonNRG> GetComponent<PlayerHP>().EldonmaxNRG)
                     {
@@ -211,7 +211,7 @@ public class EldonAttack : MonoBehaviour
                 }
                 else
                 {
-                    enemyHP.TakeDamage((int)(damage * 0.1f), energydamage);
+                    enemyHP.TakeDamage((int)(damage * 0.1f), (int)energydamage);
                     GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate*2;
                     if (GetComponent<PlayerHP>().EldonNRG > GetComponent<PlayerHP>().EldonmaxNRG)
                     {
@@ -248,7 +248,7 @@ public class EldonAttack : MonoBehaviour
 
                 if (slayermode)
                 {
-                    enemyHP.TakeDamage(damage, (energydamage * 1 / 10));
+                    enemyHP.TakeDamage(damage, (int)(energydamage * 0.1f));
                     GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate;
                     if (GetComponent<PlayerHP>().EldonNRG > GetComponent<PlayerHP>().EldonmaxNRG)
                     {
@@ -265,7 +265,7 @@ public class EldonAttack : MonoBehaviour
                 }
                 else
                 {
-                    enemyHP.TakeDamage((int)(damage * 0.1f), energydamage);
+                    enemyHP.TakeDamage((int)(damage * 0.1f), (int)energydamage);
                     GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate * 2;
                     if (GetComponent<PlayerHP>().EldonNRG > GetComponent<PlayerHP>().EldonmaxNRG)
                     {

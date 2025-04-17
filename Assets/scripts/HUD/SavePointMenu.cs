@@ -51,7 +51,7 @@ public class SavePointMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        FindAnyObjectByType<Global>().atsavepoint = true;
         if(valueclick==0)
         {
             pressedclick = false;

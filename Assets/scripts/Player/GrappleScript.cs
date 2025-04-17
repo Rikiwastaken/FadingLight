@@ -154,7 +154,7 @@ public class GrappleScript : MonoBehaviour
             }
             else
             {
-                if (Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 0.3f || (target.GetComponent<EnemyHP>()!=null && Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 1f)) 
+                if (Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 0.3f || (target.GetComponent<EnemyHP>()!=null && Vector2.Distance((Vector2)target.transform.position, (Vector2)transform.position) <= 3f)) 
                 {
                     if (pressedjump && target != closestenemy)
                     {
@@ -175,6 +175,10 @@ public class GrappleScript : MonoBehaviour
                             GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
                             GetComponent<PlayerJumpV3>().jump2 = false;
                             GetComponent<PlayerDodge>().resetairdash = true;
+                        }
+                        else
+                        {
+                            target.GetComponent<Rigidbody2D>().velocity = target.GetComponent<Rigidbody2D>().velocity / 3f;
                         }
                         return;
                     }

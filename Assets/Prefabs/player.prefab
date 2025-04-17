@@ -362,6 +362,9 @@ MonoBehaviour:
   damagereduction: 0
   GameOverPrefab: {fileID: 1909857644947452815, guid: cf12e9ad978d2d94599d99532774c1a5, type: 3}
   radOcircle: 0.06
+  MetalScrap: 0
+  CorePieces: 0
+  ElectronicComponents: 0
 --- !u!114 &7297679925771535583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,6 +699,13 @@ MonoBehaviour:
     ID: 7
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
+  - name: Sucker Chain
+    description: Sucker Chain
+    DamageMultiplier: 0.01
+    AbsorbMultiplier: 100000
+    ID: 8
+    image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
+    locked: 0
   Platelist:
   - name: Broken Plate
     description: Eldon broke is prostetic during the fall. It provides little protection
@@ -759,6 +769,9 @@ MonoBehaviour:
   drone1: {fileID: 5291592748213458889}
   drone2: {fileID: 3697768636770411347}
   EnergyShard: {fileID: 0}
+  MetalScrapSprite: {fileID: 0}
+  CorePieceSprite: {fileID: 0}
+  ElecComponentSprite: {fileID: 0}
   gotitempopupprefab: {fileID: 6175682124425559733, guid: b87792eefe96a2e40b4460d898f573cf, type: 3}
 --- !u!114 &189450580446498757
 MonoBehaviour:
