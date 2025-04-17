@@ -14,6 +14,8 @@ public class Healthbar : MonoBehaviour
     public Image imageIndicatorDrone1;
     public Image imageIndicatorDrone2;
     public Image imageIndicatorGadget;
+    public GameObject imageChainsawmodeOn;
+    public GameObject imageChainsawmodeOff;
 
     private float maxhp;
     private float maxnrj;
@@ -23,9 +25,37 @@ public class Healthbar : MonoBehaviour
     public bool drone1usable;
     public bool drone2usable;
     public bool gadgetusable;
+    public bool chainsawmode;
 
     void FixedUpdate()
     {
+        if(imageChainsawmodeOn!=null && imageChainsawmodeOff != null)
+        {
+            if (chainsawmode)
+            {
+                if (!imageChainsawmodeOn.activeSelf)
+                {
+                    imageChainsawmodeOn.SetActive(true);
+                }
+                if (imageChainsawmodeOff.activeSelf)
+                {
+                    imageChainsawmodeOff.SetActive(false);
+                }
+            }
+            else
+            {
+                if (!imageChainsawmodeOff.activeSelf)
+                {
+                    imageChainsawmodeOff.SetActive(true);
+                }
+                if (imageChainsawmodeOn.activeSelf)
+                {
+                    imageChainsawmodeOn.SetActive(false);
+                }
+            }
+        }
+        
+
         if(imageGadget != null)
         {
             float color = imageGadget.fillAmount*(2f / 3f) + 1f/3f;

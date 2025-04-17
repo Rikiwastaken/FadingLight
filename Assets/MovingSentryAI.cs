@@ -49,7 +49,7 @@ public class MovingSentryAI : MonoBehaviour
         {
             return;
         }
-        if (collision.transform.GetComponent<PlayerHP>() != null && (transform.position.y-GetComponent<BoxCollider2D>().size.y*transform.localScale.y/2f>=collision.transform.position.y+ collision.transform.GetComponent<BoxCollider2D>().size.y * collision.transform.transform.localScale.y / 2f))
+        if (collision.transform.GetComponent<PlayerHP>() != null && (GetComponent<BoxCollider2D>().bounds.center.y- GetComponent<BoxCollider2D>().bounds.size.y/2f <= collision.transform.GetComponent<BoxCollider2D>().bounds.center.y - collision.transform.GetComponent<BoxCollider2D>().bounds.size.y / 2f))
         {
             int direction = (int)((collision.transform.position.x - transform.position.x)/Mathf.Abs(collision.transform.position.x-transform.position.x));
             collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction*5,3), ForceMode2D.Impulse);
@@ -168,7 +168,7 @@ public class MovingSentryAI : MonoBehaviour
     }
     private void ManageMovement()
     {
-        if (timeunabletomovecounter > 0)
+        if (timeunabletomovecounter > 0 || FindAnyObjectByType<GrappleScript>().target==transform)
         {
             GetComponent<Animator>().speed = 0f;
             return;

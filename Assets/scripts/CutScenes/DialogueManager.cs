@@ -107,23 +107,7 @@ public class DialogueManager : MonoBehaviour
             {
                 if (currentdialogue.parts[pageindex] != null)
                 {
-                    foreach (DialogueMovement Movement in currentdialogue.parts[pageindex].movementtotrigger)
-                    {
-                        if (Movement.Actor != null)
-                        {
-                            Vector2 pos = Movement.Actor.transform.position;
-                            Vector2 dest = Movement.wheretogo;
-                            if (Vector2.Distance(pos, dest) >= 0.5f)
-                            {
-                                float speed = Movement.speed;
-                                Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
-                            }
-                            else
-                            {
-                                Movement.Actor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                            }
-                        }
-                    }
+                    ManageMovements(pageindex,false);
                 }
             }           
         }
@@ -131,6 +115,35 @@ public class DialogueManager : MonoBehaviour
         if(!Global.indialogue)
         {
             currentdialogue=null;
+        }
+    }
+
+    private void ManageMovements(int pageindex, bool endmovement)
+    {
+        foreach (DialogueMovement Movement in currentdialogue.parts[pageindex].movementtotrigger)
+        {
+            if (Movement.Actor != null)
+            {
+                if(endmovement)
+                {
+                    Movement.Actor.transform.position = Movement.wheretogo;
+                }
+                else
+                {
+                    Vector2 pos = Movement.Actor.transform.position;
+                    Vector2 dest = Movement.wheretogo;
+                    if (Vector2.Distance(pos, dest) >= 0.5f)
+                    {
+                        float speed = Movement.speed;
+                        Movement.Actor.GetComponent<Rigidbody2D>().velocity = (dest - pos).normalized * speed;
+                    }
+                    else
+                    {
+                        Movement.Actor.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                    }
+                }
+                
+            }
         }
     }
 
@@ -194,8 +207,8 @@ public class DialogueManager : MonoBehaviour
         else
         {
             pageindex = 0;
-            
-            if(currentdialogue.worldflagtotriggerattheend!=0)
+            ManageMovements(currentdialogue.parts.Count-1, true);
+            if (currentdialogue.worldflagtotriggerattheend!=0)
             {
                 Global.worldflags[currentdialogue.worldflagtotriggerattheend] = true;
             }

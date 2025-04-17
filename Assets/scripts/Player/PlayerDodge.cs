@@ -12,7 +12,6 @@ public class PlayerDodge : MonoBehaviour
 
     private bool grounded;
 
-    private bool replaceennemy;
     private float gravity;
     public GameObject Grenade;
     [Header("Ground Dodge")]
@@ -111,14 +110,9 @@ public class PlayerDodge : MonoBehaviour
             }
                 anim.SetTrigger("dodge");
             dodgecdcnt = (int)(dodgecd / Time.fixedDeltaTime);
-            replaceennemy = true;
         }
 
-        if ((!anim.GetCurrentAnimatorStateInfo(0).IsName("roll")|| airdodgelengthcnt==0) && replaceennemy)
-        {
-            replaceennemy = false;
-            Replaceenemies();
-        }
+        
 
         if(!grounded && !usedairdodge && airdodgelengthcnt==0)
         {
@@ -136,62 +130,62 @@ public class PlayerDodge : MonoBehaviour
             
             GetComponent<Rigidbody2D>().velocity = new Vector2(airdodgedirection * airdodgespeed / 2, 0);
             GetComponent<Rigidbody2D>().gravityScale = 0;
-            replaceennemy = true;
         }
 
     }
 
 
-    void Replaceenemies()
+    public void Replaceenemies()
     {
-        bool wallleft = false;
-        bool wallright = false;
-        ContactPoint2D[] collisionswall = new ContactPoint2D[99];
-        Physics2D.GetContacts(GetComponent<BoxCollider2D>(), GameObject.Find("wall").GetComponent<TilemapCollider2D>(), new ContactFilter2D(), collisionswall);
-        foreach(ContactPoint2D collision in collisionswall)
-        {
-            if (collision.point.x < transform.position.x)
-            {
-                wallleft = true;
-            }
-            if (collision.point.x > transform.position.x)
-            {
-                wallright = true;
-            }
-        }
-        Collider2D[] allcolliders = Physics2D.OverlapBoxAll(GetComponent<BoxCollider2D>().bounds.center, GetComponent<BoxCollider2D>().bounds.size* 1.1f, 0f);
-        foreach (Collider2D collider in allcolliders)
-        {
-            if (collider.GetComponent<EnemyHP>())
-            {
-                if (!collider.GetComponent<EnemyHP>().isboss)
-                {
-                    int direction = 0;
-                    if (wallleft)
-                    {
-                        direction = -1;
-                    }
-                    if(wallright)
-                    {
-                        direction = 1;
-                    }
-                    int max = 0;
-                    if (Physics2D.OverlapBoxAll(GetComponent<BoxCollider2D>().bounds.center, GetComponent<BoxCollider2D>().bounds.size * 1.1f, 0f).Contains(collider) && max <= 9999)
-                    {
-                        max++;
-                        if(direction == 0)
-                        {
-                            collider.transform.position += new Vector3(GetComponent<BoxCollider2D>().bounds.size.y * 1.1f * direction, 0.01f, 0f);
-                        }
-                        else
-                        {
-                            collider.transform.position += new Vector3(GetComponent<BoxCollider2D>().bounds.size.x * 1.1f * direction, 0f, 0f);
-                        }
-                        
-                    }
 
+
+        int safetyCounter = 0;
+        const int maxIterations = 30;
+
+        while (safetyCounter < maxIterations)
+        {
+            bool anyStillOverlapping = false;
+            Collider2D[] allcolliders = Physics2D.OverlapBoxAll(
+                GetComponent<BoxCollider2D>().bounds.center,
+                GetComponent<BoxCollider2D>().bounds.size * 1.1f,
+                0f);
+
+            foreach (Collider2D collider in allcolliders)
+            {
+                if (collider != null && collider.GetComponent<EnemyHP>() && !collider.GetComponent<EnemyHP>().isboss)
+                {
+                    anyStillOverlapping = true;
+                    int direction = 0;
+                    if (collider.transform.position.x<transform.position.x) direction = -1;
+                    if (collider.transform.position.x > transform.position.x) direction = 1;
+                    if (direction == 0)
+                    {
+                        // If no wall direction is detected, just push enemy slightly upward
+                        collider.transform.position += new Vector3(0f, 0.05f, 0f);
+                    }
+                    else
+                    {
+                        collider.transform.position += new Vector3(
+                            0.5f * direction,
+                            0f,
+                            0f);
+                    }
+                    Physics2D.SyncTransforms();
                 }
             }
+
+            if (!anyStillOverlapping)
+            {
+                break;
+            }
+
+            safetyCounter++;
+        }
+
+        if (safetyCounter == maxIterations)
+        {
+            Debug.LogWarning("Replaceenemies: Max iterations reached — some enemies may still be inside the collider.");
         }
     }
+
 }

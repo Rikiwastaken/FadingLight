@@ -43,7 +43,7 @@ public class GrappleScript : MonoBehaviour
 
     private float lastdist;
 
-    
+    public Transform target;
 
     private void Awake()
     {
@@ -118,7 +118,7 @@ public class GrappleScript : MonoBehaviour
         }
         else if(global.grappling)
         {
-            Transform target = null;
+            target = null;
             if(closestgrapple != null && !grapplingenemy)
             {
                 target=closestgrapple;
@@ -138,9 +138,17 @@ public class GrappleScript : MonoBehaviour
             {
                 TimeToThrowGrapplecounter--;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
                 float fraction = (TimeToThrowGrapple / Time.fixedDeltaTime - TimeToThrowGrapplecounter) / (TimeToThrowGrapple / Time.fixedDeltaTime);
-                Vector3 placetoputcable = (target.transform.position - transform.position)*fraction + transform.position;
+                Vector3 placetoputcable = Vector3.zero;
+                if (target.GetComponent<EnemyHP>() != null)
+                {
+                    placetoputcable = (target.transform.position+(Vector3)target.GetComponent<EnemyHP>().grappleOffset - transform.position) * fraction + transform.position;
+                }
+                else
+                {
+                    placetoputcable = (target.transform.position - transform.position) * fraction + transform.position;
+                }
+                
                 GenerateChain((Vector2)transform.position, (Vector2)placetoputcable);
 
             }
@@ -172,6 +180,7 @@ public class GrappleScript : MonoBehaviour
                     }
                     
                 }
+                Vector2 targetpos = (Vector2)target.transform.position;
                 if (target != closestenemy)
                 {
                     GetComponent<Rigidbody2D>().velocity = (target.transform.position - transform.position).normalized * speed;
@@ -196,15 +205,16 @@ public class GrappleScript : MonoBehaviour
                 {
                     if(closestenemy.GetComponent<EnemyHP>().isbig && !GetComponent<AugmentsScript>().EquipedAugments[11])
                     {
-                        GetComponent<Rigidbody2D>().velocity = (target.transform.position - transform.position).normalized * speed;
+                        GetComponent<Rigidbody2D>().velocity = (target.transform.position + (Vector3)target.GetComponent<EnemyHP>().grappleOffset - transform.position).normalized * speed;
                     }
                     else
                     {
-                        target.GetComponent<Rigidbody2D>().velocity = (transform.position - target.transform.position).normalized * speed;
+                        target.GetComponent<Rigidbody2D>().velocity = (transform.position - (Vector3)target.GetComponent<EnemyHP>().grappleOffset - target.transform.position).normalized * speed;
                     }
+                    targetpos += target.GetComponent<EnemyHP>().grappleOffset;
                 }
-                GenerateChain((Vector2)transform.position, (Vector2)target.transform.position);
-                if (Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position) - lastdist) <=0.5f)
+                GenerateChain((Vector2)transform.position, targetpos);
+                if (Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position + target.GetComponent<EnemyHP>().grappleOffset) - lastdist) <=0.01f)
                 {
                     if(pressedjump && target!=closestenemy)
                     {
@@ -232,7 +242,7 @@ public class GrappleScript : MonoBehaviour
                     }
                     
                 }
-                lastdist= Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position);
+                lastdist= Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position + target.GetComponent<EnemyHP>().grappleOffset);
             }
 
             
@@ -263,7 +273,12 @@ public class GrappleScript : MonoBehaviour
                 grappletarget.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 grappletarget.transform.localScale= Vector3.one*0.5f;
             }
+            
             grappletarget.transform.position = closestgrapple.transform.position;
+            if (closestgrapple.GetComponent<EnemyHP>() != null)
+            {
+                grappletarget.transform.position += (Vector3)closestenemy.GetComponent<EnemyHP>().grappleOffset;
+            }
         }
         else
         {
@@ -291,7 +306,7 @@ public class GrappleScript : MonoBehaviour
                 enemytarget.GetComponent<SpriteRenderer>().sortingOrder = 2;
                 enemytarget.transform.localScale = Vector3.one * 0.5f;
             }
-            enemytarget.transform.position = closestenemy.transform.position;
+            enemytarget.transform.position = closestenemy.transform.position + (Vector3)closestenemy.GetComponent<EnemyHP>().grappleOffset;
         }
         else
         {

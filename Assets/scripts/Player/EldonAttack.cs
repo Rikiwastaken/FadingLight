@@ -101,19 +101,38 @@ public class EldonAttack : MonoBehaviour
     }
 
 
-    void Modeswitch()
+    public void Modeswitch()
     {
-        if(slayermode)
+        if(!GetComponent<ChainSawMode>().chainsawmode)
         {
-            slayermode = false;
-            GameObject.Find("slayertext").GetComponent<Image>().enabled = false;
-            GameObject.Find("eatertext").GetComponent<Image>().enabled = true;
+            if (slayermode)
+            {
+                slayermode = false;
+                GameObject.Find("slayertext").GetComponent<Image>().enabled = false;
+                GameObject.Find("eatertext").GetComponent<Image>().enabled = true;
+            }
+            else
+            {
+                slayermode = true;
+                GameObject.Find("slayertext").GetComponent<Image>().enabled = true;
+                GameObject.Find("eatertext").GetComponent<Image>().enabled = false;
+            }
         }
-        else
+    }
+
+    public void Modeswitch(bool modetoactivate)
+    {
+        if (modetoactivate)
         {
             slayermode = true;
             GameObject.Find("slayertext").GetComponent<Image>().enabled = true;
             GameObject.Find("eatertext").GetComponent<Image>().enabled = false;
+        }
+        else
+        {
+            slayermode = false;
+            GameObject.Find("slayertext").GetComponent<Image>().enabled = false;
+            GameObject.Find("eatertext").GetComponent<Image>().enabled = true;
         }
     }
 
@@ -139,10 +158,18 @@ public class EldonAttack : MonoBehaviour
         int damage = hpdamage;
         int energydamage =nrgdamage;
         float absorbrate = 3f / 10f;
+        float damagewithchainsaw = hpdamage;
+        float energydamagewithchainsaw = nrgdamage;
+        if (GetComponent<ChainSawMode>().chainsawmode)
+        {
+            damagewithchainsaw *= GetComponent<ChainSawMode>().chainsawdamageMultiplier;
+            energydamagewithchainsaw *= GetComponent<ChainSawMode>().chainsawdamageMultiplier;
+            absorbrate /= GetComponent<ChainSawMode>().chainsawdamageMultiplier;
+        }
         if (equipmentScript.equipedChainIndex!=-1)
         {
-            damage = (int)(damage * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
-            energydamage = (int)(energydamage * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
+            damage = (int)(damagewithchainsaw * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
+            energydamage = (int)(energydamagewithchainsaw * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
             absorbrate = absorbrate * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].AbsorbMultiplier;
         }
 

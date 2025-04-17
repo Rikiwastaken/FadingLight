@@ -41,12 +41,12 @@ public class WallUnstickingScript : MonoBehaviour
         }
         else
         {
-            foreach (Vector2 pos in notinthemur)
+            for (int i = 30; i < notinthemur.Count; i++)
             {
-                if(Physics2D.OverlapBoxAll(pos, originalBounds.size * 0.95f, 0f, wallLayer).Length==0)
+                if (Physics2D.OverlapBoxAll(notinthemur[i], originalBounds.size * 0.95f, 0f, wallLayer).Length==0)
                 {
                     Debug.Log("joueur sauvé");
-                    transform.position = pos;
+                    transform.position = notinthemur[i];
                 }
             }
             

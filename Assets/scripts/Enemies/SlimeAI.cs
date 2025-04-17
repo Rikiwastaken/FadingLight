@@ -40,7 +40,7 @@ public class SlimeAI : MonoBehaviour
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         rb2D = transform.GetComponent<Rigidbody2D>();
-        enemyHP = this.GetComponent<EnemyHP>().enemyhp;
+        enemyHP = GetComponent<EnemyHP>().enemyhp;
         tempenemyhp = enemyHP;
     }
 
@@ -178,13 +178,10 @@ public class SlimeAI : MonoBehaviour
             if (target.transform.position.x <= transform.position.x)
             {
                 GetComponent<SpriteRenderer>().flipX = false;
-                
-
             }
             else
             {
                 GetComponent<SpriteRenderer>().flipX = true;
-                
             }
         }
     }

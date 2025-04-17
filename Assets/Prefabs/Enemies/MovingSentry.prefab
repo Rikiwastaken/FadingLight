@@ -776,7 +776,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8, y: 0.75}
+  m_Size: {x: 0.9, y: 0.75}
   m_EdgeRadius: 0
 --- !u!114 &1806110475602329056
 MonoBehaviour:
@@ -812,6 +812,7 @@ MonoBehaviour:
   hacked: 0
   healthbar: {fileID: 4526496966787258727}
   targetted: 0
+  grappleOffset: {x: 0, y: -0.5}
 --- !u!95 &5458493380403203971
 Animator:
   serializedVersion: 7

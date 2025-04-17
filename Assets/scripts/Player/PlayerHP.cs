@@ -47,6 +47,11 @@ public class PlayerHP : MonoBehaviour
                 totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
             }
 
+            if (GetComponent<ChainSawMode>().chainsawmode)
+            {
+                totaldamagereduction *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
+            }
+
             if (damage - totaldamagereduction > 0f)
             {
                 damagetotake = (int)(damage - totaldamagereduction);
@@ -79,6 +84,11 @@ public class PlayerHP : MonoBehaviour
             if (equipmentScript.equipedPlateIndex != -1)
             {
                 totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
+            }
+
+            if (GetComponent<ChainSawMode>().chainsawmode)
+            {
+                totaldamagereduction *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
             }
 
             if (damage - totaldamagereduction > 0f)
@@ -124,6 +134,11 @@ public class PlayerHP : MonoBehaviour
                 totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
             }
 
+            if (GetComponent<ChainSawMode>().chainsawmode)
+            {
+                totaldamagereduction *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
+            }
+
             if (damage - totaldamagereduction > 0f)
             {
                 damagetotake = (int)(damage - totaldamagereduction);
@@ -152,6 +167,11 @@ public class PlayerHP : MonoBehaviour
             if (equipmentScript.equipedPlateIndex != -1)
             {
                 totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
+            }
+
+            if (GetComponent<ChainSawMode>().chainsawmode)
+            {
+                totaldamagereduction *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
             }
 
             if (damage - totaldamagereduction > 0f)

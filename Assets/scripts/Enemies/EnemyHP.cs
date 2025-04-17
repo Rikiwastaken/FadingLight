@@ -68,6 +68,7 @@ public class EnemyHP : MonoBehaviour
 
     private GadgetScript gadgetScript;
     private int hackinghpdraincounter;
+    public Vector2 grappleOffset;
 
     void Start()
     {

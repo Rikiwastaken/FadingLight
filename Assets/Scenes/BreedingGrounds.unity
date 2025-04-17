@@ -79062,6 +79062,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4071362280705829637, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+      propertyPath: EnergyPerSecond
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5919727951631986471, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_Name
       value: player
@@ -79789,7 +79793,7 @@ PrefabInstance:
       objectReference: {fileID: 446306728}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[1].parts.Array.data[0].movementtotrigger.Array.data[0].speed
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[1].parts.Array.data[1].movementtotrigger.Array.data[0].Actor
@@ -79865,7 +79869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[1].parts.Array.data[0].movementtotrigger.Array.data[0].wheretogo.x
-      value: 192
+      value: 185
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[1].parts.Array.data[0].movementtotrigger.Array.data[0].wheretogo.y
