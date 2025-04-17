@@ -105,7 +105,7 @@ public class EnemyHP : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(global.inbossfight && !isboss)
+        if((global.inbossfight || global.indialogue) && !isboss && enemyhp>0)
         {
             transform.position = start;
         }
@@ -306,6 +306,10 @@ public class EnemyHP : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(damage<0)
+        {
+            damage = 0;
+        }
         enemyhp-=damage;
         NRGcounter = 0;
         if (enemyNRG <= 0)
@@ -344,7 +348,20 @@ public class EnemyHP : MonoBehaviour
 
     public void TakeDamage(int damage, int energydamage)
     {
+        if (damage < 0)
+        {
+            damage = 0;
+        }
+        if (energydamage < 0)
+        {
+            energydamage = 0;
+        }
         enemyhp -= damage;
+        enemyNRG -= energydamage;
+        if (enemyNRG < 0)
+        {
+            enemyNRG = 0;
+        }
         if (isboss && !global.inbossfight)
         {
             return;
@@ -381,18 +398,27 @@ public class EnemyHP : MonoBehaviour
 
         }
         
-        enemyNRG -= energydamage;
-        if(enemyNRG < 0)
-        {
-            enemyNRG = 0;
-        }
+        
         NRGcounter = 0;
         
     }
 
     public void TakeDamage(int damage, int energydamage, Vector2 Force)
     {
+        if (damage < 0)
+        {
+            damage = 0;
+        }
+        if (energydamage < 0)
+        {
+            energydamage = 0;
+        }
         enemyhp -= damage;
+        enemyNRG -= energydamage;
+        if (enemyNRG < 0)
+        {
+            enemyNRG = 0;
+        }
         if (isboss && !global.inbossfight)
         {
             return;
@@ -439,12 +465,6 @@ public class EnemyHP : MonoBehaviour
                 GetComponent<Rigidbody2D>().AddForce(Force, ForceMode2D.Impulse);
             }
             
-        }
-        
-        enemyNRG -= energydamage;
-        if (enemyNRG < 0)
-        {
-            enemyNRG = 0;
         }
         NRGcounter = 0;
         

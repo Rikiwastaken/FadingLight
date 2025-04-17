@@ -27,6 +27,10 @@ public class PlayerHP : MonoBehaviour
 
     private Global global;
 
+    public int MetalScrap; //number of Metal Scraps;
+    public int CorePieces; // number of Core Pieces
+    public int ElectronicComponents; // number of Electronic Components
+
     // Start is called before the first frame update
     void Start()
     {
@@ -230,9 +234,9 @@ public class PlayerHP : MonoBehaviour
             GetComponent<PlayerMovement>().rolling = false;
         }
 
-        if (GetComponent<Rigidbody2D>().position.y<-20)
+        if (GetComponent<Rigidbody2D>().position.y<-50)
         {
-            Eldonhp -=0.1f;
+            Eldonhp -=0.05f* Eldonmaxhp;
         }
     }
 

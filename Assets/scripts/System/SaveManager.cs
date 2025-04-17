@@ -26,6 +26,9 @@ public class SaveManager : MonoBehaviour
         public List<bool> WorldFlags; //flags for progession
         public int Shards; //Number of Crystal Shards picked up
         public int AugmentSlots;
+        public int MetalScrap; //number of Metal Scraps;
+        public int CorePieces; // number of Core Pieces
+        public int ElectronicComponents; // number of Electronic Components
     }
 
     public Save save;
@@ -135,7 +138,9 @@ public class SaveManager : MonoBehaviour
         }
         save.Shards = 0;
         save.AugmentSlots = 0;
-
+        save.MetalScrap = 0;
+        save.CorePieces = 0;
+        save.ElectronicComponents = 0;
 
     }
 
@@ -144,6 +149,7 @@ public class SaveManager : MonoBehaviour
         EquipmentScript equipmentScript = FindAnyObjectByType<EquipmentScript>();
         GadgetScript gadgetscript = FindAnyObjectByType<GadgetScript>();
         AugmentsScript augmentsScript = FindAnyObjectByType<AugmentsScript>();
+        PlayerHP playerHP = FindAnyObjectByType<PlayerHP>();
         save = new Save();
         save.elapsedseconds = 0;
         save.slotID = CurrentSlot;
@@ -212,6 +218,9 @@ public class SaveManager : MonoBehaviour
         }
         save.Shards = augmentsScript.numberofShardsPickedUp;
         save.AugmentSlots = augmentsScript.numberofSlotexpansionspickedup;
+        save.MetalScrap = playerHP.MetalScrap;
+        save.CorePieces = playerHP.CorePieces;
+        save.ElectronicComponents = playerHP.ElectronicComponents;
     }
 
     public void LoadSave()
@@ -234,6 +243,7 @@ public class SaveManager : MonoBehaviour
         EquipmentScript equipmentScript = FindAnyObjectByType<EquipmentScript>();
         AugmentsScript augmentsScript = FindAnyObjectByType<AugmentsScript>();
         GadgetScript gadgetScript = FindAnyObjectByType<GadgetScript>();
+        PlayerHP playerHP = FindAnyObjectByType<PlayerHP>();
 
         //    public int slotID; //slot of the save
         //public int elapsedseconds; //number of seconds elapsed since creation of the save
@@ -291,6 +301,9 @@ public class SaveManager : MonoBehaviour
 
         augmentsScript.numberofShardsPickedUp = save.Shards;
         augmentsScript.numberofSlotexpansionspickedup = save.AugmentSlots;
+        playerHP.MetalScrap = save.MetalScrap;
+        playerHP.CorePieces = save.CorePieces;
+        playerHP.ElectronicComponents = save.ElectronicComponents;
     }
 
     public List<string> GetLastSave(int slotID)

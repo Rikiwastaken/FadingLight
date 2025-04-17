@@ -16,6 +16,11 @@ public class InventoryScript : MonoBehaviour
         SetPage(0);
     }
 
+    private void Update()
+    {
+        FindAnyObjectByType<Global>().ininventory = true;
+    }
+
     public void SetPage(int pageid)
     {
         currentpageid=pageid;

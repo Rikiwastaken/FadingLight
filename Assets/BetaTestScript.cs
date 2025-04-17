@@ -32,7 +32,7 @@ public class BetaTestScript : MonoBehaviour
                 direction = -1;
             }
             Npressed = true;
-            Instantiate(EnemyList[activeindex], transform.position + new Vector3(5f,0f,0f)*direction,Quaternion.identity);
+            Instantiate(EnemyList[activeindex], transform.position + new Vector3(5f,0f,0f)* direction+new Vector3(0f, 0.5f, 0f), Quaternion.identity);
         }
 
         if(!Input.GetKeyDown(KeyCode.N))

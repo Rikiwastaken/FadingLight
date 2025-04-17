@@ -53,6 +53,9 @@ public class EquipmentScript : MonoBehaviour
     private int healcd;
 
     public Sprite EnergyShard;
+    public Sprite MetalScrapSprite;
+    public Sprite CorePieceSprite;
+    public Sprite ElecComponentSprite;
 
     public GameObject gotitempopupprefab;
 
@@ -176,9 +179,9 @@ public class EquipmentScript : MonoBehaviour
     }
 
 
-    public void ReceiveItem(int Type, int ID)
+    public void ReceiveItem(int Type, int ID, int quantity)
     {
-        switch(Type) //0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget, 5 CrystalShard
+        switch(Type) // 0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget, 5 Crystal Shard, 6 Metal Scraps, 7 Core Pieces, 8 Electronic Components
         {
             case 0:
                 if(Chainslist.Count > ID)
@@ -250,6 +253,21 @@ public class EquipmentScript : MonoBehaviour
                 augmentscript.numberofShardsPickedUp++;
                 GameObject ItemShard = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
                 ItemShard.GetComponent<GotItemPopup>().InitiatePopup(EnergyShard, "+5 Max HP, +1 Max Energy", "Crystal Shard");
+                break;
+            case 6:
+                FindAnyObjectByType<PlayerHP>().MetalScrap += quantity;
+                ItemShard = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                ItemShard.GetComponent<GotItemPopup>().InitiatePopup(MetalScrapSprite, "+"+quantity+" Metal Scrap", "Material");
+                break;
+            case 7:
+                FindAnyObjectByType<PlayerHP>().CorePieces += quantity;
+                ItemShard = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                ItemShard.GetComponent<GotItemPopup>().InitiatePopup(CorePieceSprite, "+" + quantity + " Core Pieces", "Material");
+                break;
+            case 8:
+                FindAnyObjectByType<PlayerHP>().ElectronicComponents += quantity;
+                ItemShard = Instantiate(gotitempopupprefab, GameObject.Find("Canvas").transform);
+                ItemShard.GetComponent<GotItemPopup>().InitiatePopup(ElecComponentSprite, "+" + quantity + " Electronic Components", "Material");
                 break;
         }
     }

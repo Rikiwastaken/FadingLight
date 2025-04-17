@@ -102,6 +102,10 @@ public class MovingSentryAI : MonoBehaviour
 
             managehitstun();
         }
+        else
+        {
+            GetComponent<Animator>().speed = 1f;
+        }
 
         
         

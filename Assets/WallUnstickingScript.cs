@@ -43,13 +43,15 @@ public class WallUnstickingScript : MonoBehaviour
         {
             for (int i = 30; i < notinthemur.Count; i++)
             {
-                if (Physics2D.OverlapBoxAll(notinthemur[i], originalBounds.size * 0.95f, 0f, wallLayer).Length==0)
+                if (Physics2D.OverlapBoxAll(notinthemur[i], originalBounds.size * 0.95f, 0f, wallLayer).Length==0 && notinthemur[i]!=Vector2.zero)
                 {
-                    Debug.Log("joueur sauvé");
+                    Debug.Log(transform.name+" sauvé");
                     transform.position = notinthemur[i];
+                    return;
                 }
             }
-            
+            Debug.LogWarning(transform.name + " pas sauvé");
+
         }
     }
 }

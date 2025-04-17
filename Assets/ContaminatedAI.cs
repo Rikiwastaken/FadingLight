@@ -129,13 +129,14 @@ public class ContaminatedAI : MonoBehaviour
 
     private void ManageMovement()
     {
-        if(timeunabletomovecounter>0)
-        {
-            return;
-        }
-        if(destination!=0)
+
+        if(destination!=0 && timeunabletomovecounter > 0)
         {
             GetComponent<Rigidbody2D>().velocityX=(destination-transform.position.x)/Mathf.Abs(destination - transform.position.x)*movespeed;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocityX = GetComponent<Rigidbody2D>().velocityX * 0.9991f;
         }
         if(Mathf.Abs(destination - transform.position.x)<=1 || destination==0)
         {

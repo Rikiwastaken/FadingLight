@@ -281,6 +281,10 @@ public class EldonAttack : MonoBehaviour
                     }
                 }
             }
+            else if(enemy.GetComponent<Interruptor>())
+            {
+                enemy.GetComponent<Interruptor>().InterractWithInterruptor();
+            }
 
 
         }
