@@ -450,6 +450,7 @@ MonoBehaviour:
   Augmentlist:
   - name: Durability Augment
     description: +20 Max Health.
+    ID: 0
     attributeID: 0
     valueincr: 50
     mult: 0
@@ -458,6 +459,7 @@ MonoBehaviour:
     locked: 0
   - name: Battery Augment
     description: +20 Max Energy.
+    ID: 1
     attributeID: 1
     valueincr: 10
     mult: 0
@@ -466,6 +468,7 @@ MonoBehaviour:
     locked: 0
   - name: Sharpness Augment
     description: Increase Damage by 10
+    ID: 2
     attributeID: 2
     valueincr: 10
     mult: 0
@@ -474,6 +477,7 @@ MonoBehaviour:
     locked: 0
   - name: Agressivity Augment
     description: Increase Damage by 110%.
+    ID: 2
     attributeID: 3
     valueincr: 1.1
     mult: 1
@@ -482,6 +486,7 @@ MonoBehaviour:
     locked: 0
   - name: Plate Augment
     description: Increase Defense by 5
+    ID: 4
     attributeID: 4
     valueincr: 5
     mult: 0
@@ -490,23 +495,26 @@ MonoBehaviour:
     locked: 0
   - name: Juggernaut Augment
     description: Increase Defense by 7%
-    attributeID: 5
+    ID: 5
+    attributeID: 4
     valueincr: 1.07
     mult: 1
     image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
     SlotsUsed: 4
     locked: 0
-  - name: Rien du tout hein
-    description: Bro this does nothing
-    attributeID: 6
-    valueincr: 0
+  - name: Absorption Augment
+    description: Increase energy basic attack absorption rate by 25%.
+    ID: 6
+    attributeID: -1
+    valueincr: 1.25
     mult: 0
-    image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
+    image: {fileID: 21300000, guid: afc16a212838f7e4f9f55c152a923df5, type: 3}
     SlotsUsed: 9
     locked: 0
   - name: Drone Efficiency Augment
     description: Reduce Drone Ability cooldown by 20%
-    attributeID: 7
+    ID: 7
+    attributeID: -1
     valueincr: 0
     mult: 0
     image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
@@ -514,7 +522,8 @@ MonoBehaviour:
     locked: 0
   - name: Gadget Efficiency Augment
     description: Reduce Gadget cooldown by 20%
-    attributeID: 8
+    ID: 8
+    attributeID: -1
     valueincr: 0
     mult: 0
     image: {fileID: 21300000, guid: fd649757aa38f2b4692697d2c1fbf94e, type: 3}
@@ -522,7 +531,8 @@ MonoBehaviour:
     locked: 0
   - name: Rocket Jump Augment
     description: Allows Eldon to jump when in range of grenade explosions.
-    attributeID: 9
+    ID: 9
+    attributeID: -1
     valueincr: 0
     mult: 0
     image: {fileID: 21300000, guid: a4165faefc4273c4cab101acfa166949, type: 3}
@@ -530,7 +540,8 @@ MonoBehaviour:
     locked: 0
   - name: Dash Grenade Augment
     description: Drops a grenade whenever Eldon dashes.
-    attributeID: 10
+    ID: 10
+    attributeID: -1
     valueincr: 0
     mult: 0
     image: {fileID: 21300000, guid: b4b55ee2fb8270e47aa9357ddc9c3a4d, type: 3}
@@ -538,11 +549,57 @@ MonoBehaviour:
     locked: 0
   - name: Heavy Liting Augment
     description: Allows Eldon to pull heavy enemies
-    attributeID: 11
+    ID: 11
+    attributeID: -1
     valueincr: 0
     mult: 0
     image: {fileID: 21300000, guid: 537090b4602d7d94ebbccab722efec4b, type: 3}
     SlotsUsed: 1
+    locked: 0
+  - name: Leech Augment
+    description: Heals Eldon 1% of basic attack damage dealt.
+    ID: 12
+    attributeID: -1
+    valueincr: 0.01
+    mult: 0
+    image: {fileID: 21300000, guid: 532310ee10e80a7409ed8357bdeb90c4, type: 3}
+    SlotsUsed: 3
+    locked: 0
+  - name: Electric Shield Augment
+    description: Increase defense by 20% when above 80% energy.
+    ID: 13
+    attributeID: -1
+    valueincr: 1.2
+    mult: 0
+    image: {fileID: 21300000, guid: afc16a212838f7e4f9f55c152a923df5, type: 3}
+    SlotsUsed: 2
+    locked: 0
+  - name: Specialist Augment
+    description: Increase Gadget and drone damage by 20%.
+    ID: 14
+    attributeID: -1
+    valueincr: 1.2
+    mult: 0
+    image: {fileID: 21300000, guid: 4554c8d9da2a05d4bbc1f24bd344cd4b, type: 3}
+    SlotsUsed: 3
+    locked: 0
+  - name: Overclocking Augment
+    description: Increase Chainsaw mode energy cost and effect by 50%.
+    ID: 15
+    attributeID: -1
+    valueincr: 1.5
+    mult: 0
+    image: {fileID: 21300000, guid: 4554c8d9da2a05d4bbc1f24bd344cd4b, type: 3}
+    SlotsUsed: 3
+    locked: 0
+  - name: Executioner Augment
+    description: Fully heals Eldon when he realises an execution.
+    ID: 16
+    attributeID: -1
+    valueincr: 0
+    mult: 0
+    image: {fileID: 21300000, guid: dafa6ca8039f6de4c909bbcd68c48720, type: 3}
+    SlotsUsed: 3
     locked: 0
   EquipedAugments: 000000000000000000000000000000000000
   Basestats:
@@ -885,7 +942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251d4dd209158794080ea8ef9779530c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnergyPerSecond: 2
+  EnergyPerSecond: 4
   chainsawmode: 0
   chainsawdamageMultiplier: 2
   chainsawdefenseMultiplier: 1.1

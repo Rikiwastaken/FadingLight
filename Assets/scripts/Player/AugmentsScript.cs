@@ -12,7 +12,8 @@ public class AugmentsScript : MonoBehaviour
     {
         public string name;
         public string description;
-        public int attributeID; //0 maxHP, 1 maxNRG, 2 Damage, 3 Damage, 4 DamageReduction, 5 JumpHeight, 6 Speed, 7 Special
+        public int ID;
+        public int attributeID; //0 maxHP, 1 maxNRG, 2 Damage, 3 Damage, 4 DamageReduction, 5 JumpHeight, 6 Speed, 7 IncreaseMaxSlots
         public float valueincr;
         public bool mult; //if true, multiplicative, else additive
         public Sprite image;

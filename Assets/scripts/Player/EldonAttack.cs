@@ -165,12 +165,22 @@ public class EldonAttack : MonoBehaviour
             damagewithchainsaw *= GetComponent<ChainSawMode>().chainsawdamageMultiplier;
             energydamagewithchainsaw *= GetComponent<ChainSawMode>().chainsawdamageMultiplier;
             absorbrate /= GetComponent<ChainSawMode>().chainsawdamageMultiplier;
+            if (GetComponent<AugmentsScript>().EquipedAugments[15])
+            {
+                damagewithchainsaw *= GetComponent<AugmentsScript>().Augmentlist[15].valueincr;
+                energydamagewithchainsaw *= GetComponent<AugmentsScript>().Augmentlist[15].valueincr;
+                absorbrate /= GetComponent<AugmentsScript>().Augmentlist[15].valueincr;
+            }
         }
         if (equipmentScript.equipedChainIndex!=-1)
         {
             damage = (int)(damagewithchainsaw * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
             energydamage = (int)(energydamagewithchainsaw * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].DamageMultiplier);
             absorbrate = absorbrate * equipmentScript.Chainslist[equipmentScript.equipedChainIndex].AbsorbMultiplier;
+            if(GetComponent<AugmentsScript>().EquipedAugments[6])
+            {
+                absorbrate*= GetComponent<AugmentsScript>().Augmentlist[6].valueincr;
+            }
         }
 
         foreach (Collider2D enemy in hitenemies)
@@ -190,14 +200,30 @@ public class EldonAttack : MonoBehaviour
                     {
                         GetComponent<PlayerHP>().EldonNRG = GetComponent<PlayerHP>().EldonmaxNRG;
                     }
+                    if (GetComponent<AugmentsScript>().EquipedAugments[12])
+                    {
+                        GetComponent<PlayerHP>().Eldonhp += (int)(damage * GetComponent<AugmentsScript>().Augmentlist[12].valueincr);
+                        if(GetComponent<PlayerHP>().Eldonhp> GetComponent<PlayerHP>().Eldonmaxhp)
+                        {
+                            GetComponent<PlayerHP>().Eldonhp = GetComponent<PlayerHP>().Eldonmaxhp;
+                        }
+                    }
                 }
                 else
                 {
-                    enemyHP.TakeDamage(damage*1/10, energydamage);
+                    enemyHP.TakeDamage((int)(damage * 0.1f), energydamage);
                     GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate*2;
                     if (GetComponent<PlayerHP>().EldonNRG > GetComponent<PlayerHP>().EldonmaxNRG)
                     {
                         GetComponent<PlayerHP>().EldonNRG = GetComponent<PlayerHP>().EldonmaxNRG;
+                    }
+                    if (GetComponent<AugmentsScript>().EquipedAugments[12])
+                    {
+                        GetComponent<PlayerHP>().Eldonhp += (int)(damage * 0.1f* GetComponent<AugmentsScript>().Augmentlist[12].valueincr);
+                        if (GetComponent<PlayerHP>().Eldonhp > GetComponent<PlayerHP>().Eldonmaxhp)
+                        {
+                            GetComponent<PlayerHP>().Eldonhp = GetComponent<PlayerHP>().Eldonmaxhp;
+                        }
                     }
                 }
                 if (enemyHP.enemyhp > 0)
@@ -228,14 +254,30 @@ public class EldonAttack : MonoBehaviour
                     {
                         GetComponent<PlayerHP>().EldonNRG = GetComponent<PlayerHP>().EldonmaxNRG;
                     }
+                    if (GetComponent<AugmentsScript>().EquipedAugments[12])
+                    {
+                        GetComponent<PlayerHP>().Eldonhp += (int)(damage * 0.01f);
+                        if (GetComponent<PlayerHP>().Eldonhp > GetComponent<PlayerHP>().Eldonmaxhp)
+                        {
+                            GetComponent<PlayerHP>().Eldonhp = GetComponent<PlayerHP>().Eldonmaxhp;
+                        }
+                    }
                 }
                 else
                 {
-                    enemyHP.TakeDamage(damage * 1 / 10, energydamage);
+                    enemyHP.TakeDamage((int)(damage * 0.1f), energydamage);
                     GetComponent<PlayerHP>().EldonNRG += energydamage * absorbrate * 2;
                     if (GetComponent<PlayerHP>().EldonNRG > GetComponent<PlayerHP>().EldonmaxNRG)
                     {
                         GetComponent<PlayerHP>().EldonNRG = GetComponent<PlayerHP>().EldonmaxNRG;
+                    }
+                }
+                if (GetComponent<AugmentsScript>().EquipedAugments[12])
+                {
+                    GetComponent<PlayerHP>().Eldonhp += (int)(damage * 0.1f * 0.01f);
+                    if (GetComponent<PlayerHP>().Eldonhp > GetComponent<PlayerHP>().Eldonmaxhp)
+                    {
+                        GetComponent<PlayerHP>().Eldonhp = GetComponent<PlayerHP>().Eldonmaxhp;
                     }
                 }
             }

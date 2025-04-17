@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
+using static GadgetScript;
 using static UnityEngine.UI.Image;
 
 public class SupportDrone : MonoBehaviour
@@ -213,7 +214,12 @@ public class SupportDrone : MonoBehaviour
             {
                 GameObject newrocket = Instantiate(drones[ActiveDroneID].Summon, transform.position, Quaternion.identity);
                 newrocket.GetComponent<RocketScript>().target = target;
-                newrocket.GetComponent<RocketScript>().damage = (int)(augmentsscript.EquipedStats.Damage*drones[ActiveDroneID].Effect);
+                float dronedamage = drones[ActiveDroneID].Effect;
+                if (augmentsscript.EquipedAugments[14])
+                {
+                    dronedamage *= augmentsscript.Augmentlist[14].valueincr;
+                }
+                newrocket.GetComponent<RocketScript>().damage = (int)(augmentsscript.EquipedStats.Damage* dronedamage);
                 playerhp.EldonNRG -= drones[ActiveDroneID].RequiredEnergy;
                 dronecd = (int)(CDmultiplier*drones[ActiveDroneID].cooldown / Time.deltaTime);
                 newrocket.transform.localScale = Vector3.one;
@@ -241,8 +247,13 @@ public class SupportDrone : MonoBehaviour
                 Destroy(leech.gameObject);
                 return;
             }
-            leech.target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect));
-            playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect;
+            float dronedamage = drones[ActiveDroneID].Effect;
+            if (augmentsscript.EquipedAugments[14])
+            {
+                dronedamage *= augmentsscript.Augmentlist[14].valueincr;
+            }
+            leech.target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * dronedamage));
+            playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * dronedamage;
             if (playerhp.EldonNRG > playerhp.EldonmaxNRG)
             {
                 playerhp.EldonNRG = playerhp.EldonmaxNRG;
@@ -278,8 +289,13 @@ public class SupportDrone : MonoBehaviour
                 newray.GetComponent<LeechDroneScript>().isleech = true;
                 newray.GetComponent<LeechDroneScript>().launcher = transform;
                 newray.GetComponent<LeechDroneScript>().detectionrange = detectdist;
-                target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect));
-                playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * drones[ActiveDroneID].Effect;
+                float dronedamage = drones[ActiveDroneID].Effect;
+                if (augmentsscript.EquipedAugments[14])
+                {
+                    dronedamage *= augmentsscript.Augmentlist[14].valueincr;
+                }
+                target.GetComponent<EnemyHP>().TakeDamage(0, (int)(augmentsscript.EquipedStats.NRJDamage * dronedamage));
+                playerhp.EldonNRG += augmentsscript.EquipedStats.NRJDamage * dronedamage;
                 if (playerhp.EldonNRG > playerhp.EldonmaxNRG)
                 {
                     playerhp.EldonNRG = playerhp.EldonmaxNRG;
@@ -309,8 +325,13 @@ public class SupportDrone : MonoBehaviour
                 Destroy(leech.gameObject);
                 return;
             }
-            leech.target.GetComponent<EnemyHP>().TakeDamage((int)(augmentsscript.EquipedStats.Damage * drones[ActiveDroneID].Effect),0);
-            playerhp.Eldonhp += augmentsscript.EquipedStats.Damage * drones[ActiveDroneID].Effect;
+            float dronedamage = drones[ActiveDroneID].Effect;
+            if (augmentsscript.EquipedAugments[14])
+            {
+                dronedamage *= augmentsscript.Augmentlist[14].valueincr;
+            }
+            leech.target.GetComponent<EnemyHP>().TakeDamage((int)(augmentsscript.EquipedStats.Damage * dronedamage),0);
+            playerhp.Eldonhp += augmentsscript.EquipedStats.Damage * dronedamage;
             if (playerhp.Eldonhp > playerhp.Eldonmaxhp)
             {
                 playerhp.Eldonhp = playerhp.Eldonmaxhp;
@@ -345,8 +366,13 @@ public class SupportDrone : MonoBehaviour
                 newray.GetComponent<LeechDroneScript>().launcher = transform;
                 newray.GetComponent<SpriteRenderer>().color = new UnityEngine.Color(0f,1f,0f);
                 newray.GetComponent<LeechDroneScript>().detectionrange = detectdist;
-                leech.target.GetComponent<EnemyHP>().TakeDamage((int)(augmentsscript.EquipedStats.Damage * drones[ActiveDroneID].Effect), 0);
-                playerhp.Eldonhp += augmentsscript.EquipedStats.Damage * drones[ActiveDroneID].Effect;
+                float dronedamage = drones[ActiveDroneID].Effect;
+                if (augmentsscript.EquipedAugments[14])
+                {
+                    dronedamage *= augmentsscript.Augmentlist[14].valueincr;
+                }
+                leech.target.GetComponent<EnemyHP>().TakeDamage((int)(augmentsscript.EquipedStats.Damage * dronedamage), 0);
+                playerhp.Eldonhp += augmentsscript.EquipedStats.Damage * dronedamage;
                 if (playerhp.Eldonhp > playerhp.Eldonmaxhp)
                 {
                     playerhp.Eldonhp = playerhp.Eldonmaxhp;

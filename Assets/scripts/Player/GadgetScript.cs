@@ -187,6 +187,11 @@ public class GadgetScript : MonoBehaviour
         GrenadeScript GrenadeScript = projectile.GetComponent<GrenadeScript>();
         TurretScript turretScript = projectile.GetComponent<TurretScript>();
         MaceGadget macegadget = null;
+        float gadgetdamage = gadget.DamageMultiplier;
+        if (augmentsScript.EquipedAugments[14])
+        {
+            gadgetdamage*= augmentsScript.Augmentlist[14].valueincr;
+        }
         if (projectile.transform.childCount > 0)
         {
             if (projectile.transform.GetChild(0).GetComponent<MaceGadget>())
@@ -196,15 +201,15 @@ public class GadgetScript : MonoBehaviour
         }
         if (bulletScript!=null)
         {
-            bulletScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
-            bulletScript.EnergyDamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
+            bulletScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadgetdamage);
+            bulletScript.EnergyDamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadgetdamage);
             bulletScript.direction = direction;
             bulletScript.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
         else if (rocketScript != null)
         {
-            rocketScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
-            rocketScript.Energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
+            rocketScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadgetdamage);
+            rocketScript.Energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadgetdamage);
             rocketScript.basedirection = direction;
             rocketScript.transform.localScale = new Vector3(1f, 1f, 1f);
         }
@@ -212,11 +217,11 @@ public class GadgetScript : MonoBehaviour
         {
             if(gadget.ID ==4)
             {
-                GrenadeScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
+                GrenadeScript.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadgetdamage);
             }
             else if(gadget.ID ==3)
             {
-                GrenadeScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
+                GrenadeScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadgetdamage);
             }
             Vector3 forcetoapply = new Vector3(direction * 5f, 1f, 0f)*10f;
             if (wallinfront)
@@ -234,8 +239,8 @@ public class GadgetScript : MonoBehaviour
                 forcetoapply = new Vector3(0f, 0f, 0f);
             }
             turretScript.transform.localScale = new Vector3(direction * 1.75f, 1.75f, 1.75f);
-            turretScript.damage= (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
-            turretScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadget.DamageMultiplier);
+            turretScript.damage= (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadgetdamage);
+            turretScript.energydamage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.NRJDamage * gadgetdamage);
             turretScript.GetComponent<Rigidbody2D>().AddForce(forcetoapply, ForceMode2D.Impulse);
         }
         else if(macegadget != null)
@@ -243,7 +248,7 @@ public class GadgetScript : MonoBehaviour
             
             macegadget.transform.parent.SetParent(transform);
             macegadget.transform.parent.localPosition = GetComponent<Collider2D>().offset;
-            macegadget.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadget.DamageMultiplier);
+            macegadget.damage = (int)Mathf.Round(GetComponent<AugmentsScript>().EquipedStats.Damage * gadgetdamage);
 
         }
     }

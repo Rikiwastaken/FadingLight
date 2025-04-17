@@ -30,7 +30,12 @@ public class ChainSawMode : MonoBehaviour
         }
         if (chainsawmode)
         {
-            GetComponent<PlayerHP>().EldonNRG-=EnergyPerSecond*Time.fixedDeltaTime;
+            float costmultiplier = 1f;
+            if (GetComponent<AugmentsScript>().EquipedAugments[15])
+            {
+                costmultiplier*= GetComponent<AugmentsScript>().Augmentlist[15].valueincr;
+            }
+            GetComponent<PlayerHP>().EldonNRG-=EnergyPerSecond*Time.fixedDeltaTime*costmultiplier;
             if(GetComponent<PlayerHP>().EldonNRG<=0)
             {
                 GetComponent<PlayerHP>().EldonNRG = 0;

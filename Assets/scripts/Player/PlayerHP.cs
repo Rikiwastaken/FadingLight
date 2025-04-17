@@ -36,21 +36,30 @@ public class PlayerHP : MonoBehaviour
         
     }
 
+
+    private float calculatedefense()
+    {
+        float defense = damagereduction;
+        if (equipmentScript.equipedPlateIndex != -1)
+        {
+            defense += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
+        }
+        if (GetComponent<ChainSawMode>().chainsawmode)
+        {
+            defense *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
+        }
+        if (GetComponent<AugmentsScript>().EquipedAugments[13] && EldonNRG>=EldonmaxNRG*0.8f)
+        {
+            defense *= GetComponent<AugmentsScript>().Augmentlist[13].valueincr;
+        }
+        return defense;
+    }
     public void TakeDamage(float damage, Vector2 velchg, Vector2 ForceApplied)
     {
         if (!inv)
         {
             int damagetotake = 1;
-            float totaldamagereduction = damagereduction;
-            if (equipmentScript.equipedPlateIndex != -1)
-            {
-                totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
-            }
-
-            if (GetComponent<ChainSawMode>().chainsawmode)
-            {
-                totaldamagereduction *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
-            }
+            float totaldamagereduction = calculatedefense();
 
             if (damage - totaldamagereduction > 0f)
             {
@@ -80,16 +89,7 @@ public class PlayerHP : MonoBehaviour
         {
             int damagetotake = 1;
             int energydamagetotake = 1;
-            float totaldamagereduction = damagereduction;
-            if (equipmentScript.equipedPlateIndex != -1)
-            {
-                totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
-            }
-
-            if (GetComponent<ChainSawMode>().chainsawmode)
-            {
-                totaldamagereduction *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
-            }
+            float totaldamagereduction = calculatedefense();
 
             if (damage - totaldamagereduction > 0f)
             {
@@ -128,16 +128,7 @@ public class PlayerHP : MonoBehaviour
         {
             int damagetotake = 1;
             int energydamagetotake = 1;
-            float totaldamagereduction = damagereduction;
-            if (equipmentScript.equipedPlateIndex != -1)
-            {
-                totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
-            }
-
-            if (GetComponent<ChainSawMode>().chainsawmode)
-            {
-                totaldamagereduction *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
-            }
+            float totaldamagereduction = calculatedefense();
 
             if (damage - totaldamagereduction > 0f)
             {
@@ -163,16 +154,7 @@ public class PlayerHP : MonoBehaviour
         if (!inv)
         {
             int damagetotake = 1;
-            float totaldamagereduction = damagereduction;
-            if (equipmentScript.equipedPlateIndex != -1)
-            {
-                totaldamagereduction += equipmentScript.Platelist[equipmentScript.equipedPlateIndex].Defense;
-            }
-
-            if (GetComponent<ChainSawMode>().chainsawmode)
-            {
-                totaldamagereduction *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
-            }
+            float totaldamagereduction = calculatedefense();
 
             if (damage - totaldamagereduction > 0f)
             {

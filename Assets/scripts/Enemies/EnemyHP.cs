@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public class EnemyHP : MonoBehaviour
@@ -217,8 +218,6 @@ public class EnemyHP : MonoBehaviour
             NRGcounter = 0;
         }
 
-        //temporary execution
-
        
 
         //update of the healthbar
@@ -294,6 +293,12 @@ public class EnemyHP : MonoBehaviour
                 enemyNRG = enemymaxNRG;
                 execution = false;
                 enemyanim.SetBool("Stun", false);
+
+                if (FindAnyObjectByType<AugmentsScript>().EquipedAugments[16])
+                {
+                    FindAnyObjectByType<PlayerHP>().Eldonhp = FindAnyObjectByType<PlayerHP>().Eldonmaxhp;
+                }
+
                 return;
             }
         }
@@ -318,6 +323,10 @@ public class EnemyHP : MonoBehaviour
                 }
                 else
                 {
+                    if (FindAnyObjectByType<AugmentsScript>().EquipedAugments[16])
+                    {
+                        FindAnyObjectByType<PlayerHP>().Eldonhp = FindAnyObjectByType<PlayerHP>().Eldonmaxhp;
+                    }
                     enemyhp = 0;
                 }
 
@@ -355,6 +364,10 @@ public class EnemyHP : MonoBehaviour
                 }
                 else
                 {
+                    if (FindAnyObjectByType<AugmentsScript>().EquipedAugments[16])
+                    {
+                        FindAnyObjectByType<PlayerHP>().Eldonhp = FindAnyObjectByType<PlayerHP>().Eldonmaxhp;
+                    }
                     enemyhp = 0;
                 }
 
@@ -399,6 +412,10 @@ public class EnemyHP : MonoBehaviour
                 }
                 else
                 {
+                    if (FindAnyObjectByType<AugmentsScript>().EquipedAugments[16])
+                    {
+                        FindAnyObjectByType<PlayerHP>().Eldonhp = FindAnyObjectByType<PlayerHP>().Eldonmaxhp;
+                    }
                     enemyhp = 0;
                 }
 
