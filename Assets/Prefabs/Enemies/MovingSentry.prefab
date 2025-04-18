@@ -873,10 +873,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyhp: 0
-  enemymaxhp: 350
+  enemymaxhp: 250
   rez: 0
   enemyNRG: 0
-  enemymaxNRG: 200
+  enemymaxNRG: 150
   NRGdelay: 10
   NRGrechargerate: 1
   execution: 0

@@ -702,7 +702,7 @@ MonoBehaviour:
   - name: Sucker Chain
     description: Sucker Chain
     DamageMultiplier: 0.01
-    AbsorbMultiplier: 100000
+    AbsorbMultiplier: 10000000
     ID: 8
     image: {fileID: 21300000, guid: bee2d4c1107596f4b8fe9a39daae3a3f, type: 3}
     locked: 0
@@ -769,9 +769,9 @@ MonoBehaviour:
   drone1: {fileID: 5291592748213458889}
   drone2: {fileID: 3697768636770411347}
   EnergyShard: {fileID: 0}
-  MetalScrapSprite: {fileID: 0}
-  CorePieceSprite: {fileID: 0}
-  ElecComponentSprite: {fileID: 0}
+  MetalScrapSprite: {fileID: 21300000, guid: 577066c636c631148b4950027b490dd3, type: 3}
+  CorePieceSprite: {fileID: 21300000, guid: 7c55cd9daf9ddb744bf286310a44b10d, type: 3}
+  ElecComponentSprite: {fileID: 21300000, guid: a21274c724255c449950e94023672250, type: 3}
   gotitempopupprefab: {fileID: 6175682124425559733, guid: b87792eefe96a2e40b4460d898f573cf, type: 3}
 --- !u!114 &189450580446498757
 MonoBehaviour:

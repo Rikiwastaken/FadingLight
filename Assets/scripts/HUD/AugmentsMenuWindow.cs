@@ -198,12 +198,12 @@ public class AugmentsMenuWindow : MonoBehaviour
             if(Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].locked)
             {
                 effecttext.text = "Undiscovered Augment.";
-                necessaryslots.text = "Necessary slots : ?";
+                necessaryslots.text = "Necessary slots : ?\nFree slots : "+(augmentscript.EquipedStats.MaxSlots- augmentscript.EquipedStats.EquipedSlots)+"\nMax Slots : "+ augmentscript.EquipedStats.MaxSlots;
             }
             else
             {
-                effecttext.text = Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
-                necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].SlotsUsed;
+                effecttext.text = "<b>"+Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].name + "</b>\n" + Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].description;
+                necessaryslots.text = "Necessary slots : " + Augmentlist[selected.transform.GetComponent<buttonscript>().ObjectID].SlotsUsed+ "\nFree slots : "+(augmentscript.EquipedStats.MaxSlots- augmentscript.EquipedStats.EquipedSlots) + "\nMax Slots : " + augmentscript.EquipedStats.MaxSlots;
                 if (!pressedclick && valueclick == 1 && FindAnyObjectByType<Global>().atsavepoint)
                 {
                     pressedclick = true;
@@ -215,7 +215,7 @@ public class AugmentsMenuWindow : MonoBehaviour
         else
         {
             effecttext.text = "Choose an Augment to see its effect";
-            necessaryslots.text = "Necessary slots : ";
+            necessaryslots.text = "Necessary slots : \nFree slots : "+(augmentscript.EquipedStats.MaxSlots- augmentscript.EquipedStats.EquipedSlots) + "\nMax Slots : " + augmentscript.EquipedStats.MaxSlots;
         }
 
     }

@@ -218,35 +218,72 @@ public class GrappleScript : MonoBehaviour
                     targetpos += target.GetComponent<EnemyHP>().grappleOffset;
                 }
                 GenerateChain((Vector2)transform.position, targetpos);
-                if (Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position + target.GetComponent<EnemyHP>().grappleOffset) - lastdist) <=0.01f)
+                if(target.GetComponent<EnemyHP>())
                 {
-                    if(pressedjump && target!=closestenemy)
+                    if (Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position + target.GetComponent<EnemyHP>().grappleOffset) - lastdist) <= 0.01f)
                     {
-                        
-                        GetComponent<Rigidbody2D>().MovePosition(target.transform.position - new Vector3(0, 0.29f, 0));
-                    }
-                    else
-                    {
-                        foreach (GameObject chain in LastChain)
+                        if (pressedjump && target != closestenemy)
                         {
-                            Destroy(chain);
-                        }
-                        global.grappling = false;
-                        grapplecooldown = (int)(0.2f / Time.deltaTime);
-                        GetComponent<BoxCollider2D>().enabled = true;
-                        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                        if (target != closestenemy)
-                        {
-                            GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+
+                            GetComponent<Rigidbody2D>().MovePosition(target.transform.position - new Vector3(0, 0.29f, 0));
                         }
                         else
                         {
-                            target.GetComponent<Rigidbody2D>().velocity=Vector2.zero;
+                            foreach (GameObject chain in LastChain)
+                            {
+                                Destroy(chain);
+                            }
+                            global.grappling = false;
+                            grapplecooldown = (int)(0.2f / Time.deltaTime);
+                            GetComponent<BoxCollider2D>().enabled = true;
+                            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                            if (target != closestenemy)
+                            {
+                                GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                            }
+                            else
+                            {
+                                target.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                            }
                         }
+
                     }
-                    
+                    lastdist = Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position + target.GetComponent<EnemyHP>().grappleOffset);
                 }
-                lastdist= Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position + target.GetComponent<EnemyHP>().grappleOffset);
+                else
+                {
+                    if (Mathf.Abs(Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position) - lastdist) <= 0.01f)
+                    {
+                        if (pressedjump && target != closestenemy)
+                        {
+
+                            GetComponent<Rigidbody2D>().MovePosition(target.transform.position - new Vector3(0, 0.29f, 0));
+                        }
+                        else
+                        {
+                            foreach (GameObject chain in LastChain)
+                            {
+                                Destroy(chain);
+                            }
+                            global.grappling = false;
+                            grapplecooldown = (int)(0.2f / Time.deltaTime);
+                            GetComponent<BoxCollider2D>().enabled = true;
+                            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                            if (target != closestenemy)
+                            {
+                                GetComponent<Rigidbody2D>().AddForce(launch, ForceMode2D.Impulse);
+                            }
+                            else
+                            {
+                                target.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                            }
+                        }
+
+                    }
+                    lastdist = Vector2.Distance((Vector2)transform.position, (Vector2)target.transform.position);
+                }
+                
+                
             }
 
             

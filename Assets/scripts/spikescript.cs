@@ -13,5 +13,9 @@ public class spikescript : MonoBehaviour
         {
             collision.transform.GetComponent<PlayerHP>().TakeDamage(damage,Vector2.zero,pushstr);
         }
+        if(collision.GetComponent<EnemyHP>())
+        {
+            collision.transform.GetComponent<EnemyHP>().TakeDamage(damage,0, pushstr);
+        }
     }
 }
