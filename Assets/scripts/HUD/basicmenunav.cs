@@ -40,7 +40,7 @@ public class basicmenunav : MonoBehaviour
 
         controls.gameplay.Enable();
 
-
+        selected = transform.GetChild(0).GetChild(0).GetComponent<Button>();
     }
 
     // Update is called once per frame

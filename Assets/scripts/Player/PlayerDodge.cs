@@ -92,7 +92,7 @@ public class PlayerDodge : MonoBehaviour
                 FindAnyObjectByType<Global>().closedmenu = false;
                 return;
             }
-            if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue || FindAnyObjectByType<Global>().ininventory || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling|| FindAnyObjectByType<Global>().inpause)
+            if (FindAnyObjectByType<Global>().inmenu_inv_shop || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling)
             {
                 return;
             }
@@ -184,7 +184,7 @@ public class PlayerDodge : MonoBehaviour
 
         if (safetyCounter == maxIterations)
         {
-            Debug.LogWarning("Replaceenemies: Max iterations reached — some enemies may still be inside the collider.");
+            Debug.LogWarning("Replaceenemies: Max iterations reached ï¿½ some enemies may still be inside the collider.");
         }
     }
 

@@ -15,6 +15,9 @@ public class Global : MonoBehaviour
 
     public bool atsavepoint;
 
+    public bool inmenu_inv_shop;
+
+    public bool inshop;
     public bool ininventory;
     public bool indialogue;
     public bool inbossfight;
@@ -66,6 +69,9 @@ public class Global : MonoBehaviour
     }
     private void Update()
     {
+
+        inmenu_inv_shop = ininventory || indialogue || inpause || atsavepoint || indialogue || inshop;
+
         if(SceneManager.GetActiveScene().name == "Start" || SceneManager.GetActiveScene().name == "MainMenu")
         {
             ResetVariables();
@@ -118,7 +124,7 @@ public class Global : MonoBehaviour
 
     void OnMenu()
     {
-        if(SceneManager.GetActiveScene().name!="Start" && !indialogue && SceneManager.GetActiveScene().name != "MainMenu" && !ininventory && !atsavepoint && FindAnyObjectByType<PlayerHP>().Eldonhp>0)
+        if(SceneManager.GetActiveScene().name!="Start" && SceneManager.GetActiveScene().name != "MainMenu" && !inmenu_inv_shop && FindAnyObjectByType<PlayerHP>().Eldonhp>0)
         {
             if(FindAnyObjectByType<PauseMenu>()==null)
             {

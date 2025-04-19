@@ -59,6 +59,12 @@ public class EquipmentScript : MonoBehaviour
 
     public GameObject gotitempopupprefab;
 
+    public int ChainUpgradeLevel;
+
+    public int PlateUpgradeLevel;
+
+    public int AbsorbUpgradeLevel;
+
     // Start is called before the first frame update
 
     void Awake()

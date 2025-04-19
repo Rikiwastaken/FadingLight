@@ -52,7 +52,7 @@ public class DisplayInputScript : MonoBehaviour
         controls.gameplay.attack.performed += ctx => WestButton.SetActive(true);
         controls.gameplay.attack.canceled += ctx => WestButton.SetActive(false);
         controls.gameplay.NorthButton.performed += ctx => NorthButton.SetActive(true);
-        controls.gameplay.NorthButton.canceled += ctx => NorthButton.SetActive(true);
+        controls.gameplay.NorthButton.canceled += ctx => NorthButton.SetActive(false);
 
         //Triggers and shoulder buttons
         controls.gameplay.LeftShoulder.performed += ctx => LB.SetActive(true);

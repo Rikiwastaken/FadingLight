@@ -166,9 +166,9 @@ public class AugmentsScript : MonoBehaviour
         Stats newEquipedStats = new Stats();
         newEquipedStats.MaxHP = Basestats.MaxHP+ numberofShardsPickedUp*5;
         newEquipedStats.MaxNRJ= Basestats.MaxNRJ+ numberofShardsPickedUp;
-        newEquipedStats.Damage= Basestats.Damage;
-        newEquipedStats.NRJDamage = Basestats.NRJDamage;
-        newEquipedStats.DamageReduction= Basestats.DamageReduction;
+        newEquipedStats.Damage= Basestats.Damage + Basestats.Damage * 0.1f*GetComponent<EquipmentScript>().ChainUpgradeLevel;
+        newEquipedStats.NRJDamage = Basestats.NRJDamage + Basestats.NRJDamage * 0.1f * GetComponent<EquipmentScript>().ChainUpgradeLevel;
+        newEquipedStats.DamageReduction= Basestats.DamageReduction+ Basestats.DamageReduction * 0.1f * GetComponent<EquipmentScript>().PlateUpgradeLevel;
         newEquipedStats.JumpHeight= Basestats.JumpHeight;
         newEquipedStats.Speed = Basestats.Speed;
         newEquipedStats.MaxSlots = Basestats.MaxSlots + numberofSlotexpansionspickedup;

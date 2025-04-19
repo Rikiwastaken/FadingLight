@@ -51,7 +51,7 @@ public class ChainSawMode : MonoBehaviour
 
     private void OnNorthButton()
     {
-        if (global.atsavepoint || global.indialogue || global.zipping || global.grappling || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") || global.inpause || global.ininventory)
+        if (global.inmenu_inv_shop || global.zipping || global.grappling || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll"))
         {
             return;
         }

@@ -33454,7 +33454,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 874, y: -443}
+  m_AnchoredPosition: {x: 886, y: 478}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1476111556
@@ -33746,7 +33746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 651, y: -361}
+  m_AnchoredPosition: {x: 651, y: 438}
   m_SizeDelta: {x: 320, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1520075220
@@ -79056,6 +79056,7 @@ RectTransform:
   - {fileID: 1646236087}
   - {fileID: 711089901}
   - {fileID: 2099879643}
+  - {fileID: 5859826145152856083}
   - {fileID: 1520075219}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82360,6 +82361,156 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
+--- !u!1001 &5859826145152856082
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1709527021}
+    m_Modifications:
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 874
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -443
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 729729798865099836, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: npc.name
+      value: Matt
+      objectReference: {fileID: 0}
+    - target: {fileID: 729729798865099836, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: npc.talksentence
+      value: This development is going really fast, a while ago I didn't even exist
+        !
+      objectReference: {fileID: 0}
+    - target: {fileID: 729729798865099836, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: npc.EnterSentence
+      value: Hello there, Eldon. Looking for some new Gear ?
+      objectReference: {fileID: 0}
+    - target: {fileID: 729729798865099836, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: npc.BuyingSentence
+      value: I see you brought me some tinkering material, let's see what I can make
+        with all that junk.
+      objectReference: {fileID: 0}
+    - target: {fileID: 729729798865099836, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: npc.UpgradeSentence
+      value: 'They say if it ain''t broke don''t fix it, but what about some tuning
+        up ? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 729729798865099836, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: npc.AfterTransactionSentence
+      value: Pleasure doing business with you. Well I can I can't call it business
+        until you pay me, though...
+      objectReference: {fileID: 0}
+    - target: {fileID: 729729798865099836, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: npc.NotEnoughMaterialsSentence
+      value: I think you don't have enough materials...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3045612670049982334, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: spritePerFrame
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5024337331254010564, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_Name
+      value: ShopMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334475729863371919, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334475729863371919, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 750
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334475729863371919, guid: a23498831a7b122488782325a0839818, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 495
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a23498831a7b122488782325a0839818, type: 3}
+--- !u!224 &5859826145152856083 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 501815273402879993, guid: a23498831a7b122488782325a0839818, type: 3}
+  m_PrefabInstance: {fileID: 5859826145152856082}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6249358197525414241
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ public class EldonAttack : MonoBehaviour
 
     void OnRightShoulder()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue|| FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling || FindAnyObjectByType<Global>().inpause )
+        if (FindAnyObjectByType<Global>().inmenu_inv_shop || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling )
         {
             return;
         }
@@ -65,7 +65,7 @@ public class EldonAttack : MonoBehaviour
 
     void OnAttack()
     {
-        if (FindAnyObjectByType<Global>().atsavepoint|| FindAnyObjectByType<Global>().indialogue|| FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling || GetComponent<GrappleScript>().pressedtrigger || FindAnyObjectByType<Global>().inpause || GetComponent<PlayerDodge>().airdodgelengthcnt > 0)
+        if (FindAnyObjectByType<Global>().inmenu_inv_shop || FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling || GetComponent<GrappleScript>().pressedtrigger ||  GetComponent<PlayerDodge>().airdodgelengthcnt > 0)
         {
             return;
         }
@@ -157,7 +157,7 @@ public class EldonAttack : MonoBehaviour
 
         int damage = hpdamage;
         float energydamage =nrgdamage;
-        float absorbrate = 3f / 10f;
+        float absorbrate = 3f / 10f + (3f / 10f )* 0.1f * GetComponent<EquipmentScript>().AbsorbUpgradeLevel;
         float damagewithchainsaw = hpdamage;
         float energydamagewithchainsaw = nrgdamage;
         if (GetComponent<ChainSawMode>().chainsawmode)

@@ -77,7 +77,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
     private void Update()
     {
-        if(FindAnyObjectByType<Global>().inpause || FindAnyObjectByType<Global>().atsavepoint || FindAnyObjectByType<Global>().ininventory || FindAnyObjectByType<Global>().indialogue)
+        if(FindAnyObjectByType<Global>().inmenu_inv_shop)
         {
             savepointjumpCD = 10;
         }

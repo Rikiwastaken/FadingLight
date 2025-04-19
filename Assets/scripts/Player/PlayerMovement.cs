@@ -43,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerJumpV3 playerjump;
 
-    private GameObject parentforflip;
-
     private void Awake()
     {
         controls = new PlayerControls();
@@ -69,11 +67,6 @@ public class PlayerMovement : MonoBehaviour
     //Handles running of the physics
     private void FixedUpdate()
     {
-        if(parentforflip!=null)
-        {
-            transform.parent = null;
-            Destroy(parentforflip);
-        }
 
         if (FindAnyObjectByType<Global>().atsavepoint)
         {
@@ -99,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
             
             return;
         }
-        if(FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().grappling|| FindAnyObjectByType<Global>().inpause || GetComponent<PlayerDodge>().airdodgelengthcnt>0)
+        if(FindAnyObjectByType<Global>().zipping || FindAnyObjectByType<Global>().inshop || FindAnyObjectByType<Global>().grappling|| FindAnyObjectByType<Global>().inpause || GetComponent<PlayerDodge>().airdodgelengthcnt>0)
         {
             return;
         }
