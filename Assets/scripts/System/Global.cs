@@ -35,6 +35,8 @@ public class Global : MonoBehaviour
 
     public GameObject PauseMenu;
 
+    public GameObject MattShopMenu;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -69,8 +71,18 @@ public class Global : MonoBehaviour
     }
     private void Update()
     {
+        if(FindAnyObjectByType<ShopScript>())
+        {
+            GameObject newshop = FindAnyObjectByType<ShopScript>().gameObject;
+            if (newshop.GetComponent<ShopScript>().npc.name == "Matt" && !inshop && MattShopMenu !=newshop)
+            {
+                MattShopMenu = newshop;
+                MattShopMenu.SetActive(false);
+            }
+        }
+        
 
-        inmenu_inv_shop = ininventory || indialogue || inpause || atsavepoint || indialogue || inshop;
+    inmenu_inv_shop = ininventory || indialogue || inpause || atsavepoint || indialogue || inshop;
 
         if(SceneManager.GetActiveScene().name == "Start" || SceneManager.GetActiveScene().name == "MainMenu")
         {

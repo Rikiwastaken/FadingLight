@@ -14,7 +14,7 @@ public class basicmenunav : MonoBehaviour
 
     private bool pressedclick;
     public Button selected;
-    int activebuttonID;
+    public int activebuttonID;
 
     PlayerControls controls;
 
@@ -40,7 +40,9 @@ public class basicmenunav : MonoBehaviour
 
         controls.gameplay.Enable();
 
-        selected = transform.GetChild(0).GetChild(0).GetComponent<Button>();
+        activebuttonID = 0;
+        selected = null;
+
     }
 
     // Update is called once per frame
@@ -116,6 +118,11 @@ public class basicmenunav : MonoBehaviour
             }
         }
 
+    }
+
+    public void resetselection()
+    {
+        selected = transform.GetChild(0).GetChild(0).GetComponent<Button>();
     }
     public void Direction(int dirinput)
     {

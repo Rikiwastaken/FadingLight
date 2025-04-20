@@ -178,7 +178,20 @@ public class PlayerHP : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(global==null)
+        if(MetalScrap>99999)
+        {
+            MetalScrap = 99999;
+        }
+        if (ElectronicComponents > 99999)
+        {
+            ElectronicComponents = 99999;
+        }
+        if (CorePieces > 99999)
+        {
+            CorePieces = 99999;
+        }
+
+        if (global==null)
         {
             global = FindAnyObjectByType<Global>();
         }

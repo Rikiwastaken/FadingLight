@@ -31,7 +31,7 @@ public class SaveManager : MonoBehaviour
         public int ElectronicComponents; // number of Electronic Components
         public int ChainUpgradeLevel;
         public int PlateUpgradeLevel;
-        public int AbsorbUpgradeLevel;
+        public int SlotUpgradeLevel;
     }
 
     public Save save;
@@ -146,7 +146,7 @@ public class SaveManager : MonoBehaviour
         save.ElectronicComponents = 0;
         save.ChainUpgradeLevel = 0;
         save.PlateUpgradeLevel = 0;
-        save.AbsorbUpgradeLevel = 0;
+        save.SlotUpgradeLevel = 0;
 
     }
 
@@ -229,7 +229,7 @@ public class SaveManager : MonoBehaviour
         save.ElectronicComponents = playerHP.ElectronicComponents;
         save.ChainUpgradeLevel = equipmentScript.ChainUpgradeLevel;
         save.PlateUpgradeLevel = equipmentScript.PlateUpgradeLevel;
-        save.AbsorbUpgradeLevel = equipmentScript.AbsorbUpgradeLevel;
+        save.SlotUpgradeLevel = augmentsScript.SlotUpgradeLevel;
     }
 
     public void LoadSave()
@@ -315,7 +315,7 @@ public class SaveManager : MonoBehaviour
         playerHP.ElectronicComponents = save.ElectronicComponents;
         equipmentScript.ChainUpgradeLevel = save.ChainUpgradeLevel;
         equipmentScript.PlateUpgradeLevel = save.PlateUpgradeLevel;
-        equipmentScript.AbsorbUpgradeLevel = save.AbsorbUpgradeLevel;
+        augmentsScript.SlotUpgradeLevel = save.SlotUpgradeLevel;
     }
 
     public List<string> GetLastSave(int slotID)

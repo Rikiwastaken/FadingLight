@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static EquipmentScript;
+using static UpgrademanuInfo;
 
 public class GadgetScript : MonoBehaviour
 {
@@ -18,6 +18,8 @@ public class GadgetScript : MonoBehaviour
         public GameObject PrefabtoSpawn;
         public int ID;
         public Sprite image;
+        public bool craftable;
+        public prices craftingmaterials;
         public bool locked;
     }
 

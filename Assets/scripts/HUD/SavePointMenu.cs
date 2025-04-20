@@ -37,6 +37,10 @@ public class SavePointMenu : MonoBehaviour
         controls.gameplay.crossdown.canceled += ctx => valuedown = 0;
         controls.gameplay.crossup.performed += ctx => valueup = 1;
         controls.gameplay.crossup.canceled += ctx => valueup = 0;
+        controls.gameplay.down.performed += ctx => valuedown = 1;
+        controls.gameplay.down.canceled += ctx => valuedown = 0;
+        controls.gameplay.up.performed += ctx => valueup = 1;
+        controls.gameplay.up.canceled += ctx => valueup = 0;
         controls.gameplay.jump.performed += ctx => valueclick = 1;
         controls.gameplay.jump.canceled += ctx => valueclick = 0;
 
@@ -126,7 +130,7 @@ public class SavePointMenu : MonoBehaviour
                 }
                 else
                 {
-                    activebuttonID = transform.childCount - 3;
+                    activebuttonID = transform.childCount - 4;
                     selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();
                 }
                 
@@ -150,7 +154,7 @@ public class SavePointMenu : MonoBehaviour
             }
             else
             {
-                if (activebuttonID < transform.childCount - 3)
+                if (activebuttonID < transform.childCount - 4)
                 {
                     activebuttonID += 1;
                     selected = transform.GetChild(activebuttonID).GetChild(0).GetComponent<Button>();

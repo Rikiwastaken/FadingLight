@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
+using static UpgrademanuInfo;
 
 public class AugmentsScript : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class AugmentsScript : MonoBehaviour
         public bool mult; //if true, multiplicative, else additive
         public Sprite image;
         public int SlotsUsed;
+        public bool craftable;
+        public prices craftingmaterials;
         public bool locked;
     }
 
@@ -53,6 +56,7 @@ public class AugmentsScript : MonoBehaviour
     private Healthbar healthbar;
 
     public int numberofSlotexpansionspickedup;
+    public int SlotUpgradeLevel;
 
     // Start is called before the first frame update
     void Start()
@@ -171,7 +175,7 @@ public class AugmentsScript : MonoBehaviour
         newEquipedStats.DamageReduction= Basestats.DamageReduction+ Basestats.DamageReduction * 0.1f * GetComponent<EquipmentScript>().PlateUpgradeLevel;
         newEquipedStats.JumpHeight= Basestats.JumpHeight;
         newEquipedStats.Speed = Basestats.Speed;
-        newEquipedStats.MaxSlots = Basestats.MaxSlots + numberofSlotexpansionspickedup;
+        newEquipedStats.MaxSlots = Basestats.MaxSlots + numberofSlotexpansionspickedup + SlotUpgradeLevel*2;
         EquipedStats = newEquipedStats;
     }
     

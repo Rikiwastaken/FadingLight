@@ -130,4 +130,11 @@ public class buttonscript : MonoBehaviour
         AugmentsScript.numberofSlotexpansionspickedup = 100;
     }
 
+    public void GetMoney()
+    {
+        FindAnyObjectByType<PlayerHP>().MetalScrap += 1000;
+        FindAnyObjectByType<PlayerHP>().CorePieces += 1000;
+        FindAnyObjectByType<PlayerHP>().ElectronicComponents += 1000;
+    }
+
 }

@@ -59,9 +59,10 @@ public class ShopScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        npcnametext.text = npc.name;
         if(MainShopScreen.activeSelf)
         {
-            if(MainShopScreen.GetComponent<basicmenunav>().selected!=null)
+            if(MainShopScreen.GetComponent<basicmenunav>().selected==null)
             {
                 DescriptionText.text = "";
             }
@@ -113,18 +114,61 @@ public class ShopScript : MonoBehaviour
             playAfterTransactionSentence();
             CraftScreen.SetActive(false);
             MainShopScreen.SetActive(true);
+            transform.GetChild(0).GetComponent<basicmenunav>().resetselection();
         }
         else if (UpgradeScreen.activeSelf)
         {
             playAfterTransactionSentence();
             UpgradeScreen.SetActive(false);
             MainShopScreen.SetActive(true);
+            transform.GetChild(0).GetComponent<basicmenunav>().resetselection();
         }
     }
+
+    private void OnMenu()
+    {
+        if (MainShopScreen.activeSelf)
+        {
+            Leave();
+        }
+        else if (CraftScreen.activeSelf)
+        {
+            playAfterTransactionSentence();
+            CraftScreen.SetActive(false);
+            MainShopScreen.SetActive(true);
+            transform.GetChild(0).GetComponent<basicmenunav>().resetselection();
+        }
+        else if (UpgradeScreen.activeSelf)
+        {
+            playAfterTransactionSentence();
+            UpgradeScreen.SetActive(false);
+            MainShopScreen.SetActive(true);
+            transform.GetChild(0).GetComponent<basicmenunav>().resetselection();
+        }
+    }
+
     public void OpenUpgradeScreen()
     {
         playUpgradeSentence();
         UpgradeScreen.SetActive(true);
+        MainShopScreen.SetActive(false);
+    }
+
+    public void OpenCreateAugmentsScreen()
+    {
+        PlayBuyingSentence();
+        CraftScreen.SetActive(true);
+        CraftScreen.GetComponent<CreateItemWindow>().createaugments = true;
+        CraftScreen.GetComponent<CreateItemWindow>().SetupList();
+        MainShopScreen.SetActive(false);
+    }
+
+    public void OpenCreateGadgetsScreen()
+    {
+        PlayBuyingSentence();
+        CraftScreen.SetActive(true);
+        CraftScreen.GetComponent<CreateItemWindow>().createaugments = false;
+        CraftScreen.GetComponent<CreateItemWindow>().SetupList();
         MainShopScreen.SetActive(false);
     }
 

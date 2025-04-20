@@ -459,6 +459,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: c6bd33377e4f8c54c94190a335692768, type: 3}
     SlotsUsed: 1
+    craftable: 1
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Battery Augment
     description: +20 Max Energy.
@@ -468,6 +473,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: afc16a212838f7e4f9f55c152a923df5, type: 3}
     SlotsUsed: 1
+    craftable: 1
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Sharpness Augment
     description: Increase Damage by 10
@@ -477,6 +487,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: dafa6ca8039f6de4c909bbcd68c48720, type: 3}
     SlotsUsed: 2
+    craftable: 1
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Agressivity Augment
     description: Increase Damage by 110%.
@@ -486,6 +501,11 @@ MonoBehaviour:
     mult: 1
     image: {fileID: 21300000, guid: dafa6ca8039f6de4c909bbcd68c48720, type: 3}
     SlotsUsed: 5
+    craftable: 1
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Plate Augment
     description: Increase Defense by 5
@@ -495,6 +515,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
     SlotsUsed: 2
+    craftable: 1
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Juggernaut Augment
     description: Increase Defense by 7%
@@ -504,6 +529,11 @@ MonoBehaviour:
     mult: 1
     image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
     SlotsUsed: 4
+    craftable: 1
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Absorption Augment
     description: Increase energy basic attack absorption rate by 25%.
@@ -513,6 +543,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: afc16a212838f7e4f9f55c152a923df5, type: 3}
     SlotsUsed: 9
+    craftable: 1
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Drone Efficiency Augment
     description: Reduce Drone Ability cooldown by 20%
@@ -522,6 +557,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: -4024231457797327779, guid: fd2e041938a41214990bf88a7b8a4850, type: 3}
     SlotsUsed: 3
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Gadget Efficiency Augment
     description: Reduce Gadget cooldown by 20%
@@ -531,6 +571,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: fd649757aa38f2b4692697d2c1fbf94e, type: 3}
     SlotsUsed: 3
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Rocket Jump Augment
     description: Allows Eldon to jump when in range of grenade explosions.
@@ -540,6 +585,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: a4165faefc4273c4cab101acfa166949, type: 3}
     SlotsUsed: 1
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Dash Grenade Augment
     description: Drops a grenade whenever Eldon dashes.
@@ -549,6 +599,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: b4b55ee2fb8270e47aa9357ddc9c3a4d, type: 3}
     SlotsUsed: 2
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Heavy Liting Augment
     description: Allows Eldon to pull heavy enemies
@@ -558,6 +613,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: 537090b4602d7d94ebbccab722efec4b, type: 3}
     SlotsUsed: 1
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Leech Augment
     description: Heals Eldon 1% of basic attack damage dealt.
@@ -567,6 +627,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: 532310ee10e80a7409ed8357bdeb90c4, type: 3}
     SlotsUsed: 3
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Electric Shield Augment
     description: Increase defense by 20% when above 80% energy.
@@ -576,6 +641,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: afc16a212838f7e4f9f55c152a923df5, type: 3}
     SlotsUsed: 2
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Specialist Augment
     description: Increase Gadget and drone damage by 20%.
@@ -585,6 +655,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: 4554c8d9da2a05d4bbc1f24bd344cd4b, type: 3}
     SlotsUsed: 3
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Overclocking Augment
     description: Increase Chainsaw mode energy cost and effect by 50%.
@@ -594,6 +669,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: 4554c8d9da2a05d4bbc1f24bd344cd4b, type: 3}
     SlotsUsed: 3
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Executioner Augment
     description: Fully heals Eldon when he realises an execution.
@@ -603,6 +683,11 @@ MonoBehaviour:
     mult: 0
     image: {fileID: 21300000, guid: dafa6ca8039f6de4c909bbcd68c48720, type: 3}
     SlotsUsed: 3
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   EquipedAugments: 000000000000000000000000000000000000
   Basestats:
@@ -629,6 +714,7 @@ MonoBehaviour:
   manuallyapplyaugmentboosts: 0
   numberofequipedaugments: 0
   numberofSlotexpansionspickedup: 0
+  SlotUpgradeLevel: 0
 --- !u!114 &761752601891527695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +859,9 @@ MonoBehaviour:
   CorePieceSprite: {fileID: 21300000, guid: 7c55cd9daf9ddb744bf286310a44b10d, type: 3}
   ElecComponentSprite: {fileID: 21300000, guid: a21274c724255c449950e94023672250, type: 3}
   gotitempopupprefab: {fileID: 6175682124425559733, guid: b87792eefe96a2e40b4460d898f573cf, type: 3}
+  ChainUpgradeLevel: 0
+  PlateUpgradeLevel: 0
+  AbsorbUpgradeLevel: 0
 --- !u!114 &189450580446498757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,6 +884,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 0}
     ID: 0
     image: {fileID: -2671136589151465056, guid: ae75febb297f5b04f938b6f13afdd330, type: 3}
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Energy Canon
     description: Condenses energy into an orb an launch it at moderate speed.
@@ -805,6 +899,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 3458832224624917955, guid: 50e9c6038af57bd42882a9f2aac91889, type: 3}
     ID: 1
     image: {fileID: 21300000, guid: d94e0f32361d13842b9a935935e31165, type: 3}
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Rocket Launcher
     description: Launches a seeking rocket.
@@ -815,6 +914,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 3458832224624917955, guid: f6e632099100b534da3498db3da54214, type: 3}
     ID: 2
     image: {fileID: 21300000, guid: d94e0f32361d13842b9a935935e31165, type: 3}
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Energy Grenade Launcher
     description: Launches a grenade that depletes the energy of everything in range.
@@ -825,6 +929,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 1504114112772953579, guid: 64507c07bccb74843b860de84b15b57a, type: 3}
     ID: 3
     image: {fileID: 21300000, guid: fd649757aa38f2b4692697d2c1fbf94e, type: 3}
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Grenade Launcher
     description: Launches a grenade that damages everything in range.
@@ -835,6 +944,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 1504114112772953579, guid: 64507c07bccb74843b860de84b15b57a, type: 3}
     ID: 4
     image: {fileID: 1545786567670615267, guid: e204328c74eebed42b696fa489ac6ac4, type: 3}
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Shockwave Generator
     description: Creates a shockwave that repels small enemies
@@ -845,6 +959,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 2364139102164821319, guid: f6141489246545c48ba634232060b04e, type: 3}
     ID: 5
     image: {fileID: -8128468405736905527, guid: f5913fa6ddb2205499847ecb874dc15e, type: 3}
+    craftable: 1
+    craftingmaterials:
+      metalprice: 1
+      coreprice: 2
+      electronicprice: 3
     locked: 0
   - name: Turret Launcher
     description: 'Creates a small turret that lasts 10 seconds and deals 20% of your
@@ -856,6 +975,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 7189807936841529168, guid: 75ef2785399273c4a90c35045712c6de, type: 3}
     ID: 6
     image: {fileID: -1217602550, guid: a29854d869097df41baecc2173543afe, type: 3}
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
     locked: 0
   - name: Invisibility Cloak
     description: Makes Eldon invisible for 5 seconds.
@@ -866,6 +990,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 0}
     ID: 7
     image: {fileID: 21300000, guid: df38ea83b65ac0b49ba750b53770adb4, type: 3}
+    craftable: 1
+    craftingmaterials:
+      metalprice: 2
+      coreprice: 2
+      electronicprice: 3
     locked: 0
   - name: Futuristic Mace
     description: Create a rotating mace that damages and push enemies
@@ -876,6 +1005,11 @@ MonoBehaviour:
     PrefabtoSpawn: {fileID: 3419316200322922217, guid: 149517af158883942958509e073a4c7c, type: 3}
     ID: 8
     image: {fileID: 21300000, guid: 751b5b1b59e36d34e9d878eb89e71b62, type: 3}
+    craftable: 1
+    craftingmaterials:
+      metalprice: 5
+      coreprice: 3
+      electronicprice: 2
     locked: 0
   ActiveGadgetID: 0
   gadgetCDcounter: 0

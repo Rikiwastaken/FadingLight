@@ -157,7 +157,7 @@ public class EldonAttack : MonoBehaviour
 
         int damage = hpdamage;
         float energydamage =nrgdamage;
-        float absorbrate = 3f / 10f + (3f / 10f )* 0.1f * GetComponent<EquipmentScript>().AbsorbUpgradeLevel;
+        float absorbrate = 3f / 10f;
         float damagewithchainsaw = hpdamage;
         float energydamagewithchainsaw = nrgdamage;
         if (GetComponent<ChainSawMode>().chainsawmode)
