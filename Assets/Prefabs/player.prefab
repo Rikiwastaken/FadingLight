@@ -495,8 +495,8 @@ MonoBehaviour:
     locked: 0
   - name: Agressivity Augment
     description: Increase Damage by 110%.
-    ID: 2
-    attributeID: 3
+    ID: 3
+    attributeID: 2
     valueincr: 1.1
     mult: 1
     image: {fileID: 21300000, guid: dafa6ca8039f6de4c909bbcd68c48720, type: 3}

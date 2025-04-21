@@ -100,7 +100,7 @@ public class ShopScript : MonoBehaviour
     public void Leave()
     {
         global.inshop = false;
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnDodge()

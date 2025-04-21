@@ -21,6 +21,26 @@ public class SavePointScript : MonoBehaviour
 
     private Global Global;
 
+    public GameObject Arrow;
+
+    public float rotperframe;
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.GetComponent<PlayerHP>() != null)
+        {
+            Arrow.SetActive(true);
+            Arrow.transform.rotation = Quaternion.Euler(Arrow.transform.rotation.eulerAngles + new Vector3(0, rotperframe, 0));
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.GetComponent<PlayerHP>() != null)
+        {
+            Arrow.SetActive(false);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

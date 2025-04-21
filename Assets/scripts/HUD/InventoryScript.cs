@@ -39,6 +39,14 @@ public class InventoryScript : MonoBehaviour
         }
     }
 
+    void OnMenu()
+    {
+        if (currentpageid == 0 || currentpageid >= 3)
+        {
+            FindAnyObjectByType<Global>().CloseInventory();
+        }
+    }
+
     void OnRightShoulder()
     {
         pages.GetChild(currentpageid).gameObject.SetActive(false);

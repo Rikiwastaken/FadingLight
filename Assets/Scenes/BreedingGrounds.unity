@@ -82290,11 +82290,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37
+      value: 21.79
       objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.83
+      value: -19.5
       objectReference: {fileID: 0}
     - target: {fileID: 2005576112850915861, guid: 045b0fe8a0a26e042a6d285294670c71, type: 3}
       propertyPath: m_LocalPosition.z
@@ -83044,7 +83044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}
       propertyPath: DialogueList.Array.data[0].parts.Array.data[1].text
-      value: "Wow, les noms changent en plus, \xE7a vuet dire qu'on peut vraiment
+      value: "Wow, les noms changent en plus, \xE7a veut dire qu'on peut vraiment
         parler \xE0 plusieurs !"
       objectReference: {fileID: 0}
     - target: {fileID: 3252497973711333647, guid: 89fc1a106718001429a8adef6c36cf08, type: 3}

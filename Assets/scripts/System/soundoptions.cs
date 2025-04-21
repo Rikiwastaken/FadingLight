@@ -260,6 +260,12 @@ public class soundoptions : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    private void OnMenu()
+    {
+        optionval.SaveOptions();
+        SceneManager.LoadScene("MainMenu");
+    }
+
 
     Resolution GetClosestHigher(Resolution res)
     {

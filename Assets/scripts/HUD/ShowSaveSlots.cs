@@ -12,6 +12,11 @@ public class ShowSaveSlots : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    private void OnMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     private void OnEnable()
     {
         getallsaves();

@@ -136,13 +136,31 @@ public class Global : MonoBehaviour
 
     void OnMenu()
     {
-        if(SceneManager.GetActiveScene().name!="Start" && SceneManager.GetActiveScene().name != "MainMenu" && !inmenu_inv_shop && FindAnyObjectByType<PlayerHP>().Eldonhp>0)
+        if (atsavepoint)
+        {
+
+            if (ininventory)
+            {
+                CloseInventory();
+            }
+            else if (activeSavePoint.fadetoblack.color.a <= 0.001f)
+            {
+                atsavepoint = false;
+                Destroy(FindAnyObjectByType<SavePointMenu>().gameObject);
+            }
+        }
+        if (SceneManager.GetActiveScene().name!="Start" && SceneManager.GetActiveScene().name != "MainMenu" && !inmenu_inv_shop && FindAnyObjectByType<PlayerHP>().Eldonhp>0 && !inmenu_inv_shop)
         {
             if(FindAnyObjectByType<PauseMenu>()==null)
             {
                 Instantiate(PauseMenu, GameObject.Find("Canvas").transform);
             }
         }
+        if (indialogue)
+        {
+            FindAnyObjectByType<DialogueManager>().AccelerateOrClose();
+        }
+        
     }
 
     void OnDodge()

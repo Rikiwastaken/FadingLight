@@ -62,6 +62,10 @@ public class AugmentsScript : MonoBehaviour
     void Start()
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
+        for(int i = 0; i < Augmentlist.Count; i++)
+        {
+            Augmentlist[i].ID = i;
+        }
         ApplyAugmentBoost();
     }
     private void Update()

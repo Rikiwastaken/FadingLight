@@ -27,5 +27,10 @@ public class PauseMenu : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    private void OnMenu()
+    {
+        Destroy(gameObject);
+    }
 }
 
