@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ConstrainedExecution;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class EnemyHP : MonoBehaviour
@@ -14,6 +15,11 @@ public class EnemyHP : MonoBehaviour
     public int enemymaxhp;
     private int tempHP;
     public bool rez = false;
+
+
+    [Header("EnemyType variables")]
+    public GameObject Itemdrop;
+    public int quantity;
 
     //Energy variables
     [Header("Energy variables")]
@@ -47,6 +53,7 @@ public class EnemyHP : MonoBehaviour
     //HP variables
     [Header("EnemyType variables")]
     public bool ismachine;
+    public bool iscontaminated;
     public bool isflying;
     public bool hacked;
 
@@ -70,6 +77,7 @@ public class EnemyHP : MonoBehaviour
     private GadgetScript gadgetScript;
     private int hackinghpdraincounter;
     public Vector2 grappleOffset;
+    private bool ded;
 
     void Start()
     {
@@ -235,18 +243,20 @@ public class EnemyHP : MonoBehaviour
             {
                 BossDeath();
             }
-            else
+            else if(!ded)
             {
+                ded = true;
                 GetComponentInChildren<Canvas>().enabled = false;
                 GetComponent<Collider2D>().enabled = false;
                 GetComponent<SpriteRenderer>().enabled = false;
                 GetComponent<SpriteRenderer>().enabled = false;
+                ItemDropfct();
                 transform.position = new Vector3(-100, -100);
             }
         }
         if (rez)
         {
-
+            ded = false;
             transform.position = start;
             hacked = false;
             GetComponent<Rigidbody2D>().velocity=new Vector2(0,0);
@@ -275,6 +285,23 @@ public class EnemyHP : MonoBehaviour
 
     }
 
+    void ItemDropfct()
+    {
+        GameObject Item = Instantiate(Itemdrop, transform.position, quaternion.identity);
+        Item.GetComponent<ItemDrop>().quantity=quantity;
+        if(ismachine)
+        {
+            Item.GetComponent<ItemDrop>().type = 6;
+        }
+        else if (iscontaminated)
+        {
+            Item.GetComponent<ItemDrop>().type = 8;
+        }
+        else
+        {
+            Item.GetComponent<ItemDrop>().type = 7;
+        }
+    }
 
     void BossDeath()
     {

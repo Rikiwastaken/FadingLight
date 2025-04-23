@@ -790,6 +790,8 @@ MonoBehaviour:
   enemyhp: 0
   enemymaxhp: 200
   rez: 0
+  Itemdrop: {fileID: 2014116932994965803, guid: 05b068781c272a14698a1327c032a92b, type: 3}
+  quantity: 10
   enemyNRG: 0
   enemymaxNRG: 100
   NRGdelay: 5
@@ -805,6 +807,7 @@ MonoBehaviour:
   activated: 0
   bossdying: 0
   ismachine: 0
+  iscontaminated: 0
   isflying: 0
   hacked: 0
   healthbar: {fileID: 4526496966787258727}
