@@ -59,7 +59,7 @@ public class EnemyHP : MonoBehaviour
 
 
     //Healthbar
-    public Healthbar healthbar;
+    private Healthbar healthbar;
 
     private Rigidbody2D rb2D;
 
@@ -92,6 +92,7 @@ public class EnemyHP : MonoBehaviour
         enemyNRG = enemymaxNRG;
         if(!isboss)
         {
+            healthbar = GetComponentInChildren<Healthbar>();
             healthbar.SetMaxhealth(enemymaxhp);
             healthbar.SetMaxEnergy(enemymaxNRG);
         }

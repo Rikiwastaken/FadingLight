@@ -188,6 +188,7 @@ public class EldonAttack : MonoBehaviour
             
             if (enemy.tag == "enemy")
             {
+                Debug.Log(enemy.name);
                 EnemyHP enemyHP = enemy.GetComponent<EnemyHP>();
                 enemyrb = enemy.GetComponent<Rigidbody2D>();
                 playerx = GetComponent<Rigidbody2D>().position.x;

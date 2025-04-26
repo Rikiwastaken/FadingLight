@@ -1,43 +1,16 @@
 fileFormatVersion: 2
-guid: 8a5f63d6b1bc8744ea34632995f5fde5
+guid: 91ece7e0478b6314b96f6f588420478f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6251170901057771187
-    second: RockBase_0
+      213: -8766246478143676255
+    second: JumpingRejects_0
   - first:
-      213: 1535046044697261135
-    second: RockBase_1
+      213: 2529493847589328894
+    second: JumpingRejects_1
   - first:
-      213: 8025380875328075474
-    second: RockBase_2
-  - first:
-      213: -6914581640543948721
-    second: RockBase_3
-  - first:
-      213: -1579151548435401421
-    second: RockBase_4
-  - first:
-      213: -3626729079030014202
-    second: RockBase_5
-  - first:
-      213: 3955708639218267646
-    second: RockBase_6
-  - first:
-      213: -5871942117935546722
-    second: RockBase_7
-  - first:
-      213: 2888903558739978005
-    second: RockBase_8
-  - first:
-      213: -6020429410713637457
-    second: RockBase_9
-  - first:
-      213: 8166051676285902979
-    second: RockBase_10
-  - first:
-      213: 6123551371481742053
-    second: RockBase_11
+      213: 8217294701580719535
+    second: JumpingRejects_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -70,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -108,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -146,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RockBase_0
+      name: JumpingRejects_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 767
-        width: 132
-        height: 220
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +133,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4961348f216f39a0800000000000000
-      internalID: -6251170901057771187
+      spriteID: 1a02ab01649085680800000000000000
+      internalID: -8766246478143676255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockBase_1
+      name: JumpingRejects_1
       rect:
         serializedVersion: 2
-        x: 304
-        y: 767
-        width: 131
-        height: 220
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,20 +154,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f447c00ae349d4510800000000000000
-      internalID: 1535046044697261135
+      spriteID: ef71917a0419a1320800000000000000
+      internalID: 2529493847589328894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockBase_2
+      name: JumpingRejects_2
       rect:
         serializedVersion: 2
-        x: 560
-        y: 767
-        width: 130
-        height: 220
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,197 +175,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d6b425c261ef5f60800000000000000
-      internalID: 8025380875328075474
+      spriteID: fa51b667ef1b90270800000000000000
+      internalID: 8217294701580719535
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockBase_3
+      name: JumpingRejects_3
       rect:
         serializedVersion: 2
-        x: 48
-        y: 511
-        width: 130
-        height: 220
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f40b0f802a87a00a0800000000000000
-      internalID: -6914581640543948721
+      spriteID: 478c2ab84ef30d744b88e4c9e08e1cd7
+      internalID: -1947309270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockBase_4
+      name: JumpingRejects_4
       rect:
         serializedVersion: 2
-        x: 304
-        y: 511
-        width: 130
-        height: 220
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 335fffc880ab51ae0800000000000000
-      internalID: -1579151548435401421
+      spriteID: c5d85f0e5d0aa7a48be3dcbefa6f2d87
+      internalID: -157101482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockBase_5
+      name: JumpingRejects_5
       rect:
         serializedVersion: 2
-        x: 560
-        y: 511
-        width: 130
-        height: 220
+        x: 64
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 60f16db2e154badc0800000000000000
-      internalID: -3626729079030014202
+      spriteID: ef6ec6947be9a0348b3744935d698e01
+      internalID: -759713612
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockBase_6
+      name: JumpingRejects_6
       rect:
         serializedVersion: 2
-        x: 48
-        y: 255
-        width: 130
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ef57c839c0085e630800000000000000
-      internalID: 3955708639218267646
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RockBase_7
-      rect:
-        serializedVersion: 2
-        x: 304
-        y: 255
-        width: 131
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e9efbce21cba28ea0800000000000000
-      internalID: -5871942117935546722
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RockBase_8
-      rect:
-        serializedVersion: 2
-        x: 560
-        y: 255
-        width: 132
-        height: 220
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 517ee090b72771820800000000000000
-      internalID: 2888903558739978005
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RockBase_9
-      rect:
-        serializedVersion: 2
-        x: 48
+        x: 0
         y: 0
-        width: 132
-        height: 219
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fad691b3953237ca0800000000000000
-      internalID: -6020429410713637457
+      spriteID: b5a9cb70092d1284599de83023f96fa4
+      internalID: -294893716
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RockBase_10
+      name: JumpingRejects_7
       rect:
         serializedVersion: 2
-        x: 303
+        x: 32
         y: 0
-        width: 133
-        height: 219
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3802186ebb4a35170800000000000000
-      internalID: 8166051676285902979
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RockBase_11
-      rect:
-        serializedVersion: 2
-        x: 559
-        y: 0
-        width: 133
-        height: 219
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5ea760547893bf450800000000000000
-      internalID: 6123551371481742053
+      spriteID: 7312b96bdd074bb4badfe0ac39e94e8e
+      internalID: -1519531102
       vertices: []
       indices: 
       edges: []
@@ -400,7 +289,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0753341501a802f41984d12f6cf1ca09
     internalID: 0
     vertices: []
     indices: 
@@ -408,18 +297,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RockBase_0: -6251170901057771187
-      RockBase_1: 1535046044697261135
-      RockBase_10: 8166051676285902979
-      RockBase_11: 6123551371481742053
-      RockBase_2: 8025380875328075474
-      RockBase_3: -6914581640543948721
-      RockBase_4: -1579151548435401421
-      RockBase_5: -3626729079030014202
-      RockBase_6: 3955708639218267646
-      RockBase_7: -5871942117935546722
-      RockBase_8: 2888903558739978005
-      RockBase_9: -6020429410713637457
+      JumpingRejects_0: -8766246478143676255
+      JumpingRejects_1: 2529493847589328894
+      JumpingRejects_2: 8217294701580719535
+      JumpingRejects_3: -1947309270
+      JumpingRejects_4: -157101482
+      JumpingRejects_5: -759713612
+      JumpingRejects_6: -294893716
+      JumpingRejects_7: -1519531102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
