@@ -108,6 +108,19 @@ public class PlayerHP : MonoBehaviour
             {
                 EldonNRG = 0;
             }
+            if (GetComponent<AugmentsScript>().EquipedAugments[17])
+            {
+                if(EldonNRG/2<=damagetotake)
+                {
+                    damagetotake -= (int)(EldonNRG/2);
+                    EldonNRG = 0;
+                }
+                else
+                {
+                    damagetotake = 0;
+                    EldonNRG -=damagetotake*2;
+                }
+            }
             Eldonhp -= damagetotake;
             inv = true;
             iframe = invicibilityframes;
@@ -147,6 +160,19 @@ public class PlayerHP : MonoBehaviour
             {
                 EldonNRG = 0;
             }
+            if (GetComponent<AugmentsScript>().EquipedAugments[17])
+            {
+                if (EldonNRG / 2 <= damagetotake)
+                {
+                    damagetotake -= (int)(EldonNRG / 2);
+                    EldonNRG = 0;
+                }
+                else
+                {
+                    damagetotake = 0;
+                    EldonNRG -= damagetotake * 2;
+                }
+            }
             Eldonhp -= damagetotake;
             inv = true;
             iframe = invicibilityframes;
@@ -168,6 +194,19 @@ public class PlayerHP : MonoBehaviour
             if (EldonNRG < 0)
             {
                 EldonNRG = 0;
+            }
+            if (GetComponent<AugmentsScript>().EquipedAugments[17])
+            {
+                if (EldonNRG / 2 <= damagetotake)
+                {
+                    damagetotake -= (int)(EldonNRG / 2);
+                    EldonNRG = 0;
+                }
+                else
+                {
+                    damagetotake = 0;
+                    EldonNRG -= damagetotake * 2;
+                }
             }
             Eldonhp -= damagetotake;
             inv = true;

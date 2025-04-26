@@ -633,7 +633,7 @@ MonoBehaviour:
       coreprice: 0
       electronicprice: 0
     locked: 0
-  - name: Electric Shield Augment
+  - name: Electric Armor Augment
     description: Increase defense by 20% when above 80% energy.
     ID: 13
     attributeID: -1
@@ -689,7 +689,22 @@ MonoBehaviour:
       coreprice: 0
       electronicprice: 0
     locked: 0
-  EquipedAugments: 000000000000000000000000000000000000
+  - name: Electric Shield Augment
+    description: Consumes 2 points of energy for each point of damage Eldon should
+      take.
+    ID: 17
+    attributeID: -1
+    valueincr: 0
+    mult: 0
+    image: {fileID: 21300000, guid: 9bf4c597ad6e20a42a85ecda40a10bcd, type: 3}
+    SlotsUsed: 5
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
+    locked: 0
+  EquipedAugments: 000000000000000000000000000000000000000000000000000000000000
   Basestats:
     MaxHP: 120
     MaxNRJ: 100
@@ -1213,21 +1228,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2005576112850915861}
     m_Modifications:
-    - target: {fileID: -1543034884200180113, guid: 248add938af55594f8606c6a4fee8022, type: 3}
-      propertyPath: ActiveDroneID
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 776140359127204589, guid: 248add938af55594f8606c6a4fee8022, type: 3}
       propertyPath: m_Name
       value: Drone1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6897766817068835282, guid: 248add938af55594f8606c6a4fee8022, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6897766817068835282, guid: 248add938af55594f8606c6a4fee8022, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6897766817068835282, guid: 248add938af55594f8606c6a4fee8022, type: 3}
       propertyPath: m_LocalPosition.x

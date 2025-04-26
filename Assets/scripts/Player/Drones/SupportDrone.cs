@@ -42,7 +42,7 @@ public class SupportDrone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerhp = GameObject.FindAnyObjectByType<PlayerHP>();
+        playerhp = FindAnyObjectByType<PlayerHP>();
         augmentsscript = FindAnyObjectByType<AugmentsScript>();
         EquipmentScript = FindAnyObjectByType<EquipmentScript>();
         ChangeSprite();
@@ -230,7 +230,7 @@ public class SupportDrone : MonoBehaviour
 
     void LeechDroneEffect()
     {
-        float detectdist = 3.0f;
+        float detectdist = 15.0f;
         LeechDroneScript leech = null;
         LeechDroneScript[] leeches = FindObjectsByType<LeechDroneScript>(FindObjectsSortMode.None);
         foreach(LeechDroneScript maybeleech in leeches)
@@ -308,7 +308,7 @@ public class SupportDrone : MonoBehaviour
 
     void DrainDroneEffect()
     {
-        float detectdist = 3.0f;
+        float detectdist = 15.0f;
         LeechDroneScript leech = null;
         LeechDroneScript[] leeches = FindObjectsByType<LeechDroneScript>(FindObjectsSortMode.None);
         foreach (LeechDroneScript maybeleech in leeches)
