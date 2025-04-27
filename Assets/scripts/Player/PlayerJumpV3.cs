@@ -58,6 +58,8 @@ public class PlayerJumpV3 : MonoBehaviour
     private int savepointjumpCD;
 
     private float velocityx;
+
+    private Global global;
     private void Awake()
     {
         controls = new PlayerControls();
@@ -73,6 +75,8 @@ public class PlayerJumpV3 : MonoBehaviour
         gravity = rb.gravityScale;
 
         playermov = GetComponent<PlayerMovement>();
+
+        global = FindAnyObjectByType<Global>();
     }
 
     private void Update()
@@ -133,7 +137,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
         grounded = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisground) || Physics2D.OverlapBox(groundcheck.position, new Vector2(largeurgi/2f, hauteurgi), 0, whatispassthrough));
         onennemi = (Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisennemy) || Physics2D.OverlapCircle(groundcheck.position, radOcircle, whatisboss));
-        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/2, largeurgi/2), 0, whatiswall);
+        touchingwall = Physics2D.OverlapBox(frontcheck.position, new Vector2(hauteurgi/2, largeurgi/2), 0, whatiswall) && global.worldflags[11];
         Checkground();
 
         //normal jump
@@ -163,7 +167,7 @@ public class PlayerJumpV3 : MonoBehaviour
 
         //doublejump
 
-        if (pressedjump && !grounded && !alreadypressedjump && !jump2 &&!stuckinwall && GetComponent<PlayerDodge>().airdodgelengthcnt == 0)
+        if (pressedjump && !grounded && !alreadypressedjump && !jump2 &&!stuckinwall && GetComponent<PlayerDodge>().airdodgelengthcnt == 0 && global.worldflags[12])
         {
             
             alreadypressedjump = true;

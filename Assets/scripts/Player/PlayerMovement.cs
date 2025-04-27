@@ -122,12 +122,17 @@ public class PlayerMovement : MonoBehaviour
         //move player
         if (!playerjump.stuckinwall)
         {
-            if (Mathf.Abs(rb2D.velocity.x) < maxspeed)
+            float newmaxspeed = maxspeed;
+            if (GetComponent<AugmentsScript>().EquipedAugments[18] && GetComponent<PlayerHP>().EldonNRG>= GetComponent<PlayerHP>().EldonmaxNRG*0.9f)
+            {
+                newmaxspeed = maxspeed * 1.5f;
+            }
+            if (Mathf.Abs(rb2D.velocity.x) < newmaxspeed)
             {
                 float newspeed = rb2D.velocityX + horizontal * speed;
-                if (Mathf.Abs(newspeed) > maxspeed)
+                if (Mathf.Abs(newspeed) > newmaxspeed)
                 {
-                    newspeed = horizontal * maxspeed;
+                    newspeed = horizontal * newmaxspeed;
                 }
                 rb2D.velocityX = newspeed;
             }
@@ -180,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (!playerjump.grounded && horizontal != 0 && !GetComponent<PlayerJumpV3>().stuckinwall)
+            if (!playerjump.grounded && horizontal != 0 && !playerjump.stuckinwall)
             {
                 Flip(horizontal);
             }

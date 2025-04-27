@@ -128,6 +128,11 @@ public class buttonscript : MonoBehaviour
             gadget.locked = false;
         }
         AugmentsScript.numberofSlotexpansionspickedup = 100;
+        Global global = FindAnyObjectByType<Global>();
+        for (int i = 11;i<=16;i++)
+        {
+            global.worldflags[i] = true;
+        }
     }
 
     public void GetMoney()

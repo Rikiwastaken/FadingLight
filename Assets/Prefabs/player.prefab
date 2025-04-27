@@ -704,6 +704,20 @@ MonoBehaviour:
       coreprice: 0
       electronicprice: 0
     locked: 0
+  - name: Hyperactivity Augment
+    description: Increase moving speed by 50% when above 90% Energy
+    ID: 18
+    attributeID: -1
+    valueincr: 0
+    mult: 0
+    image: {fileID: 21300000, guid: afc16a212838f7e4f9f55c152a923df5, type: 3}
+    SlotsUsed: 5
+    craftable: 0
+    craftingmaterials:
+      metalprice: 0
+      coreprice: 0
+      electronicprice: 0
+    locked: 0
   EquipedAugments: 000000000000000000000000000000000000000000000000000000000000
   Basestats:
     MaxHP: 120

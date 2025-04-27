@@ -75,7 +75,7 @@ public class GrappleScript : MonoBehaviour
         }
 
 
-        if(!global.grappling && grapplecooldown<=0 && pressedtrigger)
+        if(!global.grappling && grapplecooldown<=0 && pressedtrigger && global.worldflags[13])
         {
             GetClosestgrapple();
             GetClosestenemy();
@@ -335,7 +335,7 @@ public class GrappleScript : MonoBehaviour
             {
                 enemytarget = new GameObject();
                 enemytarget.AddComponent<SpriteRenderer>();
-                if(closestenemy.GetComponent<EnemyHP>().ismachine && closestenemy.GetComponent<EnemyHP>().enemyNRG<=0)
+                if(closestenemy.GetComponent<EnemyHP>().ismachine && closestenemy.GetComponent<EnemyHP>().enemyNRG<=0 && global.worldflags[14])
                 {
                     enemytarget.GetComponent<SpriteRenderer>().sprite = EnemyHackTargetSprite;
                 }
@@ -394,7 +394,7 @@ public class GrappleScript : MonoBehaviour
         {
             return;
         }
-        if (closestenemy != null && pressedtrigger && closestenemy.GetComponent<EnemyHP>().ismachine && closestenemy.GetComponent<EnemyHP>().enemyNRG <= 0)
+        if (closestenemy != null && pressedtrigger && closestenemy.GetComponent<EnemyHP>().ismachine && closestenemy.GetComponent<EnemyHP>().enemyNRG <= 0 && global.worldflags[14])
         {
             grapplingenemy = true;
             previousgrapple = closestenemy.gameObject;
