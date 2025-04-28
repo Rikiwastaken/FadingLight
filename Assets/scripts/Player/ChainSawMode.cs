@@ -57,7 +57,7 @@ public class ChainSawMode : MonoBehaviour
         }
         if(!chainsawmode)
         {
-            if (!GetComponent<GrappleScript>().pressedtrigger && GetComponent<PlayerHP>().EldonNRG > 0)
+            if (!GetComponent<GrappleScript>().pressedtrigger && GetComponent<PlayerHP>().EldonNRG > 0 && global.worldflags[15])
             {
                 chainsawmode = true;
                 if (!GetComponent<EldonAttack>().slayermode)

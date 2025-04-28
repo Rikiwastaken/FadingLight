@@ -30,8 +30,13 @@ public class EyeScript : MonoBehaviour
     {
         for(int i = 0; i< Eyelist.Count; i++)
         {
-            Vector2 newpos = EyeposList[i] + ((Vector2)PlayerTransf.position - EyeposList[i] - (Vector2)transform.position).normalized*EyeMovementRange[i];
+            Vector2 newpos = EyeposList[i] + ((Vector2)PlayerTransf.position - EyeposList[i] - (Vector2)transform.position).normalized * EyeMovementRange[i];
+            if (GetComponentInParent<SpriteRenderer>().flipX )
+            {
+                newpos = new Vector2(-EyeposList[i].x, EyeposList[i].y) + ((Vector2)PlayerTransf.position - EyeposList[i] - (Vector2)transform.position).normalized * EyeMovementRange[i];
+            }
             Eyelist[i].transform.localPosition = newpos;
+
         }
     }
 }

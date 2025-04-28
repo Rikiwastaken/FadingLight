@@ -130,7 +130,7 @@ public class ContaminatedAI : MonoBehaviour
     private void ManageMovement()
     {
 
-        if(destination!=0 && timeunabletomovecounter > 0)
+        if(destination!=0 && timeunabletomovecounter == 0)
         {
             GetComponent<Rigidbody2D>().velocityX=(destination-transform.position.x)/Mathf.Abs(destination - transform.position.x)*movespeed;
         }
