@@ -895,7 +895,6 @@ MonoBehaviour:
   iscontaminated: 0
   isflying: 0
   hacked: 0
-  healthbar: {fileID: 4526496966787258727}
   targetted: 0
   grappleOffset: {x: 0, y: -0.5}
 --- !u!95 &5458493380403203971

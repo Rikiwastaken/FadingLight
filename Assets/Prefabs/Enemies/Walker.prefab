@@ -605,6 +605,7 @@ GameObject:
   - component: {fileID: 8832000055120568573}
   - component: {fileID: 467123722211548697}
   - component: {fileID: 5869647317751952695}
+  - component: {fileID: 912439954775661713}
   m_Layer: 10
   m_Name: Walker
   m_TagString: enemy
@@ -697,7 +698,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
@@ -827,6 +828,7 @@ MonoBehaviour:
   - {fileID: 470726201783568763}
   EyeMovementRange:
   - 0.02
+  activateeyes: 0
 --- !u!95 &467123722211548697
 Animator:
   serializedVersion: 7
@@ -864,7 +866,49 @@ MonoBehaviour:
   timeunabletomove: 0.5
   timeunabletomovecounter: 0
   Exclamationmark: {fileID: 4107497105245484794}
-  movespeed: 2
+  movespeed: 3
+  mindist: 10
+  damage: 20
+  pushforce: {x: 50, y: 50}
+  AttackCD: 2.5
+  mindistforATK: 4
+--- !u!70 &912439954775661713
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311752338245390967}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.13509}
+  m_Size: {x: 0.1, y: 0.1}
+  m_Direction: 1
 --- !u!1 &7298686724143728594
 GameObject:
   m_ObjectHideFlags: 0

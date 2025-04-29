@@ -13,6 +13,46 @@ public class WalkerAI : MonoBehaviour
 
     private int lasthp;
 
+    public float mindist;
+    public float damage;
+
+    public Vector2 pushforce;
+
+    public float AttackCD;
+    private int AttackCDCounter;
+
+    private bool targetting;
+
+    public float mindistforATK;
+    private bool hittingleft;
+
+    private List<GameObject> hits = new List<GameObject>();
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+
+        bool rightdirection = (transform.position.x < collision.transform.position.x && !GetComponent<SpriteRenderer>().flipX) || (transform.position.x > collision.transform.position.x && !GetComponent<SpriteRenderer>().flipX);
+
+        if (((hittingleft && transform.position.x<collision.transform.position.x)|| (!hittingleft && transform.position.x > collision.transform.position.x) || hits.Contains(collision.gameObject))&& rightdirection)
+        {
+            return;
+        }
+        if(collision.gameObject.GetComponent<PlayerHP>() != null)
+        {
+            
+            Vector2 force = pushforce;
+            float newdest = transform.position.x - 3f;
+            if (collision.gameObject.transform.position.x<transform.position.x)
+            {
+                force.x *= -1;
+                newdest = transform.position.x + 3f;
+            }
+            collision.gameObject.GetComponent<PlayerHP>().TakeDamage(damage,Vector2.zero,force);
+            destination = newdest;
+            hits.Add(collision.gameObject);
+        }
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (FindAnyObjectByType<Global>().atsavepoint)
@@ -39,18 +79,58 @@ public class WalkerAI : MonoBehaviour
             return;
         }
 
+        if(Vector2.Distance(transform.position,player.transform.position)<=mindist)
+        {
+            targetting=true;
+        }
+        else
+        {
+            targetting = false;
+        }
+        GetComponent<EyeScript>().activateeyes = targetting;
+
         Exclamationmark.SetActive(false);
         if (GetComponent<EnemyHP>().enemyNRG > 0)
         {
             ManageMovement();
             managehitstun();
-
+            manageAttack();
         }
 
 
 
     }
 
+
+    private void manageAttack()
+    {
+
+        if(AttackCDCounter==0 && Vector2.Distance(transform.position, player.transform.position) <= mindistforATK && timeunabletomovecounter == 0 || GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("WalkerAttack"))
+        {
+            Exclamationmark.SetActive(true);
+        }
+        else
+        {
+            Exclamationmark.SetActive(false);
+        }
+
+        if(AttackCDCounter>0)
+        {
+            AttackCDCounter--;
+        }
+        else
+        {
+
+            bool facingrightdirection = (GetComponent<SpriteRenderer>().flipX && player.transform.position.x < transform.position.x) || (!GetComponent<SpriteRenderer>().flipX && player.transform.position.x > transform.position.x);
+            if (targetting && Vector2.Distance(transform.position,player.transform.position)<=mindistforATK && timeunabletomovecounter==0 && facingrightdirection)
+            {
+                AttackCDCounter = (int)(AttackCD/Time.fixedDeltaTime);
+                hits = new List<GameObject>();
+                GetComponent<Animator>().SetTrigger("Attack");
+                hittingleft = GetComponent<SpriteRenderer>().flipX;
+            }
+        }
+    }
 
     private void managehitstun()
     {
@@ -71,14 +151,30 @@ public class WalkerAI : MonoBehaviour
 
     private void ManageMovement()
     {
-        Debug.Log(destination);
+        if(timeunabletomovecounter > 0)
+        {
+            return;
+        }
+        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("WalkerAttack"))
+        {
+            GetComponent<Rigidbody2D>().velocityX =0;
+            return;
+        }
         if (destination != 0 && timeunabletomovecounter == 0)
         {
             GetComponent<Rigidbody2D>().velocityX = (destination - transform.position.x) / Mathf.Abs(destination - transform.position.x) * movespeed;
+            if (targetting)
+            {
+                GetComponent<Rigidbody2D>().velocityX *= 2;
+            }
         }
         else
         {
             GetComponent<Rigidbody2D>().velocityX = GetComponent<Rigidbody2D>().velocityX * 0.9991f;
+        }
+        if(targetting && AttackCDCounter==0)
+        {
+            destination = player.transform.position.x;
         }
         if (Mathf.Abs(destination - transform.position.x) <= 1 || destination == 0)
         {

@@ -32,9 +32,15 @@ public class JumpingRejectAI : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+
         if ((collision.gameObject.layer == LayerMask.NameToLayer("wall") || collision.gameObject.layer == LayerMask.NameToLayer("ground") || collision.gameObject.layer == LayerMask.NameToLayer("roof")) && collision.gameObject.transform.tag!="passthroughplatform")
         {
             touchingwall = true;
+        }
+        if (collision.transform.GetComponent<PlayerHP>() != null && (transform.position.y - GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 2f >= collision.transform.position.y + collision.transform.GetComponent<BoxCollider2D>().size.y * collision.transform.transform.localScale.y / 2f))
+        {
+            int direction = (int)((collision.transform.position.x - transform.position.x) / Mathf.Abs(collision.transform.position.x - transform.position.x));
+            collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 5, 3), ForceMode2D.Impulse);
         }
     }
 
@@ -65,6 +71,11 @@ public class JumpingRejectAI : MonoBehaviour
             howtopush.y = pushstr.y;
             howtopush.x = (collision.transform.position.x- transform.position.x)/Mathf.Abs(collision.transform.position.x - transform.position.x)*pushstr.x;
             collision.transform.GetComponent<PlayerHP>().TakeDamage(damage, Vector2.zero, howtopush);
+            Destination = -Destination;
+        }
+
+        if (collision.transform.GetComponent<EnemyHP>() != null && Destination != Vector3.zero)
+        {
             Destination = -Destination;
         }
     }
@@ -133,11 +144,11 @@ public class JumpingRejectAI : MonoBehaviour
 
         if(Destination == Vector3.zero)
         {
-            GetComponent<EyeScript>().Eyelist[0].GetComponent<SpriteRenderer>().color = new Color(0f, 0.84f, 1f, 1f);
+            GetComponent<EyeScript>().activateeyes = false;
         }
         else
         {
-            GetComponent<EyeScript>().Eyelist[0].GetComponent<SpriteRenderer>().color = new Color(0.64f,0.35f,0.33f,1f);
+            GetComponent<EyeScript>().activateeyes = true;
         }
 
     }

@@ -13,7 +13,7 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] private Transform groundcheck;
     private bool inv = false;
     public int iframe;
-    public int invicibilityframes;
+    public float timeinvincible;
     public float hitjumpforce;
     private Rigidbody2D rb;
     public float damagereduction;
@@ -71,7 +71,7 @@ public class PlayerHP : MonoBehaviour
             }
             Eldonhp -= damagetotake;
             inv = true;
-            iframe = invicibilityframes;
+            iframe = (int)(timeinvincible/Time.fixedDeltaTime);
             if (velchg.y != 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, velchg.y);
@@ -123,7 +123,7 @@ public class PlayerHP : MonoBehaviour
             }
             Eldonhp -= damagetotake;
             inv = true;
-            iframe = invicibilityframes;
+            iframe = (int)(timeinvincible/Time.fixedDeltaTime);
             if (velchg.y != 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, velchg.y);
@@ -175,7 +175,7 @@ public class PlayerHP : MonoBehaviour
             }
             Eldonhp -= damagetotake;
             inv = true;
-            iframe = invicibilityframes;
+            iframe = (int)(timeinvincible/Time.fixedDeltaTime);
         }
     }
 
@@ -210,7 +210,7 @@ public class PlayerHP : MonoBehaviour
             }
             Eldonhp -= damagetotake;
             inv = true;
-            iframe = invicibilityframes;
+            iframe = (int)(timeinvincible/Time.fixedDeltaTime);
         }
     }
 
@@ -256,8 +256,18 @@ public class PlayerHP : MonoBehaviour
             if (iframe == 0)
             {
                 inv = false;
+                Color col = GetComponent<SpriteRenderer>().color;
+                col.a = 1f;
+                GetComponent<SpriteRenderer>().color = col;
+            }
+            else if(iframe>0)
+            {
+                Color col = GetComponent<SpriteRenderer>().color;
+                col.a = 0.8f;
+                GetComponent<SpriteRenderer>().color = col;
             }
         }
+
 
         if(global.indialogue || global.atsavepoint)
         {

@@ -357,7 +357,7 @@ MonoBehaviour:
   EldonmaxNRG: 0
   groundcheck: {fileID: 7714607739817182240}
   iframe: 0
-  invicibilityframes: 120
+  timeinvincible: 1
   hitjumpforce: 2
   damagereduction: 0
   GameOverPrefab: {fileID: 1909857644947452815, guid: cf12e9ad978d2d94599d99532774c1a5, type: 3}

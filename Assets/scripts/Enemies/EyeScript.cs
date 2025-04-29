@@ -12,6 +12,7 @@ public class EyeScript : MonoBehaviour
 
     private Transform PlayerTransf;
 
+    public bool activateeyes;
 
     // Start is called before the first frame update
     void Start()
@@ -35,8 +36,17 @@ public class EyeScript : MonoBehaviour
             {
                 newpos = new Vector2(-EyeposList[i].x, EyeposList[i].y) + ((Vector2)PlayerTransf.position - EyeposList[i] - (Vector2)transform.position).normalized * EyeMovementRange[i];
             }
+            
             Eyelist[i].transform.localPosition = newpos;
+            if (activateeyes)
+            {
+                Eyelist[i].GetComponent<SpriteRenderer>().color = new Color(0.64f, 0.35f, 0.33f, 1f);
 
+            }
+            else
+            {
+                Eyelist[i].GetComponent<SpriteRenderer>().color = new Color(0f, 0.84f, 1f, 1f);
+            }
         }
     }
 }
