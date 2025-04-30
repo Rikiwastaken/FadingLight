@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class BigSlimeBoss : MonoBehaviour
@@ -8,11 +7,13 @@ public class BigSlimeBoss : MonoBehaviour
     public GameObject HorizontalSpike;
     public GameObject VerticalSpike;
     public GameObject Crystal;
+    public GameObject Overhead;
     public GameObject AttackPreviewPrefab;
     public float yforvertical;
     public int verticalspikedamage;
     public int HorizontalSpikeDamage;
     public int CrystalDamage;
+    public int OverHeadDamage;
     public Vector3 WheretoSpawnLowHorizontal;
     public Vector3 WheretoSpawnHighHorizontal;
     public Vector3 WheretoSpawnCloseRangeSpikes;
@@ -30,13 +31,26 @@ public class BigSlimeBoss : MonoBehaviour
     {
         if (GetComponent<EnemyHP>().activated)
         {
+            if(GetComponent<EnemyHP>().enemyhp< GetComponent<EnemyHP>().enemymaxhp)
+            {
+                GetComponent<EyeScript>().activateeyes = true;
+            }
+           
+            if(GetComponent<EnemyHP>().enemyNRG<=0)
+            {
+                GetComponent<EyeScript>().movearound = true;
+            }
+            else
+            {
+                GetComponent<EyeScript>().movearound = false;
+            }
             if(player == null)
             {
                 player = FindAnyObjectByType<PlayerMovement>().transform;
             }
 
 
-            if(attackcooldowncounter <= 0 && !GetComponent<EnemyHP>().execution && !GetComponent<EnemyHP>().bossdying)
+            if(attackcooldowncounter <= 0 && !GetComponent<EnemyHP>().execution && !GetComponent<EnemyHP>().bossdying && GetComponent<EnemyHP>().enemyhp < GetComponent<EnemyHP>().enemymaxhp)
             {
                 if(Mathf.Abs(player.position.x-transform.position.x)<=distancextotriggermelee)
                 {
@@ -63,7 +77,7 @@ public class BigSlimeBoss : MonoBehaviour
 
     void RandomAttackClose()
     {
-        int rd = Random.Range(0, 120);
+        int rd = Random.Range(0, 140);
         if (rd <= 10)
         {
             SpawnLineOfSpikes();
@@ -84,9 +98,13 @@ public class BigSlimeBoss : MonoBehaviour
         {
             SpawnHighHorizontalSpike();
         }
-        else if (rd <= 90)
+        else if (rd <= 80)
         {
             SpawnCrystal();
+        }
+        else if (rd <= 110)
+        {
+            SpawnOverHead();
         }
         else
         {
@@ -179,6 +197,13 @@ public class BigSlimeBoss : MonoBehaviour
         AttackPreview.GetComponent<AttackZone>().InstantiateObject(Crystal, position, CrystalDamage, 1f, new Vector2(0, -7.5f));
     }
 
+    void SpawnOverHead()
+    {
+        GameObject OverHead = Instantiate(Overhead, transform.position, Quaternion.identity);
+        OverHead.GetComponent<SlimeBossSpike>().damage = OverHeadDamage;
+        OverHead.transform.localScale = transform.localScale;
+    }
+
     void SpawnHighHorizontalSpike()
     {
         Vector3 position = transform.position + WheretoSpawnHighHorizontal;
@@ -193,12 +218,6 @@ public class BigSlimeBoss : MonoBehaviour
             Vector3 position = transform.position + WheretoSpawnCloseRangeSpikes + new Vector3(0, i, 0);
             GameObject AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
             AttackPreview.GetComponent<AttackZone>().InstantiateObject(HorizontalSpike, position, verticalspikedamage, 0.5f, new Vector3(1f, 2.5f, 1), new Vector3(0, 0, 90), new Vector2(1.25f, 0));
-
-
-            Vector3 wheretospawnright = new Vector3(-WheretoSpawnCloseRangeSpikes.x, WheretoSpawnCloseRangeSpikes.y, WheretoSpawnCloseRangeSpikes.z);
-            position = transform.position + wheretospawnright + new Vector3(0, i, 0);
-            AttackPreview = Instantiate(AttackPreviewPrefab, position, Quaternion.identity);
-            AttackPreview.GetComponent<AttackZone>().InstantiateObject(HorizontalSpike, position, verticalspikedamage, 0.5f, new Vector3(1f, -2.5f, 1), new Vector3(0, 0, 90), new Vector2(-1.25f, 0));
         }
     }
 

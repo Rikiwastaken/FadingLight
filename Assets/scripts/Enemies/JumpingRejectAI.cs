@@ -37,7 +37,7 @@ public class JumpingRejectAI : MonoBehaviour
         {
             touchingwall = true;
         }
-        if (collision.transform.GetComponent<PlayerHP>() != null && (transform.position.y - GetComponent<BoxCollider2D>().size.y * transform.localScale.y / 2f >= collision.transform.position.y + collision.transform.GetComponent<BoxCollider2D>().size.y * collision.transform.transform.localScale.y / 2f))
+        if (collision.transform.GetComponent<PlayerHP>() != null && (transform.position.y - GetComponent<CircleCollider2D>().radius * transform.localScale.y / 2f >= collision.transform.position.y + GetComponent<CircleCollider2D>().radius * collision.transform.transform.localScale.y / 2f))
         {
             int direction = (int)((collision.transform.position.x - transform.position.x) / Mathf.Abs(collision.transform.position.x - transform.position.x));
             collision.transform.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction * 5, 3), ForceMode2D.Impulse);

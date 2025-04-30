@@ -14,6 +14,8 @@ public class EyeScript : MonoBehaviour
 
     public bool activateeyes;
 
+    public bool movearound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +33,36 @@ public class EyeScript : MonoBehaviour
     {
         for(int i = 0; i< Eyelist.Count; i++)
         {
-            Vector2 newpos = EyeposList[i] + ((Vector2)PlayerTransf.position - EyeposList[i] - (Vector2)transform.position).normalized * EyeMovementRange[i];
-            if (GetComponentInParent<SpriteRenderer>().flipX )
+            Vector2 newpos = Vector2.zero;
+            if (movearound)
             {
-                newpos = new Vector2(-EyeposList[i].x, EyeposList[i].y) + ((Vector2)PlayerTransf.position - EyeposList[i] - (Vector2)transform.position).normalized * EyeMovementRange[i];
+                newpos = Eyelist[i].transform.localPosition + new Vector3(Random.Range(-EyeMovementRange[i]/5f, EyeMovementRange[i] / 5f), Random.Range(-EyeMovementRange[i] / 5f, EyeMovementRange[i] / 5f),0f);
+                if(newpos.x > EyeposList[i].x + EyeMovementRange[i])
+                {
+                    newpos.x = EyeposList[i].x + EyeMovementRange[i];
+                }
+                if (newpos.x < EyeposList[i].x - EyeMovementRange[i])
+                {
+                    newpos.x = EyeposList[i].x - EyeMovementRange[i];
+                }
+                if (newpos.y > EyeposList[i].y + EyeMovementRange[i])
+                {
+                    newpos.y = EyeposList[i].y + EyeMovementRange[i];
+                }
+                if (newpos.y < EyeposList[i].y - EyeMovementRange[i])
+                {
+                    newpos.y = EyeposList[i].y - EyeMovementRange[i];
+                }
             }
+            else
+            {
+                newpos = EyeposList[i] + ((Vector2)PlayerTransf.position - EyeposList[i] - (Vector2)transform.position).normalized * EyeMovementRange[i];
+                if (GetComponentInParent<SpriteRenderer>().flipX)
+                {
+                    newpos = new Vector2(-EyeposList[i].x, EyeposList[i].y) + ((Vector2)PlayerTransf.position - EyeposList[i] - (Vector2)transform.position).normalized * EyeMovementRange[i];
+                }
+            }
+            
             
             Eyelist[i].transform.localPosition = newpos;
             if (activateeyes)
@@ -47,6 +74,7 @@ public class EyeScript : MonoBehaviour
             {
                 Eyelist[i].GetComponent<SpriteRenderer>().color = new Color(0f, 0.84f, 1f, 1f);
             }
+
         }
     }
 }

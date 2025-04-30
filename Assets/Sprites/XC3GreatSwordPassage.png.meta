@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2c31707b96b9d03479cb15ad925caa04
+guid: 00ed0ec8e79f09d43a29c94244893f3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6251170901057771187
-    second: RockBase_0
+      213: 3401798653380377198
+    second: XC3GreatSwordPassage_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RockBase_0
+      name: XC3GreatSwordPassage_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
+        width: 1000
+        height: 563
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,8 +127,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d4961348f216f39a0800000000000000
-      internalID: -6251170901057771187
+      spriteID: e6ab32c0add953f20800000000000000
+      internalID: 3401798653380377198
       vertices: []
       indices: 
       edges: []
