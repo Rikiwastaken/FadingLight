@@ -31,7 +31,6 @@ public class PlayerHP : MonoBehaviour
     public int CorePieces; // number of Core Pieces
     public int ElectronicComponents; // number of Electronic Components
 
-    // Start is called before the first frame update
     void Start()
     {
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
@@ -300,6 +299,10 @@ public class PlayerHP : MonoBehaviour
         {
             Eldonhp -=0.05f* Eldonmaxhp;
         }
+
+
+        FindAnyObjectByType<musicmanager>().playcbt = FindEnemiesForMusic();
+        Debug.Log(FindAnyObjectByType<musicmanager>().playcbt);
     }
 
 
@@ -308,5 +311,22 @@ public class PlayerHP : MonoBehaviour
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
         healthbar.SetMaxhealth(Eldonmaxhp);
         healthbar.SetMaxEnergy(EldonmaxNRG);
+    }
+
+    private bool FindEnemiesForMusic()
+    {
+        bool enemiesfound = false;
+        float mindist = 20f;
+        EnemyHP[] allenemies = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
+        foreach(EnemyHP enemy in allenemies)
+        {
+            if(Vector2.Distance(transform.position,enemy.transform.position) < mindist && !enemy.isboss)
+            {
+                enemiesfound =true;
+                
+                return enemiesfound;
+            }
+        }
+        return enemiesfound;
     }
 }

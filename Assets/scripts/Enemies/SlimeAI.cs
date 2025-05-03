@@ -50,7 +50,7 @@ public class SlimeAI : MonoBehaviour
         {
             return;
         }
-        if (atkcdcounter!=0 && Mathf.Abs(rb2D.velocityX)>0.05 && collision.transform.tag=="Player")
+        if (atkcdcounter != 0 && Mathf.Abs(rb2D.velocityX) > 0.05 && collision.transform.tag == "Player")
         {
             collision.transform.GetComponent<PlayerHP>().TakeDamage(attackdmg, new Vector2(collision.transform.GetComponent<Rigidbody2D>().velocityX, collision.transform.GetComponent<PlayerHP>().hitjumpforce), Vector2.zero);
         }
@@ -64,15 +64,9 @@ public class SlimeAI : MonoBehaviour
             return;
         }
 
-        if (GetComponent<EnemyHP>().targetted && distplayer>= abandonrange || enemyHP <= 0)
+        if (GetComponent<EnemyHP>().targetted && distplayer >= abandonrange || enemyHP <= 0)
         {
             GetComponent<EnemyHP>().targetted = false;
-            GameObject.Find("music").GetComponent<musicmanager>().playcbt = false;
-        }
-
-        if (GetComponent<EnemyHP>().targetted)
-        {
-            GameObject.Find("music").GetComponent<musicmanager>().playcbt = true;
         }
 
         if (atkcdcounter != 0)
@@ -84,12 +78,12 @@ public class SlimeAI : MonoBehaviour
 
 
             Managedirection();
-            
 
-            if ((distplayer <= detectdist || GetComponent<EnemyHP>().targetted) && FindAnyObjectByType<GadgetScript>().invisibilityFrames==0)
+
+            if ((distplayer <= detectdist || GetComponent<EnemyHP>().targetted) && FindAnyObjectByType<GadgetScript>().invisibilityFrames == 0)
             {
                 GetComponent<EnemyHP>().targetted = true;
-                if (delaycounter == 0 && !GetComponent<EnemyHP>().cannotmove && !cannotmoveatk && Mathf.Abs(target.position.x - transform.position.x)>0.25f)
+                if (delaycounter == 0 && !GetComponent<EnemyHP>().cannotmove && !cannotmoveatk && Mathf.Abs(target.position.x - transform.position.x) > 0.25f)
                 {
                     if (target.position.x < transform.position.x)
                     {
@@ -121,23 +115,23 @@ public class SlimeAI : MonoBehaviour
             tempenemyhp = enemyHP;
         }
 
-        if (delaycounter!=0)
+        if (delaycounter != 0)
         {
             delaycounter -= 1;
         }
 
-        
 
-        if (GetComponent<EnemyHP>().targetted && distplayer < attackrange && !initiateattack && atkcdcounter==0 && GetComponent<EnemyHP>().enemyNRG>0)
+
+        if (GetComponent<EnemyHP>().targetted && distplayer < attackrange && !initiateattack && atkcdcounter == 0 && GetComponent<EnemyHP>().enemyNRG > 0)
         {
             cannotmoveatk = true;
-            attackcounter = (int)(timebeforejump/Time.deltaTime);
+            attackcounter = (int)(timebeforejump / Time.deltaTime);
             initiateattack = true;
             targetpos = target.position;
 
         }
 
-        if (initiateattack && attackcounter!=0)
+        if (initiateattack && attackcounter != 0)
         {
             attackcounter -= 1;
             transform.GetChild(0).gameObject.SetActive(true);
@@ -151,7 +145,7 @@ public class SlimeAI : MonoBehaviour
         {
             if (targetpos.x < transform.position.x)
             {
-                rb2D.AddForce(new Vector2(-jumpforcex, jumpforcey),ForceMode2D.Impulse);
+                rb2D.AddForce(new Vector2(-jumpforcex, jumpforcey), ForceMode2D.Impulse);
             }
             if (targetpos.x > transform.position.x)
             {
@@ -159,7 +153,7 @@ public class SlimeAI : MonoBehaviour
             }
 
             initiateattack = false;
-            cannotmoveatk=false;
+            cannotmoveatk = false;
             atkcdcounter = atkcd;
         }
 
@@ -185,6 +179,6 @@ public class SlimeAI : MonoBehaviour
             }
         }
     }
-    
+
 }
 

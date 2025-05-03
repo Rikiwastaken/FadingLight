@@ -187,7 +187,8 @@ public class EquipmentScript : MonoBehaviour
 
     public void ReceiveItem(int Type, int ID, int quantity)
     {
-        switch(Type) // 0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget, 5 Crystal Shard, 6 Metal Scraps, 7 Core Pieces, 8 Electronic Components
+        GetComponentInChildren<SoundEffectManager>().PlayGotItem();
+        switch (Type) // 0 chain, 1 Plate, 2 drone, 3 Augment, 4 Gadget, 5 Crystal Shard, 6 Metal Scraps, 7 Core Pieces, 8 Electronic Components
         {
             case 0:
                 if(Chainslist.Count > ID)

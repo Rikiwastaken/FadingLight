@@ -9,10 +9,12 @@ public class Interruptor : MonoBehaviour
     public int worldflagconcerned;
     public bool canonlybeactivatedOnce;
     private Global global;
+    private SoundEffectManager soundManager;
 
     private void Start()
     {
         global = FindAnyObjectByType<Global>();
+        soundManager = FindAnyObjectByType<SoundEffectManager>();
     }
     private void FixedUpdate()
     {
@@ -31,10 +33,12 @@ public class Interruptor : MonoBehaviour
         if(!global.worldflags[worldflagconcerned])
         {
             global.worldflags[worldflagconcerned] = true;
+            soundManager.PlayConsoleButton();
         }
         else if(!canonlybeactivatedOnce)
         {
             global.worldflags[worldflagconcerned] =false;
+            soundManager.PlayConsoleButton();
         }
     }
 }

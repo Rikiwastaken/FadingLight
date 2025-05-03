@@ -34,7 +34,7 @@ public class ItemDrop : MonoBehaviour
         }
         GetComponent<Rigidbody2D>().AddForce(((Vector2)(player.transform.position - transform.position).normalized * speed) + offset, ForceMode2D.Impulse);
 
-        if(Vector2.Distance(player.transform.position, transform.position)<=0.5f && timealive>=1/Time.fixedDeltaTime)
+        if(Vector2.Distance(player.transform.position, transform.position)<=1f && timealive>=1/Time.fixedDeltaTime)
         {
             player.GetComponent<EquipmentScript>().ReceiveItem(type, 0, quantity);
             Destroy(gameObject);

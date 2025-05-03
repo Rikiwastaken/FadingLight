@@ -1205,6 +1205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: {fileID: 0}
+  activebuttonID: 0
 --- !u!1 &748100837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3362,6 +3363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: {fileID: 0}
+  activebuttonID: 0
 --- !u!114 &2043299987
 MonoBehaviour:
   m_ObjectHideFlags: 0
