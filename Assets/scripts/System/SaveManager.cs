@@ -43,25 +43,25 @@ public class SaveManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(playing && save!=null)
+        if (playing && save != null)
         {
             FrameCounter++;
-            if(FrameCounter*Time.deltaTime>1)
+            if (FrameCounter * Time.deltaTime > 1)
             {
                 FrameCounter = 0;
                 save.elapsedseconds += 1;
             }
         }
 
-        if(deleteallsaves)
+        if (deleteallsaves)
         {
             deleteallsaves = false;
             DeleteAllSlots();
         }
-        
+
     }
 
-    public void InitializeSaveObject(int slotID,int elapsedseconds)
+    public void InitializeSaveObject(int slotID, int elapsedseconds)
     {
         InitializeSaveObject();
         save.elapsedseconds = elapsedseconds;
@@ -97,7 +97,7 @@ public class SaveManager : MonoBehaviour
         {
             unlockedchains.Add(false);
         }
-        unlockedchains[0]=true;
+        unlockedchains[0] = true;
         save.unlockedChains = unlockedchains;
 
         List<Plate> Platelist = equipmentScript.Platelist;
@@ -135,7 +135,7 @@ public class SaveManager : MonoBehaviour
         save.loadout = equipedItemsID;
 
         save.WorldFlags = new List<bool>();
-        for(int i=0; i<FindAnyObjectByType<Global>().worldflags.Count;i++)
+        for (int i = 0; i < FindAnyObjectByType<Global>().worldflags.Count; i++)
         {
             save.WorldFlags.Add(false);
         }
@@ -163,7 +163,7 @@ public class SaveManager : MonoBehaviour
         save.coordinates = FindAnyObjectByType<PlayerMovement>().transform.position;
         List<Augment> augmentlist = augmentsScript.Augmentlist;
         List<bool> unlockedaugments = new List<bool>();
-        foreach(Augment augment in augmentlist)
+        foreach (Augment augment in augmentlist)
         {
             unlockedaugments.Add(!augment.locked);
         }
@@ -179,7 +179,7 @@ public class SaveManager : MonoBehaviour
 
         List<Plate> Platelist = equipmentScript.Platelist;
         List<bool> unlockedplates = new List<bool>(Platelist.Count);
-        foreach(Plate plate in Platelist)
+        foreach (Plate plate in Platelist)
         {
             unlockedplates.Add(!plate.locked);
         }
@@ -187,7 +187,7 @@ public class SaveManager : MonoBehaviour
 
         List<HealerDrone> Dronelist = FindAnyObjectByType<SupportDrone>().drones;
         List<bool> unlockeddrones = new List<bool>(Dronelist.Count);
-        foreach(HealerDrone drone in Dronelist)
+        foreach (HealerDrone drone in Dronelist)
         {
             unlockeddrones.Add(!drone.locked);
         }
@@ -218,7 +218,7 @@ public class SaveManager : MonoBehaviour
         save.loadout = equipedItemsID;
 
         save.WorldFlags = new List<bool>();
-        foreach(bool flag in FindAnyObjectByType<Global>().worldflags)
+        foreach (bool flag in FindAnyObjectByType<Global>().worldflags)
         {
             save.WorldFlags.Add(flag);
         }
@@ -234,15 +234,24 @@ public class SaveManager : MonoBehaviour
 
     public void LoadSave()
     {
+        LoadSave(false);
+    }
+
+    public void LoadSave(bool loadsandbox)
+    {
         string savetoload = GetLastSave(CurrentSlot)[0];
         if (savetoload != null)
         {
             save = JsonUtility.FromJson<Save>(savetoload);
             SceneManager.LoadScene(save.zoneName);
         }
+        else if (loadsandbox)
+        {
+            SceneManager.LoadScene("SandBox");
+        }
         else
         {
-            SceneManager.LoadScene("BreedingGrounds");
+            SceneManager.LoadScene("Entrance-BreedingGrounds");
         }
     }
 
@@ -269,7 +278,7 @@ public class SaveManager : MonoBehaviour
 
         CurrentSlot = save.slotID;
         equipmentScript.transform.position = save.coordinates;
-        for(int i = 0;i<augmentsScript.Augmentlist.Count;i++)
+        for (int i = 0; i < augmentsScript.Augmentlist.Count; i++)
         {
             augmentsScript.Augmentlist[i].locked = !save.unlockedAugments[i];
         }
@@ -295,7 +304,7 @@ public class SaveManager : MonoBehaviour
         equipmentScript.drone1.GetComponent<SupportDrone>().ActiveDroneID = save.loadout[2];
         equipmentScript.drone2.GetComponent<SupportDrone>().ActiveDroneID = save.loadout[3];
         gadgetScript.ActiveGadgetID = save.loadout[4];
-        for(int i = 5;i<save.loadout.Count;i++)
+        for (int i = 5; i < save.loadout.Count; i++)
         {
             augmentsScript.EquipedAugments[save.loadout[i]] = true;
         }
@@ -306,7 +315,7 @@ public class SaveManager : MonoBehaviour
             gadgetScript.GadgetList[i].locked = !save.unlockedGadgets[i];
         }
 
-        FindAnyObjectByType<Global>().worldflags=save.WorldFlags;
+        FindAnyObjectByType<Global>().worldflags = save.WorldFlags;
 
         augmentsScript.numberofShardsPickedUp = save.Shards;
         augmentsScript.numberofSlotexpansionspickedup = save.AugmentSlots;
@@ -348,13 +357,13 @@ public class SaveManager : MonoBehaviour
                 nameres = lastname;
             }
         }
-        List<string> finalres= new List<string>() { res,nameres};
+        List<string> finalres = new List<string>() { res, nameres };
         return finalres;
     }
 
     void Delete6thSave(int slotID)
     {
-        if(System.IO.Directory.Exists(Application.persistentDataPath + "/SaveFiles/"))
+        if (System.IO.Directory.Exists(Application.persistentDataPath + "/SaveFiles/"))
         {
             string[] listpaths = System.IO.Directory.GetFiles(Application.persistentDataPath + "/SaveFiles/");
             List<string> listnames = new List<string>();
@@ -363,15 +372,15 @@ public class SaveManager : MonoBehaviour
                 string newname = path;
                 string abstractpath = Application.persistentDataPath + "/SaveFiles/";
                 newname = newname.Substring((int)(abstractpath.Length), newname.Length - abstractpath.Length);
-                if (int.Parse("" + newname[0])==save.slotID)
-                listnames.Add(newname);
+                if (int.Parse("" + newname[0]) == save.slotID)
+                    listnames.Add(newname);
             }
-            if (listnames.Count>5)
+            if (listnames.Count > 5)
             {
                 string lastname = listnames[0];
                 foreach (string name in listnames)
                 {
-                    if (int.Parse(name.Split('_')[1])< int.Parse(lastname.Split('_')[1]))
+                    if (int.Parse(name.Split('_')[1]) < int.Parse(lastname.Split('_')[1]))
                     {
                         lastname = name;
                     }
@@ -379,7 +388,7 @@ public class SaveManager : MonoBehaviour
                 System.IO.File.Delete(Application.persistentDataPath + "/SaveFiles/" + lastname);
             }
         }
-        
+
     }
 
     public void DeleteSlot(int slotID)
@@ -396,7 +405,7 @@ public class SaveManager : MonoBehaviour
                 if (int.Parse("" + newname[0]) == slotID)
                 {
                     System.IO.File.Delete(Application.persistentDataPath + "/SaveFiles/" + newname);
-                }    
+                }
             }
         }
     }
@@ -416,13 +425,13 @@ public class SaveManager : MonoBehaviour
 
     public void SaveToFile()
     {
-        InitializeSaveObject(CurrentSlot,save.elapsedseconds);
+        InitializeSaveObject(CurrentSlot, save.elapsedseconds);
         string json = JsonUtility.ToJson(save);
         if (!System.IO.Directory.Exists(Application.persistentDataPath + "/SaveFiles"))
         {
             System.IO.Directory.CreateDirectory(Application.persistentDataPath + "/SaveFiles");
         }
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/SaveFiles/" + save.slotID+"_"+save.elapsedseconds, json);
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/SaveFiles/" + save.slotID + "_" + save.elapsedseconds, json);
         Delete6thSave(save.slotID);
     }
 
