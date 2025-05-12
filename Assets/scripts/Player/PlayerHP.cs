@@ -302,7 +302,6 @@ public class PlayerHP : MonoBehaviour
 
 
         FindAnyObjectByType<musicmanager>().playcbt = FindEnemiesForMusic();
-        Debug.Log(FindAnyObjectByType<musicmanager>().playcbt);
     }
 
 

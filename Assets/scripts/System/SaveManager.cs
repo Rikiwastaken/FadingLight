@@ -137,7 +137,15 @@ public class SaveManager : MonoBehaviour
         save.WorldFlags = new List<bool>();
         for (int i = 0; i < FindAnyObjectByType<Global>().worldflags.Count; i++)
         {
-            save.WorldFlags.Add(false);
+            if(i<11 || i>16)
+            {
+                save.WorldFlags.Add(false);
+            }
+            else
+            {
+                save.WorldFlags.Add(true);
+            }
+            
         }
         save.Shards = 0;
         save.AugmentSlots = 0;
