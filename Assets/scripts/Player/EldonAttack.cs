@@ -229,17 +229,18 @@ public class EldonAttack : MonoBehaviour
                 }
                 if (enemyHP.enemyhp > 0)
                 {
-                    int direction = (int)((enemyrb.position.x - playerx) / Mathf.Abs(enemyrb.position.x - playerx));
-                    if(enemyHP.isflying)
+                    if(!enemyHP.cantbemoved)
                     {
-                        enemyrb.AddForce(new Vector2(direction * flyingrecoil, 0), ForceMode2D.Impulse);
+                        int direction = (int)((enemyrb.position.x - playerx) / Mathf.Abs(enemyrb.position.x - playerx));
+                        if (enemyHP.isflying)
+                        {
+                            enemyrb.AddForce(new Vector2(direction * flyingrecoil, 0), ForceMode2D.Impulse);
+                        }
+                        else
+                        {
+                            enemyrb.AddForce(new Vector2(direction * smallrecoil, 0), ForceMode2D.Impulse);
+                        }
                     }
-                    else
-                    {
-                        enemyrb.AddForce(new Vector2(direction * smallrecoil, 0), ForceMode2D.Impulse);
-                    }
-                   
-                    
                 }
             }
 

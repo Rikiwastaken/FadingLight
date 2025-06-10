@@ -51,17 +51,21 @@ MonoBehaviour:
   lastinv: {fileID: 0}
   closedmenu: 0
   atsavepoint: 0
+  inmenu_inv_shop: 0
+  inshop: 0
   ininventory: 0
   indialogue: 0
   inbossfight: 0
   zipping: 0
   grappling: 0
+  inpause: 0
   clickednewgame: 0
-  worldflags: 0000000000000000000000000000000000000000
+  worldflags: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   ManualClock: 0
   usemanualclock: 0
   activeSavePoint: {fileID: 0}
   PauseMenu: {fileID: 1909857644947452815, guid: 1c650d1f46e2d5c44835feb32cfe2962, type: 3}
+  MattShopMenu: {fileID: 0}
 --- !u!114 &4595281200388182569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +121,13 @@ MonoBehaviour:
     loadout: 
     WorldFlags: 
     Shards: 0
+    AugmentSlots: 0
+    MetalScrap: 0
+    CorePieces: 0
+    ElectronicComponents: 0
+    ChainUpgradeLevel: 0
+    PlateUpgradeLevel: 0
+    SlotUpgradeLevel: 0
   CurrentSlot: 0
   playing: 1
   deleteallsaves: 0
@@ -132,5 +143,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11acb2500eb1a4919af12597ed399cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicvol: 0
-  soundvol: 0
+  options:
+    musicvol: 0
+    soundvol: 0
+    resolution:
+      width: 0
+      height: 0
+    fullscreen: 0
+    headphones: 0

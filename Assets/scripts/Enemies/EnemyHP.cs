@@ -79,6 +79,7 @@ public class EnemyHP : MonoBehaviour
     public Vector2 grappleOffset;
     private bool ded;
 
+    public bool cantbemoved;
     void Start()
     {
         start = transform.position;

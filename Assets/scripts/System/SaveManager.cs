@@ -137,7 +137,7 @@ public class SaveManager : MonoBehaviour
         save.WorldFlags = new List<bool>();
         for (int i = 0; i < FindAnyObjectByType<Global>().worldflags.Count; i++)
         {
-            if(i<11 || i>16)
+            if (i < 11 || i > 16)
             {
                 save.WorldFlags.Add(false);
             }
@@ -145,7 +145,7 @@ public class SaveManager : MonoBehaviour
             {
                 save.WorldFlags.Add(true);
             }
-            
+
         }
         save.Shards = 0;
         save.AugmentSlots = 0;
@@ -259,7 +259,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene("Entrance-BreedingGrounds");
+            SceneManager.LoadScene("Entrance");
         }
     }
 

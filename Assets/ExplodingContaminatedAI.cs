@@ -15,6 +15,7 @@ public class ExplodingContaminatedAI : MonoBehaviour
 
     public GameObject ProjectilePrefab;
     public Transform wheretoplacePrefabs;
+    public bool allowexplosion;
 
     private bool exploded;
 
@@ -57,7 +58,7 @@ public class ExplodingContaminatedAI : MonoBehaviour
 
     private void ManageAttack()
     {
-        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= mindist && !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ExplosiveContaminatedExplosion") && timeunabletomovecounter ==0)
+        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= mindist && !GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ExplosiveContaminatedExplosion") && timeunabletomovecounter ==0 && allowexplosion)
         {
             GetComponent<Animator>().SetTrigger("Explosion");
         }
