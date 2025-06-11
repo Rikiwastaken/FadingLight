@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flagID: 0
+  isdoor: 1
 --- !u!61 &5762093746340783309
 BoxCollider2D:
   m_ObjectHideFlags: 0

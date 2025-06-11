@@ -210,7 +210,7 @@ public class DialogueManager : MonoBehaviour
             ManageMovements(currentdialogue.parts.Count-1, true);
             if (currentdialogue.worldflagtotriggerattheend!=0)
             {
-                Global.worldflags[currentdialogue.worldflagtotriggerattheend] = true;
+                Global.worldflags[currentdialogue.worldflagtotriggerattheend] = !Global.worldflags[currentdialogue.worldflagtotriggerattheend];
             }
             currentdialogue = null;
             Global.indialogue = false;

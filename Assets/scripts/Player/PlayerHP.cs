@@ -36,7 +36,7 @@ public class PlayerHP : MonoBehaviour
         healthbar = GameObject.Find("PlayerLifeBars").GetComponent<Healthbar>();
         rb = GetComponent<Rigidbody2D>();
         equipmentScript = GetComponent<EquipmentScript>();
-        
+
     }
 
 
@@ -51,7 +51,7 @@ public class PlayerHP : MonoBehaviour
         {
             defense *= GetComponent<ChainSawMode>().chainsawdefenseMultiplier;
         }
-        if (GetComponent<AugmentsScript>().EquipedAugments[13] && EldonNRG>=EldonmaxNRG*0.8f)
+        if (GetComponent<AugmentsScript>().EquipedAugments[13] && EldonNRG >= EldonmaxNRG * 0.8f)
         {
             defense *= GetComponent<AugmentsScript>().Augmentlist[13].valueincr;
         }
@@ -70,7 +70,7 @@ public class PlayerHP : MonoBehaviour
             }
             Eldonhp -= damagetotake;
             inv = true;
-            iframe = (int)(timeinvincible/Time.fixedDeltaTime);
+            iframe = (int)(timeinvincible / Time.fixedDeltaTime);
             if (velchg.y != 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, velchg.y);
@@ -98,31 +98,31 @@ public class PlayerHP : MonoBehaviour
             {
                 damagetotake = (int)(damage - totaldamagereduction);
             }
-            if(energydamage - totaldamagereduction > 0f)
+            if (energydamage - totaldamagereduction > 0f)
             {
                 energydamagetotake = (int)(energydamage - totaldamagereduction);
             }
             EldonNRG -= damagetotake;
-            if(EldonNRG < 0)
+            if (EldonNRG < 0)
             {
                 EldonNRG = 0;
             }
             if (GetComponent<AugmentsScript>().EquipedAugments[17])
             {
-                if(EldonNRG/2<=damagetotake)
+                if (EldonNRG / 2 <= damagetotake)
                 {
-                    damagetotake -= (int)(EldonNRG/2);
+                    damagetotake -= (int)(EldonNRG / 2);
                     EldonNRG = 0;
                 }
                 else
                 {
                     damagetotake = 0;
-                    EldonNRG -=damagetotake*2;
+                    EldonNRG -= damagetotake * 2;
                 }
             }
             Eldonhp -= damagetotake;
             inv = true;
-            iframe = (int)(timeinvincible/Time.fixedDeltaTime);
+            iframe = (int)(timeinvincible / Time.fixedDeltaTime);
             if (velchg.y != 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, velchg.y);
@@ -174,7 +174,7 @@ public class PlayerHP : MonoBehaviour
             }
             Eldonhp -= damagetotake;
             inv = true;
-            iframe = (int)(timeinvincible/Time.fixedDeltaTime);
+            iframe = (int)(timeinvincible / Time.fixedDeltaTime);
         }
     }
 
@@ -209,14 +209,14 @@ public class PlayerHP : MonoBehaviour
             }
             Eldonhp -= damagetotake;
             inv = true;
-            iframe = (int)(timeinvincible/Time.fixedDeltaTime);
+            iframe = (int)(timeinvincible / Time.fixedDeltaTime);
         }
     }
 
     void FixedUpdate()
     {
 
-        if(MetalScrap>99999)
+        if (MetalScrap > 99999)
         {
             MetalScrap = 99999;
         }
@@ -229,11 +229,11 @@ public class PlayerHP : MonoBehaviour
             CorePieces = 99999;
         }
 
-        if (global==null)
+        if (global == null)
         {
             global = FindAnyObjectByType<Global>();
         }
-        
+
 
         healthbar.SetHealth(Eldonhp);
         healthbar.SetEnergy(EldonNRG);
@@ -245,7 +245,7 @@ public class PlayerHP : MonoBehaviour
         }
 
 
-        if (Eldonhp >Eldonmaxhp)
+        if (Eldonhp > Eldonmaxhp)
         {
             Eldonhp = Eldonmaxhp;
         }
@@ -259,7 +259,7 @@ public class PlayerHP : MonoBehaviour
                 col.a = 1f;
                 GetComponent<SpriteRenderer>().color = col;
             }
-            else if(iframe>0)
+            else if (iframe > 0)
             {
                 Color col = GetComponent<SpriteRenderer>().color;
                 col.a = 0.8f;
@@ -268,21 +268,21 @@ public class PlayerHP : MonoBehaviour
         }
 
 
-        if(global.indialogue || global.atsavepoint)
+        if (global.indialogue || global.atsavepoint)
         {
             inv = true;
             iframe = 2;
             GetComponent<PlayerMovement>().rolling = false;
         }
-        
 
-        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && iframe == 0 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime<1 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1/14)
+
+        if (GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && iframe == 0 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime < 1 && GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 / 14)
         {
             iframe += 1;
             inv = true;
-            
+
         }
-        if((GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && GetComponent<PlayerJumpV3>().grounded) || GetComponent<PlayerDodge>().airdodgelengthcnt>0 )
+        if ((GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("roll") && GetComponent<PlayerJumpV3>().grounded) || GetComponent<PlayerDodge>().airdodgelengthcnt > 0)
         {
             int LayerIgnoreRaycast = LayerMask.NameToLayer("playerpassthroughenemy");
             gameObject.layer = LayerIgnoreRaycast;
@@ -295,10 +295,11 @@ public class PlayerHP : MonoBehaviour
             GetComponent<PlayerMovement>().rolling = false;
         }
 
-        if (GetComponent<Rigidbody2D>().position.y<-50)
-        {
-            Eldonhp -=0.05f* Eldonmaxhp;
-        }
+        // initially death for going too low
+        // if (GetComponent<Rigidbody2D>().position.y<-50)
+        // {
+        //     Eldonhp -=0.05f* Eldonmaxhp;
+        // }
 
 
         FindAnyObjectByType<musicmanager>().playcbt = FindEnemiesForMusic();
@@ -317,12 +318,12 @@ public class PlayerHP : MonoBehaviour
         bool enemiesfound = false;
         float mindist = 20f;
         EnemyHP[] allenemies = FindObjectsByType<EnemyHP>(FindObjectsSortMode.None);
-        foreach(EnemyHP enemy in allenemies)
+        foreach (EnemyHP enemy in allenemies)
         {
-            if(Vector2.Distance(transform.position,enemy.transform.position) < mindist && !enemy.isboss)
+            if (Vector2.Distance(transform.position, enemy.transform.position) < mindist && !enemy.isboss)
             {
-                enemiesfound =true;
-                
+                enemiesfound = true;
+
                 return enemiesfound;
             }
         }

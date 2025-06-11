@@ -7,6 +7,7 @@ public class DoorScript : MonoBehaviour
 {
     public int flagID;
     private Global global;
+    public bool isdoor;
 
     private void Start()
     {
@@ -17,13 +18,27 @@ public class DoorScript : MonoBehaviour
     {
         if (global.worldflags[flagID])
         {
-            GetComponent<Animator>().SetBool("Open",true);
-            GetComponent<BoxCollider2D>().isTrigger = true;
+            if(isdoor)
+            {
+                GetComponent<Animator>().SetBool("Open", true);
+                GetComponent<BoxCollider2D>().isTrigger = true;
+            }
+            else
+            {
+                GetComponent<BoxCollider2D>().enabled = true;
+            }
         }
         else 
         {
-            GetComponent<Animator>().SetBool("Open", false);
-            GetComponent<BoxCollider2D>().isTrigger = false;
+            if (isdoor)
+            {
+                GetComponent<Animator>().SetBool("Open", false);
+                GetComponent<BoxCollider2D>().isTrigger = false;
+            }
+            else
+            {
+                GetComponent<BoxCollider2D>().enabled = false;
+            }
         }
     }
 }
