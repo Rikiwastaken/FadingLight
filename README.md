@@ -14,6 +14,7 @@ As a metroidvania, Fading Light is a 2(.5)D  exploration game where you explore 
 
 Implemented movement options are :
 - Double Jump
+- Air Dash
 - Wall grip
 - Wall Jump
 - 2 way zip line
