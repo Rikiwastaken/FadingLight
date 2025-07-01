@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Concrete Flooring
-    second: {fileID: 2100000, guid: f04762a0a526ec34493719e5c39cae8e, type: 2}
+      name: Cliffmat
+    second: {fileID: 2100000, guid: 16fa0fcdd5487c64da2c9499e6ca9c09, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -17,33 +17,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Light iron
-    second: {fileID: 2100000, guid: 87776eeff1d6f49438dc04850cd9c3ba, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.002
-    second: {fileID: 2100000, guid: 0b7533ad2d103b5438b916a8c440cc98, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.003
-    second: {fileID: 2100000, guid: 63422f02ab9913b46b83264cc9103d58, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.006
-    second: {fileID: 2100000, guid: 982b75a8baca4394b8ac0edb251ea047, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material.007
-    second: {fileID: 2100000, guid: ed46b89dafce83149b230312a3e78663, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Office Ceiling Tile
-    second: {fileID: 2100000, guid: d8d6ea9c66eac7c42a4879e98f1bf461, type: 2}
+      name: Material.001
+    second: {fileID: 2100000, guid: fec9478c7bf85794cbd22c087ee19688, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -52,8 +27,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Vent pipe metal
-    second: {fileID: 2100000, guid: 21c3facf05c82ea42856b327eb73f47c, type: 2}
+      name: WallMat
+    second: {fileID: 2100000, guid: 9e9690b7fb12c6f4287d6208e90cd163, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -62,8 +37,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: darkmetal.001
+    second: {fileID: 2100000, guid: 41685645269920d4a838cfac3838590c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: lightbrown
     second: {fileID: 2100000, guid: 66f1c18f291d1b647bdc347aa6f8b5d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lightgrey
+    second: {fileID: 2100000, guid: aad0a2f1427ff4d44b04e29f355466f1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -72,13 +57,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: metal_plate
-    second: {fileID: 2100000, guid: 9d80196766bdff04da3f7ff4ad5ebfe3, type: 2}
+      name: lightmetal.001
+    second: {fileID: 2100000, guid: 6d20a004d9e85124db7a2fe40da86ebc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: painted_metal_shutter
-    second: {fileID: 2100000, guid: 0f79bd141e61c114b8093709f9835be4, type: 2}
+      name: lightmetal.003
+    second: {fileID: 2100000, guid: 20e2b01ae23ed71448b1493bdabc8378, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
